@@ -9,11 +9,20 @@ import (
 	"gorm.io/gorm"
 )
 
-func New() (*gorm.DB, error) {
-	return gorm.Open(postgres.Open(dsn), &gorm.Config{})
+var connectionString string
+
+// Init initializes connection string as a global module variable
+func Init() {
+	connectionString = makeConnectionString()
 }
 
-func getConnectionString() string {
+// New returns new database instance
+func New() (*gorm.DB, error) {
+	return gorm.Open(postgres.Open(connectionString), &gorm.Config{})
+}
+
+// makeConnectionString returns new connection string
+func makeConnectionString() string {
 	var err error
 
 	host := ""
@@ -21,23 +30,23 @@ func getConnectionString() string {
 		host = viper.GetString("database.host")
 	}
 
-	port := 5442
-	if port, err = utils.GetEnvInt("DB_HOST"); err != nil {
+	port := 0
+	if port, err = utils.GetEnvInt("DB_PORT"); err != nil {
 		port = viper.GetInt("database.port")
 	}
 
 	username := ""
-	if username, err = utils.GetEnvStr("DB_HOST"); err != nil {
+	if username, err = utils.GetEnvStr("DB_USERNAME"); err != nil {
 		username = viper.GetString("database.username")
 	}
 
 	password := ""
-	if password, err = utils.GetEnvStr("DB_HOST"); err != nil {
+	if password, err = utils.GetEnvStr("DB_PASSWORD"); err != nil {
 		password = viper.GetString("database.password")
 	}
 
 	db := ""
-	if db, err = utils.GetEnvStr("DB_HOST"); err != nil {
+	if db, err = utils.GetEnvStr("DB_DB"); err != nil {
 		db = viper.GetString("database.db")
 	}
 

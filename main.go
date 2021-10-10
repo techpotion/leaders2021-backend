@@ -3,11 +3,12 @@ package main
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"github.com/techpotion/leaders2021-backend/modules/database"
 	"github.com/techpotion/leaders2021-backend/modules/server"
 )
 
-func main() {
-	// viper init
+func init() {
+	// viper config initalization
 	viper.AddConfigPath("./")
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
@@ -19,6 +20,13 @@ func main() {
 	}
 	logrus.Info("viper config initialized successfully")
 
-	// server starting
+	// using non build-it Init instead built-in
+	// because viper config is required but
+	// main.init is being called after the
+	// database.init function
+	database.Init()
+}
+
+func main() {
 	server.Run()
 }
