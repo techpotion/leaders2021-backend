@@ -12,7 +12,6 @@ import (
 var connectionString string
 
 func Init() {
-	fmt.Println("db init!")
 	connectionString = makeConnectionString()
 }
 
@@ -25,14 +24,11 @@ func makeConnectionString() string {
 
 	host := ""
 	if host, err = utils.GetEnvStr("DB_HOST"); err != nil {
-		fmt.Println("here 1")
 		host = viper.GetString("database.host")
-		fmt.Println("host: ", host)
 	}
 
 	port := 0
 	if port, err = utils.GetEnvInt("DB_PORT"); err != nil {
-		fmt.Println("here 2")
 		port = viper.GetInt("database.port")
 	}
 
