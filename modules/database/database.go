@@ -11,14 +11,17 @@ import (
 
 var connectionString string
 
+// Init initializes connection string as a global module variable
 func Init() {
 	connectionString = makeConnectionString()
 }
 
+// New returns new database instance
 func New() (*gorm.DB, error) {
 	return gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 }
 
+// makeConnectionString returns new connection string
 func makeConnectionString() string {
 	var err error
 
