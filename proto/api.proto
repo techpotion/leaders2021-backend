@@ -4,6 +4,8 @@ package api;
 
 option go_package = "gen/pb";
 
+import "sports_objects.proto";
+
 import "common.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -20,19 +22,74 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     schemes: [HTTP, HTTPS]
     consumes: "application/json"
     produces: "application/json"
+    responses: {
+        key: "400";
+        value: {
+            description: "Returned when the request body does not match the API's specifications"
+            schema: {
+                json_schema: {
+                    ref: ".api.ErrorResponse";
+                }
+            }
+        }
+    }
+    responses: {
+        key: "401";
+        value: {
+            description: "Returned when the user tries to login to a resource with an incorrect login info"
+            schema: {
+                json_schema: {
+                    ref: ".api.ErrorResponse";
+                }
+            }
+        }
+    }
+    responses: {
+        key: "403";
+        value: {
+            description: "Returned when the user does not have permission to access the resource";
+            schema: {
+                json_schema: {
+                    ref: ".api.ErrorResponse";
+                }
+            }
+        }
+    }
+    responses: {
+        key: "404";
+        value: {
+            description: "Returned when the resource does not exist";
+            schema: {
+                json_schema: {
+                    ref: ".api.ErrorResponse";
+                }
+            }
+        }
+    }
+    responses: {
+        key: "500";
+        value: {
+            description: "Internal server error";
+            schema: {
+                json_schema: {
+                    ref: ".api.ErrorResponse";
+                }
+            }
+        }
+    }
 };
 
 service ApiService {
-    rpc SendMessage(Test) returns (Test) {
+    rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
         option (google.api.http) = {
-            post: "/api/v1/Mock";
+            post: "/api/v1/ListSportsObjects";
             body: "*";
         };
 
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "Mock";
-            summary: "Mock";
-            tags: "Mock";
+            description: "";
+            summary: "";
+            tags: "Sports Objects";
         };
     }
 }

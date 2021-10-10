@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message SportsObjects {
+    message ListRequest {
+
+    }
+
+    message ListResponse {
+
+    }
+}

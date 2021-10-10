@@ -4,9 +4,11 @@ package api;
 
 option go_package = "gen/pb";
 
+import "sports_objects.proto";
+
 import "common.proto";
 
 service ApiService {
-    rpc SendMessage(Test) returns (Test) {
+    rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
     }
 }

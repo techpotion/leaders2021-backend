@@ -35,39 +35,58 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on Test with the rules defined in the proto
-// definition for this message. If any rules are violated, the first error
-// encountered is returned, or nil if there are no violations.
-func (m *Test) Validate() error {
+// Validate checks the field values on SportsObject with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SportsObject) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Test with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in TestMultiError, or nil if none found.
-func (m *Test) ValidateAll() error {
+// ValidateAll checks the field values on SportsObject with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SportsObjectMultiError, or
+// nil if none found.
+func (m *SportsObject) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Test) validate(all bool) error {
+func (m *SportsObject) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
+	// no validation rules for ObjectId
+
+	// no validation rules for ObjectName
+
+	// no validation rules for DepartmentalOrganizationId
+
+	// no validation rules for DepartmentalOrganizationName
+
+	// no validation rules for SportsAreaId
+
+	// no validation rules for SportsAreaName
+
+	// no validation rules for SportsAreaType
+
+	// no validation rules for Availability
+
+	// no validation rules for SportKind
+
 	if len(errors) > 0 {
-		return TestMultiError(errors)
+		return SportsObjectMultiError(errors)
 	}
 	return nil
 }
 
-// TestMultiError is an error wrapping multiple validation errors returned by
-// Test.ValidateAll() if the designated constraints aren't met.
-type TestMultiError []error
+// SportsObjectMultiError is an error wrapping multiple validation errors
+// returned by SportsObject.ValidateAll() if the designated constraints aren't met.
+type SportsObjectMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m TestMultiError) Error() string {
+func (m SportsObjectMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -76,11 +95,11 @@ func (m TestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m TestMultiError) AllErrors() []error { return m }
+func (m SportsObjectMultiError) AllErrors() []error { return m }
 
-// TestValidationError is the validation error returned by Test.Validate if the
-// designated constraints aren't met.
-type TestValidationError struct {
+// SportsObjectValidationError is the validation error returned by
+// SportsObject.Validate if the designated constraints aren't met.
+type SportsObjectValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -88,22 +107,22 @@ type TestValidationError struct {
 }
 
 // Field function returns field value.
-func (e TestValidationError) Field() string { return e.field }
+func (e SportsObjectValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e TestValidationError) Reason() string { return e.reason }
+func (e SportsObjectValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e TestValidationError) Cause() error { return e.cause }
+func (e SportsObjectValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e TestValidationError) Key() bool { return e.key }
+func (e SportsObjectValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e TestValidationError) ErrorName() string { return "TestValidationError" }
+func (e SportsObjectValidationError) ErrorName() string { return "SportsObjectValidationError" }
 
 // Error satisfies the builtin error interface
-func (e TestValidationError) Error() string {
+func (e SportsObjectValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -115,14 +134,14 @@ func (e TestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sTest.%s: %s%s",
+		"invalid %sSportsObject.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = TestValidationError{}
+var _ error = SportsObjectValidationError{}
 
 var _ interface {
 	Field() string
@@ -130,4 +149,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = TestValidationError{}
+} = SportsObjectValidationError{}
