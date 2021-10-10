@@ -14,8 +14,8 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Run starts new server
 func Run() {
-	// server side
 	grpcInterface := viper.GetString("server.grpc.interface")
 	grpcPort := viper.GetInt("server.grpc.port")
 	grpcConnectionString := fmt.Sprintf("%s:%d", grpcInterface, grpcPort)
@@ -30,7 +30,7 @@ func Run() {
 	grpcServer := grpc.NewServer()
 	pb.RegisterApiServiceServer(grpcServer, &ApiServiceServer{})
 
-	// proxy client side
+	// starting new grpc server in a goroutine
 	go func() {
 		if grpcServer.Serve(lis) != nil {
 			logrus.WithFields(logrus.Fields{
@@ -77,6 +77,7 @@ func Run() {
 	}
 }
 
+// allowCORS sets up cors settings
 func allowCORS(h http.Handler) http.Handler {
 	return handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),

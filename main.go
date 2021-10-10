@@ -19,6 +19,6 @@ func main() {
 	}
 	logrus.Info("viper config initialized successfully")
 
-	// server init
+	// server starting
 	server.Run()
 }
