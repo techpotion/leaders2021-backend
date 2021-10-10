@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "Leaders 2021 Swagger"
+        version: "1.0"
+        contact: {
+            name: "Tech Potion"
+            url: "https://github.com/techpotion"
+            email: "varlamow.col@yahoo.com"
+        };
+    };
+    host: "localhost:3201",
+    schemes: [HTTP, HTTPS]
+    consumes: "application/json"
+    produces: "application/json"
+};
+
+service ApiService {
+    rpc SendMessage(Test) returns (Test) {
+        option (google.api.http) = {
+            post: "/api/v1/Mock";
+            body: "*";
+        };
+
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Mock";
+            summary: "Mock";
+            tags: "Mock";
+        };
+    }
+}
