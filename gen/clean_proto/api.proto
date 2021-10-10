@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+service ApiService {
+    rpc SendMessage(Test) returns (Test) {
+    }
+}
