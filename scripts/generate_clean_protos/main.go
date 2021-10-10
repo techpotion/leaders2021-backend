@@ -12,6 +12,7 @@ func main() {
 	}
 }
 
+// generateCleanProto generates clean proto files for debugging purposes (via bloomrpc for example)
 func generateCleanProto(in string, out string) error {
 	re := regexp.MustCompile(`\[((.|\n)*?)\];`)                                         // удаляем параметры полей
 	re2 := regexp.MustCompile(`option \(((.|\n)*?)};\n\n`)                              // удаляем глобальные опиции
