@@ -200,14 +200,6 @@ func (m *SportsObjects_ListRequest) Validate() error {
 
 	// no validation rules for DepartmentalOrganizationName
 
-	if m.GetSportsAreaName() != "" {
-
-	}
-
-	if m.GetSportsAreaType() != "" {
-
-	}
-
 	// no validation rules for Availability
 
 	if m.GetSportKind() != "" {
