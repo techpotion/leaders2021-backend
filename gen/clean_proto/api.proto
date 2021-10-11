@@ -9,6 +9,17 @@ import "sports_objects.proto";
 import "common.proto";
 
 service ApiService {
+    // Sports Objects
+    // List Sports Objects
     rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
+    }
+
+    // Get Sports Object
+    rpc GetSportsObject(SportsObjects.GetRequest) returns (SportsObjects.GetResponse) {
+    }
+
+    // Sports Objects Detailed
+    // List Sports Objects Detailed
+    rpc ListSportsObjectsDetailed(SportsObjectsDetailed.ListRequest) returns (SportsObjectsDetailed.ListResponse) {
     }
 }

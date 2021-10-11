@@ -3,3 +3,11 @@ syntax = "proto3";
 package api;
 
 option go_package = "gen/pb";
+
+enum Availability {
+    UNKNOWN = 0;
+    CITY = 1;
+    REGION = 2;
+    DISTRICT = 3;
+    STEP = 4;
+}

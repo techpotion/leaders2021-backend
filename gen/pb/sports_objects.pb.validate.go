@@ -11,7 +11,6 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
-	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -32,53 +31,18 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
-	_ = sort.Sort
 )
 
 // Validate checks the field values on SportsObjects with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
 func (m *SportsObjects) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObjects with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SportsObjectsMultiError, or
-// nil if none found.
-func (m *SportsObjects) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObjects) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return SportsObjectsMultiError(errors)
-	}
 	return nil
 }
-
-// SportsObjectsMultiError is an error wrapping multiple validation errors
-// returned by SportsObjects.ValidateAll() if the designated constraints
-// aren't met.
-type SportsObjectsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjectsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjectsMultiError) AllErrors() []error { return m }
 
 // SportsObjectsValidationError is the validation error returned by
 // SportsObjects.Validate if the designated constraints aren't met.
@@ -134,50 +98,116 @@ var _ interface {
 	ErrorName() string
 } = SportsObjectsValidationError{}
 
-// Validate checks the field values on SportsObjects_ListRequest with the rules
+// Validate checks the field values on SportsObjectsDetailed with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SportsObjects_ListRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObjects_ListRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SportsObjects_ListRequestMultiError, or nil if none found.
-func (m *SportsObjects_ListRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObjects_ListRequest) validate(all bool) error {
+// violated, an error is returned.
+func (m *SportsObjectsDetailed) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return SportsObjects_ListRequestMultiError(errors)
-	}
 	return nil
 }
 
-// SportsObjects_ListRequestMultiError is an error wrapping multiple validation
-// errors returned by SportsObjects_ListRequest.ValidateAll() if the
-// designated constraints aren't met.
-type SportsObjects_ListRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjects_ListRequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
+// SportsObjectsDetailedValidationError is the validation error returned by
+// SportsObjectsDetailed.Validate if the designated constraints aren't met.
+type SportsObjectsDetailedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
 }
 
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjects_ListRequestMultiError) AllErrors() []error { return m }
+// Field function returns field value.
+func (e SportsObjectsDetailedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjectsDetailedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjectsDetailedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjectsDetailedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjectsDetailedValidationError) ErrorName() string {
+	return "SportsObjectsDetailedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SportsObjectsDetailedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObjectsDetailed.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjectsDetailedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjectsDetailedValidationError{}
+
+// Validate checks the field values on SportsObjects_ListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SportsObjects_ListRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjects_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetObjectName() != "" {
+
+	}
+
+	if m.GetDepartmentalOrganizationId() != 0 {
+
+		if m.GetDepartmentalOrganizationId() < 100000 {
+			return SportsObjects_ListRequestValidationError{
+				field:  "DepartmentalOrganizationId",
+				reason: "value must be greater than or equal to 100000",
+			}
+		}
+
+	}
+
+	// no validation rules for DepartmentalOrganizationName
+
+	// no validation rules for Availability
+
+	if m.GetSportKind() != "" {
+
+	}
+
+	return nil
+}
 
 // SportsObjects_ListRequestValidationError is the validation error returned by
 // SportsObjects_ListRequest.Validate if the designated constraints aren't met.
@@ -237,48 +267,39 @@ var _ interface {
 
 // Validate checks the field values on SportsObjects_ListResponse with the
 // rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *SportsObjects_ListResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObjects_ListResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SportsObjects_ListResponseMultiError, or nil if none found.
-func (m *SportsObjects_ListResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObjects_ListResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
+	for idx, item := range m.GetSportsObjects() {
+		_, _ = idx, item
 
-	if len(errors) > 0 {
-		return SportsObjects_ListResponseMultiError(errors)
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SportsObjects_ListResponseValidationError{
+					field:  fmt.Sprintf("SportsObjects[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
+
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjects_ListResponseValidationError{
+				field:  "ListStats",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
-
-// SportsObjects_ListResponseMultiError is an error wrapping multiple
-// validation errors returned by SportsObjects_ListResponse.ValidateAll() if
-// the designated constraints aren't met.
-type SportsObjects_ListResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjects_ListResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjects_ListResponseMultiError) AllErrors() []error { return m }
 
 // SportsObjects_ListResponseValidationError is the validation error returned
 // by SportsObjects_ListResponse.Validate if the designated constraints aren't met.
@@ -335,3 +356,367 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SportsObjects_ListResponseValidationError{}
+
+// Validate checks the field values on SportsObjects_GetRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SportsObjects_GetRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetObjectId() < 200000 {
+		return SportsObjects_GetRequestValidationError{
+			field:  "ObjectId",
+			reason: "value must be greater than or equal to 200000",
+		}
+	}
+
+	return nil
+}
+
+// SportsObjects_GetRequestValidationError is the validation error returned by
+// SportsObjects_GetRequest.Validate if the designated constraints aren't met.
+type SportsObjects_GetRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SportsObjects_GetRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjects_GetRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjects_GetRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjects_GetRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjects_GetRequestValidationError) ErrorName() string {
+	return "SportsObjects_GetRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SportsObjects_GetRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObjects_GetRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjects_GetRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjects_GetRequestValidationError{}
+
+// Validate checks the field values on SportsObjects_GetResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SportsObjects_GetResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetSportsObject()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjects_GetResponseValidationError{
+				field:  "SportsObject",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// SportsObjects_GetResponseValidationError is the validation error returned by
+// SportsObjects_GetResponse.Validate if the designated constraints aren't met.
+type SportsObjects_GetResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SportsObjects_GetResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjects_GetResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjects_GetResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjects_GetResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjects_GetResponseValidationError) ErrorName() string {
+	return "SportsObjects_GetResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SportsObjects_GetResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObjects_GetResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjects_GetResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjects_GetResponseValidationError{}
+
+// Validate checks the field values on SportsObjectsDetailed_ListRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *SportsObjectsDetailed_ListRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjectsDetailed_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetObjectId() != 0 {
+
+		if m.GetObjectId() < 200000 {
+			return SportsObjectsDetailed_ListRequestValidationError{
+				field:  "ObjectId",
+				reason: "value must be greater than or equal to 200000",
+			}
+		}
+
+	}
+
+	if m.GetObjectName() != "" {
+
+	}
+
+	if m.GetDepartmentalOrganizationId() != 0 {
+
+		if m.GetDepartmentalOrganizationId() < 100000 {
+			return SportsObjectsDetailed_ListRequestValidationError{
+				field:  "DepartmentalOrganizationId",
+				reason: "value must be greater than or equal to 100000",
+			}
+		}
+
+	}
+
+	// no validation rules for DepartmentalOrganizationName
+
+	if m.GetSportsAreaName() != "" {
+
+	}
+
+	if m.GetSportsAreaType() != "" {
+
+	}
+
+	// no validation rules for Availability
+
+	if m.GetSportKind() != "" {
+
+	}
+
+	return nil
+}
+
+// SportsObjectsDetailed_ListRequestValidationError is the validation error
+// returned by SportsObjectsDetailed_ListRequest.Validate if the designated
+// constraints aren't met.
+type SportsObjectsDetailed_ListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SportsObjectsDetailed_ListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjectsDetailed_ListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjectsDetailed_ListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjectsDetailed_ListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjectsDetailed_ListRequestValidationError) ErrorName() string {
+	return "SportsObjectsDetailed_ListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SportsObjectsDetailed_ListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObjectsDetailed_ListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjectsDetailed_ListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjectsDetailed_ListRequestValidationError{}
+
+// Validate checks the field values on SportsObjectsDetailed_ListResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *SportsObjectsDetailed_ListResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetSportsObjects() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SportsObjectsDetailed_ListResponseValidationError{
+					field:  fmt.Sprintf("SportsObjects[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjectsDetailed_ListResponseValidationError{
+				field:  "ListStats",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// SportsObjectsDetailed_ListResponseValidationError is the validation error
+// returned by SportsObjectsDetailed_ListResponse.Validate if the designated
+// constraints aren't met.
+type SportsObjectsDetailed_ListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SportsObjectsDetailed_ListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjectsDetailed_ListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjectsDetailed_ListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjectsDetailed_ListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjectsDetailed_ListResponseValidationError) ErrorName() string {
+	return "SportsObjectsDetailed_ListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SportsObjectsDetailed_ListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObjectsDetailed_ListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjectsDetailed_ListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjectsDetailed_ListResponseValidationError{}

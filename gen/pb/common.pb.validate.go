@@ -11,7 +11,6 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
-	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -32,70 +31,242 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
-	_ = sort.Sort
 )
 
-// Validate checks the field values on SportsObject with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SportsObject) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObject with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SportsObjectMultiError, or
-// nil if none found.
-func (m *SportsObject) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObject) validate(all bool) error {
+// Validate checks the field values on Pagination with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Pagination) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
+	// no validation rules for PageNumber
+
+	// no validation rules for ResultsPerPage
+
+	return nil
+}
+
+// PaginationValidationError is the validation error returned by
+// Pagination.Validate if the designated constraints aren't met.
+type PaginationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PaginationValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PaginationValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PaginationValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PaginationValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PaginationValidationError) ErrorName() string { return "PaginationValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PaginationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPagination.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PaginationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PaginationValidationError{}
+
+// Validate checks the field values on ListStats with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *ListStats) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Count
+
+	return nil
+}
+
+// ListStatsValidationError is the validation error returned by
+// ListStats.Validate if the designated constraints aren't met.
+type ListStatsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStatsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStatsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListStatsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStatsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStatsValidationError) ErrorName() string { return "ListStatsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListStatsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStats.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStatsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStatsValidationError{}
+
+// Validate checks the field values on Point with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Point) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Lat
+
+	// no validation rules for Lng
+
+	return nil
+}
+
+// PointValidationError is the validation error returned by Point.Validate if
+// the designated constraints aren't met.
+type PointValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PointValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PointValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PointValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PointValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PointValidationError) ErrorName() string { return "PointValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PointValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPoint.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PointValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PointValidationError{}
+
+// Validate checks the field values on SportsObject with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *SportsObject) Validate() error {
+	if m == nil {
+		return nil
+	}
 
 	// no validation rules for ObjectId
 
 	// no validation rules for ObjectName
 
+	if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjectValidationError{
+				field:  "ObjectPoint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for DepartmentalOrganizationId
 
 	// no validation rules for DepartmentalOrganizationName
-
-	// no validation rules for SportsAreaId
-
-	// no validation rules for SportsAreaName
-
-	// no validation rules for SportsAreaType
 
 	// no validation rules for Availability
 
 	// no validation rules for SportKind
 
-	if len(errors) > 0 {
-		return SportsObjectMultiError(errors)
-	}
 	return nil
 }
-
-// SportsObjectMultiError is an error wrapping multiple validation errors
-// returned by SportsObject.ValidateAll() if the designated constraints aren't met.
-type SportsObjectMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjectMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjectMultiError) AllErrors() []error { return m }
 
 // SportsObjectValidationError is the validation error returned by
 // SportsObject.Validate if the designated constraints aren't met.
@@ -150,3 +321,98 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SportsObjectValidationError{}
+
+// Validate checks the field values on SportsObjectDetailed with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SportsObjectDetailed) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for ObjectId
+
+	// no validation rules for ObjectName
+
+	if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjectDetailedValidationError{
+				field:  "ObjectPoint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for DepartmentalOrganizationId
+
+	// no validation rules for DepartmentalOrganizationName
+
+	// no validation rules for SportsAreaId
+
+	// no validation rules for SportsAreaName
+
+	// no validation rules for SportsAreaType
+
+	// no validation rules for Availability
+
+	// no validation rules for SportKind
+
+	return nil
+}
+
+// SportsObjectDetailedValidationError is the validation error returned by
+// SportsObjectDetailed.Validate if the designated constraints aren't met.
+type SportsObjectDetailedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SportsObjectDetailedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjectDetailedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjectDetailedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjectDetailedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjectDetailedValidationError) ErrorName() string {
+	return "SportsObjectDetailedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SportsObjectDetailedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObjectDetailed.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjectDetailedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjectDetailedValidationError{}
