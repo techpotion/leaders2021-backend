@@ -7,7 +7,7 @@ COPY go.sum .
 RUN go mod download
 
 COPY . .
-COPY config.example.yaml config.yaml
+COPY ./config.example.yaml ./config.yaml
 RUN CGO_ENABLED=0 go build -o api .
 
 FROM alpine AS bin
