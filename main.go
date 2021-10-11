@@ -9,9 +9,7 @@ import (
 
 func init() {
 	// viper config initalization
-	viper.AddConfigPath("./")
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
+	viper.SetConfigFile("config.yaml")
 	err := viper.ReadInConfig()
 	if err != nil {
 		logrus.WithFields(logrus.Fields{
