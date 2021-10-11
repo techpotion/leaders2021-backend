@@ -86,10 +86,28 @@
   },
   "definitions": {
     "SportsObjectsListRequest": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/apiPagination"
+        }
+      }
     },
     "SportsObjectsListResponse": {
       "type": "object"
+    },
+    "apiPagination": {
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
     },
     "protobufAny": {
       "type": "object",

@@ -11,7 +11,6 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
-	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -32,53 +31,18 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
-	_ = sort.Sort
 )
 
 // Validate checks the field values on SportsObjects with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
 func (m *SportsObjects) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObjects with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SportsObjectsMultiError, or
-// nil if none found.
-func (m *SportsObjects) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObjects) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return SportsObjectsMultiError(errors)
-	}
 	return nil
 }
-
-// SportsObjectsMultiError is an error wrapping multiple validation errors
-// returned by SportsObjects.ValidateAll() if the designated constraints
-// aren't met.
-type SportsObjectsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjectsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjectsMultiError) AllErrors() []error { return m }
 
 // SportsObjectsValidationError is the validation error returned by
 // SportsObjects.Validate if the designated constraints aren't met.
@@ -136,48 +100,24 @@ var _ interface {
 
 // Validate checks the field values on SportsObjects_ListRequest with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *SportsObjects_ListRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObjects_ListRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SportsObjects_ListRequestMultiError, or nil if none found.
-func (m *SportsObjects_ListRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObjects_ListRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return SportsObjects_ListRequestMultiError(errors)
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjects_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
 	return nil
 }
-
-// SportsObjects_ListRequestMultiError is an error wrapping multiple validation
-// errors returned by SportsObjects_ListRequest.ValidateAll() if the
-// designated constraints aren't met.
-type SportsObjects_ListRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjects_ListRequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjects_ListRequestMultiError) AllErrors() []error { return m }
 
 // SportsObjects_ListRequestValidationError is the validation error returned by
 // SportsObjects_ListRequest.Validate if the designated constraints aren't met.
@@ -237,48 +177,14 @@ var _ interface {
 
 // Validate checks the field values on SportsObjects_ListResponse with the
 // rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *SportsObjects_ListResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SportsObjects_ListResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SportsObjects_ListResponseMultiError, or nil if none found.
-func (m *SportsObjects_ListResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SportsObjects_ListResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return SportsObjects_ListResponseMultiError(errors)
-	}
 	return nil
 }
-
-// SportsObjects_ListResponseMultiError is an error wrapping multiple
-// validation errors returned by SportsObjects_ListResponse.ValidateAll() if
-// the designated constraints aren't met.
-type SportsObjects_ListResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SportsObjects_ListResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SportsObjects_ListResponseMultiError) AllErrors() []error { return m }
 
 // SportsObjects_ListResponseValidationError is the validation error returned
 // by SportsObjects_ListResponse.Validate if the designated constraints aren't met.

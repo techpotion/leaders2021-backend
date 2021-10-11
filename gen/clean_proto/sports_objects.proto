@@ -8,7 +8,7 @@ import "common.proto";
 
 message SportsObjects {
     message ListRequest {
-
+        Pagination pagination = 1;
     }
 
     message ListResponse {
