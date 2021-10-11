@@ -28,7 +28,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/SportsObjectsDetailedListResponse"
+              "$ref": "#/definitions/apiSportsObjectsDetailedListResponse"
             }
           },
           "400": {
@@ -74,7 +74,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SportsObjectsDetailedListRequest"
+              "$ref": "#/definitions/apiSportsObjectsDetailedListRequest"
             }
           }
         ],
@@ -85,51 +85,6 @@
     }
   },
   "definitions": {
-    "SportsObjectsDetailedListRequest": {
-      "type": "object",
-      "properties": {
-        "pagination": {
-          "$ref": "#/definitions/apiPagination"
-        },
-        "object_name": {
-          "type": "string",
-          "title": "filters"
-        },
-        "departmental_organization_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "departmental_organization_name": {
-          "type": "string"
-        },
-        "sports_area_name": {
-          "type": "string"
-        },
-        "sports_area_type": {
-          "type": "string"
-        },
-        "availability": {
-          "$ref": "#/definitions/apiAvailability"
-        },
-        "sport_kind": {
-          "type": "string"
-        }
-      }
-    },
-    "SportsObjectsDetailedListResponse": {
-      "type": "object",
-      "properties": {
-        "sportsObjects": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiSportsObjectDetailed"
-          }
-        },
-        "listStats": {
-          "$ref": "#/definitions/apiListStats"
-        }
-      }
-    },
     "apiAvailability": {
       "type": "string",
       "enum": [
@@ -212,6 +167,51 @@
         },
         "sport_kind": {
           "type": "string"
+        }
+      }
+    },
+    "apiSportsObjectsDetailedListRequest": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/apiPagination"
+        },
+        "object_name": {
+          "type": "string",
+          "title": "filters"
+        },
+        "departmental_organization_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "departmental_organization_name": {
+          "type": "string"
+        },
+        "sports_area_name": {
+          "type": "string"
+        },
+        "sports_area_type": {
+          "type": "string"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability"
+        },
+        "sport_kind": {
+          "type": "string"
+        }
+      }
+    },
+    "apiSportsObjectsDetailedListResponse": {
+      "type": "object",
+      "properties": {
+        "sportsObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiSportsObjectDetailed"
+          }
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
         }
       }
     },

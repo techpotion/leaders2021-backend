@@ -235,6 +235,93 @@ var _ interface {
 	ErrorName() string
 } = PointValidationError{}
 
+// Validate checks the field values on SportsObject with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *SportsObject) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for ObjectId
+
+	// no validation rules for ObjectName
+
+	if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjectValidationError{
+				field:  "ObjectPoint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for DepartmentalOrganizationId
+
+	// no validation rules for DepartmentalOrganizationName
+
+	// no validation rules for Availability
+
+	// no validation rules for SportKind
+
+	return nil
+}
+
+// SportsObjectValidationError is the validation error returned by
+// SportsObject.Validate if the designated constraints aren't met.
+type SportsObjectValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SportsObjectValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SportsObjectValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SportsObjectValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SportsObjectValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SportsObjectValidationError) ErrorName() string { return "SportsObjectValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SportsObjectValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSportsObject.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SportsObjectValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SportsObjectValidationError{}
+
 // Validate checks the field values on SportsObjectDetailed with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
