@@ -12,6 +12,6 @@ type ApiServiceServer struct {
 	pb.UnimplementedApiServiceServer
 }
 
-func (s *ApiServiceServer) SportsObjects(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObjects_ListResponse, error) {
+func (s *ApiServiceServer) ListSportsObjects(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObjects_ListResponse, error) {
 	return sports_objects.List(ctx, in)
 }

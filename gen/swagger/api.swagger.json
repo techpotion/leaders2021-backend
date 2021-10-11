@@ -90,11 +90,65 @@
       "properties": {
         "pagination": {
           "$ref": "#/definitions/apiPagination"
+        },
+        "object_name": {
+          "type": "string",
+          "title": "filters"
+        },
+        "departmental_organization_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "departmental_organization_name": {
+          "type": "string"
+        },
+        "sports_area_name": {
+          "type": "string"
+        },
+        "sports_area_type": {
+          "type": "string"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability"
+        },
+        "sport_kind": {
+          "type": "string"
         }
       }
     },
     "SportsObjectsListResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "sportsObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiSportsObject"
+          }
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiAvailability": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "CITY",
+        "REGION",
+        "DISTRICT",
+        "STEP"
+      ],
+      "default": "UNKNOWN"
+    },
+    "apiListStats": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
     },
     "apiPagination": {
       "type": "object",
@@ -106,6 +160,58 @@
         "resultsPerPage": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "apiPoint": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "apiSportsObject": {
+      "type": "object",
+      "properties": {
+        "object_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "object_name": {
+          "type": "string"
+        },
+        "object_point": {
+          "$ref": "#/definitions/apiPoint"
+        },
+        "departmental_organization_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "departmental_organization_name": {
+          "type": "string"
+        },
+        "sports_area_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sports_area_name": {
+          "type": "string"
+        },
+        "sports_area_type": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sport_kind": {
+          "type": "string"
         }
       }
     },

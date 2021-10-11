@@ -9,9 +9,19 @@ import "common.proto";
 message SportsObjects {
     message ListRequest {
         Pagination pagination = 1;
+
+        // filters
+        string object_name = 2; // optional
+        uint32 departmental_organization_id = 3; // optional
+        string departmental_organization_name = 4; // optional
+        string sports_area_name = 5; // optional
+        string sports_area_type = 6; // optional
+        Availability availability = 7; // optional
+        string sport_kind = 8; // optional
     }
 
     message ListResponse {
-
+        repeated SportsObject sportsObjects = 1;
+        ListStats listStats = 2;
     }
 }

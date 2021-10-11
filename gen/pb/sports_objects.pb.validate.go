@@ -116,6 +116,37 @@ func (m *SportsObjects_ListRequest) Validate() error {
 		}
 	}
 
+	if m.GetObjectName() != "" {
+
+	}
+
+	if m.GetDepartmentalOrganizationId() != 0 {
+
+		if m.GetDepartmentalOrganizationId() < 100000 {
+			return SportsObjects_ListRequestValidationError{
+				field:  "DepartmentalOrganizationId",
+				reason: "value must be greater than or equal to 100000",
+			}
+		}
+
+	}
+
+	// no validation rules for DepartmentalOrganizationName
+
+	if m.GetSportsAreaName() != "" {
+
+	}
+
+	if m.GetSportsAreaType() != "" {
+
+	}
+
+	// no validation rules for Availability
+
+	if m.GetSportKind() != "" {
+
+	}
+
 	return nil
 }
 
@@ -181,6 +212,31 @@ var _ interface {
 func (m *SportsObjects_ListResponse) Validate() error {
 	if m == nil {
 		return nil
+	}
+
+	for idx, item := range m.GetSportsObjects() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SportsObjects_ListResponseValidationError{
+					field:  fmt.Sprintf("SportsObjects[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjects_ListResponseValidationError{
+				field:  "ListStats",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	return nil
