@@ -55,3 +55,32 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		ListStats:     &pb.ListStats{Count: uint64(result.RowsAffected)},
 	}, nil
 }
+
+func Get(ctx context.Context, in *pb.SportsObjects_GetRequest) (*pb.SportsObjects_GetResponse, error) {
+	filter := &pb.SportsObjectORM{
+		ObjectId: in.ObjectId,
+	}
+
+	db, err := database.New()
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	var object pb.SportsObjectORM
+	result := db.Where(filter).First(&object)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	converted, err := object.ToPB(ctx)
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	return &pb.SportsObjects_GetResponse{
+		SportsObject: &converted,
+	}, nil
+}

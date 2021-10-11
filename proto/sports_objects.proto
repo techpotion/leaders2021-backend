@@ -21,6 +21,14 @@ message SportsObjects {
         repeated SportsObject sportsObjects = 1;
         ListStats listStats = 2;
     }
+
+    message GetRequest {
+        uint32 object_id = 2 [(validate.rules).uint32 = {gte: 200000}];
+    }
+
+    message GetResponse {
+        SportsObject sportsObject = 1;
+    }
 }
 
 message SportsObjectsDetailed {

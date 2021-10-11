@@ -21,6 +21,8 @@ type ApiServiceClient interface {
 	// Sports Objects
 	// List Sports Objects
 	ListSportsObjects(ctx context.Context, in *SportsObjects_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error)
+	// Get Sports Object
+	GetSportsObject(ctx context.Context, in *SportsObjects_GetRequest, opts ...grpc.CallOption) (*SportsObjects_GetResponse, error)
 	// Sports Objects Detailed
 	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error)
@@ -43,6 +45,15 @@ func (c *apiServiceClient) ListSportsObjects(ctx context.Context, in *SportsObje
 	return out, nil
 }
 
+func (c *apiServiceClient) GetSportsObject(ctx context.Context, in *SportsObjects_GetRequest, opts ...grpc.CallOption) (*SportsObjects_GetResponse, error) {
+	out := new(SportsObjects_GetResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetSportsObject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiServiceClient) ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error) {
 	out := new(SportsObjectsDetailed_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportsObjectsDetailed", in, out, opts...)
@@ -59,6 +70,8 @@ type ApiServiceServer interface {
 	// Sports Objects
 	// List Sports Objects
 	ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error)
+	// Get Sports Object
+	GetSportsObject(context.Context, *SportsObjects_GetRequest) (*SportsObjects_GetResponse, error)
 	// Sports Objects Detailed
 	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error)
@@ -71,6 +84,9 @@ type UnimplementedApiServiceServer struct {
 
 func (UnimplementedApiServiceServer) ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjects not implemented")
+}
+func (UnimplementedApiServiceServer) GetSportsObject(context.Context, *SportsObjects_GetRequest) (*SportsObjects_GetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSportsObject not implemented")
 }
 func (UnimplementedApiServiceServer) ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjectsDetailed not implemented")
@@ -106,6 +122,24 @@ func _ApiService_ListSportsObjects_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_GetSportsObject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SportsObjects_GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).GetSportsObject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/GetSportsObject",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).GetSportsObject(ctx, req.(*SportsObjects_GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiService_ListSportsObjectsDetailed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SportsObjectsDetailed_ListRequest)
 	if err := dec(in); err != nil {
@@ -134,6 +168,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSportsObjects",
 			Handler:    _ApiService_ListSportsObjects_Handler,
+		},
+		{
+			MethodName: "GetSportsObject",
+			Handler:    _ApiService_GetSportsObject_Handler,
 		},
 		{
 			MethodName: "ListSportsObjectsDetailed",

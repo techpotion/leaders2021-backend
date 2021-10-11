@@ -21,6 +21,68 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/GetSportsObject": {
+      "get": {
+        "summary": "Get Sports Object",
+        "operationId": "ApiService_GetSportsObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SportsObjectsGetResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": ".api.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": ".api.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": ".api.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": ".api.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": ".api.ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "object_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Sports Objects"
+        ]
+      }
+    },
     "/api/v1/ListSportsObjects": {
       "get": {
         "summary": "Sports Objects\nList Sports Objects",
@@ -260,6 +322,14 @@
     }
   },
   "definitions": {
+    "SportsObjectsGetResponse": {
+      "type": "object",
+      "properties": {
+        "sportsObject": {
+          "$ref": "#/definitions/apiSportsObject"
+        }
+      }
+    },
     "apiAvailability": {
       "type": "string",
       "enum": [

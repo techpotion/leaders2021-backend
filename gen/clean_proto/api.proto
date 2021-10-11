@@ -14,6 +14,10 @@ service ApiService {
     rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
     }
 
+    // Get Sports Object
+    rpc GetSportsObject(SportsObjects.GetRequest) returns (SportsObjects.GetResponse) {
+    }
+
     // Sports Objects Detailed
     // List Sports Objects Detailed
     rpc ListSportsObjectsDetailed(SportsObjectsDetailed.ListRequest) returns (SportsObjectsDetailed.ListResponse) {
