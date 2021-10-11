@@ -370,8 +370,8 @@
       "type": "object",
       "properties": {
         "count": {
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

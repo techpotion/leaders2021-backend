@@ -52,7 +52,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 
 	return &pb.SportsObjects_ListResponse{
 		SportsObjects: convertedList,
-		ListStats:     &pb.ListStats{Count: uint64(result.RowsAffected)},
+		ListStats:     &pb.ListStats{Count: uint32(result.RowsAffected)},
 	}, nil
 }
 

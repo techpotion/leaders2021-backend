@@ -55,6 +55,6 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 
 	return &pb.SportsObjectsDetailed_ListResponse{
 		SportsObjects: convertedList,
-		ListStats:     &pb.ListStats{Count: uint64(result.RowsAffected)},
+		ListStats:     &pb.ListStats{Count: uint32(result.RowsAffected)},
 	}, nil
 }
