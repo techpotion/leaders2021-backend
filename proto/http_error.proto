@@ -1,0 +1,23 @@
+syntax = "proto3";
+package api;
+option go_package = "gen/pb";
+
+import "common.proto";
+import "google/protobuf/any.proto";
+
+message ErrorResponse {
+	int32 code = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+		pattern: "^[0-9]$",
+		title: "code",
+		description: "Response code",
+		format: "integer"
+	}];
+	string message = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+		title: "message",
+		description: "Response message"
+	}];
+	repeated google.protobuf.Any details = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+		title: "details",
+		description: "Response details"
+	}];
+}

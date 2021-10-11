@@ -35,31 +35,31 @@
           "400": {
             "description": "Returned when the request body does not match the API's specifications",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "401": {
             "description": "Returned when the user tries to login to a resource with an incorrect login info",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "500": {
             "description": "Internal server error",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "default": {
@@ -97,31 +97,31 @@
           "400": {
             "description": "Returned when the request body does not match the API's specifications",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "401": {
             "description": "Returned when the user tries to login to a resource with an incorrect login info",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "500": {
             "description": "Internal server error",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "default": {
@@ -206,31 +206,31 @@
           "400": {
             "description": "Returned when the request body does not match the API's specifications",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "401": {
             "description": "Returned when the user tries to login to a resource with an incorrect login info",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "500": {
             "description": "Internal server error",
             "schema": {
-              "$ref": ".api.ErrorResponse"
+              "$ref": "#/definitions/apiErrorResponse"
             }
           },
           "default": {
@@ -340,6 +340,31 @@
         "STEP"
       ],
       "default": "UNKNOWN"
+    },
+    "apiErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "integer",
+          "description": "Response code",
+          "title": "code",
+          "pattern": "^[0-9]$"
+        },
+        "message": {
+          "type": "string",
+          "description": "Response message",
+          "title": "message"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          },
+          "description": "Response details",
+          "title": "details"
+        }
+      }
     },
     "apiListStats": {
       "type": "object",

@@ -11,6 +11,7 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -31,21 +32,56 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
+	_ = sort.Sort
 )
 
 // Validate checks the field values on Pagination with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *Pagination) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Pagination with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PaginationMultiError, or
+// nil if none found.
+func (m *Pagination) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Pagination) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
+
+	var errors []error
 
 	// no validation rules for PageNumber
 
 	// no validation rules for ResultsPerPage
 
+	if len(errors) > 0 {
+		return PaginationMultiError(errors)
+	}
 	return nil
 }
+
+// PaginationMultiError is an error wrapping multiple validation errors
+// returned by Pagination.ValidateAll() if the designated constraints aren't met.
+type PaginationMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PaginationMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PaginationMultiError) AllErrors() []error { return m }
 
 // PaginationValidationError is the validation error returned by
 // Pagination.Validate if the designated constraints aren't met.
@@ -102,16 +138,50 @@ var _ interface {
 } = PaginationValidationError{}
 
 // Validate checks the field values on ListStats with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *ListStats) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListStats with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListStatsMultiError, or nil
+// if none found.
+func (m *ListStats) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStats) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
 	// no validation rules for Count
 
+	if len(errors) > 0 {
+		return ListStatsMultiError(errors)
+	}
 	return nil
 }
+
+// ListStatsMultiError is an error wrapping multiple validation errors returned
+// by ListStats.ValidateAll() if the designated constraints aren't met.
+type ListStatsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStatsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStatsMultiError) AllErrors() []error { return m }
 
 // ListStatsValidationError is the validation error returned by
 // ListStats.Validate if the designated constraints aren't met.
@@ -168,18 +238,51 @@ var _ interface {
 } = ListStatsValidationError{}
 
 // Validate checks the field values on Point with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *Point) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Point with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in PointMultiError, or nil if none found.
+func (m *Point) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Point) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
+
+	var errors []error
 
 	// no validation rules for Lat
 
 	// no validation rules for Lng
 
+	if len(errors) > 0 {
+		return PointMultiError(errors)
+	}
 	return nil
 }
+
+// PointMultiError is an error wrapping multiple validation errors returned by
+// Point.ValidateAll() if the designated constraints aren't met.
+type PointMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PointMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PointMultiError) AllErrors() []error { return m }
 
 // PointValidationError is the validation error returned by Point.Validate if
 // the designated constraints aren't met.
@@ -236,18 +339,51 @@ var _ interface {
 } = PointValidationError{}
 
 // Validate checks the field values on SportsObject with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *SportsObject) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SportsObject with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SportsObjectMultiError, or
+// nil if none found.
+func (m *SportsObject) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SportsObject) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
+
+	var errors []error
 
 	// no validation rules for ObjectId
 
 	// no validation rules for ObjectName
 
-	if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
+	if all {
+		switch v := interface{}(m.GetObjectPoint()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SportsObjectValidationError{
+					field:  "ObjectPoint",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SportsObjectValidationError{
+					field:  "ObjectPoint",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return SportsObjectValidationError{
 				field:  "ObjectPoint",
@@ -265,8 +401,27 @@ func (m *SportsObject) Validate() error {
 
 	// no validation rules for SportKind
 
+	if len(errors) > 0 {
+		return SportsObjectMultiError(errors)
+	}
 	return nil
 }
+
+// SportsObjectMultiError is an error wrapping multiple validation errors
+// returned by SportsObject.ValidateAll() if the designated constraints aren't met.
+type SportsObjectMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SportsObjectMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SportsObjectMultiError) AllErrors() []error { return m }
 
 // SportsObjectValidationError is the validation error returned by
 // SportsObject.Validate if the designated constraints aren't met.
@@ -324,17 +479,50 @@ var _ interface {
 
 // Validate checks the field values on SportsObjectDetailed with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *SportsObjectDetailed) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SportsObjectDetailed with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SportsObjectDetailedMultiError, or nil if none found.
+func (m *SportsObjectDetailed) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SportsObjectDetailed) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
+
+	var errors []error
 
 	// no validation rules for ObjectId
 
 	// no validation rules for ObjectName
 
-	if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
+	if all {
+		switch v := interface{}(m.GetObjectPoint()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SportsObjectDetailedValidationError{
+					field:  "ObjectPoint",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SportsObjectDetailedValidationError{
+					field:  "ObjectPoint",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return SportsObjectDetailedValidationError{
 				field:  "ObjectPoint",
@@ -358,8 +546,28 @@ func (m *SportsObjectDetailed) Validate() error {
 
 	// no validation rules for SportKind
 
+	if len(errors) > 0 {
+		return SportsObjectDetailedMultiError(errors)
+	}
 	return nil
 }
+
+// SportsObjectDetailedMultiError is an error wrapping multiple validation
+// errors returned by SportsObjectDetailed.ValidateAll() if the designated
+// constraints aren't met.
+type SportsObjectDetailedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SportsObjectDetailedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SportsObjectDetailedMultiError) AllErrors() []error { return m }
 
 // SportsObjectDetailedValidationError is the validation error returned by
 // SportsObjectDetailed.Validate if the designated constraints aren't met.

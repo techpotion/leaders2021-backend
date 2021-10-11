@@ -1,0 +1,12 @@
+syntax = "proto3";
+package api;
+option go_package = "gen/pb";
+
+import "common.proto";
+import "google/protobuf/any.proto";
+
+message ErrorResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated google.protobuf.Any details = 3;
+}
