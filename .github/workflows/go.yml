@@ -33,7 +33,7 @@ jobs:
 
   dockerize:
     name: Dockerize
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
 
   redeploy:
     name: Redeploy
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     needs: dockerize
     runs-on: ubuntu-latest
     steps:
