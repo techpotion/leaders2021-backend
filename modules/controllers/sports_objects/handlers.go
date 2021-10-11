@@ -16,6 +16,16 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
+	filter := &pb.SportsObjectORM{
+		ObjectName:                   in.ObjectName,
+		DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
+		DepartmentalOrganizationName: in.DepartmentalOrganizationName,
+		SportsAreaName:               in.SportsAreaName,
+		SportsAreaType:               in.SportsAreaType,
+		Availability:                 uint32(in.Availability),
+		SportKind:                    in.SportKind,
+	}
+
 	db, err := database.New()
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
@@ -25,7 +35,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber()) * lim
 
-	result := db.Limit(lim).Offset(offset * lim).Find(&objectsList)
+	result := db.Limit(lim).Offset(offset * lim).Where(filter).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
