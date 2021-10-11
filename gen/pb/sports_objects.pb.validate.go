@@ -578,10 +578,10 @@ func (m *SportsObjects_GetRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetObjectId() < 200000 {
+	if m.GetObjectId() < 100000 {
 		err := SportsObjects_GetRequestValidationError{
 			field:  "ObjectId",
-			reason: "value must be greater than or equal to 200000",
+			reason: "value must be greater than or equal to 100000",
 		}
 		if !all {
 			return err
@@ -852,10 +852,10 @@ func (m *SportsObjectsDetailed_ListRequest) validate(all bool) error {
 
 	if m.GetObjectId() != 0 {
 
-		if m.GetObjectId() < 200000 {
+		if m.GetObjectId() < 100000 {
 			err := SportsObjectsDetailed_ListRequestValidationError{
 				field:  "ObjectId",
-				reason: "value must be greater than or equal to 200000",
+				reason: "value must be greater than or equal to 100000",
 			}
 			if !all {
 				return err
@@ -871,10 +871,10 @@ func (m *SportsObjectsDetailed_ListRequest) validate(all bool) error {
 
 	if m.GetDepartmentalOrganizationId() != 0 {
 
-		if m.GetDepartmentalOrganizationId() < 100000 {
+		if m.GetDepartmentalOrganizationId() < 200000 {
 			err := SportsObjectsDetailed_ListRequestValidationError{
 				field:  "DepartmentalOrganizationId",
-				reason: "value must be greater than or equal to 100000",
+				reason: "value must be greater than or equal to 200000",
 			}
 			if !all {
 				return err
