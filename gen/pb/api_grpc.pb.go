@@ -18,6 +18,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiServiceClient interface {
+	// Sports Objects
+	// List Sports Objects
+	ListSportsObjects(ctx context.Context, in *SportsObjects_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error)
+	// Sports Objects Detailed
+	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error)
 }
 
@@ -27,6 +32,15 @@ type apiServiceClient struct {
 
 func NewApiServiceClient(cc grpc.ClientConnInterface) ApiServiceClient {
 	return &apiServiceClient{cc}
+}
+
+func (c *apiServiceClient) ListSportsObjects(ctx context.Context, in *SportsObjects_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error) {
+	out := new(SportsObjects_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportsObjects", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *apiServiceClient) ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error) {
@@ -42,6 +56,11 @@ func (c *apiServiceClient) ListSportsObjectsDetailed(ctx context.Context, in *Sp
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
 type ApiServiceServer interface {
+	// Sports Objects
+	// List Sports Objects
+	ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error)
+	// Sports Objects Detailed
+	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
@@ -50,6 +69,9 @@ type ApiServiceServer interface {
 type UnimplementedApiServiceServer struct {
 }
 
+func (UnimplementedApiServiceServer) ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjects not implemented")
+}
 func (UnimplementedApiServiceServer) ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjectsDetailed not implemented")
 }
@@ -64,6 +86,24 @@ type UnsafeApiServiceServer interface {
 
 func RegisterApiServiceServer(s grpc.ServiceRegistrar, srv ApiServiceServer) {
 	s.RegisterService(&ApiService_ServiceDesc, srv)
+}
+
+func _ApiService_ListSportsObjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SportsObjects_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListSportsObjects(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListSportsObjects",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListSportsObjects(ctx, req.(*SportsObjects_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ApiService_ListSportsObjectsDetailed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -91,6 +131,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.ApiService",
 	HandlerType: (*ApiServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListSportsObjects",
+			Handler:    _ApiService_ListSportsObjects_Handler,
+		},
 		{
 			MethodName: "ListSportsObjectsDetailed",
 			Handler:    _ApiService_ListSportsObjectsDetailed_Handler,
