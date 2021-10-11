@@ -194,8 +194,15 @@
             "format": "int64"
           },
           {
-            "name": "object_name",
+            "name": "object_id",
             "description": "filters.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "object_name",
             "in": "query",
             "required": false,
             "type": "string"

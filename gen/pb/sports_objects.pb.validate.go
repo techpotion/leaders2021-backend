@@ -375,6 +375,17 @@ func (m *SportsObjectsDetailed_ListRequest) Validate() error {
 		}
 	}
 
+	if m.GetObjectId() != 0 {
+
+		if m.GetObjectId() < 200000 {
+			return SportsObjectsDetailed_ListRequestValidationError{
+				field:  "ObjectId",
+				reason: "value must be greater than or equal to 200000",
+			}
+		}
+
+	}
+
 	if m.GetObjectName() != "" {
 
 	}

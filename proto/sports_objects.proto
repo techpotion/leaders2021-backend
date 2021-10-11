@@ -27,13 +27,14 @@ message SportsObjectsDetailed {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        string object_name = 2 [(validate.rules).string = {ignore_empty: true}]; // optional
-        uint32 departmental_organization_id = 3 [(validate.rules).uint32 = {ignore_empty: true, gte: 100000}]; // optional
-        string departmental_organization_name = 4; // optional
-        string sports_area_name = 5 [(validate.rules).string = {ignore_empty: true}]; // optional
-        string sports_area_type = 6 [(validate.rules).string = {ignore_empty: true}]; // optional
-        Availability availability = 7; // optional
-        string sport_kind = 8 [(validate.rules).string = {ignore_empty: true}]; // optional
+        uint32 object_id = 2 [(validate.rules).uint32 = {ignore_empty: true, gte: 200000}]; // optional
+        string object_name = 3 [(validate.rules).string = {ignore_empty: true}]; // optional
+        uint32 departmental_organization_id = 4 [(validate.rules).uint32 = {ignore_empty: true, gte: 100000}]; // optional
+        string departmental_organization_name = 5; // optional
+        string sports_area_name = 6 [(validate.rules).string = {ignore_empty: true}]; // optional
+        string sports_area_type = 7 [(validate.rules).string = {ignore_empty: true}]; // optional
+        Availability availability = 8; // optional
+        string sport_kind = 9 [(validate.rules).string = {ignore_empty: true}]; // optional
     }
 
     message ListResponse {

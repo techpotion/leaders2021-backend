@@ -17,6 +17,7 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 	}
 
 	filter := &pb.SportsObjectDetailedORM{
+		ObjectId:                     in.ObjectId,
 		ObjectName:                   in.ObjectName,
 		DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
 		DepartmentalOrganizationName: in.DepartmentalOrganizationName,
