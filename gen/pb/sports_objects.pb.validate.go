@@ -33,10 +33,10 @@ var (
 	_ = anypb.Any{}
 )
 
-// Validate checks the field values on SportsObjects with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *SportsObjects) Validate() error {
+// Validate checks the field values on SportsObjectsDetailed with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SportsObjectsDetailed) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -44,9 +44,9 @@ func (m *SportsObjects) Validate() error {
 	return nil
 }
 
-// SportsObjectsValidationError is the validation error returned by
-// SportsObjects.Validate if the designated constraints aren't met.
-type SportsObjectsValidationError struct {
+// SportsObjectsDetailedValidationError is the validation error returned by
+// SportsObjectsDetailed.Validate if the designated constraints aren't met.
+type SportsObjectsDetailedValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -54,22 +54,24 @@ type SportsObjectsValidationError struct {
 }
 
 // Field function returns field value.
-func (e SportsObjectsValidationError) Field() string { return e.field }
+func (e SportsObjectsDetailedValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SportsObjectsValidationError) Reason() string { return e.reason }
+func (e SportsObjectsDetailedValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SportsObjectsValidationError) Cause() error { return e.cause }
+func (e SportsObjectsDetailedValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SportsObjectsValidationError) Key() bool { return e.key }
+func (e SportsObjectsDetailedValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SportsObjectsValidationError) ErrorName() string { return "SportsObjectsValidationError" }
+func (e SportsObjectsDetailedValidationError) ErrorName() string {
+	return "SportsObjectsDetailedValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e SportsObjectsValidationError) Error() string {
+func (e SportsObjectsDetailedValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -81,14 +83,14 @@ func (e SportsObjectsValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSportsObjects.%s: %s%s",
+		"invalid %sSportsObjectsDetailed.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SportsObjectsValidationError{}
+var _ error = SportsObjectsDetailedValidationError{}
 
 var _ interface {
 	Field() string
@@ -96,19 +98,19 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SportsObjectsValidationError{}
+} = SportsObjectsDetailedValidationError{}
 
-// Validate checks the field values on SportsObjects_ListRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SportsObjects_ListRequest) Validate() error {
+// Validate checks the field values on SportsObjectsDetailed_ListRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *SportsObjectsDetailed_ListRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SportsObjects_ListRequestValidationError{
+			return SportsObjectsDetailed_ListRequestValidationError{
 				field:  "Pagination",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -123,7 +125,7 @@ func (m *SportsObjects_ListRequest) Validate() error {
 	if m.GetDepartmentalOrganizationId() != 0 {
 
 		if m.GetDepartmentalOrganizationId() < 100000 {
-			return SportsObjects_ListRequestValidationError{
+			return SportsObjectsDetailed_ListRequestValidationError{
 				field:  "DepartmentalOrganizationId",
 				reason: "value must be greater than or equal to 100000",
 			}
@@ -150,9 +152,10 @@ func (m *SportsObjects_ListRequest) Validate() error {
 	return nil
 }
 
-// SportsObjects_ListRequestValidationError is the validation error returned by
-// SportsObjects_ListRequest.Validate if the designated constraints aren't met.
-type SportsObjects_ListRequestValidationError struct {
+// SportsObjectsDetailed_ListRequestValidationError is the validation error
+// returned by SportsObjectsDetailed_ListRequest.Validate if the designated
+// constraints aren't met.
+type SportsObjectsDetailed_ListRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -160,24 +163,24 @@ type SportsObjects_ListRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SportsObjects_ListRequestValidationError) Field() string { return e.field }
+func (e SportsObjectsDetailed_ListRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SportsObjects_ListRequestValidationError) Reason() string { return e.reason }
+func (e SportsObjectsDetailed_ListRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SportsObjects_ListRequestValidationError) Cause() error { return e.cause }
+func (e SportsObjectsDetailed_ListRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SportsObjects_ListRequestValidationError) Key() bool { return e.key }
+func (e SportsObjectsDetailed_ListRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SportsObjects_ListRequestValidationError) ErrorName() string {
-	return "SportsObjects_ListRequestValidationError"
+func (e SportsObjectsDetailed_ListRequestValidationError) ErrorName() string {
+	return "SportsObjectsDetailed_ListRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SportsObjects_ListRequestValidationError) Error() string {
+func (e SportsObjectsDetailed_ListRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -189,14 +192,14 @@ func (e SportsObjects_ListRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSportsObjects_ListRequest.%s: %s%s",
+		"invalid %sSportsObjectsDetailed_ListRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SportsObjects_ListRequestValidationError{}
+var _ error = SportsObjectsDetailed_ListRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -204,12 +207,12 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SportsObjects_ListRequestValidationError{}
+} = SportsObjectsDetailed_ListRequestValidationError{}
 
-// Validate checks the field values on SportsObjects_ListResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SportsObjects_ListResponse) Validate() error {
+// Validate checks the field values on SportsObjectsDetailed_ListResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *SportsObjectsDetailed_ListResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -219,7 +222,7 @@ func (m *SportsObjects_ListResponse) Validate() error {
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return SportsObjects_ListResponseValidationError{
+				return SportsObjectsDetailed_ListResponseValidationError{
 					field:  fmt.Sprintf("SportsObjects[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -231,7 +234,7 @@ func (m *SportsObjects_ListResponse) Validate() error {
 
 	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SportsObjects_ListResponseValidationError{
+			return SportsObjectsDetailed_ListResponseValidationError{
 				field:  "ListStats",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -242,9 +245,10 @@ func (m *SportsObjects_ListResponse) Validate() error {
 	return nil
 }
 
-// SportsObjects_ListResponseValidationError is the validation error returned
-// by SportsObjects_ListResponse.Validate if the designated constraints aren't met.
-type SportsObjects_ListResponseValidationError struct {
+// SportsObjectsDetailed_ListResponseValidationError is the validation error
+// returned by SportsObjectsDetailed_ListResponse.Validate if the designated
+// constraints aren't met.
+type SportsObjectsDetailed_ListResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -252,24 +256,24 @@ type SportsObjects_ListResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SportsObjects_ListResponseValidationError) Field() string { return e.field }
+func (e SportsObjectsDetailed_ListResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SportsObjects_ListResponseValidationError) Reason() string { return e.reason }
+func (e SportsObjectsDetailed_ListResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SportsObjects_ListResponseValidationError) Cause() error { return e.cause }
+func (e SportsObjectsDetailed_ListResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SportsObjects_ListResponseValidationError) Key() bool { return e.key }
+func (e SportsObjectsDetailed_ListResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SportsObjects_ListResponseValidationError) ErrorName() string {
-	return "SportsObjects_ListResponseValidationError"
+func (e SportsObjectsDetailed_ListResponseValidationError) ErrorName() string {
+	return "SportsObjectsDetailed_ListResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SportsObjects_ListResponseValidationError) Error() string {
+func (e SportsObjectsDetailed_ListResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -281,14 +285,14 @@ func (e SportsObjects_ListResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSportsObjects_ListResponse.%s: %s%s",
+		"invalid %sSportsObjectsDetailed_ListResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SportsObjects_ListResponseValidationError{}
+var _ error = SportsObjectsDetailed_ListResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -296,4 +300,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SportsObjects_ListResponseValidationError{}
+} = SportsObjectsDetailed_ListResponseValidationError{}

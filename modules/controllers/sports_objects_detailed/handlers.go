@@ -1,4 +1,4 @@
-package sports_objects
+package sports_objects_detailed
 
 import (
 	"context"
@@ -11,12 +11,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObjects_ListResponse, error) {
+func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.SportsObjectsDetailed_ListResponse, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	filter := &pb.SportsObjectORM{
+	filter := &pb.SportsObjectDetailedORM{
 		ObjectName:                   in.ObjectName,
 		DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
 		DepartmentalOrganizationName: in.DepartmentalOrganizationName,
@@ -31,7 +31,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	var objectsList []*pb.SportsObjectORM
+	var objectsList []*pb.SportsObjectDetailedORM
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber()) * lim
 
@@ -43,7 +43,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		return nil, status.Error(codes.Internal, result.Error.Error())
 	}
 
-	var convertedList []*pb.SportsObject
+	var convertedList []*pb.SportsObjectDetailed
 	for _, objectORM := range objectsList {
 		converted, err := objectORM.ToPB(ctx)
 		if err != nil {
@@ -52,7 +52,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		convertedList = append(convertedList, &converted)
 	}
 
-	return &pb.SportsObjects_ListResponse{
+	return &pb.SportsObjectsDetailed_ListResponse{
 		SportsObjects: convertedList,
 		ListStats:     &pb.ListStats{Count: uint64(result.RowsAffected)},
 	}, nil

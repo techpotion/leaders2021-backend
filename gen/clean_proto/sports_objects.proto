@@ -6,10 +6,9 @@ option go_package = "gen/pb";
 
 import "common.proto";
 
-message SportsObjects {
+message SportsObjectsDetailed {
     message ListRequest {
         Pagination pagination = 1;
-
         // filters
         string object_name = 2; // optional
         uint32 departmental_organization_id = 3; // optional
@@ -21,7 +20,7 @@ message SportsObjects {
     }
 
     message ListResponse {
-        repeated SportsObject sportsObjects = 1;
+        repeated SportsObjectDetailed sportsObjects = 1;
         ListStats listStats = 2;
     }
 }

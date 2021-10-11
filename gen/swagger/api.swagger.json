@@ -21,14 +21,14 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/ListSportsObjects": {
+    "/api/v1/ListSportsObjectsDetailed": {
       "post": {
-        "operationId": "ApiService_ListSportsObjects",
+        "operationId": "ApiService_ListSportsObjectsDetailed",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/SportsObjectsListResponse"
+              "$ref": "#/definitions/SportsObjectsDetailedListResponse"
             }
           },
           "400": {
@@ -74,18 +74,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SportsObjectsListRequest"
+              "$ref": "#/definitions/SportsObjectsDetailedListRequest"
             }
           }
         ],
         "tags": [
-          "Sports Objects"
+          "Sports Objects Detailed"
         ]
       }
     }
   },
   "definitions": {
-    "SportsObjectsListRequest": {
+    "SportsObjectsDetailedListRequest": {
       "type": "object",
       "properties": {
         "pagination": {
@@ -116,13 +116,13 @@
         }
       }
     },
-    "SportsObjectsListResponse": {
+    "SportsObjectsDetailedListResponse": {
       "type": "object",
       "properties": {
         "sportsObjects": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiSportsObject"
+            "$ref": "#/definitions/apiSportsObjectDetailed"
           }
         },
         "listStats": {
@@ -176,7 +176,7 @@
         }
       }
     },
-    "apiSportsObject": {
+    "apiSportsObjectDetailed": {
       "type": "object",
       "properties": {
         "object_id": {

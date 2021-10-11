@@ -27,9 +27,9 @@ message Point {
     float lng = 2;
 }
 
-message SportsObject {
+message SportsObjectDetailed {
     option (gorm.opts).ormable = true;
-    option (gorm.opts).table = "objects";
+    option (gorm.opts).table = "objects_detailed";
     uint32 object_id = 1;
     string object_name = 2;
     Point object_point = 3 [(gorm.field).tag = {embedded: true, embedded_prefix: "object_point_", not_null: true}];

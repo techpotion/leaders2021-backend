@@ -80,16 +80,16 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service ApiService {
-    rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
+    rpc ListSportsObjectsDetailed(SportsObjectsDetailed.ListRequest) returns (SportsObjectsDetailed.ListResponse) {
         option (google.api.http) = {
-            post: "/api/v1/ListSportsObjects";
+            post: "/api/v1/ListSportsObjectsDetailed";
             body: "*";
         };
 
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             description: "";
             summary: "";
-            tags: "Sports Objects";
+            tags: "Sports Objects Detailed";
         };
     }
 }

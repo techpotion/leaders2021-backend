@@ -22,7 +22,7 @@ message Point {
     float lng = 2;
 }
 
-message SportsObject {
+message SportsObjectDetailed {
     uint32 object_id = 1;
     string object_name = 2;
     Point object_point = 3;
