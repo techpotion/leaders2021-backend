@@ -1,4 +1,4 @@
-package sports_objects_detailed
+package sportsobjectsdetailed
 
 import (
 	"context"
