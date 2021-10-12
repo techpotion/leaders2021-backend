@@ -26,6 +26,11 @@ type ApiServiceClient interface {
 	// Sports Objects Detailed
 	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error)
+	// GeoJSONs
+	// Getting Moscow regions polygons geojson
+	GetGeoJsonRegions(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
+	// Getting Moscow population density for heatmap drawing purposes
+	GetGeoJsonDensityHeatmap(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
 }
 
 type apiServiceClient struct {
@@ -63,6 +68,24 @@ func (c *apiServiceClient) ListSportsObjectsDetailed(ctx context.Context, in *Sp
 	return out, nil
 }
 
+func (c *apiServiceClient) GetGeoJsonRegions(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error) {
+	out := new(GeoJsons_Response)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetGeoJsonRegions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiServiceClient) GetGeoJsonDensityHeatmap(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error) {
+	out := new(GeoJsons_Response)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetGeoJsonDensityHeatmap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServiceServer is the server API for ApiService service.
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
@@ -75,6 +98,11 @@ type ApiServiceServer interface {
 	// Sports Objects Detailed
 	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error)
+	// GeoJSONs
+	// Getting Moscow regions polygons geojson
+	GetGeoJsonRegions(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
+	// Getting Moscow population density for heatmap drawing purposes
+	GetGeoJsonDensityHeatmap(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -90,6 +118,12 @@ func (UnimplementedApiServiceServer) GetSportsObject(context.Context, *SportsObj
 }
 func (UnimplementedApiServiceServer) ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjectsDetailed not implemented")
+}
+func (UnimplementedApiServiceServer) GetGeoJsonRegions(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGeoJsonRegions not implemented")
+}
+func (UnimplementedApiServiceServer) GetGeoJsonDensityHeatmap(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGeoJsonDensityHeatmap not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -158,6 +192,42 @@ func _ApiService_ListSportsObjectsDetailed_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_GetGeoJsonRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GeoJsons_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).GetGeoJsonRegions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/GetGeoJsonRegions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).GetGeoJsonRegions(ctx, req.(*GeoJsons_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiService_GetGeoJsonDensityHeatmap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GeoJsons_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).GetGeoJsonDensityHeatmap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/GetGeoJsonDensityHeatmap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).GetGeoJsonDensityHeatmap(ctx, req.(*GeoJsons_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiService_ServiceDesc is the grpc.ServiceDesc for ApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +246,14 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSportsObjectsDetailed",
 			Handler:    _ApiService_ListSportsObjectsDetailed_Handler,
+		},
+		{
+			MethodName: "GetGeoJsonRegions",
+			Handler:    _ApiService_GetGeoJsonRegions_Handler,
+		},
+		{
+			MethodName: "GetGeoJsonDensityHeatmap",
+			Handler:    _ApiService_GetGeoJsonDensityHeatmap_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
