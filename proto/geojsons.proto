@@ -8,6 +8,6 @@ message GeoJsons {
     message Request {}
 
     message Response {
-        bytes geoJson = 1;
+        string geoJson = 1;
     }
 }

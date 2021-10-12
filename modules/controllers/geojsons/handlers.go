@@ -28,7 +28,7 @@ func handleGeoJson(path string) (*pb.GeoJsons_Response, error) {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 	resp := &pb.GeoJsons_Response{
-		GeoJson: jsonBytes,
+		GeoJson: string(jsonBytes),
 	}
 
 	return resp, nil
