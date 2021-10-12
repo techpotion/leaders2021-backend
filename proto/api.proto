@@ -5,6 +5,7 @@ package api;
 option go_package = "gen/pb";
 
 import "sports_objects.proto";
+import "geojsons.proto";
 
 import "common.proto";
 
@@ -115,6 +116,31 @@ service ApiService {
             description: "";
             summary: "";
             tags: "Sports Objects Detailed";
+        };
+    }
+
+    // GeoJSONs
+    // Getting Moscow regions polygons geojson
+    rpc GetGeoJsonRegions(GeoJsons.Request) returns (GeoJsons.Response) {
+        option (google.api.http) = {
+            get: "/api/v1/GetGeoJsonRegions";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "GeoJsons";
+        };
+    }
+
+    // Getting Moscow population density for heatmap drawing purposes
+    rpc GetGeoJsonDensityHeatmap(GeoJsons.Request) returns (GeoJsons.Response) {
+        option (google.api.http) = {
+            get: "/api/v1/GetGeoJsonDensityHeatmap";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "GeoJsons";
         };
     }
 }

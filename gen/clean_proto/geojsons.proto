@@ -1,0 +1,13 @@
+syntax = "proto3";
+package api;
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message GeoJsons {
+    message Request {}
+
+    message Response {
+        bytes geoJson = 1;
+    }
+}

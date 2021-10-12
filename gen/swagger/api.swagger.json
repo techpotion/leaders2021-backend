@@ -21,6 +21,112 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/GetGeoJsonDensityHeatmap": {
+      "get": {
+        "summary": "Getting Moscow population density for heatmap drawing purposes",
+        "operationId": "ApiService_GetGeoJsonDensityHeatmap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGeoJsonsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "GeoJsons"
+        ]
+      }
+    },
+    "/api/v1/GetGeoJsonRegions": {
+      "get": {
+        "summary": "GeoJSONs\nGetting Moscow regions polygons geojson",
+        "operationId": "ApiService_GetGeoJsonRegions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGeoJsonsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "GeoJsons"
+        ]
+      }
+    },
     "/api/v1/GetSportsObject": {
       "get": {
         "summary": "Get Sports Object",
@@ -363,6 +469,15 @@
           },
           "description": "Response details",
           "title": "details"
+        }
+      }
+    },
+    "apiGeoJsonsResponse": {
+      "type": "object",
+      "properties": {
+        "geoJson": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },
