@@ -476,8 +476,7 @@
       "type": "object",
       "properties": {
         "geoJson": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         }
       }
     },
