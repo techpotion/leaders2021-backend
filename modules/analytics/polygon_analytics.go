@@ -29,7 +29,7 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 	return fmt.Sprintf(`
 		ST_Contains(
 			%s,
-			ST_Point(object_point_lat, object_point_lng)
+			ST_Point(object_point_lng, object_point_lat)
 		);`,
 		polygonQuery,
 	)
@@ -45,6 +45,7 @@ func formGeometryPolygon(polygon *pb.Polygon) string {
 	return fmt.Sprintf("ST_GeomFromText('%s')", poly)
 }
 
+// TODO add tests
 func CalculateSquare(areas []*pb.SportsObjectDetailed) float64 {
 	var sumSquare float64 = 0
 	for _, area := range areas {
@@ -53,6 +54,7 @@ func CalculateSquare(areas []*pb.SportsObjectDetailed) float64 {
 	return sumSquare
 }
 
+// TODO add tests
 func UniqueSportsKinds(areas []*pb.SportsObjectDetailed) []string {
 	keys := make(map[string]bool)
 	list := []string{}
@@ -64,5 +66,6 @@ func UniqueSportsKinds(areas []*pb.SportsObjectDetailed) []string {
 			list = append(list, kind)
 		}
 	}
+
 	return list
 }

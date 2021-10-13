@@ -14,8 +14,8 @@ import public "enums.proto";
 
 message Point {
     option (gorm.opts).ormable = true;
-    float lng = 2 [(validate.rules).float = {gte: -180, lte: 180}];
     float lat = 1 [(validate.rules).float = {gte: -90,  lte: 90}];
+    float lng = 2 [(validate.rules).float = {gte: -180, lte: 180}];
 }
 
 message LineString {

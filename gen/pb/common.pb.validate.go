@@ -56,10 +56,10 @@ func (m *Point) validate(all bool) error {
 
 	var errors []error
 
-	if val := m.GetLng(); val < -180 || val > 180 {
+	if val := m.GetLat(); val < -90 || val > 90 {
 		err := PointValidationError{
-			field:  "Lng",
-			reason: "value must be inside range [-180, 180]",
+			field:  "Lat",
+			reason: "value must be inside range [-90, 90]",
 		}
 		if !all {
 			return err
@@ -67,10 +67,10 @@ func (m *Point) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if val := m.GetLat(); val < -90 || val > 90 {
+	if val := m.GetLng(); val < -180 || val > 180 {
 		err := PointValidationError{
-			field:  "Lat",
-			reason: "value must be inside range [-90, 90]",
+			field:  "Lng",
+			reason: "value must be inside range [-180, 180]",
 		}
 		if !all {
 			return err

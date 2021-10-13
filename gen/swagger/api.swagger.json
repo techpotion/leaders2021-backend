@@ -632,11 +632,11 @@
     "apiPoint": {
       "type": "object",
       "properties": {
-        "lng": {
+        "lat": {
           "type": "number",
           "format": "float"
         },
-        "lat": {
+        "lng": {
           "type": "number",
           "format": "float"
         }

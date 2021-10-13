@@ -36,7 +36,7 @@ func GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_GetRequest
 
 	polygonQuery := analytics.FormPolygonContainsQuery(in.Polygon)
 
-	result := db.Where(filter).Where(polygonQuery).Find(&objectsList)
+	result := db.Select("\"sport_kind\", \"sports_area_square\"").Where(filter).Where(polygonQuery).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
