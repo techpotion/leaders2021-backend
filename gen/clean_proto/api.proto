@@ -32,4 +32,8 @@ service ApiService {
     // Getting Moscow population density for heatmap drawing purposes
     rpc GetGeoJsonDensityHeatmap(GeoJsons.Request) returns (GeoJsons.Response) {
     }
+
+    // Getting objects geojson for heatmap drawing purposes
+    rpc GetGeoJsonObjects(GeoJsons.Request) returns (GeoJsons.Response) {
+    }
 }
