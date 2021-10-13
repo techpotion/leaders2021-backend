@@ -6,6 +6,7 @@ option go_package = "gen/pb";
 
 import "sports_objects.proto";
 import "geojsons.proto";
+import "analytics.proto";
 
 import "common.proto";
 
@@ -153,6 +154,18 @@ service ApiService {
             description: "";
             summary: "";
             tags: "GeoJsons";
+        };
+    }
+
+    // Analytics
+    rpc GetPolygonAnalytics(PolygonAnalytics.GetRequest) returns (PolygonAnalytics.GetResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/GetPolygonAnalytics";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "Analytics";
         };
     }
 }

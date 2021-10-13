@@ -14,23 +14,23 @@ message Point {
 }
 
 message LineString {
-    repeated Point point = 1;
+    repeated Point points = 1;
 }
 
 message MultiLineString {
-    repeated LineString line_string = 1;
+    repeated LineString lineStrings = 1;
 }
 
 message MultiPoint {
-    repeated Point point = 1;
+    repeated Point points = 1;
 }
 
 message Polygon {
-    repeated Point point = 1;
+    repeated Point points = 1;
 }
 
 message MultiPolygon {
-    repeated Polygon polygon = 1;
+    repeated Polygon polygons = 1;
 }
 
 message Pagination {

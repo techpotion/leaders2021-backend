@@ -56,9 +56,27 @@ func (m *Point) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Lat
+	if val := m.GetLat(); val < -90 || val > 90 {
+		err := PointValidationError{
+			field:  "Lat",
+			reason: "value must be inside range [-90, 90]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Lng
+	if val := m.GetLng(); val < -180 || val > 180 {
+		err := PointValidationError{
+			field:  "Lng",
+			reason: "value must be inside range [-180, 180]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return PointMultiError(errors)
@@ -158,7 +176,7 @@ func (m *LineString) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetPoint() {
+	for idx, item := range m.GetPoints() {
 		_, _ = idx, item
 
 		if all {
@@ -166,7 +184,7 @@ func (m *LineString) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, LineStringValidationError{
-						field:  fmt.Sprintf("Point[%v]", idx),
+						field:  fmt.Sprintf("Points[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -174,7 +192,7 @@ func (m *LineString) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, LineStringValidationError{
-						field:  fmt.Sprintf("Point[%v]", idx),
+						field:  fmt.Sprintf("Points[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -183,7 +201,7 @@ func (m *LineString) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return LineStringValidationError{
-					field:  fmt.Sprintf("Point[%v]", idx),
+					field:  fmt.Sprintf("Points[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -290,7 +308,7 @@ func (m *MultiLineString) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetLineString() {
+	for idx, item := range m.GetLineStrings() {
 		_, _ = idx, item
 
 		if all {
@@ -298,7 +316,7 @@ func (m *MultiLineString) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, MultiLineStringValidationError{
-						field:  fmt.Sprintf("LineString[%v]", idx),
+						field:  fmt.Sprintf("LineStrings[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -306,7 +324,7 @@ func (m *MultiLineString) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, MultiLineStringValidationError{
-						field:  fmt.Sprintf("LineString[%v]", idx),
+						field:  fmt.Sprintf("LineStrings[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -315,7 +333,7 @@ func (m *MultiLineString) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return MultiLineStringValidationError{
-					field:  fmt.Sprintf("LineString[%v]", idx),
+					field:  fmt.Sprintf("LineStrings[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -423,7 +441,7 @@ func (m *MultiPoint) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetPoint() {
+	for idx, item := range m.GetPoints() {
 		_, _ = idx, item
 
 		if all {
@@ -431,7 +449,7 @@ func (m *MultiPoint) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, MultiPointValidationError{
-						field:  fmt.Sprintf("Point[%v]", idx),
+						field:  fmt.Sprintf("Points[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -439,7 +457,7 @@ func (m *MultiPoint) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, MultiPointValidationError{
-						field:  fmt.Sprintf("Point[%v]", idx),
+						field:  fmt.Sprintf("Points[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -448,7 +466,7 @@ func (m *MultiPoint) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return MultiPointValidationError{
-					field:  fmt.Sprintf("Point[%v]", idx),
+					field:  fmt.Sprintf("Points[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -554,7 +572,7 @@ func (m *Polygon) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetPoint() {
+	for idx, item := range m.GetPoints() {
 		_, _ = idx, item
 
 		if all {
@@ -562,7 +580,7 @@ func (m *Polygon) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PolygonValidationError{
-						field:  fmt.Sprintf("Point[%v]", idx),
+						field:  fmt.Sprintf("Points[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -570,7 +588,7 @@ func (m *Polygon) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PolygonValidationError{
-						field:  fmt.Sprintf("Point[%v]", idx),
+						field:  fmt.Sprintf("Points[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -579,7 +597,7 @@ func (m *Polygon) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PolygonValidationError{
-					field:  fmt.Sprintf("Point[%v]", idx),
+					field:  fmt.Sprintf("Points[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -686,7 +704,7 @@ func (m *MultiPolygon) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetPolygon() {
+	for idx, item := range m.GetPolygons() {
 		_, _ = idx, item
 
 		if all {
@@ -694,7 +712,7 @@ func (m *MultiPolygon) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, MultiPolygonValidationError{
-						field:  fmt.Sprintf("Polygon[%v]", idx),
+						field:  fmt.Sprintf("Polygons[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -702,7 +720,7 @@ func (m *MultiPolygon) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, MultiPolygonValidationError{
-						field:  fmt.Sprintf("Polygon[%v]", idx),
+						field:  fmt.Sprintf("Polygons[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -711,7 +729,7 @@ func (m *MultiPolygon) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return MultiPolygonValidationError{
-					field:  fmt.Sprintf("Polygon[%v]", idx),
+					field:  fmt.Sprintf("Polygons[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

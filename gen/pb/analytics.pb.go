@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -19,22 +20,247 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PolygonAnalytics struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *PolygonAnalytics) Reset() {
+	*x = PolygonAnalytics{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_analytics_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PolygonAnalytics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolygonAnalytics) ProtoMessage() {}
+
+func (x *PolygonAnalytics) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolygonAnalytics.ProtoReflect.Descriptor instead.
+func (*PolygonAnalytics) Descriptor() ([]byte, []int) {
+	return file_analytics_proto_rawDescGZIP(), []int{0}
+}
+
+type PolygonAnalytics_GetRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Polygon *Polygon `protobuf:"bytes,1,opt,name=polygon,proto3" json:"polygon,omitempty"`
+	// filters
+	SportsAreaType string       `protobuf:"bytes,2,opt,name=sportsAreaType,proto3" json:"sportsAreaType,omitempty"`                    // optional
+	Availability   Availability `protobuf:"varint,3,opt,name=availability,proto3,enum=api.Availability" json:"availability,omitempty"` // optional
+	SportKind      string       `protobuf:"bytes,4,opt,name=sportKind,proto3" json:"sportKind,omitempty"`                              // optional
+}
+
+func (x *PolygonAnalytics_GetRequest) Reset() {
+	*x = PolygonAnalytics_GetRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_analytics_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PolygonAnalytics_GetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolygonAnalytics_GetRequest) ProtoMessage() {}
+
+func (x *PolygonAnalytics_GetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolygonAnalytics_GetRequest.ProtoReflect.Descriptor instead.
+func (*PolygonAnalytics_GetRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *PolygonAnalytics_GetRequest) GetPolygon() *Polygon {
+	if x != nil {
+		return x.Polygon
+	}
+	return nil
+}
+
+func (x *PolygonAnalytics_GetRequest) GetSportsAreaType() string {
+	if x != nil {
+		return x.SportsAreaType
+	}
+	return ""
+}
+
+func (x *PolygonAnalytics_GetRequest) GetAvailability() Availability {
+	if x != nil {
+		return x.Availability
+	}
+	return Availability_UNKNOWN
+}
+
+func (x *PolygonAnalytics_GetRequest) GetSportKind() string {
+	if x != nil {
+		return x.SportKind
+	}
+	return ""
+}
+
+type PolygonAnalytics_GetResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AreasSquare  float64  `protobuf:"fixed64,1,opt,name=areasSquare,proto3" json:"areasSquare,omitempty"`
+	AreasAmount  uint32   `protobuf:"varint,2,opt,name=areasAmount,proto3" json:"areasAmount,omitempty"`
+	SportsAmount uint32   `protobuf:"varint,3,opt,name=sportsAmount,proto3" json:"sportsAmount,omitempty"`
+	SportsKinds  []string `protobuf:"bytes,4,rep,name=sportsKinds,proto3" json:"sportsKinds,omitempty"`
+}
+
+func (x *PolygonAnalytics_GetResponse) Reset() {
+	*x = PolygonAnalytics_GetResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_analytics_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PolygonAnalytics_GetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolygonAnalytics_GetResponse) ProtoMessage() {}
+
+func (x *PolygonAnalytics_GetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolygonAnalytics_GetResponse.ProtoReflect.Descriptor instead.
+func (*PolygonAnalytics_GetResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_proto_rawDescGZIP(), []int{0, 1}
+}
+
+func (x *PolygonAnalytics_GetResponse) GetAreasSquare() float64 {
+	if x != nil {
+		return x.AreasSquare
+	}
+	return 0
+}
+
+func (x *PolygonAnalytics_GetResponse) GetAreasAmount() uint32 {
+	if x != nil {
+		return x.AreasAmount
+	}
+	return 0
+}
+
+func (x *PolygonAnalytics_GetResponse) GetSportsAmount() uint32 {
+	if x != nil {
+		return x.SportsAmount
+	}
+	return 0
+}
+
+func (x *PolygonAnalytics_GetResponse) GetSportsKinds() []string {
+	if x != nil {
+		return x.SportsKinds
+	}
+	return nil
+}
+
 var File_analytics_proto protoreflect.FileDescriptor
 
 var file_analytics_proto_rawDesc = []byte{
 	0x0a, 0x0f, 0x61, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x12, 0x03, 0x61, 0x70, 0x69, 0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x42, 0x08, 0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0xf4, 0x02, 0x0a, 0x10, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e,
+	0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x1a, 0xc5, 0x01, 0x0a, 0x0a, 0x47, 0x65,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x07, 0x70, 0x6f, 0x6c, 0x79,
+	0x67, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x52, 0x07, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e,
+	0x12, 0x30, 0x0a, 0x0e, 0x73, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x41, 0x72, 0x65, 0x61, 0x54, 0x79,
+	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x72, 0x03, 0xd0,
+	0x01, 0x01, 0x52, 0x0e, 0x73, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x41, 0x72, 0x65, 0x61, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x35, 0x0a, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69,
+	0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41,
+	0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x52, 0x0c, 0x61, 0x76, 0x61,
+	0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x26, 0x0a, 0x09, 0x73, 0x70, 0x6f,
+	0x72, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42,
+	0x05, 0x72, 0x03, 0xd0, 0x01, 0x01, 0x52, 0x09, 0x73, 0x70, 0x6f, 0x72, 0x74, 0x4b, 0x69, 0x6e,
+	0x64, 0x1a, 0x97, 0x01, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x72, 0x65, 0x61, 0x73, 0x53, 0x71, 0x75, 0x61, 0x72, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0b, 0x61, 0x72, 0x65, 0x61, 0x73, 0x53, 0x71, 0x75,
+	0x61, 0x72, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x72, 0x65, 0x61, 0x73, 0x41, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0b, 0x61, 0x72, 0x65, 0x61, 0x73, 0x41,
+	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x73, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x41,
+	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x73, 0x70, 0x6f,
+	0x72, 0x74, 0x73, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x73, 0x70, 0x6f,
+	0x72, 0x74, 0x73, 0x4b, 0x69, 0x6e, 0x64, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b,
+	0x73, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x4b, 0x69, 0x6e, 0x64, 0x73, 0x42, 0x08, 0x5a, 0x06, 0x67,
+	0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
-var file_analytics_proto_goTypes = []interface{}{}
+var (
+	file_analytics_proto_rawDescOnce sync.Once
+	file_analytics_proto_rawDescData = file_analytics_proto_rawDesc
+)
+
+func file_analytics_proto_rawDescGZIP() []byte {
+	file_analytics_proto_rawDescOnce.Do(func() {
+		file_analytics_proto_rawDescData = protoimpl.X.CompressGZIP(file_analytics_proto_rawDescData)
+	})
+	return file_analytics_proto_rawDescData
+}
+
+var file_analytics_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_analytics_proto_goTypes = []interface{}{
+	(*PolygonAnalytics)(nil),             // 0: api.PolygonAnalytics
+	(*PolygonAnalytics_GetRequest)(nil),  // 1: api.PolygonAnalytics.GetRequest
+	(*PolygonAnalytics_GetResponse)(nil), // 2: api.PolygonAnalytics.GetResponse
+	(*Polygon)(nil),                      // 3: api.Polygon
+	(Availability)(0),                    // 4: api.Availability
+}
 var file_analytics_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: api.PolygonAnalytics.GetRequest.polygon:type_name -> api.Polygon
+	4, // 1: api.PolygonAnalytics.GetRequest.availability:type_name -> api.Availability
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_analytics_proto_init() }
@@ -43,18 +269,57 @@ func file_analytics_proto_init() {
 		return
 	}
 	file_common_proto_init()
+	if !protoimpl.UnsafeEnabled {
+		file_analytics_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PolygonAnalytics); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_analytics_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PolygonAnalytics_GetRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_analytics_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PolygonAnalytics_GetResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_analytics_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_analytics_proto_goTypes,
 		DependencyIndexes: file_analytics_proto_depIdxs,
+		MessageInfos:      file_analytics_proto_msgTypes,
 	}.Build()
 	File_analytics_proto = out.File
 	file_analytics_proto_rawDesc = nil
