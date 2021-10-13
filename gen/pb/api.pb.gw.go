@@ -593,7 +593,7 @@ var (
 
 	pattern_ApiService_GetGeoJsonObjects_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "GetGeoJsonObjects"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ApiService_PolygonAnalytics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "GetPolygonAnalytics"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ApiService_PolygonAnalytics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "PolygonAnalytics"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

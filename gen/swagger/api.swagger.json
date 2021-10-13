@@ -180,69 +180,6 @@
         ]
       }
     },
-    "/api/v1/GetPolygonAnalytics": {
-      "post": {
-        "summary": "Analytics",
-        "operationId": "ApiService_PolygonAnalytics",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPolygonAnalyticsResponse"
-            }
-          },
-          "400": {
-            "description": "Returned when the request body does not match the API's specifications",
-            "schema": {
-              "$ref": "#/definitions/apiErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Returned when the user tries to login to a resource with an incorrect login info",
-            "schema": {
-              "$ref": "#/definitions/apiErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Returned when the user does not have permission to access the resource",
-            "schema": {
-              "$ref": "#/definitions/apiErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Returned when the resource does not exist",
-            "schema": {
-              "$ref": "#/definitions/apiErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/apiErrorResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPolygonAnalyticsRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Analytics"
-        ]
-      }
-    },
     "/api/v1/GetSportsObject": {
       "get": {
         "summary": "Get Sports Object",
@@ -539,6 +476,69 @@
         ],
         "tags": [
           "Sports Objects Detailed"
+        ]
+      }
+    },
+    "/api/v1/PolygonAnalytics": {
+      "post": {
+        "summary": "Analytics",
+        "operationId": "ApiService_PolygonAnalytics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPolygonAnalyticsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonAnalyticsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Analytics"
         ]
       }
     }
