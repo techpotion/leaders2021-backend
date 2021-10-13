@@ -10,11 +10,11 @@ message SportsObjects {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        string object_name = 2; // optional
-        uint32 departmental_organization_id = 3; // optional
-        string departmental_organization_name = 4; // optional
+        string objectName = 2; // optional
+        uint32 departmentalOrganizationId = 3; // optional
+        string departmentalOrganizationName = 4; // optional
         Availability availability = 7; // optional
-        string sport_kind = 8; // optional
+        string sportKind = 8; // optional
     }
 
     message ListResponse {
@@ -23,7 +23,7 @@ message SportsObjects {
     }
 
     message GetRequest {
-        uint32 object_id = 2;
+        uint32 objectId = 2;
     }
 
     message GetResponse {
@@ -35,14 +35,14 @@ message SportsObjectsDetailed {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        uint32 object_id = 2; // optional
-        string object_name = 3; // optional
-        uint32 departmental_organization_id = 4; // optional
-        string departmental_organization_name = 5; // optional
-        string sports_area_name = 6; // optional
-        string sports_area_type = 7; // optional
+        uint32 objectId = 2; // optional
+        string objectName = 3; // optional
+        uint32 departmentalOrganizationId = 4; // optional
+        string departmentalOrganizationName = 5; // optional
+        string sportsAreaName = 6; // optional
+        string sportsAreaType = 7; // optional
         Availability availability = 8; // optional
-        string sport_kind = 9; // optional
+        string sportKind = 9; // optional
     }
 
     message ListResponse {

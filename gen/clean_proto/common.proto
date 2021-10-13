@@ -23,24 +23,27 @@ message Point {
 }
 
 message SportsObject {
-    uint32 object_id = 1;
-    string object_name = 2;
-    Point object_point = 3;
-    uint32 departmental_organization_id = 4;
-    string departmental_organization_name = 5;
-    uint32 availability = 9;
-    string sport_kind = 10;
+    uint32 objectId = 1;
+    string objectName = 2;
+    string objectAddress = 3;
+    Point objectPoint = 4;
+    uint32 departmentalOrganizationId = 5;
+    string departmentalOrganizationName = 6;
+    uint32 availability = 7;
+    string sportKind = 8;
 }
 
 message SportsObjectDetailed {
-    uint32 object_id = 1;
-    string object_name = 2;
-    Point object_point = 3;
-    uint32 departmental_organization_id = 4;
-    string departmental_organization_name = 5;
-    uint32 sports_area_id = 6;
-    string sports_area_name = 7;
-    string sports_area_type = 8;
-    uint32 availability = 9;
-    string sport_kind = 10;
+    uint32 objectId = 1;
+    string objectName = 2;
+    string sportsAreaAddress = 3;
+    Point objectPoint = 4;
+    uint32 departmentalOrganizationId = 5;
+    string departmentalOrganizationName = 6;
+    uint32 sportsAreaId = 7;
+    string sportsAreaName = 8;
+    string sportsAreaType = 9;
+    double sportsAreaSquare = 10;
+    uint32 availability = 11;
+    string sportKind = 12;
 }
