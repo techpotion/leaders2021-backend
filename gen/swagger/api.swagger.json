@@ -177,7 +177,7 @@
         },
         "parameters": [
           {
-            "name": "object_id",
+            "name": "objectId",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -253,21 +253,21 @@
             "format": "int64"
           },
           {
-            "name": "object_name",
+            "name": "objectName",
             "description": "filters.",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "departmental_organization_id",
+            "name": "departmentalOrganizationId",
             "in": "query",
             "required": false,
             "type": "integer",
             "format": "int64"
           },
           {
-            "name": "departmental_organization_name",
+            "name": "departmentalOrganizationName",
             "in": "query",
             "required": false,
             "type": "string"
@@ -287,7 +287,7 @@
             "default": "UNKNOWN"
           },
           {
-            "name": "sport_kind",
+            "name": "sportKind",
             "in": "query",
             "required": false,
             "type": "string"
@@ -362,7 +362,7 @@
             "format": "int64"
           },
           {
-            "name": "object_id",
+            "name": "objectId",
             "description": "filters.",
             "in": "query",
             "required": false,
@@ -370,32 +370,32 @@
             "format": "int64"
           },
           {
-            "name": "object_name",
+            "name": "objectName",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "departmental_organization_id",
+            "name": "departmentalOrganizationId",
             "in": "query",
             "required": false,
             "type": "integer",
             "format": "int64"
           },
           {
-            "name": "departmental_organization_name",
+            "name": "departmentalOrganizationName",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "sports_area_name",
+            "name": "sportsAreaName",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "sports_area_type",
+            "name": "sportsAreaType",
             "in": "query",
             "required": false,
             "type": "string"
@@ -415,7 +415,7 @@
             "default": "UNKNOWN"
           },
           {
-            "name": "sport_kind",
+            "name": "sportKind",
             "in": "query",
             "required": false,
             "type": "string"
@@ -518,28 +518,31 @@
     "apiSportsObject": {
       "type": "object",
       "properties": {
-        "object_id": {
+        "objectId": {
           "type": "integer",
           "format": "int64"
         },
-        "object_name": {
+        "objectName": {
           "type": "string"
         },
-        "object_point": {
+        "objectAddress": {
+          "type": "string"
+        },
+        "objectPoint": {
           "$ref": "#/definitions/apiPoint"
         },
-        "departmental_organization_id": {
+        "departmentalOrganizationId": {
           "type": "integer",
           "format": "int64"
         },
-        "departmental_organization_name": {
+        "departmentalOrganizationName": {
           "type": "string"
         },
         "availability": {
           "type": "integer",
           "format": "int64"
         },
-        "sport_kind": {
+        "sportKind": {
           "type": "string"
         }
       }
@@ -547,38 +550,45 @@
     "apiSportsObjectDetailed": {
       "type": "object",
       "properties": {
-        "object_id": {
+        "objectId": {
           "type": "integer",
           "format": "int64"
         },
-        "object_name": {
+        "objectName": {
           "type": "string"
         },
-        "object_point": {
+        "sportsAreaAddress": {
+          "type": "string"
+        },
+        "objectPoint": {
           "$ref": "#/definitions/apiPoint"
         },
-        "departmental_organization_id": {
+        "departmentalOrganizationId": {
           "type": "integer",
           "format": "int64"
         },
-        "departmental_organization_name": {
+        "departmentalOrganizationName": {
           "type": "string"
         },
-        "sports_area_id": {
+        "sportsAreaId": {
           "type": "integer",
           "format": "int64"
         },
-        "sports_area_name": {
+        "sportsAreaName": {
           "type": "string"
         },
-        "sports_area_type": {
+        "sportsAreaType": {
           "type": "string"
+        },
+        "sportsAreaSquare": {
+          "type": "number",
+          "format": "double"
         },
         "availability": {
           "type": "integer",
           "format": "int64"
         },
-        "sport_kind": {
+        "sportKind": {
           "type": "string"
         }
       }

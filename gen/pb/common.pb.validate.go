@@ -364,6 +364,8 @@ func (m *SportsObject) validate(all bool) error {
 
 	// no validation rules for ObjectName
 
+	// no validation rules for ObjectAddress
+
 	if all {
 		switch v := interface{}(m.GetObjectPoint()).(type) {
 		case interface{ ValidateAll() error }:
@@ -503,6 +505,8 @@ func (m *SportsObjectDetailed) validate(all bool) error {
 
 	// no validation rules for ObjectName
 
+	// no validation rules for SportsAreaAddress
+
 	if all {
 		switch v := interface{}(m.GetObjectPoint()).(type) {
 		case interface{ ValidateAll() error }:
@@ -541,6 +545,8 @@ func (m *SportsObjectDetailed) validate(all bool) error {
 	// no validation rules for SportsAreaName
 
 	// no validation rules for SportsAreaType
+
+	// no validation rules for SportsAreaSquare
 
 	// no validation rules for Availability
 
