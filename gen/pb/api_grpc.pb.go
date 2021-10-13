@@ -34,7 +34,7 @@ type ApiServiceClient interface {
 	// Getting objects geojson for heatmap drawing purposes
 	GetGeoJsonObjects(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
 	// Analytics
-	GetPolygonAnalytics(ctx context.Context, in *PolygonAnalytics_GetRequest, opts ...grpc.CallOption) (*PolygonAnalytics_GetResponse, error)
+	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
 }
 
 type apiServiceClient struct {
@@ -99,9 +99,9 @@ func (c *apiServiceClient) GetGeoJsonObjects(ctx context.Context, in *GeoJsons_R
 	return out, nil
 }
 
-func (c *apiServiceClient) GetPolygonAnalytics(ctx context.Context, in *PolygonAnalytics_GetRequest, opts ...grpc.CallOption) (*PolygonAnalytics_GetResponse, error) {
-	out := new(PolygonAnalytics_GetResponse)
-	err := c.cc.Invoke(ctx, "/api.ApiService/GetPolygonAnalytics", in, out, opts...)
+func (c *apiServiceClient) PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error) {
+	out := new(PolygonAnalytics_Response)
+	err := c.cc.Invoke(ctx, "/api.ApiService/PolygonAnalytics", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ type ApiServiceServer interface {
 	// Getting objects geojson for heatmap drawing purposes
 	GetGeoJsonObjects(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
 	// Analytics
-	GetPolygonAnalytics(context.Context, *PolygonAnalytics_GetRequest) (*PolygonAnalytics_GetResponse, error)
+	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -154,8 +154,8 @@ func (UnimplementedApiServiceServer) GetGeoJsonDensityHeatmap(context.Context, *
 func (UnimplementedApiServiceServer) GetGeoJsonObjects(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGeoJsonObjects not implemented")
 }
-func (UnimplementedApiServiceServer) GetPolygonAnalytics(context.Context, *PolygonAnalytics_GetRequest) (*PolygonAnalytics_GetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPolygonAnalytics not implemented")
+func (UnimplementedApiServiceServer) PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PolygonAnalytics not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -278,20 +278,20 @@ func _ApiService_GetGeoJsonObjects_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ApiService_GetPolygonAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PolygonAnalytics_GetRequest)
+func _ApiService_PolygonAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolygonAnalytics_Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServiceServer).GetPolygonAnalytics(ctx, in)
+		return srv.(ApiServiceServer).PolygonAnalytics(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.ApiService/GetPolygonAnalytics",
+		FullMethod: "/api.ApiService/PolygonAnalytics",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServiceServer).GetPolygonAnalytics(ctx, req.(*PolygonAnalytics_GetRequest))
+		return srv.(ApiServiceServer).PolygonAnalytics(ctx, req.(*PolygonAnalytics_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -328,8 +328,8 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ApiService_GetGeoJsonObjects_Handler,
 		},
 		{
-			MethodName: "GetPolygonAnalytics",
-			Handler:    _ApiService_GetPolygonAnalytics_Handler,
+			MethodName: "PolygonAnalytics",
+			Handler:    _ApiService_PolygonAnalytics_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

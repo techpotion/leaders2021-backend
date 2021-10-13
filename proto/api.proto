@@ -158,9 +158,10 @@ service ApiService {
     }
 
     // Analytics
-    rpc GetPolygonAnalytics(PolygonAnalytics.GetRequest) returns (PolygonAnalytics.GetResponse) {
+    rpc PolygonAnalytics(PolygonAnalytics.Request) returns (PolygonAnalytics.Response) {
         option (google.api.http) = {
-            get: "/api/v1/GetPolygonAnalytics";
+            post: "/api/v1/GetPolygonAnalytics";
+            body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             description: "";

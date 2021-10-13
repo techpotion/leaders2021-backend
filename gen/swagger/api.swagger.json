@@ -181,14 +181,14 @@
       }
     },
     "/api/v1/GetPolygonAnalytics": {
-      "get": {
+      "post": {
         "summary": "Analytics",
-        "operationId": "ApiService_GetPolygonAnalytics",
+        "operationId": "ApiService_PolygonAnalytics",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPolygonAnalyticsGetResponse"
+              "$ref": "#/definitions/apiPolygonAnalyticsResponse"
             }
           },
           "400": {
@@ -230,31 +230,12 @@
         },
         "parameters": [
           {
-            "name": "sportsAreaType",
-            "description": "filters.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "availability",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "UNKNOWN",
-              "CITY",
-              "REGION",
-              "DISTRICT",
-              "STEP"
-            ],
-            "default": "UNKNOWN"
-          },
-          {
-            "name": "sportKind",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonAnalyticsRequest"
+            }
           }
         ],
         "tags": [
@@ -270,7 +251,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiSportsObjectsGetResponse"
+              "$ref": "#/definitions/SportsObjectsGetResponse"
             }
           },
           "400": {
@@ -563,6 +544,14 @@
     }
   },
   "definitions": {
+    "SportsObjectsGetResponse": {
+      "type": "object",
+      "properties": {
+        "sportsObject": {
+          "$ref": "#/definitions/apiSportsObject"
+        }
+      }
+    },
     "apiAvailability": {
       "type": "string",
       "enum": [
@@ -653,7 +642,25 @@
         }
       }
     },
-    "apiPolygonAnalyticsGetResponse": {
+    "apiPolygonAnalyticsRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        },
+        "sportsAreaType": {
+          "type": "string",
+          "title": "filters"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability"
+        },
+        "sportKind": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPolygonAnalyticsResponse": {
       "type": "object",
       "properties": {
         "areasSquare": {
@@ -765,14 +772,6 @@
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
-        }
-      }
-    },
-    "apiSportsObjectsGetResponse": {
-      "type": "object",
-      "properties": {
-        "sportsObject": {
-          "$ref": "#/definitions/apiSportsObject"
         }
       }
     },

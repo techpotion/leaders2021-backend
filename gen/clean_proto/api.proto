@@ -39,6 +39,6 @@ service ApiService {
     }
 
     // Analytics
-    rpc GetPolygonAnalytics(PolygonAnalytics.GetRequest) returns (PolygonAnalytics.GetResponse) {
+    rpc PolygonAnalytics(PolygonAnalytics.Request) returns (PolygonAnalytics.Response) {
     }
 }
