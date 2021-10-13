@@ -543,6 +543,44 @@ func (x *SportsObjectDetailed) GetSportKind() string {
 	return ""
 }
 
+type Polygon struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Polygon) Reset() {
+	*x = Polygon{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_common_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Polygon) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Polygon) ProtoMessage() {}
+
+func (x *Polygon) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Polygon.ProtoReflect.Descriptor instead.
+func (*Polygon) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{5}
+}
+
 var File_common_proto protoreflect.FileDescriptor
 
 var file_common_proto_rawDesc = []byte{
@@ -641,9 +679,10 @@ var file_common_proto_rawDesc = []byte{
 	0x79, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x70, 0x6f, 0x72, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x18, 0x0c,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x70, 0x6f, 0x72, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x3a,
 	0x1c, 0xba, 0xb9, 0x19, 0x02, 0x08, 0x01, 0xba, 0xb9, 0x19, 0x12, 0x1a, 0x10, 0x6f, 0x62, 0x6a,
-	0x65, 0x63, 0x74, 0x73, 0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x42, 0x08, 0x5a,
-	0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x50, 0x00, 0x50, 0x01, 0x50, 0x02, 0x50, 0x03, 0x50,
-	0x04, 0x50, 0x05, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x63, 0x74, 0x73, 0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x22, 0x09, 0x0a,
+	0x07, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x42, 0x08, 0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f,
+	0x70, 0x62, 0x50, 0x00, 0x50, 0x01, 0x50, 0x02, 0x50, 0x03, 0x50, 0x04, 0x50, 0x05, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -658,13 +697,14 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_common_proto_goTypes = []interface{}{
 	(*Pagination)(nil),           // 0: api.Pagination
 	(*ListStats)(nil),            // 1: api.ListStats
 	(*Point)(nil),                // 2: api.Point
 	(*SportsObject)(nil),         // 3: api.SportsObject
 	(*SportsObjectDetailed)(nil), // 4: api.SportsObjectDetailed
+	(*Polygon)(nil),              // 5: api.Polygon
 }
 var file_common_proto_depIdxs = []int32{
 	2, // 0: api.SportsObject.objectPoint:type_name -> api.Point
@@ -743,6 +783,18 @@ func file_common_proto_init() {
 				return nil
 			}
 		}
+		file_common_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Polygon); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -750,7 +802,7 @@ func file_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

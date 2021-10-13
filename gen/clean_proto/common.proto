@@ -47,3 +47,7 @@ message SportsObjectDetailed {
     uint32 availability = 11;
     string sportKind = 12;
 }
+
+message Polygon {
+
+}

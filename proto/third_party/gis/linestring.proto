@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package gis.protobuf;
+
+import "third_party/gis/point.proto";
+

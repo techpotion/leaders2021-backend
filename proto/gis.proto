@@ -1,0 +1,78 @@
+// https://github.com/tomi77/protobuf-gis
+
+syntax = "proto3";
+package api;
+option go_package = "gen/pb";
+
+// type: LineString
+// coordinates: [[x, y], [x, y]]
+message LineString2D {
+    repeated Point2D point = 1;
+}
+
+// type: LineString
+// coordinates: [[x, y, z], [x, y, z]]
+message LineString3D {
+    repeated Point3D point = 1;
+}
+
+// type: MultiLineString
+// coordinates: [[[x, y], [x, y]], [[x, y], [x, y]]]
+message MultiLineString2D {
+    repeated LineString2D line_string = 1;
+}
+
+// type: MultiLineString
+// coordinates: [[[x, y, z], [x, y, z]], [[x, y, z], [x, y, z]]]
+message MultiLineString3D {
+    repeated LineString3D line_string = 1;
+}
+
+message Point2D {
+    float x = 1;
+    float y = 2;
+}
+
+// type: Point
+// coordinates: [x, y, z]
+message Point3D {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+// type: MultiPoint
+// coordinates: [[x, y], [x, y]]
+message MultiPoint2D {
+    repeated Point2D point = 1;
+}
+
+// type: MultiPoint
+// coordinates: [[x, y, z], [x, y, z]]
+message MultiPoint3D {
+    repeated Point3D point = 1;
+}
+
+// type: Polygon
+// coordinates: [[[x, y], [x, y]]]
+message Polygon2D {
+    repeated Point2D point = 1;
+}
+
+// type: Polygon
+// coordinates: [[[x, y, z], [x, y, z]]]
+message Polygon3D {
+    repeated Point3D point = 1;
+}
+
+// type: MultiPolygin
+// coordinates: [[[[x, y], [x, y]]], [[[x, y], [x, y]]]]
+message MultiPolygon2D {
+    repeated Polygon2D polygon = 1;
+}
+
+// type: MultiPolygin
+// coordinates: [[[[x, y, z], [x, y, z]]], [[[x, y, z], [x, y, z]]]]
+message MultiPolygon3D {
+    repeated Polygon3D polygon = 1;
+}
