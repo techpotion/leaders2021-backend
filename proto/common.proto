@@ -30,7 +30,6 @@ message MultiPoint {
     repeated Point point = 1;
 }
 
-
 message Polygon {
     repeated Point point = 1;
 }
