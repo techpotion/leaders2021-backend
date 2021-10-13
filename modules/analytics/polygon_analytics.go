@@ -44,3 +44,25 @@ func formGeometryPolygon(polygon *pb.Polygon) string {
 	poly := "POLYGON((" + points[1:] + "))"
 	return fmt.Sprintf("ST_GeomFromText('%s')", poly)
 }
+
+func CalculateSquare(areas []*pb.SportsObjectDetailed) float64 {
+	var sumSquare float64 = 0
+	for _, area := range areas {
+		sumSquare += area.GetSportsAreaSquare()
+	}
+	return sumSquare
+}
+
+func UniqueSportsKinds(areas []*pb.SportsObjectDetailed) []string {
+	keys := make(map[string]bool)
+	list := []string{}
+
+	for _, area := range areas {
+		kind := area.SportKind
+		if _, ok := keys[kind]; !ok {
+			keys[kind] = true
+			list = append(list, kind)
+		}
+	}
+	return list
+}

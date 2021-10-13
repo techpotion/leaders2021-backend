@@ -3,7 +3,6 @@ package analytics
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/analytics"
@@ -54,9 +53,15 @@ func GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_GetRequest
 		convertedList = append(convertedList, &converted)
 	}
 
-	fmt.Println(&pb.SportsObjectsDetailed_ListResponse{
-		SportsObjects: convertedList,
-		ListStats:     &pb.ListStats{Count: uint32(result.RowsAffected)},
-	})
-	return nil, nil
+	areasSquare := analytics.CalculateSquare(convertedList)
+	areasAmount := len(convertedList)
+	sportsKinds := analytics.UniqueSportsKinds(convertedList)
+	sportsAmount := len(sportsKinds)
+
+	return &pb.PolygonAnalytics_GetResponse{
+		AreasSquare:  areasSquare,
+		AreasAmount:  uint32(areasAmount),
+		SportsAmount: uint32(sportsAmount),
+		SportsKinds:  sportsKinds,
+	}, nil
 }
