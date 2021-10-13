@@ -12,6 +12,7 @@ import (
 const (
 	regionsPath        = "static/moscow_regions.geojson"
 	densityHeatmapPath = "static/density.geojson"
+	objectsPath        = "static/objects.geojson"
 )
 
 func GetRegions(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
@@ -20,6 +21,10 @@ func GetRegions(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Resp
 
 func GetDensityHeatmap(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return handleGeoJson(densityHeatmapPath)
+}
+
+func GetGeoJsonObjects(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
+	return handleGeoJson(objectsPath)
 }
 
 func handleGeoJson(path string) (*pb.GeoJsons_Response, error) {
