@@ -134,22 +134,22 @@ var _ interface {
 	ErrorName() string
 } = PolygonAnalyticsValidationError{}
 
-// Validate checks the field values on PolygonAnalytics_GetRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on PolygonAnalytics_Request with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *PolygonAnalytics_GetRequest) Validate() error {
+func (m *PolygonAnalytics_Request) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on PolygonAnalytics_GetRequest with the
+// ValidateAll checks the field values on PolygonAnalytics_Request with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// PolygonAnalytics_GetRequestMultiError, or nil if none found.
-func (m *PolygonAnalytics_GetRequest) ValidateAll() error {
+// PolygonAnalytics_RequestMultiError, or nil if none found.
+func (m *PolygonAnalytics_Request) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *PolygonAnalytics_GetRequest) validate(all bool) error {
+func (m *PolygonAnalytics_Request) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -160,7 +160,7 @@ func (m *PolygonAnalytics_GetRequest) validate(all bool) error {
 		switch v := interface{}(m.GetPolygon()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PolygonAnalytics_GetRequestValidationError{
+				errors = append(errors, PolygonAnalytics_RequestValidationError{
 					field:  "Polygon",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -168,7 +168,7 @@ func (m *PolygonAnalytics_GetRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, PolygonAnalytics_GetRequestValidationError{
+				errors = append(errors, PolygonAnalytics_RequestValidationError{
 					field:  "Polygon",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -177,7 +177,7 @@ func (m *PolygonAnalytics_GetRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return PolygonAnalytics_GetRequestValidationError{
+			return PolygonAnalytics_RequestValidationError{
 				field:  "Polygon",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -196,18 +196,18 @@ func (m *PolygonAnalytics_GetRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return PolygonAnalytics_GetRequestMultiError(errors)
+		return PolygonAnalytics_RequestMultiError(errors)
 	}
 	return nil
 }
 
-// PolygonAnalytics_GetRequestMultiError is an error wrapping multiple
-// validation errors returned by PolygonAnalytics_GetRequest.ValidateAll() if
-// the designated constraints aren't met.
-type PolygonAnalytics_GetRequestMultiError []error
+// PolygonAnalytics_RequestMultiError is an error wrapping multiple validation
+// errors returned by PolygonAnalytics_Request.ValidateAll() if the designated
+// constraints aren't met.
+type PolygonAnalytics_RequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m PolygonAnalytics_GetRequestMultiError) Error() string {
+func (m PolygonAnalytics_RequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -216,12 +216,11 @@ func (m PolygonAnalytics_GetRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m PolygonAnalytics_GetRequestMultiError) AllErrors() []error { return m }
+func (m PolygonAnalytics_RequestMultiError) AllErrors() []error { return m }
 
-// PolygonAnalytics_GetRequestValidationError is the validation error returned
-// by PolygonAnalytics_GetRequest.Validate if the designated constraints
-// aren't met.
-type PolygonAnalytics_GetRequestValidationError struct {
+// PolygonAnalytics_RequestValidationError is the validation error returned by
+// PolygonAnalytics_Request.Validate if the designated constraints aren't met.
+type PolygonAnalytics_RequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -229,24 +228,24 @@ type PolygonAnalytics_GetRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e PolygonAnalytics_GetRequestValidationError) Field() string { return e.field }
+func (e PolygonAnalytics_RequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PolygonAnalytics_GetRequestValidationError) Reason() string { return e.reason }
+func (e PolygonAnalytics_RequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PolygonAnalytics_GetRequestValidationError) Cause() error { return e.cause }
+func (e PolygonAnalytics_RequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PolygonAnalytics_GetRequestValidationError) Key() bool { return e.key }
+func (e PolygonAnalytics_RequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PolygonAnalytics_GetRequestValidationError) ErrorName() string {
-	return "PolygonAnalytics_GetRequestValidationError"
+func (e PolygonAnalytics_RequestValidationError) ErrorName() string {
+	return "PolygonAnalytics_RequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e PolygonAnalytics_GetRequestValidationError) Error() string {
+func (e PolygonAnalytics_RequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -258,14 +257,14 @@ func (e PolygonAnalytics_GetRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sPolygonAnalytics_GetRequest.%s: %s%s",
+		"invalid %sPolygonAnalytics_Request.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PolygonAnalytics_GetRequestValidationError{}
+var _ error = PolygonAnalytics_RequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -273,24 +272,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PolygonAnalytics_GetRequestValidationError{}
+} = PolygonAnalytics_RequestValidationError{}
 
-// Validate checks the field values on PolygonAnalytics_GetResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on PolygonAnalytics_Response with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *PolygonAnalytics_GetResponse) Validate() error {
+func (m *PolygonAnalytics_Response) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on PolygonAnalytics_GetResponse with the
+// ValidateAll checks the field values on PolygonAnalytics_Response with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// PolygonAnalytics_GetResponseMultiError, or nil if none found.
-func (m *PolygonAnalytics_GetResponse) ValidateAll() error {
+// PolygonAnalytics_ResponseMultiError, or nil if none found.
+func (m *PolygonAnalytics_Response) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *PolygonAnalytics_GetResponse) validate(all bool) error {
+func (m *PolygonAnalytics_Response) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -304,18 +303,18 @@ func (m *PolygonAnalytics_GetResponse) validate(all bool) error {
 	// no validation rules for SportsAmount
 
 	if len(errors) > 0 {
-		return PolygonAnalytics_GetResponseMultiError(errors)
+		return PolygonAnalytics_ResponseMultiError(errors)
 	}
 	return nil
 }
 
-// PolygonAnalytics_GetResponseMultiError is an error wrapping multiple
-// validation errors returned by PolygonAnalytics_GetResponse.ValidateAll() if
-// the designated constraints aren't met.
-type PolygonAnalytics_GetResponseMultiError []error
+// PolygonAnalytics_ResponseMultiError is an error wrapping multiple validation
+// errors returned by PolygonAnalytics_Response.ValidateAll() if the
+// designated constraints aren't met.
+type PolygonAnalytics_ResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m PolygonAnalytics_GetResponseMultiError) Error() string {
+func (m PolygonAnalytics_ResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -324,12 +323,11 @@ func (m PolygonAnalytics_GetResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m PolygonAnalytics_GetResponseMultiError) AllErrors() []error { return m }
+func (m PolygonAnalytics_ResponseMultiError) AllErrors() []error { return m }
 
-// PolygonAnalytics_GetResponseValidationError is the validation error returned
-// by PolygonAnalytics_GetResponse.Validate if the designated constraints
-// aren't met.
-type PolygonAnalytics_GetResponseValidationError struct {
+// PolygonAnalytics_ResponseValidationError is the validation error returned by
+// PolygonAnalytics_Response.Validate if the designated constraints aren't met.
+type PolygonAnalytics_ResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -337,24 +335,24 @@ type PolygonAnalytics_GetResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e PolygonAnalytics_GetResponseValidationError) Field() string { return e.field }
+func (e PolygonAnalytics_ResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PolygonAnalytics_GetResponseValidationError) Reason() string { return e.reason }
+func (e PolygonAnalytics_ResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PolygonAnalytics_GetResponseValidationError) Cause() error { return e.cause }
+func (e PolygonAnalytics_ResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PolygonAnalytics_GetResponseValidationError) Key() bool { return e.key }
+func (e PolygonAnalytics_ResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PolygonAnalytics_GetResponseValidationError) ErrorName() string {
-	return "PolygonAnalytics_GetResponseValidationError"
+func (e PolygonAnalytics_ResponseValidationError) ErrorName() string {
+	return "PolygonAnalytics_ResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e PolygonAnalytics_GetResponseValidationError) Error() string {
+func (e PolygonAnalytics_ResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -366,14 +364,14 @@ func (e PolygonAnalytics_GetResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sPolygonAnalytics_GetResponse.%s: %s%s",
+		"invalid %sPolygonAnalytics_Response.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PolygonAnalytics_GetResponseValidationError{}
+var _ error = PolygonAnalytics_ResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -381,4 +379,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PolygonAnalytics_GetResponseValidationError{}
+} = PolygonAnalytics_ResponseValidationError{}

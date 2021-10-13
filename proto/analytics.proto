@@ -7,7 +7,7 @@ option go_package = "gen/pb";
 import "common.proto";
 
 message PolygonAnalytics {
-    message GetRequest {
+    message Request {
         Polygon polygon = 1;
         // filters
         string sportsAreaType = 2 [(validate.rules).string = {ignore_empty: true}]; // optional
@@ -15,7 +15,7 @@ message PolygonAnalytics {
         string sportKind = 4 [(validate.rules).string = {ignore_empty: true}]; // optional
     }
 
-    message GetResponse {
+    message Response {
         double areasSquare = 1;
         uint32 areasAmount = 2;
         uint32 sportsAmount = 3;

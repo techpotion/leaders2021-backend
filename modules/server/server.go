@@ -56,7 +56,9 @@ func Run() {
 	httpPort := viper.GetInt("server.http.port")
 	httpConnectionString := fmt.Sprintf("%s:%d", httpInterface, httpPort)
 
-	gwMux := runtime.NewServeMux()
+	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
+		EmitDefaults: true,
+	}))
 	err = pb.RegisterApiServiceHandler(context.Background(), gwMux, conn)
 	if err != nil {
 		logrus.WithFields(logrus.Fields{
@@ -77,11 +79,26 @@ func Run() {
 	}
 }
 
-// allowCORS sets up cors settings
+func preflightHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
+}
+
 func allowCORS(h http.Handler) http.Handler {
-	return handlers.CORS(
+	h = handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
 		handlers.AllowedMethods([]string{"*"}),
 		handlers.AllowedHeaders([]string{"*"}),
 	)(h)
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if origin := r.Header.Get("Origin"); origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			if r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != "" {
+				preflightHandler(w, r)
+				return
+			}
+		}
+		h.ServeHTTP(w, r)
+	})
 }

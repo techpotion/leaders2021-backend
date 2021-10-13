@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_GetRequest) (*pb.PolygonAnalytics_GetResponse, error) {
+func GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb.PolygonAnalytics_Response, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
@@ -58,7 +58,7 @@ func GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_GetRequest
 	sportsKinds := analytics.UniqueSportsKinds(convertedList)
 	sportsAmount := len(sportsKinds)
 
-	return &pb.PolygonAnalytics_GetResponse{
+	return &pb.PolygonAnalytics_Response{
 		AreasSquare:  areasSquare,
 		AreasAmount:  uint32(areasAmount),
 		SportsAmount: uint32(sportsAmount),

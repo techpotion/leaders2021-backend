@@ -39,6 +39,6 @@ func (s *ApiServiceServer) GetGeoJsonObjects(ctx context.Context, in *pb.GeoJson
 	return geojsons.GetDensityHeatmap(ctx, in)
 }
 
-func (s *ApiServiceServer) GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_GetRequest) (*pb.PolygonAnalytics_GetResponse, error) {
+func (s *ApiServiceServer) GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb.PolygonAnalytics_Response, error) {
 	return analytics.GetPolygonAnalytics(ctx, in)
 }
