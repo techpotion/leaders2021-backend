@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message PolygonAnalytics {
+    message GetRequest {
+        Polygon polygon = 1;
+        // filters
+        string sportsAreaType = 2; // optional
+        Availability availability = 3; // optional
+        string sportKind = 4; // optional
+    }
+
+    message GetResponse {
+        double areasSquare = 1;
+        uint32 areasAmount = 2;
+        uint32 sportsAmount = 3;
+        repeated string sportsKinds = 4;
+    }
+}
