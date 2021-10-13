@@ -76,6 +76,7 @@ type PointWithAfterToPB interface {
 type SportsObjectORM struct {
 	ObjectId                     uint32
 	ObjectName                   string
+	ObjectAddress                string
 	DepartmentalOrganizationId   uint32
 	DepartmentalOrganizationName string
 	Availability                 uint32
@@ -100,6 +101,7 @@ func (m *SportsObject) ToORM(ctx context.Context) (SportsObjectORM, error) {
 	}
 	to.ObjectId = m.ObjectId
 	to.ObjectName = m.ObjectName
+	to.ObjectAddress = m.ObjectAddress
 	if m.GetObjectPoint() != nil {
 		tempObjectPoint, err := m.GetObjectPoint().ToORM(ctx)
 		if err != nil {
@@ -129,6 +131,7 @@ func (m *SportsObjectORM) ToPB(ctx context.Context) (SportsObject, error) {
 	}
 	to.ObjectId = m.ObjectId
 	to.ObjectName = m.ObjectName
+	to.ObjectAddress = m.ObjectAddress
 	if m.ObjectPoint != nil {
 		tempObjectPoint, err := m.ObjectPoint.ToPB(ctx)
 		if err != nil {
@@ -172,11 +175,13 @@ type SportsObjectWithAfterToPB interface {
 type SportsObjectDetailedORM struct {
 	ObjectId                     uint32
 	ObjectName                   string
+	SportsAreaAddress            string
 	DepartmentalOrganizationId   uint32
 	DepartmentalOrganizationName string
 	SportsAreaId                 uint32
 	SportsAreaName               string
 	SportsAreaType               string
+	SportsAreaSquare             float64
 	Availability                 uint32
 	SportKind                    string
 	ObjectPoint                  *PointORM `gorm:"not null;embedded;embeddedPrefix:object_point_"`
@@ -199,6 +204,7 @@ func (m *SportsObjectDetailed) ToORM(ctx context.Context) (SportsObjectDetailedO
 	}
 	to.ObjectId = m.ObjectId
 	to.ObjectName = m.ObjectName
+	to.SportsAreaAddress = m.SportsAreaAddress
 	if m.GetObjectPoint() != nil {
 		tempObjectPoint, err := m.GetObjectPoint().ToORM(ctx)
 		if err != nil {
@@ -211,6 +217,7 @@ func (m *SportsObjectDetailed) ToORM(ctx context.Context) (SportsObjectDetailedO
 	to.SportsAreaId = m.SportsAreaId
 	to.SportsAreaName = m.SportsAreaName
 	to.SportsAreaType = m.SportsAreaType
+	to.SportsAreaSquare = m.SportsAreaSquare
 	to.Availability = m.Availability
 	to.SportKind = m.SportKind
 	if posthook, ok := interface{}(m).(SportsObjectDetailedWithAfterToORM); ok {
@@ -231,6 +238,7 @@ func (m *SportsObjectDetailedORM) ToPB(ctx context.Context) (SportsObjectDetaile
 	}
 	to.ObjectId = m.ObjectId
 	to.ObjectName = m.ObjectName
+	to.SportsAreaAddress = m.SportsAreaAddress
 	if m.ObjectPoint != nil {
 		tempObjectPoint, err := m.ObjectPoint.ToPB(ctx)
 		if err != nil {
@@ -243,6 +251,7 @@ func (m *SportsObjectDetailedORM) ToPB(ctx context.Context) (SportsObjectDetaile
 	to.SportsAreaId = m.SportsAreaId
 	to.SportsAreaName = m.SportsAreaName
 	to.SportsAreaType = m.SportsAreaType
+	to.SportsAreaSquare = m.SportsAreaSquare
 	to.Availability = m.Availability
 	to.SportKind = m.SportKind
 	if posthook, ok := interface{}(m).(SportsObjectDetailedWithAfterToPB); ok {

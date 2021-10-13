@@ -33,3 +33,7 @@ func (s *ApiServiceServer) GetGeoJsonRegions(ctx context.Context, in *pb.GeoJson
 func (s *ApiServiceServer) GetGeoJsonDensityHeatmap(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return geojsons.GetDensityHeatmap(ctx, in)
 }
+
+func (s *ApiServiceServer) GetGeoJsonObjects(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
+	return geojsons.GetDensityHeatmap(ctx, in)
+}
