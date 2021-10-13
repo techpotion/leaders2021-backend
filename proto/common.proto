@@ -12,6 +12,33 @@ import public "google/protobuf/any.proto";
 
 import public "enums.proto";
 
+message Point {
+    option (gorm.opts).ormable = true;
+    float lat = 1;
+    float lng = 2;
+}
+
+message LineString {
+    repeated Point point = 1;
+}
+
+message MultiLineString {
+    repeated LineString line_string = 1;
+}
+
+message MultiPoint {
+    repeated Point point = 1;
+}
+
+
+message Polygon {
+    repeated Point point = 1;
+}
+
+message MultiPolygon {
+    repeated Polygon polygon = 1;
+}
+
 message Pagination {
     uint32 pageNumber = 1;
     uint32 resultsPerPage = 2;
@@ -19,12 +46,6 @@ message Pagination {
 
 message ListStats {
     uint32 count = 1;
-}
-
-message Point {
-    option (gorm.opts).ormable = true;
-    float lat = 1;
-    float lng = 2;
 }
 
 message SportsObject {
@@ -55,8 +76,4 @@ message SportsObjectDetailed {
     double sportsAreaSquare = 10;
     uint32 availability = 11;
     string sportKind = 12;
-}
-
-message Polygon {
-
 }
