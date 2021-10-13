@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/analytics"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/geojsons"
 	sportsobjects "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects"
 	sportsobjectsdetailed "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects_detailed"
@@ -36,4 +37,8 @@ func (s *ApiServiceServer) GetGeoJsonDensityHeatmap(ctx context.Context, in *pb.
 
 func (s *ApiServiceServer) GetGeoJsonObjects(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return geojsons.GetDensityHeatmap(ctx, in)
+}
+
+func (s *ApiServiceServer) GetPolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_GetRequest) (*pb.PolygonAnalytics_GetResponse, error) {
+	return analytics.GetPolygonAnalytics(ctx, in)
 }

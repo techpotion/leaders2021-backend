@@ -9,8 +9,8 @@ import public "google/protobuf/any.proto";
 import public "enums.proto";
 
 message Point {
-    float lat = 1;
     float lng = 2;
+    float lat = 1;
 }
 
 message LineString {
