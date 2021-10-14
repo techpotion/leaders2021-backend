@@ -29,7 +29,7 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 	return fmt.Sprintf(`
 		ST_Contains(
 			%s,
-			ST_Point(object_point_lng, object_point_lat)
+			position
 		);`,
 		polygonQuery,
 	)
