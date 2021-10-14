@@ -80,7 +80,6 @@ type SportsObjectORM struct {
 	DepartmentalOrganizationId   uint32
 	DepartmentalOrganizationName string
 	Availability                 uint32
-	SportKind                    string
 	ObjectSumSquare              float64
 	ObjectPoint                  *PointORM `gorm:"not null;embedded;embeddedPrefix:object_point_"`
 }
@@ -113,7 +112,6 @@ func (m *SportsObject) ToORM(ctx context.Context) (SportsObjectORM, error) {
 	to.DepartmentalOrganizationId = m.DepartmentalOrganizationId
 	to.DepartmentalOrganizationName = m.DepartmentalOrganizationName
 	to.Availability = m.Availability
-	to.SportKind = m.SportKind
 	to.ObjectSumSquare = m.ObjectSumSquare
 	if posthook, ok := interface{}(m).(SportsObjectWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
@@ -144,7 +142,6 @@ func (m *SportsObjectORM) ToPB(ctx context.Context) (SportsObject, error) {
 	to.DepartmentalOrganizationId = m.DepartmentalOrganizationId
 	to.DepartmentalOrganizationName = m.DepartmentalOrganizationName
 	to.Availability = m.Availability
-	to.SportKind = m.SportKind
 	to.ObjectSumSquare = m.ObjectSumSquare
 	if posthook, ok := interface{}(m).(SportsObjectWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)

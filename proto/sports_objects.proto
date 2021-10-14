@@ -14,7 +14,6 @@ message SportsObjects {
         uint32 departmentalOrganizationId = 3 [(validate.rules).uint32 = {ignore_empty: true, gte: 100000}]; // optional
         string departmentalOrganizationName = 4; // optional
         Availability availability = 7; // optional
-        string sportKind = 8 [(validate.rules).string = {ignore_empty: true}]; // optional
     }
 
     message ListResponse {

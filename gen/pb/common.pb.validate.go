@@ -672,8 +672,6 @@ func (m *SportsObject) Validate() error {
 
 	// no validation rules for Availability
 
-	// no validation rules for SportKind
-
 	// no validation rules for ObjectSumSquare
 
 	return nil

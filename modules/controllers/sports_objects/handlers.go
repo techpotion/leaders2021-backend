@@ -21,7 +21,6 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
 		DepartmentalOrganizationName: in.DepartmentalOrganizationName,
 		Availability:                 uint32(in.Availability),
-		SportKind:                    in.SportKind,
 	}
 
 	db, err := database.New()

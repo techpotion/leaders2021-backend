@@ -7,7 +7,6 @@ import (
 	"github.com/techpotion/leaders2021-backend/modules/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 )
 
 var connectionString string
@@ -19,9 +18,7 @@ func Init() {
 
 // New returns new database instance
 func New() (*gorm.DB, error) {
-	return gorm.Open(postgres.Open(connectionString), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
+	return gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 }
 
 // makeConnectionString returns new connection string
