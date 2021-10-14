@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message ObjectsNames {
+    message ListRequest {
+        Pagination pagination = 1;
+    }
+
+    message ListResponse {
+        repeated string names = 1;
+        ListStats listStats = 2;
+    }
+}
+
+message DepartmentalOrganizationsIds {
+    message ListRequest {
+        Pagination pagination = 1;
+    }
+
+    message ListResponse {
+        repeated uint32 ids = 1;
+        ListStats listStats = 2;
+    }
+}
+
+message DepartmentalOrganizationsNames {
+    message ListRequest {
+        Pagination pagination = 1;
+    }
+
+    message ListResponse {
+        repeated string names = 1;
+        ListStats listStats = 2;
+    }
+}
+
+message SportKinds {
+    message ListRequest {
+        Pagination pagination = 1;
+    }
+
+    message ListResponse {
+        repeated string kinds = 1;
+        ListStats listStats = 2;
+    }
+}

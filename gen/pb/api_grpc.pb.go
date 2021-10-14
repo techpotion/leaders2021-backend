@@ -34,7 +34,17 @@ type ApiServiceClient interface {
 	// Getting objects geojson for heatmap drawing purposes
 	GetGeoJsonObjects(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
 	// Analytics
+	// Getting analytics for sports objects in polygon
 	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
+	// Filters
+	// Getting the list of unique object names
+	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
+	// Getting the list of departmental organizations ids
+	ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error)
+	// Getting the list of departmental organizations names
+	ListDepartmentalOrganizationsNames(ctx context.Context, in *DepartmentalOrganizationsNames_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsNames_ListResponse, error)
+	// Getting the list of departmental organizations names
+	ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error)
 }
 
 type apiServiceClient struct {
@@ -108,6 +118,42 @@ func (c *apiServiceClient) PolygonAnalytics(ctx context.Context, in *PolygonAnal
 	return out, nil
 }
 
+func (c *apiServiceClient) ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
+	out := new(ObjectsNames_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjectsNames", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiServiceClient) ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error) {
+	out := new(DepartmentalOrganizationsIds_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListDepartmentalOrganizationsIds", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiServiceClient) ListDepartmentalOrganizationsNames(ctx context.Context, in *DepartmentalOrganizationsNames_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsNames_ListResponse, error) {
+	out := new(DepartmentalOrganizationsNames_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListDepartmentalOrganizationsNames", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiServiceClient) ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error) {
+	out := new(SportKinds_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportKinds", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServiceServer is the server API for ApiService service.
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
@@ -128,7 +174,17 @@ type ApiServiceServer interface {
 	// Getting objects geojson for heatmap drawing purposes
 	GetGeoJsonObjects(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
 	// Analytics
+	// Getting analytics for sports objects in polygon
 	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
+	// Filters
+	// Getting the list of unique object names
+	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
+	// Getting the list of departmental organizations ids
+	ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error)
+	// Getting the list of departmental organizations names
+	ListDepartmentalOrganizationsNames(context.Context, *DepartmentalOrganizationsNames_ListRequest) (*DepartmentalOrganizationsNames_ListResponse, error)
+	// Getting the list of departmental organizations names
+	ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -156,6 +212,18 @@ func (UnimplementedApiServiceServer) GetGeoJsonObjects(context.Context, *GeoJson
 }
 func (UnimplementedApiServiceServer) PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PolygonAnalytics not implemented")
+}
+func (UnimplementedApiServiceServer) ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsNames not implemented")
+}
+func (UnimplementedApiServiceServer) ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDepartmentalOrganizationsIds not implemented")
+}
+func (UnimplementedApiServiceServer) ListDepartmentalOrganizationsNames(context.Context, *DepartmentalOrganizationsNames_ListRequest) (*DepartmentalOrganizationsNames_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDepartmentalOrganizationsNames not implemented")
+}
+func (UnimplementedApiServiceServer) ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSportKinds not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -296,6 +364,78 @@ func _ApiService_PolygonAnalytics_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_ListObjectsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ObjectsNames_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListObjectsNames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListObjectsNames",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListObjectsNames(ctx, req.(*ObjectsNames_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiService_ListDepartmentalOrganizationsIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DepartmentalOrganizationsIds_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListDepartmentalOrganizationsIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListDepartmentalOrganizationsIds",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListDepartmentalOrganizationsIds(ctx, req.(*DepartmentalOrganizationsIds_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiService_ListDepartmentalOrganizationsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DepartmentalOrganizationsNames_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListDepartmentalOrganizationsNames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListDepartmentalOrganizationsNames",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListDepartmentalOrganizationsNames(ctx, req.(*DepartmentalOrganizationsNames_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiService_ListSportKinds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SportKinds_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListSportKinds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListSportKinds",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListSportKinds(ctx, req.(*SportKinds_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiService_ServiceDesc is the grpc.ServiceDesc for ApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -330,6 +470,22 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PolygonAnalytics",
 			Handler:    _ApiService_PolygonAnalytics_Handler,
+		},
+		{
+			MethodName: "ListObjectsNames",
+			Handler:    _ApiService_ListObjectsNames_Handler,
+		},
+		{
+			MethodName: "ListDepartmentalOrganizationsIds",
+			Handler:    _ApiService_ListDepartmentalOrganizationsIds_Handler,
+		},
+		{
+			MethodName: "ListDepartmentalOrganizationsNames",
+			Handler:    _ApiService_ListDepartmentalOrganizationsNames_Handler,
+		},
+		{
+			MethodName: "ListSportKinds",
+			Handler:    _ApiService_ListSportKinds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
