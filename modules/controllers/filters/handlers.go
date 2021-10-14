@@ -21,7 +21,7 @@ func ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb
 
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber()) * lim
-	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("object_name IS NOT NULL").Distinct().Pluck("object_name", &names).Debug()
+	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("object_name IS NOT NULL").Distinct().Pluck("object_name", &names)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
@@ -45,7 +45,7 @@ func ListDepartmentalOrganizationsIds(ctx context.Context, in *pb.DepartmentalOr
 
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber()) * lim
-	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("departmental_organization_id IS NOT NULL").Distinct().Pluck("departmental_organization_id", &ids).Debug()
+	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("departmental_organization_id IS NOT NULL").Distinct().Pluck("departmental_organization_id", &ids)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
@@ -69,7 +69,7 @@ func ListDepartmentalOrganizationsNames(ctx context.Context, in *pb.Departmental
 
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber()) * lim
-	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("departmental_organization_name IS NOT NULL").Distinct().Pluck("departmental_organization_name", &names).Debug()
+	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("departmental_organization_name IS NOT NULL").Distinct().Pluck("departmental_organization_name", &names)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
@@ -93,7 +93,7 @@ func ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.Spo
 
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber()) * lim
-	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sport_kind IS NOT NULL").Distinct().Pluck("sport_kind", &sportKinds).Debug()
+	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sport_kind IS NOT NULL").Distinct().Pluck("sport_kind", &sportKinds)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
