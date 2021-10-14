@@ -5,6 +5,7 @@ package api;
 option go_package = "gen/pb";
 
 import "analytics.proto";
+import "filters.proto";
 import "geojsons.proto";
 import "sports_objects.proto";
 
@@ -39,6 +40,24 @@ service ApiService {
     }
 
     // Analytics
+    // Getting analytics for sports objects in polygon
     rpc PolygonAnalytics(PolygonAnalytics.Request) returns (PolygonAnalytics.Response) {
+    }
+
+    // Filters
+    // Getting the list of unique object names
+    rpc ListObjecstNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
+    }
+
+    // Getting the list of departmental organizations ids
+    rpc ListDepartmentalOrganizationsIds(DepartmentalOrganizationsIds.ListRequest) returns (DepartmentalOrganizationsIds.ListResponse) {
+    }
+
+    // Getting the list of departmental organizations names
+    rpc ListDepartmentalOrganizationsNames(DepartmentalOrganizationsNames.ListRequest) returns (DepartmentalOrganizationsNames.ListResponse) {
+    }
+
+    // Getting the list of departmental organizations names
+    rpc ListSportKinds(SportKinds.ListRequest) returns (SportKinds.ListResponse) {
     }
 }
