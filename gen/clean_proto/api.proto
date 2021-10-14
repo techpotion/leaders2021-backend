@@ -46,7 +46,7 @@ service ApiService {
 
     // Filters
     // Getting the list of unique object names
-    rpc ListObjecstNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
+    rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
     }
 
     // Getting the list of departmental organizations ids

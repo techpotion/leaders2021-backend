@@ -38,7 +38,7 @@ type ApiServiceClient interface {
 	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
 	// Filters
 	// Getting the list of unique object names
-	ListObjecstNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
+	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
 	// Getting the list of departmental organizations ids
 	ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error)
 	// Getting the list of departmental organizations names
@@ -118,9 +118,9 @@ func (c *apiServiceClient) PolygonAnalytics(ctx context.Context, in *PolygonAnal
 	return out, nil
 }
 
-func (c *apiServiceClient) ListObjecstNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
+func (c *apiServiceClient) ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
 	out := new(ObjectsNames_ListResponse)
-	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjecstNames", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjectsNames", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -178,7 +178,7 @@ type ApiServiceServer interface {
 	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
 	// Filters
 	// Getting the list of unique object names
-	ListObjecstNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
+	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
 	// Getting the list of departmental organizations ids
 	ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error)
 	// Getting the list of departmental organizations names
@@ -213,8 +213,8 @@ func (UnimplementedApiServiceServer) GetGeoJsonObjects(context.Context, *GeoJson
 func (UnimplementedApiServiceServer) PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PolygonAnalytics not implemented")
 }
-func (UnimplementedApiServiceServer) ListObjecstNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListObjecstNames not implemented")
+func (UnimplementedApiServiceServer) ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsNames not implemented")
 }
 func (UnimplementedApiServiceServer) ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDepartmentalOrganizationsIds not implemented")
@@ -364,20 +364,20 @@ func _ApiService_PolygonAnalytics_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ApiService_ListObjecstNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ApiService_ListObjectsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ObjectsNames_ListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServiceServer).ListObjecstNames(ctx, in)
+		return srv.(ApiServiceServer).ListObjectsNames(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.ApiService/ListObjecstNames",
+		FullMethod: "/api.ApiService/ListObjectsNames",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServiceServer).ListObjecstNames(ctx, req.(*ObjectsNames_ListRequest))
+		return srv.(ApiServiceServer).ListObjectsNames(ctx, req.(*ObjectsNames_ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -472,8 +472,8 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ApiService_PolygonAnalytics_Handler,
 		},
 		{
-			MethodName: "ListObjecstNames",
-			Handler:    _ApiService_ListObjecstNames_Handler,
+			MethodName: "ListObjectsNames",
+			Handler:    _ApiService_ListObjectsNames_Handler,
 		},
 		{
 			MethodName: "ListDepartmentalOrganizationsIds",
