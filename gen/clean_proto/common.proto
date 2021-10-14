@@ -51,6 +51,7 @@ message SportsObject {
     string departmentalOrganizationName = 6;
     uint32 availability = 7;
     string sportKind = 8;
+    double objectSumSquare = 9;
 }
 
 message SportsObjectDetailed {

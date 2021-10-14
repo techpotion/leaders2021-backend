@@ -1045,6 +1045,10 @@
         },
         "sportKind": {
           "type": "string"
+        },
+        "objectSumSquare": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
