@@ -5,6 +5,7 @@ import (
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/analytics"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/filters"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/geojsons"
 	sportsobjects "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects"
 	sportsobjectsdetailed "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects_detailed"
@@ -41,4 +42,20 @@ func (s *ApiServiceServer) GetGeoJsonObjects(ctx context.Context, in *pb.GeoJson
 
 func (s *ApiServiceServer) PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb.PolygonAnalytics_Response, error) {
 	return analytics.PolygonAnalytics(ctx, in)
+}
+
+func (s *ApiServiceServer) ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb.ObjectsNames_ListResponse, error) {
+	return filters.ListObjectsNames(ctx, in)
+}
+
+func (s *ApiServiceServer) ListDepartmentalOrganizationsIds(ctx context.Context, in *pb.DepartmentalOrganizationsIds_ListRequest) (*pb.DepartmentalOrganizationsIds_ListResponse, error) {
+	return filters.ListDepartmentalOrganizationsIds(ctx, in)
+}
+
+func (s *ApiServiceServer) ListDepartmentalOrganizationsNames(ctx context.Context, in *pb.DepartmentalOrganizationsNames_ListRequest) (*pb.DepartmentalOrganizationsNames_ListResponse, error) {
+	return filters.ListDepartmentalOrganizationsNames(ctx, in)
+}
+
+func (s *ApiServiceServer) ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.SportKinds_ListResponse, error) {
+	return filters.ListSportKinds(ctx, in)
 }
