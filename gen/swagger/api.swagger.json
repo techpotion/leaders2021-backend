@@ -614,12 +614,6 @@
               "STEP"
             ],
             "default": "UNKNOWN"
-          },
-          {
-            "name": "sportKind",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -1043,8 +1037,9 @@
           "type": "integer",
           "format": "int64"
         },
-        "sportKind": {
-          "type": "string"
+        "objectSumSquare": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

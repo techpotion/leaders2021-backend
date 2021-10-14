@@ -202,10 +202,6 @@ func (m *SportsObjects_ListRequest) Validate() error {
 
 	// no validation rules for Availability
 
-	if m.GetSportKind() != "" {
-
-	}
-
 	return nil
 }
 
