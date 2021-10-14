@@ -306,6 +306,16 @@ func (m *ObjectsNames_ListRequest) Validate() error {
 		return nil
 	}
 
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ObjectsNames_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -448,6 +458,16 @@ var _ interface {
 func (m *DepartmentalOrganizationsIds_ListRequest) Validate() error {
 	if m == nil {
 		return nil
+	}
+
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DepartmentalOrganizationsIds_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	return nil
@@ -596,6 +616,16 @@ func (m *DepartmentalOrganizationsNames_ListRequest) Validate() error {
 		return nil
 	}
 
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DepartmentalOrganizationsNames_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -740,6 +770,16 @@ var _ interface {
 func (m *SportKinds_ListRequest) Validate() error {
 	if m == nil {
 		return nil
+	}
+
+	if v, ok := interface{}(m.GetPagination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportKinds_ListRequestValidationError{
+				field:  "Pagination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	return nil

@@ -229,9 +229,20 @@ func local_request_ApiService_PolygonAnalytics_0(ctx context.Context, marshaler 
 
 }
 
+var (
+	filter_ApiService_ListObjectsNames_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_ApiService_ListObjectsNames_0(ctx context.Context, marshaler runtime.Marshaler, client ApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ObjectsNames_ListRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListObjectsNames_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.ListObjectsNames(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -242,14 +253,32 @@ func local_request_ApiService_ListObjectsNames_0(ctx context.Context, marshaler 
 	var protoReq ObjectsNames_ListRequest
 	var metadata runtime.ServerMetadata
 
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListObjectsNames_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	msg, err := server.ListObjectsNames(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
+var (
+	filter_ApiService_ListDepartmentalOrganizationsIds_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_ApiService_ListDepartmentalOrganizationsIds_0(ctx context.Context, marshaler runtime.Marshaler, client ApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DepartmentalOrganizationsIds_ListRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListDepartmentalOrganizationsIds_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.ListDepartmentalOrganizationsIds(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -260,14 +289,32 @@ func local_request_ApiService_ListDepartmentalOrganizationsIds_0(ctx context.Con
 	var protoReq DepartmentalOrganizationsIds_ListRequest
 	var metadata runtime.ServerMetadata
 
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListDepartmentalOrganizationsIds_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	msg, err := server.ListDepartmentalOrganizationsIds(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
+var (
+	filter_ApiService_ListDepartmentalOrganizationsNames_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_ApiService_ListDepartmentalOrganizationsNames_0(ctx context.Context, marshaler runtime.Marshaler, client ApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DepartmentalOrganizationsNames_ListRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListDepartmentalOrganizationsNames_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.ListDepartmentalOrganizationsNames(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -278,14 +325,32 @@ func local_request_ApiService_ListDepartmentalOrganizationsNames_0(ctx context.C
 	var protoReq DepartmentalOrganizationsNames_ListRequest
 	var metadata runtime.ServerMetadata
 
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListDepartmentalOrganizationsNames_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	msg, err := server.ListDepartmentalOrganizationsNames(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
+var (
+	filter_ApiService_ListSportKinds_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_ApiService_ListSportKinds_0(ctx context.Context, marshaler runtime.Marshaler, client ApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SportKinds_ListRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListSportKinds_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.ListSportKinds(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -295,6 +360,13 @@ func request_ApiService_ListSportKinds_0(ctx context.Context, marshaler runtime.
 func local_request_ApiService_ListSportKinds_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SportKinds_ListRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ApiService_ListSportKinds_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := server.ListSportKinds(ctx, &protoReq)
 	return msg, metadata, err

@@ -8,6 +8,7 @@ import "common.proto";
 
 message ObjectsNames {
     message ListRequest {
+        Pagination pagination = 1;
     }
 
     message ListResponse {
@@ -18,6 +19,7 @@ message ObjectsNames {
 
 message DepartmentalOrganizationsIds {
     message ListRequest {
+        Pagination pagination = 1;
     }
 
     message ListResponse {
@@ -28,6 +30,7 @@ message DepartmentalOrganizationsIds {
 
 message DepartmentalOrganizationsNames {
     message ListRequest {
+        Pagination pagination = 1;
     }
 
     message ListResponse {
@@ -38,6 +41,7 @@ message DepartmentalOrganizationsNames {
 
 message SportKinds {
     message ListRequest {
+        Pagination pagination = 1;
     }
 
     message ListResponse {

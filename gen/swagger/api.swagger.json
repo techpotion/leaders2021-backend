@@ -290,6 +290,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "pagination.pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pagination.resultsPerPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "tags": [
           "Filters"
         ]
@@ -343,6 +359,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "pagination.pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pagination.resultsPerPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "tags": [
           "Filters"
         ]
@@ -396,6 +428,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "pagination.pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pagination.resultsPerPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "tags": [
           "Filters"
         ]
@@ -449,6 +497,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "pagination.pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pagination.resultsPerPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "tags": [
           "Filters"
         ]
