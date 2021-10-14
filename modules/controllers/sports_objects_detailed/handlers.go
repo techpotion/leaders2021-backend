@@ -34,7 +34,7 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 
 	var objectsList []*pb.SportsObjectDetailedORM
 	lim := int(in.Pagination.GetResultsPerPage())
-	offset := int(in.Pagination.GetPageNumber()) * lim
+	offset := int(in.Pagination.GetPageNumber())
 
 	result := db.Limit(lim).Offset(offset * lim).Where(filter).Find(&objectsList)
 	if result.Error != nil {

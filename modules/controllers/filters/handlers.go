@@ -20,7 +20,7 @@ func ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb
 	var names []string
 
 	lim := int(in.Pagination.GetResultsPerPage())
-	offset := int(in.Pagination.GetPageNumber()) * lim
+	offset := int(in.Pagination.GetPageNumber())
 	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("object_name IS NOT NULL").Distinct().Pluck("object_name", &names)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
@@ -44,7 +44,7 @@ func ListDepartmentalOrganizationsIds(ctx context.Context, in *pb.DepartmentalOr
 	var ids []uint32
 
 	lim := int(in.Pagination.GetResultsPerPage())
-	offset := int(in.Pagination.GetPageNumber()) * lim
+	offset := int(in.Pagination.GetPageNumber())
 	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("departmental_organization_id IS NOT NULL").Distinct().Pluck("departmental_organization_id", &ids)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
@@ -68,7 +68,7 @@ func ListDepartmentalOrganizationsNames(ctx context.Context, in *pb.Departmental
 	var names []string
 
 	lim := int(in.Pagination.GetResultsPerPage())
-	offset := int(in.Pagination.GetPageNumber()) * lim
+	offset := int(in.Pagination.GetPageNumber())
 	result := db.Model(&pb.SportsObjectORM{}).Limit(lim).Offset(offset*lim).Where("departmental_organization_name IS NOT NULL").Distinct().Pluck("departmental_organization_name", &names)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
@@ -92,7 +92,7 @@ func ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.Spo
 	var sportKinds []string
 
 	lim := int(in.Pagination.GetResultsPerPage())
-	offset := int(in.Pagination.GetPageNumber()) * lim
+	offset := int(in.Pagination.GetPageNumber())
 	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sport_kind IS NOT NULL").Distinct().Pluck("sport_kind", &sportKinds)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
