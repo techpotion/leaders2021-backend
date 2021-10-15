@@ -49,3 +49,25 @@ message SportKinds {
         ListStats listStats = 2;
     }
 }
+
+message SportsAreaTypes {
+    message ListRequest {
+        Pagination pagination = 1;
+    }
+
+    message ListResponse {
+        repeated string types = 1;
+        ListStats listStats = 2;
+    }
+}
+
+message SportsAreaNames {
+    message ListRequest {
+        Pagination pagination = 1;
+    }
+
+    message ListResponse {
+        repeated string names = 1;
+        ListStats listStats = 2;
+    }
+}

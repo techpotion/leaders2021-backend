@@ -36,7 +36,7 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 
 	polygonQuery := analytics.FormPolygonContainsQuery(in.Polygon)
 
-	result := db.Select("\"sport_kind\", \"sports_area_square\"").Where(filter).Where(polygonQuery).Find(&objectsList)
+	result := db.Select("\"sport_kind\", \"sports_area_type\", \"sports_area_square\"").Where(filter).Where(polygonQuery).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
@@ -57,11 +57,15 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 	areasAmount := len(convertedList)
 	sportsKinds := analytics.UniqueSportsKinds(convertedList)
 	sportsAmount := len(sportsKinds)
+	areaTypes := analytics.UniqueAreaTypes(convertedList)
+	areaTypesAmount := len(areaTypes)
 
 	return &pb.PolygonAnalytics_Response{
-		AreasSquare:  areasSquare,
-		AreasAmount:  uint32(areasAmount),
-		SportsAmount: uint32(sportsAmount),
-		SportsKinds:  sportsKinds,
+		AreasSquare:     areasSquare,
+		AreasAmount:     uint32(areasAmount),
+		SportsAmount:    uint32(sportsAmount),
+		SportsKinds:     sportsKinds,
+		AreaTypes:       areaTypes,
+		AreaTypesAmount: uint32(areaTypesAmount),
 	}, nil
 }

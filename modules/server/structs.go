@@ -59,3 +59,11 @@ func (s *ApiServiceServer) ListDepartmentalOrganizationsNames(ctx context.Contex
 func (s *ApiServiceServer) ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.SportKinds_ListResponse, error) {
 	return filters.ListSportKinds(ctx, in)
 }
+
+func (s *ApiServiceServer) ListSportsAreaNames(ctx context.Context, in *pb.SportsAreaNames_ListRequest) (*pb.SportsAreaNames_ListResponse, error) {
+	return filters.ListSportsAreaNames(ctx, in)
+}
+
+func (s *ApiServiceServer) ListSportsAreaTypes(ctx context.Context, in *pb.SportsAreaTypes_ListRequest) (*pb.SportsAreaTypes_ListResponse, error) {
+	return filters.ListSportsAreaTypes(ctx, in)
+}

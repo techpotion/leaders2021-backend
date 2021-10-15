@@ -69,3 +69,19 @@ func UniqueSportsKinds(areas []*pb.SportsObjectDetailed) []string {
 
 	return list
 }
+
+// TODO add tests
+func UniqueAreaTypes(areas []*pb.SportsObjectDetailed) []string {
+	keys := make(map[string]bool)
+	list := []string{}
+
+	for _, area := range areas {
+		kind := area.SportsAreaType
+		if _, ok := keys[kind]; !ok {
+			keys[kind] = true
+			list = append(list, kind)
+		}
+	}
+
+	return list
+}

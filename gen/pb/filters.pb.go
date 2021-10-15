@@ -172,6 +172,82 @@ func (*SportKinds) Descriptor() ([]byte, []int) {
 	return file_filters_proto_rawDescGZIP(), []int{3}
 }
 
+type SportsAreaTypes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SportsAreaTypes) Reset() {
+	*x = SportsAreaTypes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_filters_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SportsAreaTypes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SportsAreaTypes) ProtoMessage() {}
+
+func (x *SportsAreaTypes) ProtoReflect() protoreflect.Message {
+	mi := &file_filters_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SportsAreaTypes.ProtoReflect.Descriptor instead.
+func (*SportsAreaTypes) Descriptor() ([]byte, []int) {
+	return file_filters_proto_rawDescGZIP(), []int{4}
+}
+
+type SportsAreaNames struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SportsAreaNames) Reset() {
+	*x = SportsAreaNames{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_filters_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SportsAreaNames) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SportsAreaNames) ProtoMessage() {}
+
+func (x *SportsAreaNames) ProtoReflect() protoreflect.Message {
+	mi := &file_filters_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SportsAreaNames.ProtoReflect.Descriptor instead.
+func (*SportsAreaNames) Descriptor() ([]byte, []int) {
+	return file_filters_proto_rawDescGZIP(), []int{5}
+}
+
 type ObjectsNames_ListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -183,7 +259,7 @@ type ObjectsNames_ListRequest struct {
 func (x *ObjectsNames_ListRequest) Reset() {
 	*x = ObjectsNames_ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[4]
+		mi := &file_filters_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -196,7 +272,7 @@ func (x *ObjectsNames_ListRequest) String() string {
 func (*ObjectsNames_ListRequest) ProtoMessage() {}
 
 func (x *ObjectsNames_ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[4]
+	mi := &file_filters_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -231,7 +307,7 @@ type ObjectsNames_ListResponse struct {
 func (x *ObjectsNames_ListResponse) Reset() {
 	*x = ObjectsNames_ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[5]
+		mi := &file_filters_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -244,7 +320,7 @@ func (x *ObjectsNames_ListResponse) String() string {
 func (*ObjectsNames_ListResponse) ProtoMessage() {}
 
 func (x *ObjectsNames_ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[5]
+	mi := &file_filters_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +361,7 @@ type DepartmentalOrganizationsIds_ListRequest struct {
 func (x *DepartmentalOrganizationsIds_ListRequest) Reset() {
 	*x = DepartmentalOrganizationsIds_ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[6]
+		mi := &file_filters_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -298,7 +374,7 @@ func (x *DepartmentalOrganizationsIds_ListRequest) String() string {
 func (*DepartmentalOrganizationsIds_ListRequest) ProtoMessage() {}
 
 func (x *DepartmentalOrganizationsIds_ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[6]
+	mi := &file_filters_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -333,7 +409,7 @@ type DepartmentalOrganizationsIds_ListResponse struct {
 func (x *DepartmentalOrganizationsIds_ListResponse) Reset() {
 	*x = DepartmentalOrganizationsIds_ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[7]
+		mi := &file_filters_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -346,7 +422,7 @@ func (x *DepartmentalOrganizationsIds_ListResponse) String() string {
 func (*DepartmentalOrganizationsIds_ListResponse) ProtoMessage() {}
 
 func (x *DepartmentalOrganizationsIds_ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[7]
+	mi := &file_filters_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -387,7 +463,7 @@ type DepartmentalOrganizationsNames_ListRequest struct {
 func (x *DepartmentalOrganizationsNames_ListRequest) Reset() {
 	*x = DepartmentalOrganizationsNames_ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[8]
+		mi := &file_filters_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -400,7 +476,7 @@ func (x *DepartmentalOrganizationsNames_ListRequest) String() string {
 func (*DepartmentalOrganizationsNames_ListRequest) ProtoMessage() {}
 
 func (x *DepartmentalOrganizationsNames_ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[8]
+	mi := &file_filters_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -435,7 +511,7 @@ type DepartmentalOrganizationsNames_ListResponse struct {
 func (x *DepartmentalOrganizationsNames_ListResponse) Reset() {
 	*x = DepartmentalOrganizationsNames_ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[9]
+		mi := &file_filters_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -448,7 +524,7 @@ func (x *DepartmentalOrganizationsNames_ListResponse) String() string {
 func (*DepartmentalOrganizationsNames_ListResponse) ProtoMessage() {}
 
 func (x *DepartmentalOrganizationsNames_ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[9]
+	mi := &file_filters_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -489,7 +565,7 @@ type SportKinds_ListRequest struct {
 func (x *SportKinds_ListRequest) Reset() {
 	*x = SportKinds_ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[10]
+		mi := &file_filters_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -502,7 +578,7 @@ func (x *SportKinds_ListRequest) String() string {
 func (*SportKinds_ListRequest) ProtoMessage() {}
 
 func (x *SportKinds_ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[10]
+	mi := &file_filters_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -537,7 +613,7 @@ type SportKinds_ListResponse struct {
 func (x *SportKinds_ListResponse) Reset() {
 	*x = SportKinds_ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_filters_proto_msgTypes[11]
+		mi := &file_filters_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -550,7 +626,7 @@ func (x *SportKinds_ListResponse) String() string {
 func (*SportKinds_ListResponse) ProtoMessage() {}
 
 func (x *SportKinds_ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_filters_proto_msgTypes[11]
+	mi := &file_filters_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -574,6 +650,210 @@ func (x *SportKinds_ListResponse) GetKinds() []string {
 }
 
 func (x *SportKinds_ListResponse) GetListStats() *ListStats {
+	if x != nil {
+		return x.ListStats
+	}
+	return nil
+}
+
+type SportsAreaTypes_ListRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pagination *Pagination `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (x *SportsAreaTypes_ListRequest) Reset() {
+	*x = SportsAreaTypes_ListRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_filters_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SportsAreaTypes_ListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SportsAreaTypes_ListRequest) ProtoMessage() {}
+
+func (x *SportsAreaTypes_ListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_filters_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SportsAreaTypes_ListRequest.ProtoReflect.Descriptor instead.
+func (*SportsAreaTypes_ListRequest) Descriptor() ([]byte, []int) {
+	return file_filters_proto_rawDescGZIP(), []int{4, 0}
+}
+
+func (x *SportsAreaTypes_ListRequest) GetPagination() *Pagination {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type SportsAreaTypes_ListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Types     []string   `protobuf:"bytes,1,rep,name=types,proto3" json:"types,omitempty"`
+	ListStats *ListStats `protobuf:"bytes,2,opt,name=listStats,proto3" json:"listStats,omitempty"`
+}
+
+func (x *SportsAreaTypes_ListResponse) Reset() {
+	*x = SportsAreaTypes_ListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_filters_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SportsAreaTypes_ListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SportsAreaTypes_ListResponse) ProtoMessage() {}
+
+func (x *SportsAreaTypes_ListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_filters_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SportsAreaTypes_ListResponse.ProtoReflect.Descriptor instead.
+func (*SportsAreaTypes_ListResponse) Descriptor() ([]byte, []int) {
+	return file_filters_proto_rawDescGZIP(), []int{4, 1}
+}
+
+func (x *SportsAreaTypes_ListResponse) GetTypes() []string {
+	if x != nil {
+		return x.Types
+	}
+	return nil
+}
+
+func (x *SportsAreaTypes_ListResponse) GetListStats() *ListStats {
+	if x != nil {
+		return x.ListStats
+	}
+	return nil
+}
+
+type SportsAreaNames_ListRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pagination *Pagination `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (x *SportsAreaNames_ListRequest) Reset() {
+	*x = SportsAreaNames_ListRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_filters_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SportsAreaNames_ListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SportsAreaNames_ListRequest) ProtoMessage() {}
+
+func (x *SportsAreaNames_ListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_filters_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SportsAreaNames_ListRequest.ProtoReflect.Descriptor instead.
+func (*SportsAreaNames_ListRequest) Descriptor() ([]byte, []int) {
+	return file_filters_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *SportsAreaNames_ListRequest) GetPagination() *Pagination {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type SportsAreaNames_ListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Names     []string   `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
+	ListStats *ListStats `protobuf:"bytes,2,opt,name=listStats,proto3" json:"listStats,omitempty"`
+}
+
+func (x *SportsAreaNames_ListResponse) Reset() {
+	*x = SportsAreaNames_ListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_filters_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SportsAreaNames_ListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SportsAreaNames_ListResponse) ProtoMessage() {}
+
+func (x *SportsAreaNames_ListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_filters_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SportsAreaNames_ListResponse.ProtoReflect.Descriptor instead.
+func (*SportsAreaNames_ListResponse) Descriptor() ([]byte, []int) {
+	return file_filters_proto_rawDescGZIP(), []int{5, 1}
+}
+
+func (x *SportsAreaNames_ListResponse) GetNames() []string {
+	if x != nil {
+		return x.Names
+	}
+	return nil
+}
+
+func (x *SportsAreaNames_ListResponse) GetListStats() *ListStats {
 	if x != nil {
 		return x.ListStats
 	}
@@ -628,6 +908,27 @@ var file_filters_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x64, 0x73, 0x12, 0x2c, 0x0a, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74,
 	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69,
 	0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61,
+	0x74, 0x73, 0x22, 0xa5, 0x01, 0x0a, 0x0f, 0x53, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x41, 0x72, 0x65,
+	0x61, 0x54, 0x79, 0x70, 0x65, 0x73, 0x1a, 0x3e, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2f, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x52, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x05, 0x74, 0x79, 0x70, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x09,
+	0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52,
+	0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x22, 0xa5, 0x01, 0x0a, 0x0f, 0x53,
+	0x70, 0x6f, 0x72, 0x74, 0x73, 0x41, 0x72, 0x65, 0x61, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x1a, 0x3e,
+	0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2f, 0x0a,
+	0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x52,
+	0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14,
+	0x0a, 0x05, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x05, 0x6e,
+	0x61, 0x6d, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74,
+	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69,
+	0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61,
 	0x74, 0x73, 0x42, 0x08, 0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x33,
 }
@@ -644,37 +945,47 @@ func file_filters_proto_rawDescGZIP() []byte {
 	return file_filters_proto_rawDescData
 }
 
-var file_filters_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_filters_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_filters_proto_goTypes = []interface{}{
 	(*ObjectsNames)(nil),                                // 0: api.ObjectsNames
 	(*DepartmentalOrganizationsIds)(nil),                // 1: api.DepartmentalOrganizationsIds
 	(*DepartmentalOrganizationsNames)(nil),              // 2: api.DepartmentalOrganizationsNames
 	(*SportKinds)(nil),                                  // 3: api.SportKinds
-	(*ObjectsNames_ListRequest)(nil),                    // 4: api.ObjectsNames.ListRequest
-	(*ObjectsNames_ListResponse)(nil),                   // 5: api.ObjectsNames.ListResponse
-	(*DepartmentalOrganizationsIds_ListRequest)(nil),    // 6: api.DepartmentalOrganizationsIds.ListRequest
-	(*DepartmentalOrganizationsIds_ListResponse)(nil),   // 7: api.DepartmentalOrganizationsIds.ListResponse
-	(*DepartmentalOrganizationsNames_ListRequest)(nil),  // 8: api.DepartmentalOrganizationsNames.ListRequest
-	(*DepartmentalOrganizationsNames_ListResponse)(nil), // 9: api.DepartmentalOrganizationsNames.ListResponse
-	(*SportKinds_ListRequest)(nil),                      // 10: api.SportKinds.ListRequest
-	(*SportKinds_ListResponse)(nil),                     // 11: api.SportKinds.ListResponse
-	(*Pagination)(nil),                                  // 12: api.Pagination
-	(*ListStats)(nil),                                   // 13: api.ListStats
+	(*SportsAreaTypes)(nil),                             // 4: api.SportsAreaTypes
+	(*SportsAreaNames)(nil),                             // 5: api.SportsAreaNames
+	(*ObjectsNames_ListRequest)(nil),                    // 6: api.ObjectsNames.ListRequest
+	(*ObjectsNames_ListResponse)(nil),                   // 7: api.ObjectsNames.ListResponse
+	(*DepartmentalOrganizationsIds_ListRequest)(nil),    // 8: api.DepartmentalOrganizationsIds.ListRequest
+	(*DepartmentalOrganizationsIds_ListResponse)(nil),   // 9: api.DepartmentalOrganizationsIds.ListResponse
+	(*DepartmentalOrganizationsNames_ListRequest)(nil),  // 10: api.DepartmentalOrganizationsNames.ListRequest
+	(*DepartmentalOrganizationsNames_ListResponse)(nil), // 11: api.DepartmentalOrganizationsNames.ListResponse
+	(*SportKinds_ListRequest)(nil),                      // 12: api.SportKinds.ListRequest
+	(*SportKinds_ListResponse)(nil),                     // 13: api.SportKinds.ListResponse
+	(*SportsAreaTypes_ListRequest)(nil),                 // 14: api.SportsAreaTypes.ListRequest
+	(*SportsAreaTypes_ListResponse)(nil),                // 15: api.SportsAreaTypes.ListResponse
+	(*SportsAreaNames_ListRequest)(nil),                 // 16: api.SportsAreaNames.ListRequest
+	(*SportsAreaNames_ListResponse)(nil),                // 17: api.SportsAreaNames.ListResponse
+	(*Pagination)(nil),                                  // 18: api.Pagination
+	(*ListStats)(nil),                                   // 19: api.ListStats
 }
 var file_filters_proto_depIdxs = []int32{
-	12, // 0: api.ObjectsNames.ListRequest.pagination:type_name -> api.Pagination
-	13, // 1: api.ObjectsNames.ListResponse.listStats:type_name -> api.ListStats
-	12, // 2: api.DepartmentalOrganizationsIds.ListRequest.pagination:type_name -> api.Pagination
-	13, // 3: api.DepartmentalOrganizationsIds.ListResponse.listStats:type_name -> api.ListStats
-	12, // 4: api.DepartmentalOrganizationsNames.ListRequest.pagination:type_name -> api.Pagination
-	13, // 5: api.DepartmentalOrganizationsNames.ListResponse.listStats:type_name -> api.ListStats
-	12, // 6: api.SportKinds.ListRequest.pagination:type_name -> api.Pagination
-	13, // 7: api.SportKinds.ListResponse.listStats:type_name -> api.ListStats
-	8,  // [8:8] is the sub-list for method output_type
-	8,  // [8:8] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	18, // 0: api.ObjectsNames.ListRequest.pagination:type_name -> api.Pagination
+	19, // 1: api.ObjectsNames.ListResponse.listStats:type_name -> api.ListStats
+	18, // 2: api.DepartmentalOrganizationsIds.ListRequest.pagination:type_name -> api.Pagination
+	19, // 3: api.DepartmentalOrganizationsIds.ListResponse.listStats:type_name -> api.ListStats
+	18, // 4: api.DepartmentalOrganizationsNames.ListRequest.pagination:type_name -> api.Pagination
+	19, // 5: api.DepartmentalOrganizationsNames.ListResponse.listStats:type_name -> api.ListStats
+	18, // 6: api.SportKinds.ListRequest.pagination:type_name -> api.Pagination
+	19, // 7: api.SportKinds.ListResponse.listStats:type_name -> api.ListStats
+	18, // 8: api.SportsAreaTypes.ListRequest.pagination:type_name -> api.Pagination
+	19, // 9: api.SportsAreaTypes.ListResponse.listStats:type_name -> api.ListStats
+	18, // 10: api.SportsAreaNames.ListRequest.pagination:type_name -> api.Pagination
+	19, // 11: api.SportsAreaNames.ListResponse.listStats:type_name -> api.ListStats
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_filters_proto_init() }
@@ -733,7 +1044,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObjectsNames_ListRequest); i {
+			switch v := v.(*SportsAreaTypes); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -745,7 +1056,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObjectsNames_ListResponse); i {
+			switch v := v.(*SportsAreaNames); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -757,7 +1068,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DepartmentalOrganizationsIds_ListRequest); i {
+			switch v := v.(*ObjectsNames_ListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -769,7 +1080,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DepartmentalOrganizationsIds_ListResponse); i {
+			switch v := v.(*ObjectsNames_ListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -781,7 +1092,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DepartmentalOrganizationsNames_ListRequest); i {
+			switch v := v.(*DepartmentalOrganizationsIds_ListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -793,7 +1104,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DepartmentalOrganizationsNames_ListResponse); i {
+			switch v := v.(*DepartmentalOrganizationsIds_ListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -805,7 +1116,7 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SportKinds_ListRequest); i {
+			switch v := v.(*DepartmentalOrganizationsNames_ListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -817,7 +1128,79 @@ func file_filters_proto_init() {
 			}
 		}
 		file_filters_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DepartmentalOrganizationsNames_ListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_filters_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SportKinds_ListRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_filters_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SportKinds_ListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_filters_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SportsAreaTypes_ListRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_filters_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SportsAreaTypes_ListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_filters_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SportsAreaNames_ListRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_filters_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SportsAreaNames_ListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -835,7 +1218,7 @@ func file_filters_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_filters_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

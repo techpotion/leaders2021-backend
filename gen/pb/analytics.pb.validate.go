@@ -302,6 +302,8 @@ func (m *PolygonAnalytics_Response) validate(all bool) error {
 
 	// no validation rules for SportsAmount
 
+	// no validation rules for AreaTypesAmount
+
 	if len(errors) > 0 {
 		return PolygonAnalytics_ResponseMultiError(errors)
 	}
