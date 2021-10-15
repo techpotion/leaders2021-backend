@@ -57,6 +57,14 @@ service ApiService {
     rpc ListDepartmentalOrganizationsNames(DepartmentalOrganizationsNames.ListRequest) returns (DepartmentalOrganizationsNames.ListResponse) {
     }
 
+    // Getting the list of sports area names
+    rpc ListSportsAreaNames(SportsAreaNames.ListRequest) returns (SportsAreaNames.ListResponse) {
+    }
+
+    // Getting the list of sports area types
+    rpc ListSportsAreaTypes(SportsAreaTypes.ListRequest) returns (SportsAreaTypes.ListResponse) {
+    }
+
     // Getting the list of departmental organizations names
     rpc ListSportKinds(SportKinds.ListRequest) returns (SportKinds.ListResponse) {
     }

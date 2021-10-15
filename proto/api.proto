@@ -211,7 +211,31 @@ service ApiService {
         };
     }
 
-    // Getting the list of departmental organizations names
+    // Getting the list of sports area names
+    rpc ListSportsAreaNames(SportsAreaNames.ListRequest) returns (SportsAreaNames.ListResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/ListSportsAreaNames";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "Filters";
+        };
+    }
+
+    // Getting the list of sports area types
+    rpc ListSportsAreaTypes(SportsAreaTypes.ListRequest) returns (SportsAreaTypes.ListResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/ListSportsAreaTypes";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "Filters";
+        };
+    }
+
+            // Getting the list of departmental organizations names
     rpc ListSportKinds(SportKinds.ListRequest) returns (SportKinds.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListSportKinds";

@@ -43,6 +43,10 @@ type ApiServiceClient interface {
 	ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error)
 	// Getting the list of departmental organizations names
 	ListDepartmentalOrganizationsNames(ctx context.Context, in *DepartmentalOrganizationsNames_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsNames_ListResponse, error)
+	// Getting the list of sports area names
+	ListSportsAreaNames(ctx context.Context, in *SportsAreaNames_ListRequest, opts ...grpc.CallOption) (*SportsAreaNames_ListResponse, error)
+	// Getting the list of sports area types
+	ListSportsAreaTypes(ctx context.Context, in *SportsAreaTypes_ListRequest, opts ...grpc.CallOption) (*SportsAreaTypes_ListResponse, error)
 	// Getting the list of departmental organizations names
 	ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error)
 }
@@ -145,6 +149,24 @@ func (c *apiServiceClient) ListDepartmentalOrganizationsNames(ctx context.Contex
 	return out, nil
 }
 
+func (c *apiServiceClient) ListSportsAreaNames(ctx context.Context, in *SportsAreaNames_ListRequest, opts ...grpc.CallOption) (*SportsAreaNames_ListResponse, error) {
+	out := new(SportsAreaNames_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportsAreaNames", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiServiceClient) ListSportsAreaTypes(ctx context.Context, in *SportsAreaTypes_ListRequest, opts ...grpc.CallOption) (*SportsAreaTypes_ListResponse, error) {
+	out := new(SportsAreaTypes_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportsAreaTypes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiServiceClient) ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error) {
 	out := new(SportKinds_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportKinds", in, out, opts...)
@@ -183,6 +205,10 @@ type ApiServiceServer interface {
 	ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error)
 	// Getting the list of departmental organizations names
 	ListDepartmentalOrganizationsNames(context.Context, *DepartmentalOrganizationsNames_ListRequest) (*DepartmentalOrganizationsNames_ListResponse, error)
+	// Getting the list of sports area names
+	ListSportsAreaNames(context.Context, *SportsAreaNames_ListRequest) (*SportsAreaNames_ListResponse, error)
+	// Getting the list of sports area types
+	ListSportsAreaTypes(context.Context, *SportsAreaTypes_ListRequest) (*SportsAreaTypes_ListResponse, error)
 	// Getting the list of departmental organizations names
 	ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
@@ -221,6 +247,12 @@ func (UnimplementedApiServiceServer) ListDepartmentalOrganizationsIds(context.Co
 }
 func (UnimplementedApiServiceServer) ListDepartmentalOrganizationsNames(context.Context, *DepartmentalOrganizationsNames_ListRequest) (*DepartmentalOrganizationsNames_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDepartmentalOrganizationsNames not implemented")
+}
+func (UnimplementedApiServiceServer) ListSportsAreaNames(context.Context, *SportsAreaNames_ListRequest) (*SportsAreaNames_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSportsAreaNames not implemented")
+}
+func (UnimplementedApiServiceServer) ListSportsAreaTypes(context.Context, *SportsAreaTypes_ListRequest) (*SportsAreaTypes_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSportsAreaTypes not implemented")
 }
 func (UnimplementedApiServiceServer) ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportKinds not implemented")
@@ -418,6 +450,42 @@ func _ApiService_ListDepartmentalOrganizationsNames_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_ListSportsAreaNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SportsAreaNames_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListSportsAreaNames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListSportsAreaNames",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListSportsAreaNames(ctx, req.(*SportsAreaNames_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiService_ListSportsAreaTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SportsAreaTypes_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListSportsAreaTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListSportsAreaTypes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListSportsAreaTypes(ctx, req.(*SportsAreaTypes_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiService_ListSportKinds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SportKinds_ListRequest)
 	if err := dec(in); err != nil {
@@ -482,6 +550,14 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDepartmentalOrganizationsNames",
 			Handler:    _ApiService_ListDepartmentalOrganizationsNames_Handler,
+		},
+		{
+			MethodName: "ListSportsAreaNames",
+			Handler:    _ApiService_ListSportsAreaNames_Handler,
+		},
+		{
+			MethodName: "ListSportsAreaTypes",
+			Handler:    _ApiService_ListSportsAreaTypes_Handler,
 		},
 		{
 			MethodName: "ListSportKinds",

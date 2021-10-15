@@ -106,3 +106,51 @@ func ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.Spo
 		ListStats: &pb.ListStats{Count: uint32(len(sportKinds))},
 	}, nil
 }
+
+func ListSportsAreaTypes(ctx context.Context, in *pb.SportsAreaTypes_ListRequest) (*pb.SportsAreaTypes_ListResponse, error) {
+	db, err := database.New()
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	var sportsTypes []string
+
+	lim := int(in.Pagination.GetResultsPerPage())
+	offset := int(in.Pagination.GetPageNumber())
+	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sports_area_type IS NOT NULL").Distinct().Pluck("sports_area_type", &sportsTypes)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	return &pb.SportsAreaTypes_ListResponse{
+		Types:     sportsTypes,
+		ListStats: &pb.ListStats{Count: uint32(len(sportsTypes))},
+	}, nil
+}
+
+func ListSportsAreaNames(ctx context.Context, in *pb.SportsAreaNames_ListRequest) (*pb.SportsAreaNames_ListResponse, error) {
+	db, err := database.New()
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	var sportsNames []string
+
+	lim := int(in.Pagination.GetResultsPerPage())
+	offset := int(in.Pagination.GetPageNumber())
+	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sport_kind IS NOT NULL").Distinct().Pluck("sport_kind", &sportsNames)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	return &pb.SportsAreaNames_ListResponse{
+		Names:     sportsNames,
+		ListStats: &pb.ListStats{Count: uint32(len(sportsNames))},
+	}, nil
+}
