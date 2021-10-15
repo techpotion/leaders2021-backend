@@ -10,10 +10,10 @@ message SportsObjects {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        string objectName = 2; // optional
-        uint32 departmentalOrganizationId = 3; // optional
-        string departmentalOrganizationName = 4; // optional
-        Availability availability = 7; // optional
+        repeated string objectNames = 2; // optional
+        repeated uint32 departmentalOrganizationIds = 3; // optional
+        repeated string departmentalOrganizationNames = 4; // optional
+        repeated Availability availabilities = 7; // optional
     }
 
     message ListResponse {
