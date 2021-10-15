@@ -519,7 +519,7 @@
       }
     },
     "/api/v1/ListSportsObjects": {
-      "get": {
+      "post": {
         "summary": "Sports Objects\nList Sports Objects",
         "operationId": "ApiService_ListSportsObjects",
         "responses": {
@@ -568,67 +568,12 @@
         },
         "parameters": [
           {
-            "name": "pagination.pageNumber",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "pagination.resultsPerPage",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "objectNames",
-            "description": "filters.",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "departmentalOrganizationIds",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "departmentalOrganizationNames",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "availabilities",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "UNKNOWN",
-                "CITY",
-                "REGION",
-                "DISTRICT",
-                "STEP"
-              ]
-            },
-            "collectionFormat": "multi"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSportsObjectsListRequest"
+            }
           }
         ],
         "tags": [
@@ -637,7 +582,7 @@
       }
     },
     "/api/v1/ListSportsObjectsDetailed": {
-      "get": {
+      "post": {
         "summary": "Sports Objects Detailed\nList Sports Objects Detailed",
         "operationId": "ApiService_ListSportsObjectsDetailed",
         "responses": {
@@ -686,108 +631,12 @@
         },
         "parameters": [
           {
-            "name": "pagination.pageNumber",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "pagination.resultsPerPage",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "objectIds",
-            "description": "filters.",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "objectNames",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "departmentalOrganizationIds",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "departmentalOrganizationNames",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "sportsAreaNames",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "sportsAreaTypes",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "availabilities",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "UNKNOWN",
-                "CITY",
-                "REGION",
-                "DISTRICT",
-                "STEP"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "sportKinds",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSportsObjectsDetailedListRequest"
+            }
           }
         ],
         "tags": [
@@ -1135,6 +984,65 @@
         }
       }
     },
+    "apiSportsObjectsDetailedListRequest": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/apiPagination"
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": "filters"
+        },
+        "objectNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "departmentalOrganizationIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "departmentalOrganizationNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sportsAreaNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAvailability"
+          }
+        },
+        "sportKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "apiSportsObjectsDetailedListResponse": {
       "type": "object",
       "properties": {
@@ -1146,6 +1054,40 @@
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiSportsObjectsListRequest": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/apiPagination"
+        },
+        "objectNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "filters"
+        },
+        "departmentalOrganizationIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "departmentalOrganizationNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAvailability"
+          }
         }
       }
     },
