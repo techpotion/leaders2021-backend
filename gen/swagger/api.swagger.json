@@ -1026,6 +1026,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "areaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "areaTypesAmount": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
