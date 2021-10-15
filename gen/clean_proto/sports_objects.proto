@@ -34,14 +34,14 @@ message SportsObjectsDetailed {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        uint32 objectId = 2; // optional
-        string objectName = 3; // optional
-        uint32 departmentalOrganizationId = 4; // optional
-        string departmentalOrganizationName = 5; // optional
-        string sportsAreaName = 6; // optional
-        string sportsAreaType = 7; // optional
-        Availability availability = 8; // optional
-        string sportKind = 9; // optional
+        repeated uint32 objectIds = 2; // optional
+        repeated string objectNames = 3; // optional
+        repeated uint32 departmentalOrganizationIds = 4; // optional
+        repeated string departmentalOrganizationNames = 5; // optional
+        repeated string sportsAreaNames = 6; // optional
+        repeated string sportsAreaTypes = 7; // optional
+        repeated Availability availabilities = 8; // optional
+        repeated string sportKinds = 9; // optional
     }
 
     message ListResponse {

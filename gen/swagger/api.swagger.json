@@ -700,63 +700,94 @@
             "format": "int64"
           },
           {
-            "name": "objectId",
+            "name": "objectIds",
             "description": "filters.",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int64"
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "objectName",
+            "name": "objectNames",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "departmentalOrganizationId",
+            "name": "departmentalOrganizationIds",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int64"
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "departmentalOrganizationName",
+            "name": "departmentalOrganizationNames",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "sportsAreaName",
+            "name": "sportsAreaNames",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "sportsAreaType",
+            "name": "sportsAreaTypes",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "availability",
+            "name": "availabilities",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "UNKNOWN",
-              "CITY",
-              "REGION",
-              "DISTRICT",
-              "STEP"
-            ],
-            "default": "UNKNOWN"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "UNKNOWN",
+                "CITY",
+                "REGION",
+                "DISTRICT",
+                "STEP"
+              ]
+            },
+            "collectionFormat": "multi"
           },
           {
-            "name": "sportKind",
+            "name": "sportKinds",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [

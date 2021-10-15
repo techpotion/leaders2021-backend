@@ -17,13 +17,6 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	// filter := &pb.SportsObjectORM{
-	// 	ObjectName:                   in.ObjectName,
-	// 	DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
-	// 	DepartmentalOrganizationName: in.DepartmentalOrganizationName,
-	// 	Availability:                 uint32(in.Availability),
-	// }
-
 	db, err := database.New()
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
