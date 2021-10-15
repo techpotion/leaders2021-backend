@@ -6,6 +6,7 @@ import (
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/database"
+	"github.com/techpotion/leaders2021-backend/modules/filters"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"gorm.io/gorm"
@@ -14,13 +15,6 @@ import (
 func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObjects_ListResponse, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	filter := &pb.SportsObjectORM{
-		ObjectName:                   in.ObjectName,
-		DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
-		DepartmentalOrganizationName: in.DepartmentalOrganizationName,
-		Availability:                 uint32(in.Availability),
 	}
 
 	db, err := database.New()
@@ -32,7 +26,12 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber())
 
-	result := db.Limit(lim).Offset(offset * lim).Where(filter).Find(&objectsList)
+	result := db.Limit(lim).Offset(offset*lim).Scopes(
+		filters.ObjectNamesScope(in.ObjectNames),
+		filters.DepartmentalOrganizationIdsScope(in.DepartmentalOrganizationIds),
+		filters.DepartmentalOrganizationNamesScope(in.DepartmentalOrganizationNames),
+		filters.AvailabilitiesScope(in.Availabilities),
+	).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())

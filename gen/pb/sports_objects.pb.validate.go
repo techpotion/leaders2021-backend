@@ -183,24 +183,30 @@ func (m *SportsObjects_ListRequest) Validate() error {
 		}
 	}
 
-	if m.GetObjectName() != "" {
+	for idx, item := range m.GetObjectNames() {
+		_, _ = idx, item
 
-	}
+		if item != "" {
 
-	if m.GetDepartmentalOrganizationId() != 0 {
-
-		if m.GetDepartmentalOrganizationId() < 100000 {
-			return SportsObjects_ListRequestValidationError{
-				field:  "DepartmentalOrganizationId",
-				reason: "value must be greater than or equal to 100000",
-			}
 		}
 
 	}
 
-	// no validation rules for DepartmentalOrganizationName
+	for idx, item := range m.GetDepartmentalOrganizationIds() {
+		_, _ = idx, item
 
-	// no validation rules for Availability
+		if item != 0 {
+
+			if item < 100000 {
+				return SportsObjects_ListRequestValidationError{
+					field:  fmt.Sprintf("DepartmentalOrganizationIds[%v]", idx),
+					reason: "value must be greater than or equal to 100000",
+				}
+			}
+
+		}
+
+	}
 
 	return nil
 }
@@ -522,45 +528,71 @@ func (m *SportsObjectsDetailed_ListRequest) Validate() error {
 		}
 	}
 
-	if m.GetObjectId() != 0 {
+	for idx, item := range m.GetObjectIds() {
+		_, _ = idx, item
 
-		if m.GetObjectId() < 100000 {
-			return SportsObjectsDetailed_ListRequestValidationError{
-				field:  "ObjectId",
-				reason: "value must be greater than or equal to 100000",
+		if item != 0 {
+
+			if item < 100000 {
+				return SportsObjectsDetailed_ListRequestValidationError{
+					field:  fmt.Sprintf("ObjectIds[%v]", idx),
+					reason: "value must be greater than or equal to 100000",
+				}
 			}
+
 		}
 
 	}
 
-	if m.GetObjectName() != "" {
+	for idx, item := range m.GetObjectNames() {
+		_, _ = idx, item
 
-	}
+		if item != "" {
 
-	if m.GetDepartmentalOrganizationId() != 0 {
-
-		if m.GetDepartmentalOrganizationId() < 200000 {
-			return SportsObjectsDetailed_ListRequestValidationError{
-				field:  "DepartmentalOrganizationId",
-				reason: "value must be greater than or equal to 200000",
-			}
 		}
 
 	}
 
-	// no validation rules for DepartmentalOrganizationName
+	for idx, item := range m.GetDepartmentalOrganizationIds() {
+		_, _ = idx, item
 
-	if m.GetSportsAreaName() != "" {
+		if item != 0 {
+
+			if item < 200000 {
+				return SportsObjectsDetailed_ListRequestValidationError{
+					field:  fmt.Sprintf("DepartmentalOrganizationIds[%v]", idx),
+					reason: "value must be greater than or equal to 200000",
+				}
+			}
+
+		}
 
 	}
 
-	if m.GetSportsAreaType() != "" {
+	for idx, item := range m.GetSportsAreaNames() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
 
 	}
 
-	// no validation rules for Availability
+	for idx, item := range m.GetSportsAreaTypes() {
+		_, _ = idx, item
 
-	if m.GetSportKind() != "" {
+		if item != "" {
+
+		}
+
+	}
+
+	for idx, item := range m.GetSportKinds() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
 
 	}
 

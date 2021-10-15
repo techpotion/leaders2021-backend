@@ -10,10 +10,10 @@ message SportsObjects {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        string objectName = 2 [(validate.rules).string = {ignore_empty: true}]; // optional
-        uint32 departmentalOrganizationId = 3 [(validate.rules).uint32 = {ignore_empty: true, gte: 100000}]; // optional
-        string departmentalOrganizationName = 4; // optional
-        Availability availability = 7; // optional
+        repeated string objectNames = 2 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated uint32 departmentalOrganizationIds = 3 [(validate.rules).repeated.items.uint32 = {ignore_empty: true, gte: 100000}]; // optional
+        repeated string departmentalOrganizationNames = 4; // optional
+        repeated Availability availabilities = 7; // optional
     }
 
     message ListResponse {
@@ -34,14 +34,14 @@ message SportsObjectsDetailed {
     message ListRequest {
         Pagination pagination = 1;
         // filters
-        uint32 objectId = 2 [(validate.rules).uint32 = {ignore_empty: true, gte: 100000}]; // optional
-        string objectName = 3 [(validate.rules).string = {ignore_empty: true}]; // optional
-        uint32 departmentalOrganizationId = 4 [(validate.rules).uint32 = {ignore_empty: true, gte: 200000}]; // optional
-        string departmentalOrganizationName = 5; // optional
-        string sportsAreaName = 6 [(validate.rules).string = {ignore_empty: true}]; // optional
-        string sportsAreaType = 7 [(validate.rules).string = {ignore_empty: true}]; // optional
-        Availability availability = 8; // optional
-        string sportKind = 9 [(validate.rules).string = {ignore_empty: true}]; // optional
+        repeated uint32 objectIds = 2 [(validate.rules).repeated.items.uint32 = {ignore_empty: true, gte: 100000}]; // optional
+        repeated string objectNames = 3 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated uint32 departmentalOrganizationIds = 4 [(validate.rules).repeated.items.uint32 = {ignore_empty: true, gte: 200000}]; // optional
+        repeated string departmentalOrganizationNames = 5; // optional
+        repeated string sportsAreaNames = 6 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated string sportsAreaTypes = 7 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated Availability availabilities = 8; // optional
+        repeated string sportKinds = 9 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
     }
 
     message ListResponse {

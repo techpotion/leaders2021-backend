@@ -6,6 +6,7 @@ import (
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/database"
+	"github.com/techpotion/leaders2021-backend/modules/filters"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"gorm.io/gorm"
@@ -16,16 +17,16 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	filter := &pb.SportsObjectDetailedORM{
-		ObjectId:                     in.ObjectId,
-		ObjectName:                   in.ObjectName,
-		DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
-		DepartmentalOrganizationName: in.DepartmentalOrganizationName,
-		SportsAreaName:               in.SportsAreaName,
-		SportsAreaType:               in.SportsAreaType,
-		Availability:                 uint32(in.Availability),
-		SportKind:                    in.SportKind,
-	}
+	// filter := &pb.SportsObjectDetailedORM{
+	// 	ObjectId:                     in.ObjectId,
+	// 	ObjectName:                   in.ObjectName,
+	// 	DepartmentalOrganizationId:   in.DepartmentalOrganizationId,
+	// 	DepartmentalOrganizationName: in.DepartmentalOrganizationName,
+	// 	SportsAreaName:               in.SportsAreaName,
+	// 	SportsAreaType:               in.SportsAreaType,
+	// 	Availability:                 uint32(in.Availability),
+	// 	SportKind:                    in.SportKind,
+	// }
 
 	db, err := database.New()
 	if err != nil {
@@ -36,7 +37,16 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber())
 
-	result := db.Limit(lim).Offset(offset * lim).Where(filter).Find(&objectsList)
+	result := db.Limit(lim).Offset(offset*lim).Scopes(
+		filters.ObjectIdsScope(in.ObjectIds),
+		filters.ObjectNamesScope(in.ObjectNames),
+		filters.DepartmentalOrganizationIdsScope(in.DepartmentalOrganizationIds),
+		filters.DepartmentalOrganizationNamesScope(in.DepartmentalOrganizationNames),
+		filters.SportsAreaNamesScope(in.SportsAreaNames),
+		filters.SportsAreaTypeScope(in.SportsAreaTypes),
+		filters.AvailabilitiesScope(in.Availabilities),
+		filters.SportKindsScope(in.SportKinds),
+	).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
