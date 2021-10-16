@@ -23,7 +23,7 @@ func GetDensityHeatmap(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJso
 	return handleGeoJson(densityHeatmapPath)
 }
 
-func GetGeoJsonObjects(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
+func GetGeoJsonSportObjects(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return handleGeoJson(objectsPath)
 }
 

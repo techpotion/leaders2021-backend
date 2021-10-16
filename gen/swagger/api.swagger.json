@@ -74,10 +74,10 @@
         ]
       }
     },
-    "/api/v1/GetGeoJsonObjects": {
+    "/api/v1/GetGeoJsonRegions": {
       "get": {
-        "summary": "Getting objects geojson for heatmap drawing purposes",
-        "operationId": "ApiService_GetGeoJsonObjects",
+        "summary": "GeoJSONs\nGetting Moscow regions polygons geojson",
+        "operationId": "ApiService_GetGeoJsonRegions",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -127,10 +127,10 @@
         ]
       }
     },
-    "/api/v1/GetGeoJsonRegions": {
+    "/api/v1/GetGeoJsonSportObjects": {
       "get": {
-        "summary": "GeoJSONs\nGetting Moscow regions polygons geojson",
-        "operationId": "ApiService_GetGeoJsonRegions",
+        "summary": "Getting objects geojson for heatmap drawing purposes",
+        "operationId": "ApiService_GetGeoJsonSportObjects",
         "responses": {
           "200": {
             "description": "A successful response.",

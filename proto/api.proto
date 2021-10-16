@@ -149,9 +149,9 @@ service ApiService {
     }
 
     // Getting objects geojson for heatmap drawing purposes
-    rpc GetGeoJsonObjects(GeoJsons.Request) returns (GeoJsons.Response) {
+    rpc GetGeoJsonSportObjects(GeoJsons.Request) returns (GeoJsons.Response) {
         option (google.api.http) = {
-            get: "/api/v1/GetGeoJsonObjects";
+            get: "/api/v1/GetGeoJsonSportObjects";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             description: "";

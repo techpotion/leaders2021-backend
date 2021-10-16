@@ -36,7 +36,7 @@ service ApiService {
     }
 
     // Getting objects geojson for heatmap drawing purposes
-    rpc GetGeoJsonObjects(GeoJsons.Request) returns (GeoJsons.Response) {
+    rpc GetGeoJsonSportObjects(GeoJsons.Request) returns (GeoJsons.Response) {
     }
 
     // Analytics
