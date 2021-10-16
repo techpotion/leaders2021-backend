@@ -127,10 +127,10 @@
         ]
       }
     },
-    "/api/v1/GetGeoJsonSportObjects": {
+    "/api/v1/GetGeoJsonSportsObjects": {
       "get": {
         "summary": "Getting objects geojson for heatmap drawing purposes",
-        "operationId": "ApiService_GetGeoJsonSportObjects",
+        "operationId": "ApiService_GetGeoJsonSportsObjects",
         "responses": {
           "200": {
             "description": "A successful response.",
