@@ -36,6 +36,8 @@ type ApiServiceClient interface {
 	// Analytics
 	// Getting analytics for sports objects in polygon
 	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
+	// Getting analytics for parks overlaping
+	PolygonParkAnalytics(ctx context.Context, in *PolygonParkAnalytics_Request, opts ...grpc.CallOption) (*PolygonParkAnalytics_Response, error)
 	// Filters
 	// Getting the list of unique object names
 	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
@@ -122,6 +124,15 @@ func (c *apiServiceClient) PolygonAnalytics(ctx context.Context, in *PolygonAnal
 	return out, nil
 }
 
+func (c *apiServiceClient) PolygonParkAnalytics(ctx context.Context, in *PolygonParkAnalytics_Request, opts ...grpc.CallOption) (*PolygonParkAnalytics_Response, error) {
+	out := new(PolygonParkAnalytics_Response)
+	err := c.cc.Invoke(ctx, "/api.ApiService/PolygonParkAnalytics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiServiceClient) ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
 	out := new(ObjectsNames_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjectsNames", in, out, opts...)
@@ -198,6 +209,8 @@ type ApiServiceServer interface {
 	// Analytics
 	// Getting analytics for sports objects in polygon
 	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
+	// Getting analytics for parks overlaping
+	PolygonParkAnalytics(context.Context, *PolygonParkAnalytics_Request) (*PolygonParkAnalytics_Response, error)
 	// Filters
 	// Getting the list of unique object names
 	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
@@ -238,6 +251,9 @@ func (UnimplementedApiServiceServer) GetGeoJsonSportsObjects(context.Context, *G
 }
 func (UnimplementedApiServiceServer) PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PolygonAnalytics not implemented")
+}
+func (UnimplementedApiServiceServer) PolygonParkAnalytics(context.Context, *PolygonParkAnalytics_Request) (*PolygonParkAnalytics_Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PolygonParkAnalytics not implemented")
 }
 func (UnimplementedApiServiceServer) ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsNames not implemented")
@@ -396,6 +412,24 @@ func _ApiService_PolygonAnalytics_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_PolygonParkAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolygonParkAnalytics_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).PolygonParkAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/PolygonParkAnalytics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).PolygonParkAnalytics(ctx, req.(*PolygonParkAnalytics_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiService_ListObjectsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ObjectsNames_ListRequest)
 	if err := dec(in); err != nil {
@@ -538,6 +572,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PolygonAnalytics",
 			Handler:    _ApiService_PolygonAnalytics_Handler,
+		},
+		{
+			MethodName: "PolygonParkAnalytics",
+			Handler:    _ApiService_PolygonParkAnalytics_Handler,
 		},
 		{
 			MethodName: "ListObjectsNames",

@@ -67,3 +67,12 @@ message SportsObjectDetailed {
     uint32 availability = 11;
     string sportKind = 12;
 }
+
+message Park {
+    string commonName = 1;
+    string admArea = 2;
+    string district = 3;
+    string location = 4;
+    bool hasSportground = 5;
+    Point objectPoint = 6;
+}
