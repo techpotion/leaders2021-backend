@@ -24,3 +24,14 @@ message PolygonAnalytics {
         uint32 areaTypesAmount = 6;
     }
 }
+
+message PolygonParkAnalytics {
+    message Request {
+        Polygon polygon = 1;
+    }
+
+    message Response {
+        repeated Park parks = 1;
+        ListStats listStats = 2;
+    }
+}

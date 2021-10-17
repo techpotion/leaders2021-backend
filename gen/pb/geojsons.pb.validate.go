@@ -11,7 +11,6 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
-	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -32,52 +31,17 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
-	_ = sort.Sort
 )
 
 // Validate checks the field values on GeoJsons with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
+// proto definition for this message. If any rules are violated, an error is returned.
 func (m *GeoJsons) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GeoJsons with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in GeoJsonsMultiError, or nil
-// if none found.
-func (m *GeoJsons) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GeoJsons) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return GeoJsonsMultiError(errors)
-	}
 	return nil
 }
-
-// GeoJsonsMultiError is an error wrapping multiple validation errors returned
-// by GeoJsons.ValidateAll() if the designated constraints aren't met.
-type GeoJsonsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GeoJsonsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GeoJsonsMultiError) AllErrors() []error { return m }
 
 // GeoJsonsValidationError is the validation error returned by
 // GeoJsons.Validate if the designated constraints aren't met.
@@ -134,49 +98,15 @@ var _ interface {
 } = GeoJsonsValidationError{}
 
 // Validate checks the field values on GeoJsons_Request with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
 func (m *GeoJsons_Request) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GeoJsons_Request with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GeoJsons_RequestMultiError, or nil if none found.
-func (m *GeoJsons_Request) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GeoJsons_Request) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return GeoJsons_RequestMultiError(errors)
-	}
 	return nil
 }
-
-// GeoJsons_RequestMultiError is an error wrapping multiple validation errors
-// returned by GeoJsons_Request.ValidateAll() if the designated constraints
-// aren't met.
-type GeoJsons_RequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GeoJsons_RequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GeoJsons_RequestMultiError) AllErrors() []error { return m }
 
 // GeoJsons_RequestValidationError is the validation error returned by
 // GeoJsons_Request.Validate if the designated constraints aren't met.
@@ -233,51 +163,17 @@ var _ interface {
 } = GeoJsons_RequestValidationError{}
 
 // Validate checks the field values on GeoJsons_Response with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
 func (m *GeoJsons_Response) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GeoJsons_Response with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GeoJsons_ResponseMultiError, or nil if none found.
-func (m *GeoJsons_Response) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GeoJsons_Response) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
 	// no validation rules for GeoJson
 
-	if len(errors) > 0 {
-		return GeoJsons_ResponseMultiError(errors)
-	}
 	return nil
 }
-
-// GeoJsons_ResponseMultiError is an error wrapping multiple validation errors
-// returned by GeoJsons_Response.ValidateAll() if the designated constraints
-// aren't met.
-type GeoJsons_ResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GeoJsons_ResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GeoJsons_ResponseMultiError) AllErrors() []error { return m }
 
 // GeoJsons_ResponseValidationError is the validation error returned by
 // GeoJsons_Response.Validate if the designated constraints aren't met.

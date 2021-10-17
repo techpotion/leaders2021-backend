@@ -44,6 +44,10 @@ service ApiService {
     rpc PolygonAnalytics(PolygonAnalytics.Request) returns (PolygonAnalytics.Response) {
     }
 
+    // Getting analytics for parks overlaping
+    rpc PolygonParkAnalytics(PolygonParkAnalytics.Request) returns (PolygonParkAnalytics.Response) {
+    }
+
     // Filters
     // Getting the list of unique object names
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {

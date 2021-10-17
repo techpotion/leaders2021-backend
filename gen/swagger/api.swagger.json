@@ -844,6 +844,69 @@
           "Analytics"
         ]
       }
+    },
+    "/api/v1/PolygonParkAnalytics": {
+      "post": {
+        "summary": "Getting analytics for parks overlaping",
+        "operationId": "ApiService_PolygonParkAnalytics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPolygonParkAnalyticsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonParkAnalyticsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
     }
   },
   "definitions": {
@@ -964,6 +1027,29 @@
         }
       }
     },
+    "apiPark": {
+      "type": "object",
+      "properties": {
+        "commonName": {
+          "type": "string"
+        },
+        "admArea": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "hasSportground": {
+          "type": "boolean"
+        },
+        "objectPoint": {
+          "$ref": "#/definitions/apiPoint"
+        }
+      }
+    },
     "apiPoint": {
       "type": "object",
       "properties": {
@@ -1036,6 +1122,28 @@
         "areaTypesAmount": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "apiPolygonParkAnalyticsRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        }
+      }
+    },
+    "apiPolygonParkAnalyticsResponse": {
+      "type": "object",
+      "properties": {
+        "parks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPark"
+          }
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
         }
       }
     },

@@ -42,7 +42,7 @@ func formGeometryPolygon(polygon *pb.Polygon) string {
 		points += fmt.Sprintf(",%f %f", point.Lng, point.Lat)
 	}
 	poly := "POLYGON((" + points[1:] + "))"
-	return fmt.Sprintf("ST_GeomFromText('%s')", poly)
+	return fmt.Sprintf("ST_GeomFromText('%s', 4326)", poly)
 }
 
 // TODO add tests
@@ -84,4 +84,15 @@ func UniqueAreaTypes(areas []*pb.SportsObjectDetailed) []string {
 	}
 
 	return list
+}
+
+func FormPolygonOverlapsParkQuery(polygon *pb.Polygon) string {
+	polygonQuery := formGeometryPolygon(polygon)
+	return fmt.Sprintf(`
+		ST_Intersects(
+			%s,
+			polygon
+		);`,
+		polygonQuery,
+	)
 }

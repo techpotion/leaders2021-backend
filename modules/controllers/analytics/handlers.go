@@ -69,3 +69,44 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 		AreaTypesAmount: uint32(areaTypesAmount),
 	}, nil
 }
+
+func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Request) (*pb.PolygonParkAnalytics_Response, error) {
+	if err := in.Validate(); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	db, err := database.New()
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	var parksList []*pb.ParkORM
+
+	polygonQuery := analytics.FormPolygonOverlapsParkQuery(in.Polygon)
+
+	result := db.Where(pb.ParkORM{HasSportground: false}).Where("has_sportground = false").Where(polygonQuery).Find(&parksList)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	var convertedList []*pb.Park
+	for _, objectORM := range parksList {
+		converted, err := objectORM.ToPB(ctx)
+		if err != nil {
+			return nil, status.Error(codes.Internal, err.Error())
+		}
+		convertedList = append(convertedList, &converted)
+	}
+
+	return &pb.PolygonParkAnalytics_Response{
+		Parks:     convertedList,
+		ListStats: &pb.ListStats{Count: uint32(result.RowsAffected)},
+	}, nil
+}
