@@ -88,7 +88,7 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 
 	polygonQuery := analytics.FormPolygonOverlapsParkQuery(in.Polygon)
 
-	result := db.Where(polygonQuery).Find(&parksList)
+	result := db.Where(pb.ParkORM{HasSportground: false}).Where("has_sportground = false").Where(polygonQuery).Find(&parksList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
