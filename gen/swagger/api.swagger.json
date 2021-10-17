@@ -1130,6 +1130,10 @@
       "properties": {
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
+        },
+        "hasSportground": {
+          "type": "boolean",
+          "title": "filters"
         }
       }
     },

@@ -28,6 +28,8 @@ message PolygonAnalytics {
 message PolygonParkAnalytics {
     message Request {
         Polygon polygon = 1;
+        // filters
+        bool hasSportground = 2;
     }
 
     message Response {
