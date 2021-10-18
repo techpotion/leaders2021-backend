@@ -345,6 +345,8 @@ func (m *PolygonParkAnalytics_Request) Validate() error {
 		}
 	}
 
+	// no validation rules for HasSportground
+
 	return nil
 }
 
