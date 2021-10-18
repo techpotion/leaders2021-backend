@@ -76,3 +76,12 @@ message Park {
     bool hasSportground = 5;
     Point objectPoint = 6;
 }
+
+message Pollution {
+    string admArea = 1;
+    string district = 2;
+    string location = 3;
+    bool isPolluted = 4;
+    Point objectPoint = 5;
+    string results = 6;
+}

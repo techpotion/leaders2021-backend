@@ -913,3 +913,87 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ParkValidationError{}
+
+// Validate checks the field values on Pollution with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Pollution) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for AdmArea
+
+	// no validation rules for District
+
+	// no validation rules for Location
+
+	// no validation rules for IsPolluted
+
+	if v, ok := interface{}(m.GetObjectPoint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PollutionValidationError{
+				field:  "ObjectPoint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Results
+
+	return nil
+}
+
+// PollutionValidationError is the validation error returned by
+// Pollution.Validate if the designated constraints aren't met.
+type PollutionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PollutionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PollutionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PollutionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PollutionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PollutionValidationError) ErrorName() string { return "PollutionValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PollutionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPollution.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PollutionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PollutionValidationError{}

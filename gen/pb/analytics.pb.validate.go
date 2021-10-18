@@ -165,6 +165,73 @@ var _ interface {
 	ErrorName() string
 } = PolygonParkAnalyticsValidationError{}
 
+// Validate checks the field values on PolygonPollutionAnalytics with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *PolygonPollutionAnalytics) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// PolygonPollutionAnalyticsValidationError is the validation error returned by
+// PolygonPollutionAnalytics.Validate if the designated constraints aren't met.
+type PolygonPollutionAnalyticsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PolygonPollutionAnalyticsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PolygonPollutionAnalyticsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PolygonPollutionAnalyticsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PolygonPollutionAnalyticsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PolygonPollutionAnalyticsValidationError) ErrorName() string {
+	return "PolygonPollutionAnalyticsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PolygonPollutionAnalyticsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPolygonPollutionAnalytics.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PolygonPollutionAnalyticsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PolygonPollutionAnalyticsValidationError{}
+
 // Validate checks the field values on PolygonAnalytics_Request with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
@@ -499,3 +566,178 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PolygonParkAnalytics_ResponseValidationError{}
+
+// Validate checks the field values on PolygonPollutionAnalytics_Request with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *PolygonPollutionAnalytics_Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PolygonPollutionAnalytics_RequestValidationError{
+				field:  "Polygon",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for IsPolluted
+
+	// no validation rules for ReturnPoints
+
+	return nil
+}
+
+// PolygonPollutionAnalytics_RequestValidationError is the validation error
+// returned by PolygonPollutionAnalytics_Request.Validate if the designated
+// constraints aren't met.
+type PolygonPollutionAnalytics_RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PolygonPollutionAnalytics_RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PolygonPollutionAnalytics_RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PolygonPollutionAnalytics_RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PolygonPollutionAnalytics_RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PolygonPollutionAnalytics_RequestValidationError) ErrorName() string {
+	return "PolygonPollutionAnalytics_RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PolygonPollutionAnalytics_RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPolygonPollutionAnalytics_Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PolygonPollutionAnalytics_RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PolygonPollutionAnalytics_RequestValidationError{}
+
+// Validate checks the field values on PolygonPollutionAnalytics_Response with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *PolygonPollutionAnalytics_Response) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetPoints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PolygonPollutionAnalytics_ResponseValidationError{
+					field:  fmt.Sprintf("Points[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PolygonPollutionAnalytics_ResponseValidationError{
+				field:  "ListStats",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// PolygonPollutionAnalytics_ResponseValidationError is the validation error
+// returned by PolygonPollutionAnalytics_Response.Validate if the designated
+// constraints aren't met.
+type PolygonPollutionAnalytics_ResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PolygonPollutionAnalytics_ResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PolygonPollutionAnalytics_ResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PolygonPollutionAnalytics_ResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PolygonPollutionAnalytics_ResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PolygonPollutionAnalytics_ResponseValidationError) ErrorName() string {
+	return "PolygonPollutionAnalytics_ResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PolygonPollutionAnalytics_ResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPolygonPollutionAnalytics_Response.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PolygonPollutionAnalytics_ResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PolygonPollutionAnalytics_ResponseValidationError{}

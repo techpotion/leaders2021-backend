@@ -37,3 +37,17 @@ message PolygonParkAnalytics {
         ListStats listStats = 2;
     }
 }
+
+message PolygonPollutionAnalytics {
+    message Request {
+        Polygon polygon = 1;
+        // filters
+        bool isPolluted = 2;
+        bool returnPoints = 3;
+    }
+
+    message Response {
+        repeated Pollution points = 1;
+        ListStats listStats = 2;
+    }
+}

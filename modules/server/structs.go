@@ -48,6 +48,10 @@ func (s *ApiServiceServer) PolygonParkAnalytics(ctx context.Context, in *pb.Poly
 	return analytics.PolygonParkAnalytics(ctx, in)
 }
 
+func (s *ApiServiceServer) PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnalytics_Request) (*pb.PolygonPollutionAnalytics_Response, error) {
+	return analytics.PolygonPollutionAnalytics(ctx, in)
+}
+
 func (s *ApiServiceServer) ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb.ObjectsNames_ListResponse, error) {
 	return filters.ListObjectsNames(ctx, in)
 }

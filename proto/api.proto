@@ -187,6 +187,19 @@ service ApiService {
         };
     }
 
+    // Getting analytics for pollution situation
+    rpc PolygonPollutionAnalytics(PolygonPollutionAnalytics.Request) returns (PolygonPollutionAnalytics.Response) {
+        option (google.api.http) = {
+            post: "/api/v1/PolygonPollutionAnalytics";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "Analytics";
+        };
+    }
+
     // Filters
     // Getting the list of unique object names
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
