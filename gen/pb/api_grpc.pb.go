@@ -38,6 +38,8 @@ type ApiServiceClient interface {
 	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
 	// Getting analytics for parks overlaping
 	PolygonParkAnalytics(ctx context.Context, in *PolygonParkAnalytics_Request, opts ...grpc.CallOption) (*PolygonParkAnalytics_Response, error)
+	// Getting analytics for pollution situation
+	PolygonPollutionAnalytics(ctx context.Context, in *PolygonPollutionAnalytics_Request, opts ...grpc.CallOption) (*PolygonPollutionAnalytics_Response, error)
 	// Filters
 	// Getting the list of unique object names
 	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
@@ -133,6 +135,15 @@ func (c *apiServiceClient) PolygonParkAnalytics(ctx context.Context, in *Polygon
 	return out, nil
 }
 
+func (c *apiServiceClient) PolygonPollutionAnalytics(ctx context.Context, in *PolygonPollutionAnalytics_Request, opts ...grpc.CallOption) (*PolygonPollutionAnalytics_Response, error) {
+	out := new(PolygonPollutionAnalytics_Response)
+	err := c.cc.Invoke(ctx, "/api.ApiService/PolygonPollutionAnalytics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiServiceClient) ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
 	out := new(ObjectsNames_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjectsNames", in, out, opts...)
@@ -211,6 +222,8 @@ type ApiServiceServer interface {
 	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
 	// Getting analytics for parks overlaping
 	PolygonParkAnalytics(context.Context, *PolygonParkAnalytics_Request) (*PolygonParkAnalytics_Response, error)
+	// Getting analytics for pollution situation
+	PolygonPollutionAnalytics(context.Context, *PolygonPollutionAnalytics_Request) (*PolygonPollutionAnalytics_Response, error)
 	// Filters
 	// Getting the list of unique object names
 	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
@@ -254,6 +267,9 @@ func (UnimplementedApiServiceServer) PolygonAnalytics(context.Context, *PolygonA
 }
 func (UnimplementedApiServiceServer) PolygonParkAnalytics(context.Context, *PolygonParkAnalytics_Request) (*PolygonParkAnalytics_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PolygonParkAnalytics not implemented")
+}
+func (UnimplementedApiServiceServer) PolygonPollutionAnalytics(context.Context, *PolygonPollutionAnalytics_Request) (*PolygonPollutionAnalytics_Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PolygonPollutionAnalytics not implemented")
 }
 func (UnimplementedApiServiceServer) ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsNames not implemented")
@@ -430,6 +446,24 @@ func _ApiService_PolygonParkAnalytics_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_PolygonPollutionAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolygonPollutionAnalytics_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).PolygonPollutionAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/PolygonPollutionAnalytics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).PolygonPollutionAnalytics(ctx, req.(*PolygonPollutionAnalytics_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiService_ListObjectsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ObjectsNames_ListRequest)
 	if err := dec(in); err != nil {
@@ -576,6 +610,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PolygonParkAnalytics",
 			Handler:    _ApiService_PolygonParkAnalytics_Handler,
+		},
+		{
+			MethodName: "PolygonPollutionAnalytics",
+			Handler:    _ApiService_PolygonPollutionAnalytics_Handler,
 		},
 		{
 			MethodName: "ListObjectsNames",

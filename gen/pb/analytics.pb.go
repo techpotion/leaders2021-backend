@@ -96,6 +96,44 @@ func (*PolygonParkAnalytics) Descriptor() ([]byte, []int) {
 	return file_analytics_proto_rawDescGZIP(), []int{1}
 }
 
+type PolygonPollutionAnalytics struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *PolygonPollutionAnalytics) Reset() {
+	*x = PolygonPollutionAnalytics{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_analytics_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PolygonPollutionAnalytics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolygonPollutionAnalytics) ProtoMessage() {}
+
+func (x *PolygonPollutionAnalytics) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolygonPollutionAnalytics.ProtoReflect.Descriptor instead.
+func (*PolygonPollutionAnalytics) Descriptor() ([]byte, []int) {
+	return file_analytics_proto_rawDescGZIP(), []int{2}
+}
+
 type PolygonAnalytics_Request struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -111,7 +149,7 @@ type PolygonAnalytics_Request struct {
 func (x *PolygonAnalytics_Request) Reset() {
 	*x = PolygonAnalytics_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_analytics_proto_msgTypes[2]
+		mi := &file_analytics_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -124,7 +162,7 @@ func (x *PolygonAnalytics_Request) String() string {
 func (*PolygonAnalytics_Request) ProtoMessage() {}
 
 func (x *PolygonAnalytics_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_proto_msgTypes[2]
+	mi := &file_analytics_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,7 +222,7 @@ type PolygonAnalytics_Response struct {
 func (x *PolygonAnalytics_Response) Reset() {
 	*x = PolygonAnalytics_Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_analytics_proto_msgTypes[3]
+		mi := &file_analytics_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -197,7 +235,7 @@ func (x *PolygonAnalytics_Response) String() string {
 func (*PolygonAnalytics_Response) ProtoMessage() {}
 
 func (x *PolygonAnalytics_Response) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_proto_msgTypes[3]
+	mi := &file_analytics_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -268,7 +306,7 @@ type PolygonParkAnalytics_Request struct {
 func (x *PolygonParkAnalytics_Request) Reset() {
 	*x = PolygonParkAnalytics_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_analytics_proto_msgTypes[4]
+		mi := &file_analytics_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -281,7 +319,7 @@ func (x *PolygonParkAnalytics_Request) String() string {
 func (*PolygonParkAnalytics_Request) ProtoMessage() {}
 
 func (x *PolygonParkAnalytics_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_proto_msgTypes[4]
+	mi := &file_analytics_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -323,7 +361,7 @@ type PolygonParkAnalytics_Response struct {
 func (x *PolygonParkAnalytics_Response) Reset() {
 	*x = PolygonParkAnalytics_Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_analytics_proto_msgTypes[5]
+		mi := &file_analytics_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -336,7 +374,7 @@ func (x *PolygonParkAnalytics_Response) String() string {
 func (*PolygonParkAnalytics_Response) ProtoMessage() {}
 
 func (x *PolygonParkAnalytics_Response) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_proto_msgTypes[5]
+	mi := &file_analytics_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -360,6 +398,125 @@ func (x *PolygonParkAnalytics_Response) GetParks() []*Park {
 }
 
 func (x *PolygonParkAnalytics_Response) GetListStats() *ListStats {
+	if x != nil {
+		return x.ListStats
+	}
+	return nil
+}
+
+type PolygonPollutionAnalytics_Request struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Polygon *Polygon `protobuf:"bytes,1,opt,name=polygon,proto3" json:"polygon,omitempty"`
+	// filters
+	IsPolluted   bool `protobuf:"varint,2,opt,name=isPolluted,proto3" json:"isPolluted,omitempty"`
+	ReturnPoints bool `protobuf:"varint,3,opt,name=returnPoints,proto3" json:"returnPoints,omitempty"`
+}
+
+func (x *PolygonPollutionAnalytics_Request) Reset() {
+	*x = PolygonPollutionAnalytics_Request{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_analytics_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PolygonPollutionAnalytics_Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolygonPollutionAnalytics_Request) ProtoMessage() {}
+
+func (x *PolygonPollutionAnalytics_Request) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolygonPollutionAnalytics_Request.ProtoReflect.Descriptor instead.
+func (*PolygonPollutionAnalytics_Request) Descriptor() ([]byte, []int) {
+	return file_analytics_proto_rawDescGZIP(), []int{2, 0}
+}
+
+func (x *PolygonPollutionAnalytics_Request) GetPolygon() *Polygon {
+	if x != nil {
+		return x.Polygon
+	}
+	return nil
+}
+
+func (x *PolygonPollutionAnalytics_Request) GetIsPolluted() bool {
+	if x != nil {
+		return x.IsPolluted
+	}
+	return false
+}
+
+func (x *PolygonPollutionAnalytics_Request) GetReturnPoints() bool {
+	if x != nil {
+		return x.ReturnPoints
+	}
+	return false
+}
+
+type PolygonPollutionAnalytics_Response struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Points    []*Pollution `protobuf:"bytes,1,rep,name=points,proto3" json:"points,omitempty"`
+	ListStats *ListStats   `protobuf:"bytes,2,opt,name=listStats,proto3" json:"listStats,omitempty"`
+}
+
+func (x *PolygonPollutionAnalytics_Response) Reset() {
+	*x = PolygonPollutionAnalytics_Response{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_analytics_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PolygonPollutionAnalytics_Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolygonPollutionAnalytics_Response) ProtoMessage() {}
+
+func (x *PolygonPollutionAnalytics_Response) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolygonPollutionAnalytics_Response.ProtoReflect.Descriptor instead.
+func (*PolygonPollutionAnalytics_Response) Descriptor() ([]byte, []int) {
+	return file_analytics_proto_rawDescGZIP(), []int{2, 1}
+}
+
+func (x *PolygonPollutionAnalytics_Response) GetPoints() []*Pollution {
+	if x != nil {
+		return x.Points
+	}
+	return nil
+}
+
+func (x *PolygonPollutionAnalytics_Response) GetListStats() *ListStats {
 	if x != nil {
 		return x.ListStats
 	}
@@ -411,8 +568,24 @@ var file_analytics_proto_rawDesc = []byte{
 	0x70, 0x69, 0x2e, 0x50, 0x61, 0x72, 0x6b, 0x52, 0x05, 0x70, 0x61, 0x72, 0x6b, 0x73, 0x12, 0x2c,
 	0x0a, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74,
-	0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x42, 0x08, 0x5a, 0x06,
-	0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x22, 0xf4, 0x01, 0x0a,
+	0x19, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x6c, 0x75, 0x74, 0x69, 0x6f,
+	0x6e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x1a, 0x75, 0x0a, 0x07, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x07, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x6c,
+	0x79, 0x67, 0x6f, 0x6e, 0x52, 0x07, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x12, 0x1e, 0x0a,
+	0x0a, 0x69, 0x73, 0x50, 0x6f, 0x6c, 0x6c, 0x75, 0x74, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0a, 0x69, 0x73, 0x50, 0x6f, 0x6c, 0x6c, 0x75, 0x74, 0x65, 0x64, 0x12, 0x22, 0x0a,
+	0x0c, 0x72, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x0c, 0x72, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74,
+	0x73, 0x1a, 0x60, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x26, 0x0a,
+	0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x6c, 0x6c, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x06, 0x70,
+	0x6f, 0x69, 0x6e, 0x74, 0x73, 0x12, 0x2c, 0x0a, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61,
+	0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74,
+	0x61, 0x74, 0x73, 0x42, 0x08, 0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -427,30 +600,37 @@ func file_analytics_proto_rawDescGZIP() []byte {
 	return file_analytics_proto_rawDescData
 }
 
-var file_analytics_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_analytics_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_analytics_proto_goTypes = []interface{}{
-	(*PolygonAnalytics)(nil),              // 0: api.PolygonAnalytics
-	(*PolygonParkAnalytics)(nil),          // 1: api.PolygonParkAnalytics
-	(*PolygonAnalytics_Request)(nil),      // 2: api.PolygonAnalytics.Request
-	(*PolygonAnalytics_Response)(nil),     // 3: api.PolygonAnalytics.Response
-	(*PolygonParkAnalytics_Request)(nil),  // 4: api.PolygonParkAnalytics.Request
-	(*PolygonParkAnalytics_Response)(nil), // 5: api.PolygonParkAnalytics.Response
-	(*Polygon)(nil),                       // 6: api.Polygon
-	(Availability)(0),                     // 7: api.Availability
-	(*Park)(nil),                          // 8: api.Park
-	(*ListStats)(nil),                     // 9: api.ListStats
+	(*PolygonAnalytics)(nil),                   // 0: api.PolygonAnalytics
+	(*PolygonParkAnalytics)(nil),               // 1: api.PolygonParkAnalytics
+	(*PolygonPollutionAnalytics)(nil),          // 2: api.PolygonPollutionAnalytics
+	(*PolygonAnalytics_Request)(nil),           // 3: api.PolygonAnalytics.Request
+	(*PolygonAnalytics_Response)(nil),          // 4: api.PolygonAnalytics.Response
+	(*PolygonParkAnalytics_Request)(nil),       // 5: api.PolygonParkAnalytics.Request
+	(*PolygonParkAnalytics_Response)(nil),      // 6: api.PolygonParkAnalytics.Response
+	(*PolygonPollutionAnalytics_Request)(nil),  // 7: api.PolygonPollutionAnalytics.Request
+	(*PolygonPollutionAnalytics_Response)(nil), // 8: api.PolygonPollutionAnalytics.Response
+	(*Polygon)(nil),                            // 9: api.Polygon
+	(Availability)(0),                          // 10: api.Availability
+	(*Park)(nil),                               // 11: api.Park
+	(*ListStats)(nil),                          // 12: api.ListStats
+	(*Pollution)(nil),                          // 13: api.Pollution
 }
 var file_analytics_proto_depIdxs = []int32{
-	6, // 0: api.PolygonAnalytics.Request.polygon:type_name -> api.Polygon
-	7, // 1: api.PolygonAnalytics.Request.availability:type_name -> api.Availability
-	6, // 2: api.PolygonParkAnalytics.Request.polygon:type_name -> api.Polygon
-	8, // 3: api.PolygonParkAnalytics.Response.parks:type_name -> api.Park
-	9, // 4: api.PolygonParkAnalytics.Response.listStats:type_name -> api.ListStats
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	9,  // 0: api.PolygonAnalytics.Request.polygon:type_name -> api.Polygon
+	10, // 1: api.PolygonAnalytics.Request.availability:type_name -> api.Availability
+	9,  // 2: api.PolygonParkAnalytics.Request.polygon:type_name -> api.Polygon
+	11, // 3: api.PolygonParkAnalytics.Response.parks:type_name -> api.Park
+	12, // 4: api.PolygonParkAnalytics.Response.listStats:type_name -> api.ListStats
+	9,  // 5: api.PolygonPollutionAnalytics.Request.polygon:type_name -> api.Polygon
+	13, // 6: api.PolygonPollutionAnalytics.Response.points:type_name -> api.Pollution
+	12, // 7: api.PolygonPollutionAnalytics.Response.listStats:type_name -> api.ListStats
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_analytics_proto_init() }
@@ -485,7 +665,7 @@ func file_analytics_proto_init() {
 			}
 		}
 		file_analytics_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PolygonAnalytics_Request); i {
+			switch v := v.(*PolygonPollutionAnalytics); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -497,7 +677,7 @@ func file_analytics_proto_init() {
 			}
 		}
 		file_analytics_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PolygonAnalytics_Response); i {
+			switch v := v.(*PolygonAnalytics_Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -509,7 +689,7 @@ func file_analytics_proto_init() {
 			}
 		}
 		file_analytics_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PolygonParkAnalytics_Request); i {
+			switch v := v.(*PolygonAnalytics_Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -521,7 +701,43 @@ func file_analytics_proto_init() {
 			}
 		}
 		file_analytics_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PolygonParkAnalytics_Request); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_analytics_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PolygonParkAnalytics_Response); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_analytics_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PolygonPollutionAnalytics_Request); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_analytics_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PolygonPollutionAnalytics_Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -539,7 +755,7 @@ func file_analytics_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_analytics_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

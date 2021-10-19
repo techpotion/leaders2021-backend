@@ -110,3 +110,48 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 		ListStats: &pb.ListStats{Count: uint32(result.RowsAffected)},
 	}, nil
 }
+
+func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnalytics_Request) (*pb.PolygonPollutionAnalytics_Response, error) {
+	if err := in.Validate(); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	db, err := database.New()
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	var parksList []*pb.PollutionORM
+
+	polygonQuery := analytics.FormPolygonContainsQuery(in.Polygon)
+
+	result := db.Where(pb.ParkORM{HasSportground: false}).Where("is_polluted = ?", in.IsPolluted).Where(polygonQuery).Find(&parksList)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	var convertedList []*pb.Pollution
+	for _, objectORM := range parksList {
+		converted, err := objectORM.ToPB(ctx)
+		if err != nil {
+			return nil, status.Error(codes.Internal, err.Error())
+		}
+		convertedList = append(convertedList, &converted)
+	}
+
+	if in.ReturnPoints {
+		return &pb.PolygonPollutionAnalytics_Response{
+			Points:    convertedList,
+			ListStats: &pb.ListStats{Count: uint32(result.RowsAffected)},
+		}, nil
+	} else {
+		return &pb.PolygonPollutionAnalytics_Response{}, nil
+	}
+}

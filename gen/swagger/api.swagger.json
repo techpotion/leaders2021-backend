@@ -907,6 +907,69 @@
           "Analytics"
         ]
       }
+    },
+    "/api/v1/PolygonPollutionAnalytics": {
+      "post": {
+        "summary": "Getting analytics for pollution situation",
+        "operationId": "ApiService_PolygonPollutionAnalytics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPolygonPollutionAnalyticsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonPollutionAnalyticsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1063,6 +1126,29 @@
         }
       }
     },
+    "apiPollution": {
+      "type": "object",
+      "properties": {
+        "admArea": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "isPolluted": {
+          "type": "boolean"
+        },
+        "objectPoint": {
+          "$ref": "#/definitions/apiPoint"
+        },
+        "results": {
+          "type": "string"
+        }
+      }
+    },
     "apiPolygon": {
       "type": "object",
       "properties": {
@@ -1144,6 +1230,35 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiPark"
+          }
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiPolygonPollutionAnalyticsRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        },
+        "isPolluted": {
+          "type": "boolean",
+          "title": "filters"
+        },
+        "returnPoints": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiPolygonPollutionAnalyticsResponse": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPollution"
           }
         },
         "listStats": {

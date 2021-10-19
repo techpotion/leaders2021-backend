@@ -86,3 +86,13 @@ message Park {
     bool hasSportground = 5;
     Point objectPoint = 6 [(gorm.field).tag = {embedded: true, embedded_prefix: "center_point_", not_null: true}];
 }
+
+message Pollution {
+    option (gorm.opts).ormable = true;
+    string admArea = 1;
+    string district = 2;
+    string location = 3;
+    bool isPolluted = 4;
+    Point objectPoint = 5 [(gorm.field).tag = {embedded: true, embedded_prefix: "center_point_", not_null: true}];
+    string results = 6;
+}

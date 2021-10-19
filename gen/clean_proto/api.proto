@@ -48,6 +48,10 @@ service ApiService {
     rpc PolygonParkAnalytics(PolygonParkAnalytics.Request) returns (PolygonParkAnalytics.Response) {
     }
 
+    // Getting analytics for pollution situation
+    rpc PolygonPollutionAnalytics(PolygonPollutionAnalytics.Request) returns (PolygonPollutionAnalytics.Response) {
+    }
+
     // Filters
     // Getting the list of unique object names
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
