@@ -9,6 +9,9 @@ import (
 
 // TODO add tests
 func FormPolygonContainsQuery(polygon *pb.Polygon) string {
+	if polygon == nil || polygon.Points == nil || len(polygon.Points) < 4 {
+		return "true"
+	}
 	polygonQuery := analytics.FormGeometryPolygon(polygon)
 	return fmt.Sprintf(`
 		ST_Contains(
