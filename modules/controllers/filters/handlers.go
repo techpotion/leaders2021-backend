@@ -141,7 +141,7 @@ func ListSportsAreaNames(ctx context.Context, in *pb.SportsAreaNames_ListRequest
 
 	lim := int(in.Pagination.GetResultsPerPage())
 	offset := int(in.Pagination.GetPageNumber())
-	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sport_kind IS NOT NULL").Distinct().Pluck("sport_kind", &sportsNames)
+	result := db.Model(&pb.SportsObjectDetailedORM{}).Limit(lim).Offset(offset*lim).Where("sports_area_name IS NOT NULL").Distinct().Pluck("sports_area_name", &sportsNames)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
