@@ -380,6 +380,76 @@
         ]
       }
     },
+    "/api/v1/ListIntersections": {
+      "get": {
+        "summary": "Circles\nGetting the list of circles",
+        "operationId": "ApiService_ListIntersections",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiIntersectionsListResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "availability",
+            "description": "filters.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "CITY",
+              "REGION",
+              "DISTRICT",
+              "STEP"
+            ],
+            "default": "UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Circles"
+        ]
+      }
+    },
     "/api/v1/ListObjectsNames": {
       "get": {
         "summary": "Filters\nGetting the list of unique object names",
@@ -992,6 +1062,26 @@
       ],
       "default": "UNKNOWN"
     },
+    "apiCircleIntersections": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "intersections": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "square": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiDepartmentalOrganizationsIdsListResponse": {
       "type": "object",
       "properties": {
@@ -1051,6 +1141,20 @@
       "properties": {
         "geoJson": {
           "type": "string"
+        }
+      }
+    },
+    "apiIntersectionsListResponse": {
+      "type": "object",
+      "properties": {
+        "intersections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiCircleIntersections"
+          }
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
         }
       }
     },

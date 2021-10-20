@@ -86,7 +86,7 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 
 	var parksList []*pb.ParkORM
 
-	polygonQuery := analytics.FormPolygonOverlapsParkQuery(in.Polygon)
+	polygonQuery := analytics.FormPolygonIntersectsParkQuery(in.Polygon)
 
 	result := db.Where(pb.ParkORM{HasSportground: false}).Where("has_sportground = ?", in.HasSportground).Where(polygonQuery).Find(&parksList)
 	if result.Error != nil {

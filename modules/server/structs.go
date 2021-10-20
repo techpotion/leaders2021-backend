@@ -5,6 +5,7 @@ import (
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/analytics"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/circles"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/filters"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/geojsons"
 	sportsobjects "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects"
@@ -74,4 +75,8 @@ func (s *ApiServiceServer) ListSportsAreaNames(ctx context.Context, in *pb.Sport
 
 func (s *ApiServiceServer) ListSportsAreaTypes(ctx context.Context, in *pb.SportsAreaTypes_ListRequest) (*pb.SportsAreaTypes_ListResponse, error) {
 	return filters.ListSportsAreaTypes(ctx, in)
+}
+
+func (s *ApiServiceServer) ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*pb.Intersections_ListResponse, error) {
+	return circles.ListIntersections(ctx, in)
 }

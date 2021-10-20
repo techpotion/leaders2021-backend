@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message Intersections {
+    message ListRequest {
+        Polygon polygon = 1;
+        // filters
+        Availability availability = 2; // optional
+    }
+
+    message ListResponse {
+        repeated CircleIntersections intersections = 1;
+        ListStats listStats = 2;
+    }
+}

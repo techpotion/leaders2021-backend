@@ -85,3 +85,15 @@ message Pollution {
     Point objectPoint = 5;
     string results = 6;
 }
+
+message Circle {
+    uint32 objectId = 1;
+    uint32 neighborObjectId = 2;
+    uint32 availability = 3;
+}
+
+message CircleIntersections {
+    uint32 objectId = 1;
+    repeated int32 intersections = 2;
+    double square = 3;
+}
