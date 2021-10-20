@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message Circles {
+    message ListRequest {
+        // filters
+        Availability availability = 1; // optional
+    }
+
+    message ListResponse {
+        repeated CircleIntersections intersections = 1;
+        ListStats listStats = 2;
+    }
+}

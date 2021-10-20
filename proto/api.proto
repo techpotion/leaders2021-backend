@@ -8,6 +8,7 @@ import "filters.proto";
 import "sports_objects.proto";
 import "geojsons.proto";
 import "analytics.proto";
+import "circles.proto";
 
 import "common.proto";
 
@@ -261,7 +262,7 @@ service ApiService {
         };
     }
 
-            // Getting the list of departmental organizations names
+    // Getting the list of departmental organizations names
     rpc ListSportKinds(SportKinds.ListRequest) returns (SportKinds.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListSportKinds";
@@ -270,6 +271,19 @@ service ApiService {
             description: "";
             summary: "";
             tags: "Filters";
+        };
+    }
+
+    // Circles
+    // Getting the list of circles
+    rpc ListCircles(Circles.ListRequest) returns (Circles.ListResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/ListCircles";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "Circles";
         };
     }
 }

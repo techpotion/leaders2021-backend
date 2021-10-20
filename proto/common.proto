@@ -96,3 +96,15 @@ message Pollution {
     Point objectPoint = 5 [(gorm.field).tag = {embedded: true, embedded_prefix: "center_point_", not_null: true}];
     string results = 6;
 }
+
+message Circle {
+    option (gorm.opts).ormable = true;
+    uint32 objectId = 1;
+    uint32 neighborObjectId = 2;
+    uint32 availability = 3;
+}
+
+message CircleIntersections {
+    uint32 objectId = 1;
+    repeated uint32 neighborsObjectIds = 2;
+}

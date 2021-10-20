@@ -53,6 +53,9 @@ type ApiServiceClient interface {
 	ListSportsAreaTypes(ctx context.Context, in *SportsAreaTypes_ListRequest, opts ...grpc.CallOption) (*SportsAreaTypes_ListResponse, error)
 	// Getting the list of departmental organizations names
 	ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error)
+	// Circles
+	// Getting the list of circles
+	ListCircles(ctx context.Context, in *Circles_ListRequest, opts ...grpc.CallOption) (*Circles_ListResponse, error)
 }
 
 type apiServiceClient struct {
@@ -198,6 +201,15 @@ func (c *apiServiceClient) ListSportKinds(ctx context.Context, in *SportKinds_Li
 	return out, nil
 }
 
+func (c *apiServiceClient) ListCircles(ctx context.Context, in *Circles_ListRequest, opts ...grpc.CallOption) (*Circles_ListResponse, error) {
+	out := new(Circles_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListCircles", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServiceServer is the server API for ApiService service.
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
@@ -237,6 +249,9 @@ type ApiServiceServer interface {
 	ListSportsAreaTypes(context.Context, *SportsAreaTypes_ListRequest) (*SportsAreaTypes_ListResponse, error)
 	// Getting the list of departmental organizations names
 	ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error)
+	// Circles
+	// Getting the list of circles
+	ListCircles(context.Context, *Circles_ListRequest) (*Circles_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -288,6 +303,9 @@ func (UnimplementedApiServiceServer) ListSportsAreaTypes(context.Context, *Sport
 }
 func (UnimplementedApiServiceServer) ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportKinds not implemented")
+}
+func (UnimplementedApiServiceServer) ListCircles(context.Context, *Circles_ListRequest) (*Circles_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCircles not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -572,6 +590,24 @@ func _ApiService_ListSportKinds_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_ListCircles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Circles_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListCircles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListCircles",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListCircles(ctx, req.(*Circles_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiService_ServiceDesc is the grpc.ServiceDesc for ApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -638,6 +674,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSportKinds",
 			Handler:    _ApiService_ListSportKinds_Handler,
+		},
+		{
+			MethodName: "ListCircles",
+			Handler:    _ApiService_ListCircles_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

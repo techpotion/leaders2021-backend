@@ -952,6 +952,124 @@ func (x *Pollution) GetResults() string {
 	return ""
 }
 
+type Circle struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ObjectId         uint32 `protobuf:"varint,1,opt,name=objectId,proto3" json:"objectId,omitempty"`
+	NeighborObjectId uint32 `protobuf:"varint,2,opt,name=neighborObjectId,proto3" json:"neighborObjectId,omitempty"`
+	Availability     uint32 `protobuf:"varint,3,opt,name=availability,proto3" json:"availability,omitempty"`
+}
+
+func (x *Circle) Reset() {
+	*x = Circle{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_common_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Circle) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Circle) ProtoMessage() {}
+
+func (x *Circle) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Circle.ProtoReflect.Descriptor instead.
+func (*Circle) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *Circle) GetObjectId() uint32 {
+	if x != nil {
+		return x.ObjectId
+	}
+	return 0
+}
+
+func (x *Circle) GetNeighborObjectId() uint32 {
+	if x != nil {
+		return x.NeighborObjectId
+	}
+	return 0
+}
+
+func (x *Circle) GetAvailability() uint32 {
+	if x != nil {
+		return x.Availability
+	}
+	return 0
+}
+
+type CircleIntersections struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ObjectId           uint32   `protobuf:"varint,1,opt,name=objectId,proto3" json:"objectId,omitempty"`
+	NeighborsObjectIds []uint32 `protobuf:"varint,2,rep,packed,name=neighborsObjectIds,proto3" json:"neighborsObjectIds,omitempty"`
+}
+
+func (x *CircleIntersections) Reset() {
+	*x = CircleIntersections{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_common_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CircleIntersections) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CircleIntersections) ProtoMessage() {}
+
+func (x *CircleIntersections) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CircleIntersections.ProtoReflect.Descriptor instead.
+func (*CircleIntersections) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CircleIntersections) GetObjectId() uint32 {
+	if x != nil {
+		return x.ObjectId
+	}
+	return 0
+}
+
+func (x *CircleIntersections) GetNeighborsObjectIds() []uint32 {
+	if x != nil {
+		return x.NeighborsObjectIds
+	}
+	return nil
+}
+
 var File_common_proto protoreflect.FileDescriptor
 
 var file_common_proto_rawDesc = []byte{
@@ -1100,9 +1218,23 @@ var file_common_proto_rawDesc = []byte{
 	0x0d, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x5f, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x5f, 0x52, 0x0b,
 	0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x72,
 	0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x73, 0x3a, 0x06, 0xba, 0xb9, 0x19, 0x02, 0x08, 0x01, 0x42, 0x08, 0x5a,
-	0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x50, 0x00, 0x50, 0x01, 0x50, 0x02, 0x50, 0x03, 0x50,
-	0x04, 0x50, 0x05, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x75, 0x6c, 0x74, 0x73, 0x3a, 0x06, 0xba, 0xb9, 0x19, 0x02, 0x08, 0x01, 0x22, 0x7c, 0x0a,
+	0x06, 0x43, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x6f, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x10, 0x6e, 0x65, 0x69, 0x67, 0x68, 0x62, 0x6f, 0x72, 0x4f,
+	0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x10, 0x6e,
+	0x65, 0x69, 0x67, 0x68, 0x62, 0x6f, 0x72, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12,
+	0x22, 0x0a, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c,
+	0x69, 0x74, 0x79, 0x3a, 0x06, 0xba, 0xb9, 0x19, 0x02, 0x08, 0x01, 0x22, 0x61, 0x0a, 0x13, 0x43,
+	0x69, 0x72, 0x63, 0x6c, 0x65, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x2e,
+	0x0a, 0x12, 0x6e, 0x65, 0x69, 0x67, 0x68, 0x62, 0x6f, 0x72, 0x73, 0x4f, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x49, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0d, 0x52, 0x12, 0x6e, 0x65, 0x69, 0x67,
+	0x68, 0x62, 0x6f, 0x72, 0x73, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x73, 0x42, 0x08,
+	0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x50, 0x00, 0x50, 0x01, 0x50, 0x02, 0x50, 0x03,
+	0x50, 0x04, 0x50, 0x05, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1117,7 +1249,7 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_common_proto_goTypes = []interface{}{
 	(*Point)(nil),                // 0: api.Point
 	(*LineString)(nil),           // 1: api.LineString
@@ -1131,6 +1263,8 @@ var file_common_proto_goTypes = []interface{}{
 	(*SportsObjectDetailed)(nil), // 9: api.SportsObjectDetailed
 	(*Park)(nil),                 // 10: api.Park
 	(*Pollution)(nil),            // 11: api.Pollution
+	(*Circle)(nil),               // 12: api.Circle
+	(*CircleIntersections)(nil),  // 13: api.CircleIntersections
 }
 var file_common_proto_depIdxs = []int32{
 	0, // 0: api.LineString.points:type_name -> api.Point
@@ -1300,6 +1434,30 @@ func file_common_proto_init() {
 				return nil
 			}
 		}
+		file_common_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Circle); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_common_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CircleIntersections); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1307,7 +1465,7 @@ func file_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
