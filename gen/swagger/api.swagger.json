@@ -1069,12 +1069,16 @@
           "type": "integer",
           "format": "int64"
         },
-        "neighborsObjectIds": {
+        "intersections": {
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
+        },
+        "square": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

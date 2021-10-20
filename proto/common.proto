@@ -106,5 +106,6 @@ message Circle {
 
 message CircleIntersections {
     uint32 objectId = 1;
-    repeated uint32 neighborsObjectIds = 2;
+    repeated int32 intersections = 2;
+    double square = 3;
 }
