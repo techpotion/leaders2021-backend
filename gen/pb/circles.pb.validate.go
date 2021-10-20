@@ -35,21 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on Circles with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
+// Validate checks the field values on Intersections with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *Circles) Validate() error {
+func (m *Intersections) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Circles with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in CirclesMultiError, or nil if none found.
-func (m *Circles) ValidateAll() error {
+// ValidateAll checks the field values on Intersections with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in IntersectionsMultiError, or
+// nil if none found.
+func (m *Intersections) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Circles) validate(all bool) error {
+func (m *Intersections) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -57,17 +58,18 @@ func (m *Circles) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return CirclesMultiError(errors)
+		return IntersectionsMultiError(errors)
 	}
 	return nil
 }
 
-// CirclesMultiError is an error wrapping multiple validation errors returned
-// by Circles.ValidateAll() if the designated constraints aren't met.
-type CirclesMultiError []error
+// IntersectionsMultiError is an error wrapping multiple validation errors
+// returned by Intersections.ValidateAll() if the designated constraints
+// aren't met.
+type IntersectionsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CirclesMultiError) Error() string {
+func (m IntersectionsMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -76,11 +78,11 @@ func (m CirclesMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CirclesMultiError) AllErrors() []error { return m }
+func (m IntersectionsMultiError) AllErrors() []error { return m }
 
-// CirclesValidationError is the validation error returned by Circles.Validate
-// if the designated constraints aren't met.
-type CirclesValidationError struct {
+// IntersectionsValidationError is the validation error returned by
+// Intersections.Validate if the designated constraints aren't met.
+type IntersectionsValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -88,22 +90,22 @@ type CirclesValidationError struct {
 }
 
 // Field function returns field value.
-func (e CirclesValidationError) Field() string { return e.field }
+func (e IntersectionsValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CirclesValidationError) Reason() string { return e.reason }
+func (e IntersectionsValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CirclesValidationError) Cause() error { return e.cause }
+func (e IntersectionsValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CirclesValidationError) Key() bool { return e.key }
+func (e IntersectionsValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CirclesValidationError) ErrorName() string { return "CirclesValidationError" }
+func (e IntersectionsValidationError) ErrorName() string { return "IntersectionsValidationError" }
 
 // Error satisfies the builtin error interface
-func (e CirclesValidationError) Error() string {
+func (e IntersectionsValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -115,14 +117,14 @@ func (e CirclesValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCircles.%s: %s%s",
+		"invalid %sIntersections.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CirclesValidationError{}
+var _ error = IntersectionsValidationError{}
 
 var _ interface {
 	Field() string
@@ -130,45 +132,74 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CirclesValidationError{}
+} = IntersectionsValidationError{}
 
-// Validate checks the field values on Circles_ListRequest with the rules
+// Validate checks the field values on Intersections_ListRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *Circles_ListRequest) Validate() error {
+func (m *Intersections_ListRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Circles_ListRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on Intersections_ListRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// Circles_ListRequestMultiError, or nil if none found.
-func (m *Circles_ListRequest) ValidateAll() error {
+// Intersections_ListRequestMultiError, or nil if none found.
+func (m *Intersections_ListRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Circles_ListRequest) validate(all bool) error {
+func (m *Intersections_ListRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetPolygon()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Intersections_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Intersections_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return Intersections_ListRequestValidationError{
+				field:  "Polygon",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for Availability
 
 	if len(errors) > 0 {
-		return Circles_ListRequestMultiError(errors)
+		return Intersections_ListRequestMultiError(errors)
 	}
 	return nil
 }
 
-// Circles_ListRequestMultiError is an error wrapping multiple validation
-// errors returned by Circles_ListRequest.ValidateAll() if the designated
-// constraints aren't met.
-type Circles_ListRequestMultiError []error
+// Intersections_ListRequestMultiError is an error wrapping multiple validation
+// errors returned by Intersections_ListRequest.ValidateAll() if the
+// designated constraints aren't met.
+type Intersections_ListRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m Circles_ListRequestMultiError) Error() string {
+func (m Intersections_ListRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -177,11 +208,11 @@ func (m Circles_ListRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m Circles_ListRequestMultiError) AllErrors() []error { return m }
+func (m Intersections_ListRequestMultiError) AllErrors() []error { return m }
 
-// Circles_ListRequestValidationError is the validation error returned by
-// Circles_ListRequest.Validate if the designated constraints aren't met.
-type Circles_ListRequestValidationError struct {
+// Intersections_ListRequestValidationError is the validation error returned by
+// Intersections_ListRequest.Validate if the designated constraints aren't met.
+type Intersections_ListRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -189,24 +220,24 @@ type Circles_ListRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e Circles_ListRequestValidationError) Field() string { return e.field }
+func (e Intersections_ListRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e Circles_ListRequestValidationError) Reason() string { return e.reason }
+func (e Intersections_ListRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e Circles_ListRequestValidationError) Cause() error { return e.cause }
+func (e Intersections_ListRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e Circles_ListRequestValidationError) Key() bool { return e.key }
+func (e Intersections_ListRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e Circles_ListRequestValidationError) ErrorName() string {
-	return "Circles_ListRequestValidationError"
+func (e Intersections_ListRequestValidationError) ErrorName() string {
+	return "Intersections_ListRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e Circles_ListRequestValidationError) Error() string {
+func (e Intersections_ListRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -218,14 +249,14 @@ func (e Circles_ListRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCircles_ListRequest.%s: %s%s",
+		"invalid %sIntersections_ListRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = Circles_ListRequestValidationError{}
+var _ error = Intersections_ListRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -233,24 +264,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = Circles_ListRequestValidationError{}
+} = Intersections_ListRequestValidationError{}
 
-// Validate checks the field values on Circles_ListResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on Intersections_ListResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *Circles_ListResponse) Validate() error {
+func (m *Intersections_ListResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Circles_ListResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on Intersections_ListResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// Circles_ListResponseMultiError, or nil if none found.
-func (m *Circles_ListResponse) ValidateAll() error {
+// Intersections_ListResponseMultiError, or nil if none found.
+func (m *Intersections_ListResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Circles_ListResponse) validate(all bool) error {
+func (m *Intersections_ListResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -264,7 +295,7 @@ func (m *Circles_ListResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, Circles_ListResponseValidationError{
+					errors = append(errors, Intersections_ListResponseValidationError{
 						field:  fmt.Sprintf("Intersections[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -272,7 +303,7 @@ func (m *Circles_ListResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, Circles_ListResponseValidationError{
+					errors = append(errors, Intersections_ListResponseValidationError{
 						field:  fmt.Sprintf("Intersections[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -281,7 +312,7 @@ func (m *Circles_ListResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return Circles_ListResponseValidationError{
+				return Intersections_ListResponseValidationError{
 					field:  fmt.Sprintf("Intersections[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -295,7 +326,7 @@ func (m *Circles_ListResponse) validate(all bool) error {
 		switch v := interface{}(m.GetListStats()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, Circles_ListResponseValidationError{
+				errors = append(errors, Intersections_ListResponseValidationError{
 					field:  "ListStats",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -303,7 +334,7 @@ func (m *Circles_ListResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, Circles_ListResponseValidationError{
+				errors = append(errors, Intersections_ListResponseValidationError{
 					field:  "ListStats",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -312,7 +343,7 @@ func (m *Circles_ListResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return Circles_ListResponseValidationError{
+			return Intersections_ListResponseValidationError{
 				field:  "ListStats",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -321,18 +352,18 @@ func (m *Circles_ListResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return Circles_ListResponseMultiError(errors)
+		return Intersections_ListResponseMultiError(errors)
 	}
 	return nil
 }
 
-// Circles_ListResponseMultiError is an error wrapping multiple validation
-// errors returned by Circles_ListResponse.ValidateAll() if the designated
-// constraints aren't met.
-type Circles_ListResponseMultiError []error
+// Intersections_ListResponseMultiError is an error wrapping multiple
+// validation errors returned by Intersections_ListResponse.ValidateAll() if
+// the designated constraints aren't met.
+type Intersections_ListResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m Circles_ListResponseMultiError) Error() string {
+func (m Intersections_ListResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -341,11 +372,11 @@ func (m Circles_ListResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m Circles_ListResponseMultiError) AllErrors() []error { return m }
+func (m Intersections_ListResponseMultiError) AllErrors() []error { return m }
 
-// Circles_ListResponseValidationError is the validation error returned by
-// Circles_ListResponse.Validate if the designated constraints aren't met.
-type Circles_ListResponseValidationError struct {
+// Intersections_ListResponseValidationError is the validation error returned
+// by Intersections_ListResponse.Validate if the designated constraints aren't met.
+type Intersections_ListResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -353,24 +384,24 @@ type Circles_ListResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e Circles_ListResponseValidationError) Field() string { return e.field }
+func (e Intersections_ListResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e Circles_ListResponseValidationError) Reason() string { return e.reason }
+func (e Intersections_ListResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e Circles_ListResponseValidationError) Cause() error { return e.cause }
+func (e Intersections_ListResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e Circles_ListResponseValidationError) Key() bool { return e.key }
+func (e Intersections_ListResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e Circles_ListResponseValidationError) ErrorName() string {
-	return "Circles_ListResponseValidationError"
+func (e Intersections_ListResponseValidationError) ErrorName() string {
+	return "Intersections_ListResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e Circles_ListResponseValidationError) Error() string {
+func (e Intersections_ListResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -382,14 +413,14 @@ func (e Circles_ListResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCircles_ListResponse.%s: %s%s",
+		"invalid %sIntersections_ListResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = Circles_ListResponseValidationError{}
+var _ error = Intersections_ListResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -397,4 +428,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = Circles_ListResponseValidationError{}
+} = Intersections_ListResponseValidationError{}

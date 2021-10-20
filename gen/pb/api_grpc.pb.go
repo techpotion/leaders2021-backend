@@ -55,7 +55,7 @@ type ApiServiceClient interface {
 	ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error)
 	// Circles
 	// Getting the list of circles
-	ListCircles(ctx context.Context, in *Circles_ListRequest, opts ...grpc.CallOption) (*Circles_ListResponse, error)
+	ListIntersections(ctx context.Context, in *Intersections_ListRequest, opts ...grpc.CallOption) (*Intersections_ListResponse, error)
 }
 
 type apiServiceClient struct {
@@ -201,9 +201,9 @@ func (c *apiServiceClient) ListSportKinds(ctx context.Context, in *SportKinds_Li
 	return out, nil
 }
 
-func (c *apiServiceClient) ListCircles(ctx context.Context, in *Circles_ListRequest, opts ...grpc.CallOption) (*Circles_ListResponse, error) {
-	out := new(Circles_ListResponse)
-	err := c.cc.Invoke(ctx, "/api.ApiService/ListCircles", in, out, opts...)
+func (c *apiServiceClient) ListIntersections(ctx context.Context, in *Intersections_ListRequest, opts ...grpc.CallOption) (*Intersections_ListResponse, error) {
+	out := new(Intersections_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListIntersections", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -251,7 +251,7 @@ type ApiServiceServer interface {
 	ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error)
 	// Circles
 	// Getting the list of circles
-	ListCircles(context.Context, *Circles_ListRequest) (*Circles_ListResponse, error)
+	ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -304,8 +304,8 @@ func (UnimplementedApiServiceServer) ListSportsAreaTypes(context.Context, *Sport
 func (UnimplementedApiServiceServer) ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportKinds not implemented")
 }
-func (UnimplementedApiServiceServer) ListCircles(context.Context, *Circles_ListRequest) (*Circles_ListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCircles not implemented")
+func (UnimplementedApiServiceServer) ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntersections not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -590,20 +590,20 @@ func _ApiService_ListSportKinds_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ApiService_ListCircles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Circles_ListRequest)
+func _ApiService_ListIntersections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Intersections_ListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServiceServer).ListCircles(ctx, in)
+		return srv.(ApiServiceServer).ListIntersections(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.ApiService/ListCircles",
+		FullMethod: "/api.ApiService/ListIntersections",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServiceServer).ListCircles(ctx, req.(*Circles_ListRequest))
+		return srv.(ApiServiceServer).ListIntersections(ctx, req.(*Intersections_ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -676,8 +676,8 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ApiService_ListSportKinds_Handler,
 		},
 		{
-			MethodName: "ListCircles",
-			Handler:    _ApiService_ListCircles_Handler,
+			MethodName: "ListIntersections",
+			Handler:    _ApiService_ListIntersections_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

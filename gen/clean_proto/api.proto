@@ -80,6 +80,6 @@ service ApiService {
 
     // Circles
     // Getting the list of circles
-    rpc ListCircles(Circles.ListRequest) returns (Circles.ListResponse) {
+    rpc ListIntersections(Intersections.ListRequest) returns (Intersections.ListResponse) {
     }
 }

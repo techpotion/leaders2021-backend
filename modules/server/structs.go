@@ -77,6 +77,6 @@ func (s *ApiServiceServer) ListSportsAreaTypes(ctx context.Context, in *pb.Sport
 	return filters.ListSportsAreaTypes(ctx, in)
 }
 
-func (s *ApiServiceServer) ListCircles(ctx context.Context, in *pb.Circles_ListRequest) (*pb.Circles_ListResponse, error) {
-	return circles.ListCircles(ctx, in)
+func (s *ApiServiceServer) ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*pb.Intersections_ListResponse, error) {
+	return circles.ListIntersections(ctx, in)
 }

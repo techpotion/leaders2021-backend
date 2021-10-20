@@ -10,13 +10,13 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func ListCircles(ctx context.Context, in *pb.Circles_ListRequest) (*pb.Circles_ListResponse, error) {
+func ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*pb.Intersections_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	query := circles.FormIntersectionsQuery(uint32(in.Availability))
+	query := circles.FormIntersectionsQuery(uint32(in.Availability), in.Polygon)
 
 	var intersections []circles.CircleIntersectionsORM
 
@@ -30,7 +30,7 @@ func ListCircles(ctx context.Context, in *pb.Circles_ListRequest) (*pb.Circles_L
 		}
 		convertedList = append(convertedList, &converted)
 	}
-	return &pb.Circles_ListResponse{
+	return &pb.Intersections_ListResponse{
 		Intersections: convertedList,
 		ListStats:     &pb.ListStats{Count: uint32(len(convertedList))},
 	}, nil

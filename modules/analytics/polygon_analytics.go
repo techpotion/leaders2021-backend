@@ -25,7 +25,7 @@ func ValidatePolygon(polygon *pb.Polygon) error {
 
 // TODO add tests
 func FormPolygonContainsQuery(polygon *pb.Polygon) string {
-	polygonQuery := formGeometryPolygon(polygon)
+	polygonQuery := FormGeometryPolygon(polygon)
 	return fmt.Sprintf(`
 		ST_Contains(
 			%s,
@@ -36,7 +36,7 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 }
 
 // TODO add tests
-func formGeometryPolygon(polygon *pb.Polygon) string {
+func FormGeometryPolygon(polygon *pb.Polygon) string {
 	points := ""
 	for _, point := range polygon.Points {
 		points += fmt.Sprintf(",%f %f", point.Lng, point.Lat)
@@ -86,8 +86,8 @@ func UniqueAreaTypes(areas []*pb.SportsObjectDetailed) []string {
 	return list
 }
 
-func FormPolygonOverlapsParkQuery(polygon *pb.Polygon) string {
-	polygonQuery := formGeometryPolygon(polygon)
+func FormPolygonIntersectsParkQuery(polygon *pb.Polygon) string {
+	polygonQuery := FormGeometryPolygon(polygon)
 	return fmt.Sprintf(`
 		ST_Intersects(
 			%s,
