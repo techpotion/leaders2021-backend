@@ -14,76 +14,59 @@ import "common.proto";
 
 service ApiService {
     // Sports Objects
-    // List Sports Objects
     rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
     }
 
-    // Get Sports Object
     rpc GetSportsObject(SportsObjects.GetRequest) returns (SportsObjects.GetResponse) {
     }
 
     // Sports Objects Detailed
-    // List Sports Objects Detailed
     rpc ListSportsObjectsDetailed(SportsObjectsDetailed.ListRequest) returns (SportsObjectsDetailed.ListResponse) {
     }
 
     // GeoJSONs
-    // Getting Moscow regions polygons geojson
     rpc GetGeoJsonRegions(GeoJsons.Request) returns (GeoJsons.Response) {
     }
 
-    // Getting Moscow population density for heatmap drawing purposes
     rpc GetGeoJsonDensityHeatmap(GeoJsons.Request) returns (GeoJsons.Response) {
     }
 
-    // Getting objects geojson for heatmap drawing purposes
     rpc GetGeoJsonSportsObjects(GeoJsons.Request) returns (GeoJsons.Response) {
     }
 
     // Analytics
-    // Getting analytics for sports objects in polygon
     rpc PolygonAnalytics(PolygonAnalytics.Request) returns (PolygonAnalytics.Response) {
     }
 
-    // Getting analytics for parks overlaping
     rpc PolygonParkAnalytics(PolygonParkAnalytics.Request) returns (PolygonParkAnalytics.Response) {
     }
 
-    // Getting analytics for pollution situation
     rpc PolygonPollutionAnalytics(PolygonPollutionAnalytics.Request) returns (PolygonPollutionAnalytics.Response) {
     }
 
     // Filters
-    // Getting the list of unique object names
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
     }
 
-    // Getting the list of departmental organizations ids
     rpc ListDepartmentalOrganizationsIds(DepartmentalOrganizationsIds.ListRequest) returns (DepartmentalOrganizationsIds.ListResponse) {
     }
 
-    // Getting the list of departmental organizations names
     rpc ListDepartmentalOrganizationsNames(DepartmentalOrganizationsNames.ListRequest) returns (DepartmentalOrganizationsNames.ListResponse) {
     }
 
-    // Getting the list of sports area names
     rpc ListSportsAreaNames(SportsAreaNames.ListRequest) returns (SportsAreaNames.ListResponse) {
     }
 
-    // Getting the list of sports area types
     rpc ListSportsAreaTypes(SportsAreaTypes.ListRequest) returns (SportsAreaTypes.ListResponse) {
     }
 
-    // Getting the list of departmental organizations names
     rpc ListSportKinds(SportKinds.ListRequest) returns (SportKinds.ListResponse) {
     }
 
     // Circles
-    // Getting the list of intersections polygons
     rpc ListIntersections(Intersections.ListRequest) returns (Intersections.ListResponse) {
     }
 
-    // Getting the list of intersections polygons
     rpc ListUnions(Unions.ListRequest) returns (Unions.ListResponse) {
     }
 }
