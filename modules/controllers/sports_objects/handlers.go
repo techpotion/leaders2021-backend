@@ -31,6 +31,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 		filters.DepartmentalOrganizationIdsScope(in.DepartmentalOrganizationIds),
 		filters.DepartmentalOrganizationNamesScope(in.DepartmentalOrganizationNames),
 		filters.AvailabilitiesScope(in.Availabilities),
+		filters.PolygonScope(in.Polygon),
 	).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {

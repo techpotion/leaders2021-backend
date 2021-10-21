@@ -315,6 +315,35 @@ func (m *SportsObjects_ListRequest) validate(all bool) error {
 
 	}
 
+	if all {
+		switch v := interface{}(m.GetPolygon()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SportsObjects_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SportsObjects_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjects_ListRequestValidationError{
+				field:  "Polygon",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SportsObjects_ListRequestMultiError(errors)
 	}
@@ -926,6 +955,35 @@ func (m *SportsObjectsDetailed_ListRequest) validate(all bool) error {
 
 		}
 
+	}
+
+	if all {
+		switch v := interface{}(m.GetPolygon()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SportsObjectsDetailed_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SportsObjectsDetailed_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SportsObjectsDetailed_ListRequestValidationError{
+				field:  "Polygon",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {

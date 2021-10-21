@@ -30,7 +30,7 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 		ST_Contains(
 			%s,
 			position
-		);`,
+		)`,
 		polygonQuery,
 	)
 }

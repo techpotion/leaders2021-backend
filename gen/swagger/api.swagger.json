@@ -1547,6 +1547,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
         }
       }
     },
@@ -1595,6 +1598,9 @@
           "items": {
             "$ref": "#/definitions/apiAvailability"
           }
+        },
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
         }
       }
     },
