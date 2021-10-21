@@ -14,6 +14,8 @@ message SportsObjects {
         repeated uint32 departmentalOrganizationIds = 3 [(validate.rules).repeated.items.uint32 = {ignore_empty: true, gte: 100000}]; // optional
         repeated string departmentalOrganizationNames = 4; // optional
         repeated Availability availabilities = 7; // optional
+        Polygon polygon = 8; // optional
+
     }
 
     message ListResponse {
@@ -42,6 +44,7 @@ message SportsObjectsDetailed {
         repeated string sportsAreaTypes = 7 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
         repeated Availability availabilities = 8; // optional
         repeated string sportKinds = 9 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        Polygon polygon = 10; // optional
     }
 
     message ListResponse {

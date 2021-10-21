@@ -2,6 +2,7 @@ package filters
 
 import (
 	"github.com/techpotion/leaders2021-backend/gen/pb"
+	"github.com/techpotion/leaders2021-backend/modules/analytics"
 	"gorm.io/gorm"
 )
 
@@ -72,6 +73,16 @@ func SportKindsScope(kinds []string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(kinds) > 0 {
 			return db.Where("sport_kind IN ?", kinds)
+		}
+		return db
+	}
+}
+
+func PolygonScope(polygon *pb.Polygon) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if polygon != nil {
+			polyQuery := analytics.FormPolygonContainsQuery(polygon)
+			return db.Where(polyQuery)
 		}
 		return db
 	}
