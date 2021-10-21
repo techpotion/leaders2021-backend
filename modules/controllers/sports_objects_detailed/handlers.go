@@ -7,6 +7,7 @@ import (
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/database"
 	"github.com/techpotion/leaders2021-backend/modules/filters"
+	sportsobjectsdetailed "github.com/techpotion/leaders2021-backend/modules/sports_objects_detailed"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"gorm.io/gorm"
@@ -38,14 +39,14 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 	offset := int(in.Pagination.GetPageNumber())
 
 	result := db.Limit(lim).Offset(offset*lim).Scopes(
-		filters.ObjectIdsScope(in.ObjectIds),
-		filters.ObjectNamesScope(in.ObjectNames),
-		filters.DepartmentalOrganizationIdsScope(in.DepartmentalOrganizationIds),
-		filters.DepartmentalOrganizationNamesScope(in.DepartmentalOrganizationNames),
-		filters.SportsAreaNamesScope(in.SportsAreaNames),
-		filters.SportsAreaTypeScope(in.SportsAreaTypes),
-		filters.AvailabilitiesScope(in.Availabilities),
-		filters.SportKindsScope(in.SportKinds),
+		filters.ObjectIdsScope(in.ObjectIds, sportsobjectsdetailed.TableName),
+		filters.ObjectNamesScope(in.ObjectNames, sportsobjectsdetailed.TableName),
+		filters.DepartmentalOrganizationIdsScope(in.DepartmentalOrganizationIds, sportsobjectsdetailed.TableName),
+		filters.DepartmentalOrganizationNamesScope(in.DepartmentalOrganizationNames, sportsobjectsdetailed.TableName),
+		filters.SportsAreaNamesScope(in.SportsAreaNames, sportsobjectsdetailed.TableName),
+		filters.SportsAreaTypeScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
+		filters.AvailabilitiesScope(in.Availabilities, sportsobjectsdetailed.TableName),
+		filters.SportKindsScope(in.SportKinds, sportsobjectsdetailed.TableName),
 		filters.PolygonScope(in.Polygon),
 	).Find(&objectsList)
 	if result.Error != nil {

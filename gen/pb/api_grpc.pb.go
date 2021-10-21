@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type ApiServiceClient interface {
 	// Sports Objects
 	ListSportsObjects(ctx context.Context, in *SportsObjects_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error)
+	ListSportsObjectsTest(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error)
 	GetSportsObject(ctx context.Context, in *SportsObjects_GetRequest, opts ...grpc.CallOption) (*SportsObjects_GetResponse, error)
 	// Sports Objects Detailed
 	ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error)
@@ -54,6 +55,15 @@ func NewApiServiceClient(cc grpc.ClientConnInterface) ApiServiceClient {
 func (c *apiServiceClient) ListSportsObjects(ctx context.Context, in *SportsObjects_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error) {
 	out := new(SportsObjects_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportsObjects", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiServiceClient) ListSportsObjectsTest(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error) {
+	out := new(SportsObjects_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListSportsObjectsTest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -210,6 +220,7 @@ func (c *apiServiceClient) ListUnions(ctx context.Context, in *Unions_ListReques
 type ApiServiceServer interface {
 	// Sports Objects
 	ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error)
+	ListSportsObjectsTest(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjects_ListResponse, error)
 	GetSportsObject(context.Context, *SportsObjects_GetRequest) (*SportsObjects_GetResponse, error)
 	// Sports Objects Detailed
 	ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error)
@@ -240,6 +251,9 @@ type UnimplementedApiServiceServer struct {
 
 func (UnimplementedApiServiceServer) ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjects not implemented")
+}
+func (UnimplementedApiServiceServer) ListSportsObjectsTest(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjects_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSportsObjectsTest not implemented")
 }
 func (UnimplementedApiServiceServer) GetSportsObject(context.Context, *SportsObjects_GetRequest) (*SportsObjects_GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSportsObject not implemented")
@@ -316,6 +330,24 @@ func _ApiService_ListSportsObjects_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServiceServer).ListSportsObjects(ctx, req.(*SportsObjects_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiService_ListSportsObjectsTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SportsObjectsDetailed_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListSportsObjectsTest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListSportsObjectsTest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListSportsObjectsTest(ctx, req.(*SportsObjectsDetailed_ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -618,6 +650,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSportsObjects",
 			Handler:    _ApiService_ListSportsObjects_Handler,
+		},
+		{
+			MethodName: "ListSportsObjectsTest",
+			Handler:    _ApiService_ListSportsObjectsTest_Handler,
 		},
 		{
 			MethodName: "GetSportsObject",

@@ -97,6 +97,18 @@ service ApiService {
         };
     }
 
+    rpc ListSportsObjectsTest(SportsObjectsDetailed.ListRequest) returns (SportsObjects.ListResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/ListSportsObjectsTest";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Lists Sports Objects";
+            summary: "Lists Sports Objects";
+            tags: "Sports Objects";
+        };
+    }
+
     rpc GetSportsObject(SportsObjects.GetRequest) returns (SportsObjects.GetResponse) {
         option (google.api.http) = {
             get: "/api/v1/GetSportsObject";
