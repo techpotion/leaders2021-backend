@@ -11,7 +11,6 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
-	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -32,53 +31,18 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
-	_ = sort.Sort
 )
 
 // Validate checks the field values on PolygonAnalytics with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
 func (m *PolygonAnalytics) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonAnalytics with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PolygonAnalyticsMultiError, or nil if none found.
-func (m *PolygonAnalytics) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonAnalytics) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return PolygonAnalyticsMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonAnalyticsMultiError is an error wrapping multiple validation errors
-// returned by PolygonAnalytics.ValidateAll() if the designated constraints
-// aren't met.
-type PolygonAnalyticsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonAnalyticsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonAnalyticsMultiError) AllErrors() []error { return m }
 
 // PolygonAnalyticsValidationError is the validation error returned by
 // PolygonAnalytics.Validate if the designated constraints aren't met.
@@ -136,48 +100,14 @@ var _ interface {
 
 // Validate checks the field values on PolygonParkAnalytics with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *PolygonParkAnalytics) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonParkAnalytics with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PolygonParkAnalyticsMultiError, or nil if none found.
-func (m *PolygonParkAnalytics) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonParkAnalytics) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return PolygonParkAnalyticsMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonParkAnalyticsMultiError is an error wrapping multiple validation
-// errors returned by PolygonParkAnalytics.ValidateAll() if the designated
-// constraints aren't met.
-type PolygonParkAnalyticsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonParkAnalyticsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonParkAnalyticsMultiError) AllErrors() []error { return m }
 
 // PolygonParkAnalyticsValidationError is the validation error returned by
 // PolygonParkAnalytics.Validate if the designated constraints aren't met.
@@ -237,48 +167,14 @@ var _ interface {
 
 // Validate checks the field values on PolygonPollutionAnalytics with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *PolygonPollutionAnalytics) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonPollutionAnalytics with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PolygonPollutionAnalyticsMultiError, or nil if none found.
-func (m *PolygonPollutionAnalytics) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonPollutionAnalytics) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if len(errors) > 0 {
-		return PolygonPollutionAnalyticsMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonPollutionAnalyticsMultiError is an error wrapping multiple validation
-// errors returned by PolygonPollutionAnalytics.ValidateAll() if the
-// designated constraints aren't met.
-type PolygonPollutionAnalyticsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonPollutionAnalyticsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonPollutionAnalyticsMultiError) AllErrors() []error { return m }
 
 // PolygonPollutionAnalyticsValidationError is the validation error returned by
 // PolygonPollutionAnalytics.Validate if the designated constraints aren't met.
@@ -338,46 +234,13 @@ var _ interface {
 
 // Validate checks the field values on PolygonAnalytics_Request with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *PolygonAnalytics_Request) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonAnalytics_Request with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PolygonAnalytics_RequestMultiError, or nil if none found.
-func (m *PolygonAnalytics_Request) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonAnalytics_Request) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetPolygon()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PolygonAnalytics_RequestValidationError{
-					field:  "Polygon",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PolygonAnalytics_RequestValidationError{
-					field:  "Polygon",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PolygonAnalytics_RequestValidationError{
 				field:  "Polygon",
@@ -397,28 +260,8 @@ func (m *PolygonAnalytics_Request) validate(all bool) error {
 
 	}
 
-	if len(errors) > 0 {
-		return PolygonAnalytics_RequestMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonAnalytics_RequestMultiError is an error wrapping multiple validation
-// errors returned by PolygonAnalytics_Request.ValidateAll() if the designated
-// constraints aren't met.
-type PolygonAnalytics_RequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonAnalytics_RequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonAnalytics_RequestMultiError) AllErrors() []error { return m }
 
 // PolygonAnalytics_RequestValidationError is the validation error returned by
 // PolygonAnalytics_Request.Validate if the designated constraints aren't met.
@@ -478,25 +321,11 @@ var _ interface {
 
 // Validate checks the field values on PolygonAnalytics_Response with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *PolygonAnalytics_Response) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonAnalytics_Response with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PolygonAnalytics_ResponseMultiError, or nil if none found.
-func (m *PolygonAnalytics_Response) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonAnalytics_Response) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
-
-	var errors []error
 
 	// no validation rules for AreasSquare
 
@@ -506,28 +335,8 @@ func (m *PolygonAnalytics_Response) validate(all bool) error {
 
 	// no validation rules for AreaTypesAmount
 
-	if len(errors) > 0 {
-		return PolygonAnalytics_ResponseMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonAnalytics_ResponseMultiError is an error wrapping multiple validation
-// errors returned by PolygonAnalytics_Response.ValidateAll() if the
-// designated constraints aren't met.
-type PolygonAnalytics_ResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonAnalytics_ResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonAnalytics_ResponseMultiError) AllErrors() []error { return m }
 
 // PolygonAnalytics_ResponseValidationError is the validation error returned by
 // PolygonAnalytics_Response.Validate if the designated constraints aren't met.
@@ -587,46 +396,13 @@ var _ interface {
 
 // Validate checks the field values on PolygonParkAnalytics_Request with the
 // rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *PolygonParkAnalytics_Request) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonParkAnalytics_Request with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PolygonParkAnalytics_RequestMultiError, or nil if none found.
-func (m *PolygonParkAnalytics_Request) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonParkAnalytics_Request) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetPolygon()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PolygonParkAnalytics_RequestValidationError{
-					field:  "Polygon",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PolygonParkAnalytics_RequestValidationError{
-					field:  "Polygon",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PolygonParkAnalytics_RequestValidationError{
 				field:  "Polygon",
@@ -638,28 +414,8 @@ func (m *PolygonParkAnalytics_Request) validate(all bool) error {
 
 	// no validation rules for HasSportground
 
-	if len(errors) > 0 {
-		return PolygonParkAnalytics_RequestMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonParkAnalytics_RequestMultiError is an error wrapping multiple
-// validation errors returned by PolygonParkAnalytics_Request.ValidateAll() if
-// the designated constraints aren't met.
-type PolygonParkAnalytics_RequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonParkAnalytics_RequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonParkAnalytics_RequestMultiError) AllErrors() []error { return m }
 
 // PolygonParkAnalytics_RequestValidationError is the validation error returned
 // by PolygonParkAnalytics_Request.Validate if the designated constraints
@@ -720,49 +476,16 @@ var _ interface {
 
 // Validate checks the field values on PolygonParkAnalytics_Response with the
 // rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
+// violated, an error is returned.
 func (m *PolygonParkAnalytics_Response) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonParkAnalytics_Response with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// PolygonParkAnalytics_ResponseMultiError, or nil if none found.
-func (m *PolygonParkAnalytics_Response) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonParkAnalytics_Response) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
 	for idx, item := range m.GetParks() {
 		_, _ = idx, item
 
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, PolygonParkAnalytics_ResponseValidationError{
-						field:  fmt.Sprintf("Parks[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, PolygonParkAnalytics_ResponseValidationError{
-						field:  fmt.Sprintf("Parks[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PolygonParkAnalytics_ResponseValidationError{
 					field:  fmt.Sprintf("Parks[%v]", idx),
@@ -774,26 +497,7 @@ func (m *PolygonParkAnalytics_Response) validate(all bool) error {
 
 	}
 
-	if all {
-		switch v := interface{}(m.GetListStats()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PolygonParkAnalytics_ResponseValidationError{
-					field:  "ListStats",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PolygonParkAnalytics_ResponseValidationError{
-					field:  "ListStats",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PolygonParkAnalytics_ResponseValidationError{
 				field:  "ListStats",
@@ -803,28 +507,8 @@ func (m *PolygonParkAnalytics_Response) validate(all bool) error {
 		}
 	}
 
-	if len(errors) > 0 {
-		return PolygonParkAnalytics_ResponseMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonParkAnalytics_ResponseMultiError is an error wrapping multiple
-// validation errors returned by PolygonParkAnalytics_Response.ValidateAll()
-// if the designated constraints aren't met.
-type PolygonParkAnalytics_ResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonParkAnalytics_ResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonParkAnalytics_ResponseMultiError) AllErrors() []error { return m }
 
 // PolygonParkAnalytics_ResponseValidationError is the validation error
 // returned by PolygonParkAnalytics_Response.Validate if the designated
@@ -885,47 +569,13 @@ var _ interface {
 
 // Validate checks the field values on PolygonPollutionAnalytics_Request with
 // the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
+// are violated, an error is returned.
 func (m *PolygonPollutionAnalytics_Request) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonPollutionAnalytics_Request
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// PolygonPollutionAnalytics_RequestMultiError, or nil if none found.
-func (m *PolygonPollutionAnalytics_Request) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonPollutionAnalytics_Request) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetPolygon()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PolygonPollutionAnalytics_RequestValidationError{
-					field:  "Polygon",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PolygonPollutionAnalytics_RequestValidationError{
-					field:  "Polygon",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PolygonPollutionAnalytics_RequestValidationError{
 				field:  "Polygon",
@@ -939,29 +589,8 @@ func (m *PolygonPollutionAnalytics_Request) validate(all bool) error {
 
 	// no validation rules for ReturnPoints
 
-	if len(errors) > 0 {
-		return PolygonPollutionAnalytics_RequestMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonPollutionAnalytics_RequestMultiError is an error wrapping multiple
-// validation errors returned by
-// PolygonPollutionAnalytics_Request.ValidateAll() if the designated
-// constraints aren't met.
-type PolygonPollutionAnalytics_RequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonPollutionAnalytics_RequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonPollutionAnalytics_RequestMultiError) AllErrors() []error { return m }
 
 // PolygonPollutionAnalytics_RequestValidationError is the validation error
 // returned by PolygonPollutionAnalytics_Request.Validate if the designated
@@ -1022,50 +651,16 @@ var _ interface {
 
 // Validate checks the field values on PolygonPollutionAnalytics_Response with
 // the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
+// are violated, an error is returned.
 func (m *PolygonPollutionAnalytics_Response) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PolygonPollutionAnalytics_Response
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// PolygonPollutionAnalytics_ResponseMultiError, or nil if none found.
-func (m *PolygonPollutionAnalytics_Response) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PolygonPollutionAnalytics_Response) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	var errors []error
-
 	for idx, item := range m.GetPoints() {
 		_, _ = idx, item
 
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, PolygonPollutionAnalytics_ResponseValidationError{
-						field:  fmt.Sprintf("Points[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, PolygonPollutionAnalytics_ResponseValidationError{
-						field:  fmt.Sprintf("Points[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PolygonPollutionAnalytics_ResponseValidationError{
 					field:  fmt.Sprintf("Points[%v]", idx),
@@ -1077,26 +672,7 @@ func (m *PolygonPollutionAnalytics_Response) validate(all bool) error {
 
 	}
 
-	if all {
-		switch v := interface{}(m.GetListStats()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PolygonPollutionAnalytics_ResponseValidationError{
-					field:  "ListStats",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PolygonPollutionAnalytics_ResponseValidationError{
-					field:  "ListStats",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PolygonPollutionAnalytics_ResponseValidationError{
 				field:  "ListStats",
@@ -1106,29 +682,8 @@ func (m *PolygonPollutionAnalytics_Response) validate(all bool) error {
 		}
 	}
 
-	if len(errors) > 0 {
-		return PolygonPollutionAnalytics_ResponseMultiError(errors)
-	}
 	return nil
 }
-
-// PolygonPollutionAnalytics_ResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// PolygonPollutionAnalytics_Response.ValidateAll() if the designated
-// constraints aren't met.
-type PolygonPollutionAnalytics_ResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PolygonPollutionAnalytics_ResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PolygonPollutionAnalytics_ResponseMultiError) AllErrors() []error { return m }
 
 // PolygonPollutionAnalytics_ResponseValidationError is the validation error
 // returned by PolygonPollutionAnalytics_Response.Validate if the designated
