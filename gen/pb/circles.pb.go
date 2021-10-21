@@ -58,6 +58,44 @@ func (*Intersections) Descriptor() ([]byte, []int) {
 	return file_circles_proto_rawDescGZIP(), []int{0}
 }
 
+type Unions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Unions) Reset() {
+	*x = Unions{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_circles_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Unions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Unions) ProtoMessage() {}
+
+func (x *Unions) ProtoReflect() protoreflect.Message {
+	mi := &file_circles_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Unions.ProtoReflect.Descriptor instead.
+func (*Unions) Descriptor() ([]byte, []int) {
+	return file_circles_proto_rawDescGZIP(), []int{1}
+}
+
 type Intersections_ListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -65,13 +103,13 @@ type Intersections_ListRequest struct {
 
 	Polygon *Polygon `protobuf:"bytes,1,opt,name=polygon,proto3" json:"polygon,omitempty"`
 	// filters
-	Availability Availability `protobuf:"varint,2,opt,name=availability,proto3,enum=api.Availability" json:"availability,omitempty"` // optional
+	Availability Availability `protobuf:"varint,2,opt,name=availability,proto3,enum=api.Availability" json:"availability,omitempty"`
 }
 
 func (x *Intersections_ListRequest) Reset() {
 	*x = Intersections_ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_circles_proto_msgTypes[1]
+		mi := &file_circles_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -84,7 +122,7 @@ func (x *Intersections_ListRequest) String() string {
 func (*Intersections_ListRequest) ProtoMessage() {}
 
 func (x *Intersections_ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_circles_proto_msgTypes[1]
+	mi := &file_circles_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -119,14 +157,14 @@ type Intersections_ListResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Intersections []*CircleIntersections `protobuf:"bytes,1,rep,name=intersections,proto3" json:"intersections,omitempty"`
-	ListStats     *ListStats             `protobuf:"bytes,2,opt,name=listStats,proto3" json:"listStats,omitempty"`
+	Intersections []*CirclesCluster `protobuf:"bytes,1,rep,name=intersections,proto3" json:"intersections,omitempty"`
+	ListStats     *ListStats        `protobuf:"bytes,2,opt,name=listStats,proto3" json:"listStats,omitempty"`
 }
 
 func (x *Intersections_ListResponse) Reset() {
 	*x = Intersections_ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_circles_proto_msgTypes[2]
+		mi := &file_circles_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -139,7 +177,7 @@ func (x *Intersections_ListResponse) String() string {
 func (*Intersections_ListResponse) ProtoMessage() {}
 
 func (x *Intersections_ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_circles_proto_msgTypes[2]
+	mi := &file_circles_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -155,7 +193,7 @@ func (*Intersections_ListResponse) Descriptor() ([]byte, []int) {
 	return file_circles_proto_rawDescGZIP(), []int{0, 1}
 }
 
-func (x *Intersections_ListResponse) GetIntersections() []*CircleIntersections {
+func (x *Intersections_ListResponse) GetIntersections() []*CirclesCluster {
 	if x != nil {
 		return x.Intersections
 	}
@@ -169,12 +207,123 @@ func (x *Intersections_ListResponse) GetListStats() *ListStats {
 	return nil
 }
 
+type Unions_ListRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Polygon *Polygon `protobuf:"bytes,1,opt,name=polygon,proto3" json:"polygon,omitempty"`
+	// filters
+	Availability Availability `protobuf:"varint,2,opt,name=availability,proto3,enum=api.Availability" json:"availability,omitempty"`
+}
+
+func (x *Unions_ListRequest) Reset() {
+	*x = Unions_ListRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_circles_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Unions_ListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Unions_ListRequest) ProtoMessage() {}
+
+func (x *Unions_ListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_circles_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Unions_ListRequest.ProtoReflect.Descriptor instead.
+func (*Unions_ListRequest) Descriptor() ([]byte, []int) {
+	return file_circles_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *Unions_ListRequest) GetPolygon() *Polygon {
+	if x != nil {
+		return x.Polygon
+	}
+	return nil
+}
+
+func (x *Unions_ListRequest) GetAvailability() Availability {
+	if x != nil {
+		return x.Availability
+	}
+	return Availability_UNKNOWN
+}
+
+type Unions_ListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Unions    []*CirclesCluster `protobuf:"bytes,1,rep,name=unions,proto3" json:"unions,omitempty"`
+	ListStats *ListStats        `protobuf:"bytes,2,opt,name=listStats,proto3" json:"listStats,omitempty"`
+}
+
+func (x *Unions_ListResponse) Reset() {
+	*x = Unions_ListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_circles_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Unions_ListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Unions_ListResponse) ProtoMessage() {}
+
+func (x *Unions_ListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_circles_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Unions_ListResponse.ProtoReflect.Descriptor instead.
+func (*Unions_ListResponse) Descriptor() ([]byte, []int) {
+	return file_circles_proto_rawDescGZIP(), []int{1, 1}
+}
+
+func (x *Unions_ListResponse) GetUnions() []*CirclesCluster {
+	if x != nil {
+		return x.Unions
+	}
+	return nil
+}
+
+func (x *Unions_ListResponse) GetListStats() *ListStats {
+	if x != nil {
+		return x.ListStats
+	}
+	return nil
+}
+
 var File_circles_proto protoreflect.FileDescriptor
 
 var file_circles_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x63, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
 	0x03, 0x61, 0x70, 0x69, 0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0xfb, 0x01, 0x0a, 0x0d, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74,
+	0x74, 0x6f, 0x22, 0xf6, 0x01, 0x0a, 0x0d, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74,
 	0x69, 0x6f, 0x6e, 0x73, 0x1a, 0x6c, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x07, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x6c, 0x79, 0x67,
@@ -182,16 +331,30 @@ var file_circles_proto_rawDesc = []byte{
 	0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x0e, 0x32, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69,
 	0x6c, 0x69, 0x74, 0x79, 0x52, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69,
-	0x74, 0x79, 0x1a, 0x7c, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x3e, 0x0a, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e,
-	0x43, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x52, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x12, 0x2c, 0x0a, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69, 0x73, 0x74,
-	0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73,
-	0x42, 0x08, 0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x74, 0x79, 0x1a, 0x77, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x39, 0x0a, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x43, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x73, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x52, 0x0d,
+	0x69, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2c, 0x0a,
+	0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73,
+	0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x22, 0xe1, 0x01, 0x0a, 0x06,
+	0x55, 0x6e, 0x69, 0x6f, 0x6e, 0x73, 0x1a, 0x6c, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x07, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x6c,
+	0x79, 0x67, 0x6f, 0x6e, 0x52, 0x07, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x12, 0x35, 0x0a,
+	0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61,
+	0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x52, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69,
+	0x6c, 0x69, 0x74, 0x79, 0x1a, 0x69, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2b, 0x0a, 0x06, 0x75, 0x6e, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x43, 0x69, 0x72, 0x63, 0x6c,
+	0x65, 0x73, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x52, 0x06, 0x75, 0x6e, 0x69, 0x6f, 0x6e,
+	0x73, 0x12, 0x2c, 0x0a, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53,
+	0x74, 0x61, 0x74, 0x73, 0x52, 0x09, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x42,
+	0x08, 0x5a, 0x06, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -206,26 +369,33 @@ func file_circles_proto_rawDescGZIP() []byte {
 	return file_circles_proto_rawDescData
 }
 
-var file_circles_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_circles_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_circles_proto_goTypes = []interface{}{
 	(*Intersections)(nil),              // 0: api.Intersections
-	(*Intersections_ListRequest)(nil),  // 1: api.Intersections.ListRequest
-	(*Intersections_ListResponse)(nil), // 2: api.Intersections.ListResponse
-	(*Polygon)(nil),                    // 3: api.Polygon
-	(Availability)(0),                  // 4: api.Availability
-	(*CircleIntersections)(nil),        // 5: api.CircleIntersections
-	(*ListStats)(nil),                  // 6: api.ListStats
+	(*Unions)(nil),                     // 1: api.Unions
+	(*Intersections_ListRequest)(nil),  // 2: api.Intersections.ListRequest
+	(*Intersections_ListResponse)(nil), // 3: api.Intersections.ListResponse
+	(*Unions_ListRequest)(nil),         // 4: api.Unions.ListRequest
+	(*Unions_ListResponse)(nil),        // 5: api.Unions.ListResponse
+	(*Polygon)(nil),                    // 6: api.Polygon
+	(Availability)(0),                  // 7: api.Availability
+	(*CirclesCluster)(nil),             // 8: api.CirclesCluster
+	(*ListStats)(nil),                  // 9: api.ListStats
 }
 var file_circles_proto_depIdxs = []int32{
-	3, // 0: api.Intersections.ListRequest.polygon:type_name -> api.Polygon
-	4, // 1: api.Intersections.ListRequest.availability:type_name -> api.Availability
-	5, // 2: api.Intersections.ListResponse.intersections:type_name -> api.CircleIntersections
-	6, // 3: api.Intersections.ListResponse.listStats:type_name -> api.ListStats
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	6, // 0: api.Intersections.ListRequest.polygon:type_name -> api.Polygon
+	7, // 1: api.Intersections.ListRequest.availability:type_name -> api.Availability
+	8, // 2: api.Intersections.ListResponse.intersections:type_name -> api.CirclesCluster
+	9, // 3: api.Intersections.ListResponse.listStats:type_name -> api.ListStats
+	6, // 4: api.Unions.ListRequest.polygon:type_name -> api.Polygon
+	7, // 5: api.Unions.ListRequest.availability:type_name -> api.Availability
+	8, // 6: api.Unions.ListResponse.unions:type_name -> api.CirclesCluster
+	9, // 7: api.Unions.ListResponse.listStats:type_name -> api.ListStats
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_circles_proto_init() }
@@ -248,7 +418,7 @@ func file_circles_proto_init() {
 			}
 		}
 		file_circles_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Intersections_ListRequest); i {
+			switch v := v.(*Unions); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -260,7 +430,43 @@ func file_circles_proto_init() {
 			}
 		}
 		file_circles_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Intersections_ListRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_circles_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Intersections_ListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_circles_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Unions_ListRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_circles_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Unions_ListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -278,7 +484,7 @@ func file_circles_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_circles_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

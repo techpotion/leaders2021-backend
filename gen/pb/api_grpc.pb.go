@@ -54,8 +54,10 @@ type ApiServiceClient interface {
 	// Getting the list of departmental organizations names
 	ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error)
 	// Circles
-	// Getting the list of circles
+	// Getting the list of intersections polygons
 	ListIntersections(ctx context.Context, in *Intersections_ListRequest, opts ...grpc.CallOption) (*Intersections_ListResponse, error)
+	// Getting the list of intersections polygons
+	ListUnions(ctx context.Context, in *Unions_ListRequest, opts ...grpc.CallOption) (*Unions_ListResponse, error)
 }
 
 type apiServiceClient struct {
@@ -210,6 +212,15 @@ func (c *apiServiceClient) ListIntersections(ctx context.Context, in *Intersecti
 	return out, nil
 }
 
+func (c *apiServiceClient) ListUnions(ctx context.Context, in *Unions_ListRequest, opts ...grpc.CallOption) (*Unions_ListResponse, error) {
+	out := new(Unions_ListResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/ListUnions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServiceServer is the server API for ApiService service.
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
@@ -250,8 +261,10 @@ type ApiServiceServer interface {
 	// Getting the list of departmental organizations names
 	ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error)
 	// Circles
-	// Getting the list of circles
+	// Getting the list of intersections polygons
 	ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error)
+	// Getting the list of intersections polygons
+	ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -306,6 +319,9 @@ func (UnimplementedApiServiceServer) ListSportKinds(context.Context, *SportKinds
 }
 func (UnimplementedApiServiceServer) ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIntersections not implemented")
+}
+func (UnimplementedApiServiceServer) ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnions not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -608,6 +624,24 @@ func _ApiService_ListIntersections_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_ListUnions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Unions_ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).ListUnions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/ListUnions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).ListUnions(ctx, req.(*Unions_ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiService_ServiceDesc is the grpc.ServiceDesc for ApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -678,6 +712,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListIntersections",
 			Handler:    _ApiService_ListIntersections_Handler,
+		},
+		{
+			MethodName: "ListUnions",
+			Handler:    _ApiService_ListUnions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

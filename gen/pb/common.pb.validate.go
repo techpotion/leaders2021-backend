@@ -1582,45 +1582,45 @@ var _ interface {
 	ErrorName() string
 } = PollutionValidationError{}
 
-// Validate checks the field values on Circle with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
+// Validate checks the field values on CirclesCluster with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *Circle) Validate() error {
+func (m *CirclesCluster) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Circle with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in CircleMultiError, or nil if none found.
-func (m *Circle) ValidateAll() error {
+// ValidateAll checks the field values on CirclesCluster with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CirclesClusterMultiError,
+// or nil if none found.
+func (m *CirclesCluster) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Circle) validate(all bool) error {
+func (m *CirclesCluster) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for ObjectId
+	// no validation rules for Geojson
 
-	// no validation rules for NeighborObjectId
-
-	// no validation rules for Availability
+	// no validation rules for Square
 
 	if len(errors) > 0 {
-		return CircleMultiError(errors)
+		return CirclesClusterMultiError(errors)
 	}
 	return nil
 }
 
-// CircleMultiError is an error wrapping multiple validation errors returned by
-// Circle.ValidateAll() if the designated constraints aren't met.
-type CircleMultiError []error
+// CirclesClusterMultiError is an error wrapping multiple validation errors
+// returned by CirclesCluster.ValidateAll() if the designated constraints
+// aren't met.
+type CirclesClusterMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CircleMultiError) Error() string {
+func (m CirclesClusterMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1629,11 +1629,11 @@ func (m CircleMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CircleMultiError) AllErrors() []error { return m }
+func (m CirclesClusterMultiError) AllErrors() []error { return m }
 
-// CircleValidationError is the validation error returned by Circle.Validate if
-// the designated constraints aren't met.
-type CircleValidationError struct {
+// CirclesClusterValidationError is the validation error returned by
+// CirclesCluster.Validate if the designated constraints aren't met.
+type CirclesClusterValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1641,22 +1641,22 @@ type CircleValidationError struct {
 }
 
 // Field function returns field value.
-func (e CircleValidationError) Field() string { return e.field }
+func (e CirclesClusterValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CircleValidationError) Reason() string { return e.reason }
+func (e CirclesClusterValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CircleValidationError) Cause() error { return e.cause }
+func (e CirclesClusterValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CircleValidationError) Key() bool { return e.key }
+func (e CirclesClusterValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CircleValidationError) ErrorName() string { return "CircleValidationError" }
+func (e CirclesClusterValidationError) ErrorName() string { return "CirclesClusterValidationError" }
 
 // Error satisfies the builtin error interface
-func (e CircleValidationError) Error() string {
+func (e CirclesClusterValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1668,14 +1668,14 @@ func (e CircleValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCircle.%s: %s%s",
+		"invalid %sCirclesCluster.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CircleValidationError{}
+var _ error = CirclesClusterValidationError{}
 
 var _ interface {
 	Field() string
@@ -1683,109 +1683,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CircleValidationError{}
-
-// Validate checks the field values on CircleIntersections with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CircleIntersections) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CircleIntersections with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CircleIntersectionsMultiError, or nil if none found.
-func (m *CircleIntersections) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CircleIntersections) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for ObjectId
-
-	// no validation rules for ObjectSquare
-
-	if len(errors) > 0 {
-		return CircleIntersectionsMultiError(errors)
-	}
-	return nil
-}
-
-// CircleIntersectionsMultiError is an error wrapping multiple validation
-// errors returned by CircleIntersections.ValidateAll() if the designated
-// constraints aren't met.
-type CircleIntersectionsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m CircleIntersectionsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m CircleIntersectionsMultiError) AllErrors() []error { return m }
-
-// CircleIntersectionsValidationError is the validation error returned by
-// CircleIntersections.Validate if the designated constraints aren't met.
-type CircleIntersectionsValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e CircleIntersectionsValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e CircleIntersectionsValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e CircleIntersectionsValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e CircleIntersectionsValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e CircleIntersectionsValidationError) ErrorName() string {
-	return "CircleIntersectionsValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e CircleIntersectionsValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sCircleIntersections.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = CircleIntersectionsValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = CircleIntersectionsValidationError{}
+} = CirclesClusterValidationError{}
