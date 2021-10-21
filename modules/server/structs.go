@@ -21,8 +21,8 @@ func (s *ApiServiceServer) ListSportsObjects(ctx context.Context, in *pb.SportsO
 	return sportsobjects.List(ctx, in)
 }
 
-func (s *ApiServiceServer) ListSportsObjectsTest(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.SportsObjects_ListResponse, error) {
-	return sportsobjects.ListTest(ctx, in)
+func (s *ApiServiceServer) ListSportsObjectsFromDetailed(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.SportsObjects_ListResponse, error) {
+	return sportsobjects.ListFromDetailed(ctx, in)
 }
 
 func (s *ApiServiceServer) GetSportsObject(ctx context.Context, in *pb.SportsObjects_GetRequest) (*pb.SportsObjects_GetResponse, error) {

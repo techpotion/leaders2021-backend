@@ -86,7 +86,7 @@ func Get(ctx context.Context, in *pb.SportsObjects_GetRequest) (*pb.SportsObject
 	}, nil
 }
 
-func ListTest(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.SportsObjects_ListResponse, error) {
+func ListFromDetailed(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.SportsObjects_ListResponse, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}

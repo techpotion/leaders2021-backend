@@ -97,14 +97,14 @@ service ApiService {
         };
     }
 
-    rpc ListSportsObjectsTest(SportsObjectsDetailed.ListRequest) returns (SportsObjects.ListResponse) {
+    rpc ListSportsObjectsFromDetailed(SportsObjectsDetailed.ListRequest) returns (SportsObjects.ListResponse) {
         option (google.api.http) = {
-            post: "/api/v1/ListSportsObjectsTest";
+            post: "/api/v1/ListSportsObjectsFromDetailed";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "Lists Sports Objects";
-            summary: "Lists Sports Objects";
+            description: "Lists Sports Objects by detailed objects' filters";
+            summary: "Lists Sports Objects by detailed objects' filters";
             tags: "Sports Objects";
         };
     }

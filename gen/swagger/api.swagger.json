@@ -858,11 +858,11 @@
         ]
       }
     },
-    "/api/v1/ListSportsObjectsTest": {
+    "/api/v1/ListSportsObjectsFromDetailed": {
       "post": {
         "summary": "Lists Sports Objects",
         "description": "Lists Sports Objects",
-        "operationId": "ApiService_ListSportsObjectsTest",
+        "operationId": "ApiService_ListSportsObjectsFromDetailed",
         "responses": {
           "200": {
             "description": "A successful response.",
