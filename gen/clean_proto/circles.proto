@@ -10,11 +10,24 @@ message Intersections {
     message ListRequest {
         Polygon polygon = 1;
         // filters
-        Availability availability = 2; // optional
+        Availability availability = 2;
     }
 
     message ListResponse {
-        repeated CircleIntersections intersections = 1;
+        repeated CirclesCluster intersections = 1;
+        ListStats listStats = 2;
+    }
+}
+
+message Unions {
+    message ListRequest {
+        Polygon polygon = 1;
+        // filters
+        Availability availability = 2;
+    }
+
+    message ListResponse {
+        repeated CirclesCluster unions = 1;
         ListStats listStats = 2;
     }
 }

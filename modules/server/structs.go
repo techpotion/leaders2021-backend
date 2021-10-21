@@ -80,3 +80,7 @@ func (s *ApiServiceServer) ListSportsAreaTypes(ctx context.Context, in *pb.Sport
 func (s *ApiServiceServer) ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*pb.Intersections_ListResponse, error) {
 	return circles.ListIntersections(ctx, in)
 }
+
+func (s *ApiServiceServer) ListUnions(ctx context.Context, in *pb.Unions_ListRequest) (*pb.Unions_ListResponse, error) {
+	return circles.ListUnions(ctx, in)
+}

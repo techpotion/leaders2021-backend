@@ -16,7 +16,7 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 	return fmt.Sprintf(`
 		ST_Contains(
 			%s,
-			main_object.position
+			position
 		)`,
 		polygonQuery,
 	)

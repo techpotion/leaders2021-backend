@@ -381,8 +381,8 @@
       }
     },
     "/api/v1/ListIntersections": {
-      "get": {
-        "summary": "Circles\nGetting the list of circles",
+      "post": {
+        "summary": "Circles\nGetting the list of intersections polygons",
         "operationId": "ApiService_ListIntersections",
         "responses": {
           "200": {
@@ -430,19 +430,12 @@
         },
         "parameters": [
           {
-            "name": "availability",
-            "description": "filters.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "UNKNOWN",
-              "CITY",
-              "REGION",
-              "DISTRICT",
-              "STEP"
-            ],
-            "default": "UNKNOWN"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiIntersectionsListRequest"
+            }
           }
         ],
         "tags": [
@@ -852,6 +845,69 @@
         ]
       }
     },
+    "/api/v1/ListUnions": {
+      "post": {
+        "summary": "Getting the list of intersections polygons",
+        "operationId": "ApiService_ListUnions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiUnionsListResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiUnionsListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Circles"
+        ]
+      }
+    },
     "/api/v1/PolygonAnalytics": {
       "post": {
         "summary": "Analytics\nGetting analytics for sports objects in polygon",
@@ -1062,19 +1118,11 @@
       ],
       "default": "UNKNOWN"
     },
-    "apiCircleIntersections": {
+    "apiCirclesCluster": {
       "type": "object",
       "properties": {
-        "objectId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "intersections": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
+        "geojson": {
+          "type": "string"
         },
         "square": {
           "type": "number",
@@ -1144,13 +1192,25 @@
         }
       }
     },
+    "apiIntersectionsListRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability",
+          "title": "filters"
+        }
+      }
+    },
     "apiIntersectionsListResponse": {
       "type": "object",
       "properties": {
         "intersections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiCircleIntersections"
+            "$ref": "#/definitions/apiCirclesCluster"
           }
         },
         "listStats": {
@@ -1611,6 +1671,32 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiSportsObject"
+          }
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiUnionsListRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability",
+          "title": "filters"
+        }
+      }
+    },
+    "apiUnionsListResponse": {
+      "type": "object",
+      "properties": {
+        "unions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiCirclesCluster"
           }
         },
         "listStats": {

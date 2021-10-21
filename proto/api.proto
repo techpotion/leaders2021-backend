@@ -275,10 +275,24 @@ service ApiService {
     }
 
     // Circles
-    // Getting the list of circles
+    // Getting the list of intersections polygons
     rpc ListIntersections(Intersections.ListRequest) returns (Intersections.ListResponse) {
         option (google.api.http) = {
-            get: "/api/v1/ListIntersections";
+            post: "/api/v1/ListIntersections";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "";
+            summary: "";
+            tags: "Circles";
+        };
+    }
+
+    // Getting the list of intersections polygons
+    rpc ListUnions(Unions.ListRequest) returns (Unions.ListResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/ListUnions";
+            body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             description: "";
