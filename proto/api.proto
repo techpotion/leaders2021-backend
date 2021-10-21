@@ -85,218 +85,201 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 service ApiService {
     // Sports Objects
-    // List Sports Objects
     rpc ListSportsObjects(SportsObjects.ListRequest) returns (SportsObjects.ListResponse) {
         option (google.api.http) = {
             post: "/api/v1/ListSportsObjects";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Lists Sports Objects";
+            summary: "Lists Sports Objects";
             tags: "Sports Objects";
         };
     }
 
-    // Get Sports Object
     rpc GetSportsObject(SportsObjects.GetRequest) returns (SportsObjects.GetResponse) {
         option (google.api.http) = {
             get: "/api/v1/GetSportsObject";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns Sports Object info by its ID";
+            summary: "Returns Sports Object info by its ID";
             tags: "Sports Objects";
         };
     }
 
     // Sports Objects Detailed
-    // List Sports Objects Detailed
     rpc ListSportsObjectsDetailed(SportsObjectsDetailed.ListRequest) returns (SportsObjectsDetailed.ListResponse) {
         option (google.api.http) = {
             post: "/api/v1/ListSportsObjectsDetailed";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Lists Sports Objects with detailed sports areas information";
+            summary: "Lists Sports Objects with detailed sports areas information";
             tags: "Sports Objects Detailed";
         };
     }
 
     // GeoJSONs
-    // Getting Moscow regions polygons geojson
     rpc GetGeoJsonRegions(GeoJsons.Request) returns (GeoJsons.Response) {
         option (google.api.http) = {
             get: "/api/v1/GetGeoJsonRegions";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns Moscow regions polygons (currently unused)";
+            summary: "Returns Moscow regions polygons (currently unused)";
             tags: "GeoJsons";
         };
     }
 
-    // Getting Moscow population density for heatmap drawing purposes
     rpc GetGeoJsonDensityHeatmap(GeoJsons.Request) returns (GeoJsons.Response) {
         option (google.api.http) = {
             get: "/api/v1/GetGeoJsonDensityHeatmap";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns Moscow population density heatmap based on 2020 elections";
+            summary: "Returns Moscow population density heatmap based on 2020 elections";
             tags: "GeoJsons";
         };
     }
 
-    // Getting objects geojson for heatmap drawing purposes
     rpc GetGeoJsonSportsObjects(GeoJsons.Request) returns (GeoJsons.Response) {
         option (google.api.http) = {
             get: "/api/v1/GetGeoJsonSportsObjects";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns Sports Objects density heatmap";
+            summary: "Returns Sports Objects density heatmap";
             tags: "GeoJsons";
         };
     }
 
     // Analytics
-    // Getting analytics for sports objects in polygon
     rpc PolygonAnalytics(PolygonAnalytics.Request) returns (PolygonAnalytics.Response) {
         option (google.api.http) = {
             post: "/api/v1/PolygonAnalytics";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns basic polygon analytics";
+            summary: "Returns basic polygon analytics";
             tags: "Analytics";
         };
     }
 
-    // Getting analytics for parks overlaping
     rpc PolygonParkAnalytics(PolygonParkAnalytics.Request) returns (PolygonParkAnalytics.Response) {
         option (google.api.http) = {
             post: "/api/v1/PolygonParkAnalytics";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns polygon's parks analytics";
+            summary: "Returns polygon's parks analytics";
             tags: "Analytics";
         };
     }
 
-    // Getting analytics for pollution situation
     rpc PolygonPollutionAnalytics(PolygonPollutionAnalytics.Request) returns (PolygonPollutionAnalytics.Response) {
         option (google.api.http) = {
             post: "/api/v1/PolygonPollutionAnalytics";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns air pollution situation within requested polygon";
+            summary: "Returns air pollution situation within requested polygon";
             tags: "Analytics";
         };
     }
 
     // Filters
-    // Getting the list of unique object names
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListObjectsNames";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns the list of unique object names";
+            summary: "Returns the list of unique object names";
             tags: "Filters";
         };
     }
 
-    // Getting the list of departmental organizations ids
     rpc ListDepartmentalOrganizationsIds(DepartmentalOrganizationsIds.ListRequest) returns (DepartmentalOrganizationsIds.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListDepartmentalOrganizationsIds";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns the list of unique departmental organizations ids";
+            summary: "Returns the list of unique departmental organizations ids";
             tags: "Filters";
         };
     }
 
-    // Getting the list of departmental organizations names
     rpc ListDepartmentalOrganizationsNames(DepartmentalOrganizationsNames.ListRequest) returns (DepartmentalOrganizationsNames.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListDepartmentalOrganizationsNames";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns the list of unique departmental organizations names";
+            summary: "Returns the list of unique departmental organizations names";
             tags: "Filters";
         };
     }
 
-    // Getting the list of sports area names
     rpc ListSportsAreaNames(SportsAreaNames.ListRequest) returns (SportsAreaNames.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListSportsAreaNames";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns the list of unique sports areas names";
+            summary: "Returns the list of unique sports areas names";
             tags: "Filters";
         };
     }
 
-    // Getting the list of sports area types
     rpc ListSportsAreaTypes(SportsAreaTypes.ListRequest) returns (SportsAreaTypes.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListSportsAreaTypes";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns the list of unique sports areas types";
+            summary: "Returns the list of unique sports areas types";
             tags: "Filters";
         };
     }
 
-    // Getting the list of departmental organizations names
     rpc ListSportKinds(SportKinds.ListRequest) returns (SportKinds.ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/ListSportKinds";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns the list of unique sport kinds";
+            summary: "Returns the list of unique sport kinds";
             tags: "Filters";
         };
     }
 
     // Circles
-    // Getting the list of intersections polygons
     rpc ListIntersections(Intersections.ListRequest) returns (Intersections.ListResponse) {
         option (google.api.http) = {
             post: "/api/v1/ListIntersections";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns geojsons of objects circles intersections polygons/multipolygons";
+            summary: "Returns geojsons of objects circles intersections polygons/multipolygons";
             tags: "Circles";
         };
     }
 
-    // Getting the list of intersections polygons
     rpc ListUnions(Unions.ListRequest) returns (Unions.ListResponse) {
         option (google.api.http) = {
             post: "/api/v1/ListUnions";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            description: "";
-            summary: "";
+            description: "Returns geojsons of polygons/multipolygons of united circles";
+            summary: "Returns geojsons of polygons/multipolygons of united circles";
             tags: "Circles";
         };
     }

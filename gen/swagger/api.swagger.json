@@ -23,7 +23,8 @@
   "paths": {
     "/api/v1/GetGeoJsonDensityHeatmap": {
       "get": {
-        "summary": "Getting Moscow population density for heatmap drawing purposes",
+        "summary": "Returns Moscow population density heatmap based on 2020 elections",
+        "description": "Returns Moscow population density heatmap based on 2020 elections",
         "operationId": "ApiService_GetGeoJsonDensityHeatmap",
         "responses": {
           "200": {
@@ -76,7 +77,8 @@
     },
     "/api/v1/GetGeoJsonRegions": {
       "get": {
-        "summary": "GeoJSONs\nGetting Moscow regions polygons geojson",
+        "summary": "Returns Moscow regions polygons (currently unused)",
+        "description": "Returns Moscow regions polygons (currently unused)",
         "operationId": "ApiService_GetGeoJsonRegions",
         "responses": {
           "200": {
@@ -129,7 +131,8 @@
     },
     "/api/v1/GetGeoJsonSportsObjects": {
       "get": {
-        "summary": "Getting objects geojson for heatmap drawing purposes",
+        "summary": "Returns Sports Objects density heatmap",
+        "description": "Returns Sports Objects density heatmap",
         "operationId": "ApiService_GetGeoJsonSportsObjects",
         "responses": {
           "200": {
@@ -182,7 +185,8 @@
     },
     "/api/v1/GetSportsObject": {
       "get": {
-        "summary": "Get Sports Object",
+        "summary": "Returns Sports Object info by its ID",
+        "description": "Returns Sports Object info by its ID",
         "operationId": "ApiService_GetSportsObject",
         "responses": {
           "200": {
@@ -244,7 +248,8 @@
     },
     "/api/v1/ListDepartmentalOrganizationsIds": {
       "get": {
-        "summary": "Getting the list of departmental organizations ids",
+        "summary": "Returns the list of unique departmental organizations ids",
+        "description": "Returns the list of unique departmental organizations ids",
         "operationId": "ApiService_ListDepartmentalOrganizationsIds",
         "responses": {
           "200": {
@@ -313,7 +318,8 @@
     },
     "/api/v1/ListDepartmentalOrganizationsNames": {
       "get": {
-        "summary": "Getting the list of departmental organizations names",
+        "summary": "Returns the list of unique departmental organizations names",
+        "description": "Returns the list of unique departmental organizations names",
         "operationId": "ApiService_ListDepartmentalOrganizationsNames",
         "responses": {
           "200": {
@@ -382,7 +388,8 @@
     },
     "/api/v1/ListIntersections": {
       "post": {
-        "summary": "Circles\nGetting the list of intersections polygons",
+        "summary": "Returns geojsons of objects circles intersections polygons/multipolygons",
+        "description": "Returns geojsons of objects circles intersections polygons/multipolygons",
         "operationId": "ApiService_ListIntersections",
         "responses": {
           "200": {
@@ -445,7 +452,8 @@
     },
     "/api/v1/ListObjectsNames": {
       "get": {
-        "summary": "Filters\nGetting the list of unique object names",
+        "summary": "Returns the list of unique object names",
+        "description": "Returns the list of unique object names",
         "operationId": "ApiService_ListObjectsNames",
         "responses": {
           "200": {
@@ -514,7 +522,8 @@
     },
     "/api/v1/ListSportKinds": {
       "get": {
-        "summary": "Getting the list of departmental organizations names",
+        "summary": "Returns the list of unique sport kinds",
+        "description": "Returns the list of unique sport kinds",
         "operationId": "ApiService_ListSportKinds",
         "responses": {
           "200": {
@@ -583,7 +592,8 @@
     },
     "/api/v1/ListSportsAreaNames": {
       "get": {
-        "summary": "Getting the list of sports area names",
+        "summary": "Returns the list of unique sports areas names",
+        "description": "Returns the list of unique sports areas names",
         "operationId": "ApiService_ListSportsAreaNames",
         "responses": {
           "200": {
@@ -652,7 +662,8 @@
     },
     "/api/v1/ListSportsAreaTypes": {
       "get": {
-        "summary": "Getting the list of sports area types",
+        "summary": "Returns the list of unique sports areas types",
+        "description": "Returns the list of unique sports areas types",
         "operationId": "ApiService_ListSportsAreaTypes",
         "responses": {
           "200": {
@@ -721,7 +732,8 @@
     },
     "/api/v1/ListSportsObjects": {
       "post": {
-        "summary": "Sports Objects\nList Sports Objects",
+        "summary": "Lists Sports Objects",
+        "description": "Lists Sports Objects",
         "operationId": "ApiService_ListSportsObjects",
         "responses": {
           "200": {
@@ -784,7 +796,8 @@
     },
     "/api/v1/ListSportsObjectsDetailed": {
       "post": {
-        "summary": "Sports Objects Detailed\nList Sports Objects Detailed",
+        "summary": "Lists Sports Objects with detailed sports areas information",
+        "description": "Lists Sports Objects with detailed sports areas information",
         "operationId": "ApiService_ListSportsObjectsDetailed",
         "responses": {
           "200": {
@@ -847,7 +860,8 @@
     },
     "/api/v1/ListUnions": {
       "post": {
-        "summary": "Getting the list of intersections polygons",
+        "summary": "Returns geojsons of polygons/multipolygons of united circles",
+        "description": "Returns geojsons of polygons/multipolygons of united circles",
         "operationId": "ApiService_ListUnions",
         "responses": {
           "200": {
@@ -910,7 +924,8 @@
     },
     "/api/v1/PolygonAnalytics": {
       "post": {
-        "summary": "Analytics\nGetting analytics for sports objects in polygon",
+        "summary": "Returns basic polygon analytics",
+        "description": "Returns basic polygon analytics",
         "operationId": "ApiService_PolygonAnalytics",
         "responses": {
           "200": {
@@ -973,7 +988,8 @@
     },
     "/api/v1/PolygonParkAnalytics": {
       "post": {
-        "summary": "Getting analytics for parks overlaping",
+        "summary": "Returns polygon's parks analytics",
+        "description": "Returns polygon's parks analytics",
         "operationId": "ApiService_PolygonParkAnalytics",
         "responses": {
           "200": {
@@ -1036,7 +1052,8 @@
     },
     "/api/v1/PolygonPollutionAnalytics": {
       "post": {
-        "summary": "Getting analytics for pollution situation",
+        "summary": "Returns air pollution situation within requested polygon",
+        "description": "Returns air pollution situation within requested polygon",
         "operationId": "ApiService_PolygonPollutionAnalytics",
         "responses": {
           "200": {

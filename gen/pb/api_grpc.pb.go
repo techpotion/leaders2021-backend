@@ -19,44 +19,27 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiServiceClient interface {
 	// Sports Objects
-	// List Sports Objects
 	ListSportsObjects(ctx context.Context, in *SportsObjects_ListRequest, opts ...grpc.CallOption) (*SportsObjects_ListResponse, error)
-	// Get Sports Object
 	GetSportsObject(ctx context.Context, in *SportsObjects_GetRequest, opts ...grpc.CallOption) (*SportsObjects_GetResponse, error)
 	// Sports Objects Detailed
-	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(ctx context.Context, in *SportsObjectsDetailed_ListRequest, opts ...grpc.CallOption) (*SportsObjectsDetailed_ListResponse, error)
 	// GeoJSONs
-	// Getting Moscow regions polygons geojson
 	GetGeoJsonRegions(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
-	// Getting Moscow population density for heatmap drawing purposes
 	GetGeoJsonDensityHeatmap(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
-	// Getting objects geojson for heatmap drawing purposes
 	GetGeoJsonSportsObjects(ctx context.Context, in *GeoJsons_Request, opts ...grpc.CallOption) (*GeoJsons_Response, error)
 	// Analytics
-	// Getting analytics for sports objects in polygon
 	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
-	// Getting analytics for parks overlaping
 	PolygonParkAnalytics(ctx context.Context, in *PolygonParkAnalytics_Request, opts ...grpc.CallOption) (*PolygonParkAnalytics_Response, error)
-	// Getting analytics for pollution situation
 	PolygonPollutionAnalytics(ctx context.Context, in *PolygonPollutionAnalytics_Request, opts ...grpc.CallOption) (*PolygonPollutionAnalytics_Response, error)
 	// Filters
-	// Getting the list of unique object names
 	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
-	// Getting the list of departmental organizations ids
 	ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error)
-	// Getting the list of departmental organizations names
 	ListDepartmentalOrganizationsNames(ctx context.Context, in *DepartmentalOrganizationsNames_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsNames_ListResponse, error)
-	// Getting the list of sports area names
 	ListSportsAreaNames(ctx context.Context, in *SportsAreaNames_ListRequest, opts ...grpc.CallOption) (*SportsAreaNames_ListResponse, error)
-	// Getting the list of sports area types
 	ListSportsAreaTypes(ctx context.Context, in *SportsAreaTypes_ListRequest, opts ...grpc.CallOption) (*SportsAreaTypes_ListResponse, error)
-	// Getting the list of departmental organizations names
 	ListSportKinds(ctx context.Context, in *SportKinds_ListRequest, opts ...grpc.CallOption) (*SportKinds_ListResponse, error)
 	// Circles
-	// Getting the list of intersections polygons
 	ListIntersections(ctx context.Context, in *Intersections_ListRequest, opts ...grpc.CallOption) (*Intersections_ListResponse, error)
-	// Getting the list of intersections polygons
 	ListUnions(ctx context.Context, in *Unions_ListRequest, opts ...grpc.CallOption) (*Unions_ListResponse, error)
 }
 
@@ -226,44 +209,27 @@ func (c *apiServiceClient) ListUnions(ctx context.Context, in *Unions_ListReques
 // for forward compatibility
 type ApiServiceServer interface {
 	// Sports Objects
-	// List Sports Objects
 	ListSportsObjects(context.Context, *SportsObjects_ListRequest) (*SportsObjects_ListResponse, error)
-	// Get Sports Object
 	GetSportsObject(context.Context, *SportsObjects_GetRequest) (*SportsObjects_GetResponse, error)
 	// Sports Objects Detailed
-	// List Sports Objects Detailed
 	ListSportsObjectsDetailed(context.Context, *SportsObjectsDetailed_ListRequest) (*SportsObjectsDetailed_ListResponse, error)
 	// GeoJSONs
-	// Getting Moscow regions polygons geojson
 	GetGeoJsonRegions(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
-	// Getting Moscow population density for heatmap drawing purposes
 	GetGeoJsonDensityHeatmap(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
-	// Getting objects geojson for heatmap drawing purposes
 	GetGeoJsonSportsObjects(context.Context, *GeoJsons_Request) (*GeoJsons_Response, error)
 	// Analytics
-	// Getting analytics for sports objects in polygon
 	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
-	// Getting analytics for parks overlaping
 	PolygonParkAnalytics(context.Context, *PolygonParkAnalytics_Request) (*PolygonParkAnalytics_Response, error)
-	// Getting analytics for pollution situation
 	PolygonPollutionAnalytics(context.Context, *PolygonPollutionAnalytics_Request) (*PolygonPollutionAnalytics_Response, error)
 	// Filters
-	// Getting the list of unique object names
 	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
-	// Getting the list of departmental organizations ids
 	ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error)
-	// Getting the list of departmental organizations names
 	ListDepartmentalOrganizationsNames(context.Context, *DepartmentalOrganizationsNames_ListRequest) (*DepartmentalOrganizationsNames_ListResponse, error)
-	// Getting the list of sports area names
 	ListSportsAreaNames(context.Context, *SportsAreaNames_ListRequest) (*SportsAreaNames_ListResponse, error)
-	// Getting the list of sports area types
 	ListSportsAreaTypes(context.Context, *SportsAreaTypes_ListRequest) (*SportsAreaTypes_ListResponse, error)
-	// Getting the list of departmental organizations names
 	ListSportKinds(context.Context, *SportKinds_ListRequest) (*SportKinds_ListResponse, error)
 	// Circles
-	// Getting the list of intersections polygons
 	ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error)
-	// Getting the list of intersections polygons
 	ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
