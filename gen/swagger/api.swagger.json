@@ -1069,16 +1069,16 @@
           "type": "integer",
           "format": "int64"
         },
+        "objectSquare": {
+          "type": "number",
+          "format": "double"
+        },
         "intersections": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int32"
           }
-        },
-        "square": {
-          "type": "number",
-          "format": "double"
         }
       }
     },

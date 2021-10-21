@@ -10,14 +10,14 @@ import (
 type CircleIntersectionsORM struct {
 	gorm.Model
 	ObjectId      uint32
+	ObjectSquare  float64
 	Intersections pq.Int32Array `gorm:"type:bigint[]"`
-	Square        float64
 }
 
 func (c *CircleIntersectionsORM) ToPB(ctx context.Context) (pb.CircleIntersections, error) {
 	return pb.CircleIntersections{
 		ObjectId:      c.ObjectId,
+		ObjectSquare:  c.ObjectSquare,
 		Intersections: c.Intersections,
-		Square:        c.Square,
 	}, nil
 }

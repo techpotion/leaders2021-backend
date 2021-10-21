@@ -9,7 +9,7 @@ import (
 func FormIntersectionsQuery(availability uint32, polygon *pb.Polygon) string {
 	polyQuery := FormPolygonContainsQuery(polygon)
 	return fmt.Sprintf(`
-		SELECT c.object_id, array_agg(c.neighbor_object_id) AS intersections, sum(neighbor_object.object_sum_square)+main_object.object_sum_square AS square FROM circles AS c
+		SELECT c.object_id, main_object.object_sum_square as object_square, array_agg(c.neighbor_object_id) AS intersections FROM circles AS c
 
 		LEFT JOIN objects AS main_object
 		ON main_object.object_id = c.object_id
@@ -19,7 +19,7 @@ func FormIntersectionsQuery(availability uint32, polygon *pb.Polygon) string {
 
 		WHERE c.availability = %d AND %s
 
-		GROUP BY c.object_id, main_object.object_sum_square, main_object.position`,
+		GROUP BY c.object_id, main_object.object_sum_square`,
 		availability,
 		polyQuery,
 	)

@@ -1709,7 +1709,7 @@ func (m *CircleIntersections) validate(all bool) error {
 
 	// no validation rules for ObjectId
 
-	// no validation rules for Square
+	// no validation rules for ObjectSquare
 
 	if len(errors) > 0 {
 		return CircleIntersectionsMultiError(errors)
