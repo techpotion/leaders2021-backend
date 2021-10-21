@@ -381,7 +381,7 @@
       }
     },
     "/api/v1/ListIntersections": {
-      "get": {
+      "post": {
         "summary": "Circles\nGetting the list of intersections polygons",
         "operationId": "ApiService_ListIntersections",
         "responses": {
@@ -430,19 +430,12 @@
         },
         "parameters": [
           {
-            "name": "availability",
-            "description": "filters.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "UNKNOWN",
-              "CITY",
-              "REGION",
-              "DISTRICT",
-              "STEP"
-            ],
-            "default": "UNKNOWN"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiIntersectionsListRequest"
+            }
           }
         ],
         "tags": [
@@ -853,7 +846,7 @@
       }
     },
     "/api/v1/ListUnions": {
-      "get": {
+      "post": {
         "summary": "Getting the list of intersections polygons",
         "operationId": "ApiService_ListUnions",
         "responses": {
@@ -902,19 +895,12 @@
         },
         "parameters": [
           {
-            "name": "availability",
-            "description": "filters.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "UNKNOWN",
-              "CITY",
-              "REGION",
-              "DISTRICT",
-              "STEP"
-            ],
-            "default": "UNKNOWN"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiUnionsListRequest"
+            }
           }
         ],
         "tags": [
@@ -1203,6 +1189,18 @@
       "properties": {
         "geoJson": {
           "type": "string"
+        }
+      }
+    },
+    "apiIntersectionsListRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability",
+          "title": "filters"
         }
       }
     },
@@ -1677,6 +1675,18 @@
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiUnionsListRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability",
+          "title": "filters"
         }
       }
     },
