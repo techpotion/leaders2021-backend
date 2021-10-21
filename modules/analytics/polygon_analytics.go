@@ -92,7 +92,7 @@ func FormPolygonIntersectsParkQuery(polygon *pb.Polygon) string {
 		ST_Intersects(
 			%s,
 			polygon
-		);`,
+		)`,
 		polygonQuery,
 	)
 }
