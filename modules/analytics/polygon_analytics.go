@@ -121,3 +121,11 @@ func CalculatePolygonCenter(poly *pb.Polygon) *pb.Point {
 		Lng: lng / float32(pointsLen),
 	}
 }
+
+func CalculatePolygonSquareQuery(polygon *pb.Polygon) string {
+	polygonQuery := FormGeometryPolygon(polygon)
+	return fmt.Sprintf(`
+		SELECT ST_Area(%s::geography)/1000000`,
+		polygonQuery,
+	)
+}
