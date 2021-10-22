@@ -11,17 +11,32 @@ import (
 )
 
 var connectionString string
+var db *gorm.DB
 
 // Init initializes connection string as a global module variable
 func Init() {
 	connectionString = makeConnectionString()
 }
 
-// New returns new database instance
+// New returns database instance
 func New() (*gorm.DB, error) {
-	return gorm.Open(postgres.Open(connectionString), &gorm.Config{
+	if db != nil {
+		conn, err := db.DB()
+		if err != nil {
+			return nil, err
+		}
+
+		err = conn.Close()
+		if err != nil {
+			return nil, err
+		}
+	}
+	var err error
+	db, err = gorm.Open(postgres.Open(connectionString), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
+
+	return db, err
 }
 
 // makeConnectionString returns new connection string
