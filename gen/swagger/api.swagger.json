@@ -860,8 +860,8 @@
     },
     "/api/v1/ListSportsObjectsFromDetailed": {
       "post": {
-        "summary": "Lists Sports Objects",
-        "description": "Lists Sports Objects",
+        "summary": "Lists Sports Objects by detailed objects' filters",
+        "description": "Lists Sports Objects by detailed objects' filters",
         "operationId": "ApiService_ListSportsObjectsFromDetailed",
         "responses": {
           "200": {
@@ -1430,13 +1430,25 @@
           "type": "number",
           "format": "double"
         },
+        "areasSquarePer100k": {
+          "type": "number",
+          "format": "double"
+        },
         "areasAmount": {
           "type": "integer",
           "format": "int64"
         },
+        "areasAmountPer100k": {
+          "type": "number",
+          "format": "double"
+        },
         "sportsAmount": {
           "type": "integer",
           "format": "int64"
+        },
+        "sportsAmountPer100k": {
+          "type": "number",
+          "format": "double"
         },
         "sportsKinds": {
           "type": "array",

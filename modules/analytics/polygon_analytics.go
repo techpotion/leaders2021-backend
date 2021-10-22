@@ -96,3 +96,36 @@ func FormPolygonIntersectsParkQuery(polygon *pb.Polygon) string {
 		polygonQuery,
 	)
 }
+
+func FormPolygonContainsPointQuery(point *pb.Point) string {
+	return fmt.Sprintf(`
+		ST_Intersects(
+			polygon,
+			ST_SetSRID(ST_Point(%f, %f), 4326)
+		)`,
+		point.Lng,
+		point.Lat,
+	)
+}
+
+func CalculatePolygonCenter(poly *pb.Polygon) *pb.Point {
+	pointsLen := len(poly.Points)
+	var lat float32 = 0.
+	var lng float32 = 0.
+	for _, point := range poly.Points {
+		lat += point.Lat
+		lng += point.Lng
+	}
+	return &pb.Point{
+		Lat: lat / float32(pointsLen),
+		Lng: lng / float32(pointsLen),
+	}
+}
+
+func CalculatePolygonSquareQuery(polygon *pb.Polygon) string {
+	polygonQuery := FormGeometryPolygon(polygon)
+	return fmt.Sprintf(`
+		SELECT ST_Area(%s::geography)/1000000`,
+		polygonQuery,
+	)
+}

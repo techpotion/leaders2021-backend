@@ -53,20 +53,51 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 		convertedList = append(convertedList, &converted)
 	}
 
+	region := &pb.RegionORM{}
+	polygonCenter := analytics.CalculatePolygonCenter(in.Polygon)
+	polygonContaintsQuery := analytics.FormPolygonContainsPointQuery(polygonCenter)
+	result = db.Where(polygonContaintsQuery).Find(&region)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	var polygonSquare float64
+	polygonSquareQuery := analytics.CalculatePolygonSquareQuery(in.Polygon)
+	result = db.Raw(polygonSquareQuery).Scan(&polygonSquare)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	personsOnSquare := polygonSquare * region.Density
+
 	areasSquare := analytics.CalculateSquare(convertedList)
 	areasAmount := len(convertedList)
+	areasSquarePerPerson := float64(areasSquare) / personsOnSquare
+
 	sportsKinds := analytics.UniqueSportsKinds(convertedList)
 	sportsAmount := len(sportsKinds)
+	sportsAmountPerPerson := float64(sportsAmount) / personsOnSquare
+
 	areaTypes := analytics.UniqueAreaTypes(convertedList)
 	areaTypesAmount := len(areaTypes)
+	areaTypesAmountPerPerson := float64(areaTypesAmount) / personsOnSquare
 
 	return &pb.PolygonAnalytics_Response{
-		AreasSquare:     areasSquare,
-		AreasAmount:     uint32(areasAmount),
-		SportsAmount:    uint32(sportsAmount),
-		SportsKinds:     sportsKinds,
-		AreaTypes:       areaTypes,
-		AreaTypesAmount: uint32(areaTypesAmount),
+		AreasSquare:         areasSquare,
+		AreasAmount:         uint32(areasAmount),
+		AreasSquarePer100K:  areasSquarePerPerson * 100000,
+		SportsKinds:         sportsKinds,
+		SportsAmount:        uint32(sportsAmount),
+		SportsAmountPer100K: sportsAmountPerPerson * 100000,
+		AreaTypes:           areaTypes,
+		AreaTypesAmount:     uint32(areaTypesAmount),
+		AreasAmountPer100K:  areaTypesAmountPerPerson * 100000,
 	}, nil
 }
 
