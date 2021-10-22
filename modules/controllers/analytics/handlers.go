@@ -89,15 +89,15 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 	areaTypesAmountPerPerson := float64(areaTypesAmount) / personsOnSquare
 
 	return &pb.PolygonAnalytics_Response{
-		AreasSquare:           areasSquare,
-		AreasSquarePerPerson:  areasSquarePerPerson,
-		AreasAmount:           uint32(areasAmount),
-		SportsKinds:           sportsKinds,
-		SportsAmount:          uint32(sportsAmount),
-		SportsAmountPerPerson: sportsAmountPerPerson,
-		AreaTypes:             areaTypes,
-		AreaTypesAmount:       uint32(areaTypesAmount),
-		AreasAmountPerPerson:  areaTypesAmountPerPerson,
+		AreasSquare:         areasSquare,
+		AreasAmount:         uint32(areasAmount),
+		AreasSquarePer100K:  areasSquarePerPerson * 100000,
+		SportsKinds:         sportsKinds,
+		SportsAmount:        uint32(sportsAmount),
+		SportsAmountPer100K: sportsAmountPerPerson * 100000,
+		AreaTypes:           areaTypes,
+		AreaTypesAmount:     uint32(areaTypesAmount),
+		AreasAmountPer100K:  areaTypesAmountPerPerson * 100000,
 	}, nil
 }
 

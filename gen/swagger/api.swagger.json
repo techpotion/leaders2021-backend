@@ -1430,7 +1430,7 @@
           "type": "number",
           "format": "double"
         },
-        "areasSquarePerPerson": {
+        "areasSquarePer100k": {
           "type": "number",
           "format": "double"
         },
@@ -1438,7 +1438,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "areasAmountPerPerson": {
+        "areasAmountPer100k": {
           "type": "number",
           "format": "double"
         },
@@ -1446,7 +1446,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "sportsAmountPerPerson": {
+        "sportsAmountPer100k": {
           "type": "number",
           "format": "double"
         },
