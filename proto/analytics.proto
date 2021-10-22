@@ -17,11 +17,14 @@ message PolygonAnalytics {
 
     message Response {
         double areasSquare = 1;
-        uint32 areasAmount = 2;
-        uint32 sportsAmount = 3;
-        repeated string sportsKinds = 4;
-        repeated string areaTypes = 5;
-        uint32 areaTypesAmount = 6;
+        double areasSquarePerPerson = 2;
+        uint32 areasAmount = 3;
+        double areasAmountPerPerson = 4;
+        uint32 sportsAmount = 5;
+        double sportsAmountPerPerson = 6;
+        repeated string sportsKinds = 7;
+        repeated string areaTypes = 8;
+        uint32 areaTypesAmount = 9;
     }
 }
 

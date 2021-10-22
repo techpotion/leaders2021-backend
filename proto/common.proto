@@ -102,3 +102,11 @@ message CirclesCluster {
     string geojson = 1;
     double square = 2;
 }
+
+message Region {
+    option (gorm.opts).ormable = true;
+    string region = 1;
+    double square = 2;
+    double density = 3;
+    double population = 4;
+}

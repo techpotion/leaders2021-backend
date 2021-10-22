@@ -329,9 +329,15 @@ func (m *PolygonAnalytics_Response) Validate() error {
 
 	// no validation rules for AreasSquare
 
+	// no validation rules for AreasSquarePerPerson
+
 	// no validation rules for AreasAmount
 
+	// no validation rules for AreasAmountPerPerson
+
 	// no validation rules for SportsAmount
+
+	// no validation rules for SportsAmountPerPerson
 
 	// no validation rules for AreaTypesAmount
 
