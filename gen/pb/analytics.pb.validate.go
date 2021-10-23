@@ -341,6 +341,10 @@ func (m *PolygonAnalytics_Response) Validate() error {
 
 	// no validation rules for AreaTypesAmount
 
+	// no validation rules for SportsObjectsAmount
+
+	// no validation rules for SportsObjectsAmountPer100K
+
 	return nil
 }
 

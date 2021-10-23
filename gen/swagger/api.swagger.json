@@ -1465,6 +1465,14 @@
         "areaTypesAmount": {
           "type": "integer",
           "format": "int64"
+        },
+        "sportsObjectsAmount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sportsObjectsAmountPer100k": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

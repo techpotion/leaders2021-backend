@@ -25,6 +25,8 @@ message PolygonAnalytics {
         repeated string sportsKinds = 7;
         repeated string areaTypes = 8;
         uint32 areaTypesAmount = 9;
+        uint32 sportsObjectsAmount = 10;
+        double sportsObjectsAmountPer100k = 11;
     }
 }
 
