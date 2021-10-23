@@ -19,8 +19,10 @@ func List(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.Sp
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+	if in.Polygon != nil {
+		if err := analytics.ValidatePolygon(in.Polygon); err != nil {
+			return nil, status.Error(codes.InvalidArgument, err.Error())
+		}
 	}
 
 	// filter := &pb.SportsObjectDetailedORM{
