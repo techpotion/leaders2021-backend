@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"github.com/techpotion/leaders2021-backend/modules/utils"
 	"gorm.io/driver/postgres"
@@ -16,27 +17,21 @@ var db *gorm.DB
 // Init initializes connection string as a global module variable
 func Init() {
 	connectionString = makeConnectionString()
+	var dbErr error
+	db, dbErr = gorm.Open(postgres.Open(connectionString), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
+	if dbErr != nil {
+		logrus.WithFields(logrus.Fields{
+			"error": dbErr.Error(),
+		}).Fatalln("failed to connect to the database")
+	}
+
 }
 
 // New returns database instance
 func New() (*gorm.DB, error) {
-	if db != nil {
-		conn, err := db.DB()
-		if err != nil {
-			return nil, err
-		}
-
-		err = conn.Close()
-		if err != nil {
-			return nil, err
-		}
-	}
-	var err error
-	db, err = gorm.Open(postgres.Open(connectionString), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
-
-	return db, err
+	return db, nil
 }
 
 // makeConnectionString returns new connection string
