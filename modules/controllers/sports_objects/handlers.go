@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
+	"github.com/techpotion/leaders2021-backend/modules/analytics"
 	"github.com/techpotion/leaders2021-backend/modules/database"
 	"github.com/techpotion/leaders2021-backend/modules/filters"
 	sportsobjects "github.com/techpotion/leaders2021-backend/modules/sports_objects"
@@ -16,6 +17,10 @@ import (
 
 func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObjects_ListResponse, error) {
 	if err := in.Validate(); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 

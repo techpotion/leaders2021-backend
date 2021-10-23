@@ -11,8 +11,8 @@ import (
 func ValidatePolygon(polygon *pb.Polygon) error {
 	polyLen := len(polygon.Points)
 
-	if polyLen < 5 {
-		return errors.New("polygon must consist of at least 4 different points")
+	if polyLen < 4 {
+		return errors.New("polygon must consist of at least 3 different points")
 	}
 
 	if polygon.Points[0].Lat != polygon.Points[polyLen-1].Lat &&
