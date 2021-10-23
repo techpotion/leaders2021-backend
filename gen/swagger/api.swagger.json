@@ -1050,6 +1050,70 @@
         ]
       }
     },
+    "/api/v1/PolygonAnalyticsDashboard": {
+      "post": {
+        "summary": "Returns compiled polygon analytics for the dashboard",
+        "description": "Returns compiled polygon analytics for the dashboard",
+        "operationId": "ApiService_PolygonAnalyticsDashboard",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPolygonAnalyticsDashboardResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonAnalyticsDashboardRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
     "/api/v1/PolygonParkAnalytics": {
       "post": {
         "summary": "Returns polygon's parks analytics",
@@ -1402,6 +1466,28 @@
           "items": {
             "$ref": "#/definitions/apiPoint"
           }
+        }
+      }
+    },
+    "apiPolygonAnalyticsDashboardRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        }
+      }
+    },
+    "apiPolygonAnalyticsDashboardResponse": {
+      "type": "object",
+      "properties": {
+        "basicAnalytics": {
+          "$ref": "#/definitions/apiPolygonAnalyticsResponse"
+        },
+        "parkAnalytics": {
+          "$ref": "#/definitions/apiPolygonParkAnalyticsResponse"
+        },
+        "pollutionAnalytics": {
+          "$ref": "#/definitions/apiPolygonPollutionAnalyticsResponse"
         }
       }
     },

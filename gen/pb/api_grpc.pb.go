@@ -32,6 +32,7 @@ type ApiServiceClient interface {
 	PolygonAnalytics(ctx context.Context, in *PolygonAnalytics_Request, opts ...grpc.CallOption) (*PolygonAnalytics_Response, error)
 	PolygonParkAnalytics(ctx context.Context, in *PolygonParkAnalytics_Request, opts ...grpc.CallOption) (*PolygonParkAnalytics_Response, error)
 	PolygonPollutionAnalytics(ctx context.Context, in *PolygonPollutionAnalytics_Request, opts ...grpc.CallOption) (*PolygonPollutionAnalytics_Response, error)
+	PolygonAnalyticsDashboard(ctx context.Context, in *PolygonAnalyticsDashboard_Request, opts ...grpc.CallOption) (*PolygonAnalyticsDashboard_Response, error)
 	// Filters
 	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
 	ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error)
@@ -142,6 +143,15 @@ func (c *apiServiceClient) PolygonPollutionAnalytics(ctx context.Context, in *Po
 	return out, nil
 }
 
+func (c *apiServiceClient) PolygonAnalyticsDashboard(ctx context.Context, in *PolygonAnalyticsDashboard_Request, opts ...grpc.CallOption) (*PolygonAnalyticsDashboard_Response, error) {
+	out := new(PolygonAnalyticsDashboard_Response)
+	err := c.cc.Invoke(ctx, "/api.ApiService/PolygonAnalyticsDashboard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiServiceClient) ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
 	out := new(ObjectsNames_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjectsNames", in, out, opts...)
@@ -232,6 +242,7 @@ type ApiServiceServer interface {
 	PolygonAnalytics(context.Context, *PolygonAnalytics_Request) (*PolygonAnalytics_Response, error)
 	PolygonParkAnalytics(context.Context, *PolygonParkAnalytics_Request) (*PolygonParkAnalytics_Response, error)
 	PolygonPollutionAnalytics(context.Context, *PolygonPollutionAnalytics_Request) (*PolygonPollutionAnalytics_Response, error)
+	PolygonAnalyticsDashboard(context.Context, *PolygonAnalyticsDashboard_Request) (*PolygonAnalyticsDashboard_Response, error)
 	// Filters
 	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
 	ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error)
@@ -278,6 +289,9 @@ func (UnimplementedApiServiceServer) PolygonParkAnalytics(context.Context, *Poly
 }
 func (UnimplementedApiServiceServer) PolygonPollutionAnalytics(context.Context, *PolygonPollutionAnalytics_Request) (*PolygonPollutionAnalytics_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PolygonPollutionAnalytics not implemented")
+}
+func (UnimplementedApiServiceServer) PolygonAnalyticsDashboard(context.Context, *PolygonAnalyticsDashboard_Request) (*PolygonAnalyticsDashboard_Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PolygonAnalyticsDashboard not implemented")
 }
 func (UnimplementedApiServiceServer) ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsNames not implemented")
@@ -496,6 +510,24 @@ func _ApiService_PolygonPollutionAnalytics_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_PolygonAnalyticsDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolygonAnalyticsDashboard_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).PolygonAnalyticsDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/PolygonAnalyticsDashboard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).PolygonAnalyticsDashboard(ctx, req.(*PolygonAnalyticsDashboard_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiService_ListObjectsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ObjectsNames_ListRequest)
 	if err := dec(in); err != nil {
@@ -686,6 +718,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PolygonPollutionAnalytics",
 			Handler:    _ApiService_PolygonPollutionAnalytics_Handler,
+		},
+		{
+			MethodName: "PolygonAnalyticsDashboard",
+			Handler:    _ApiService_PolygonAnalyticsDashboard_Handler,
 		},
 		{
 			MethodName: "ListObjectsNames",

@@ -3,6 +3,7 @@ package analytics
 import (
 	"context"
 	"errors"
+	"sync"
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/analytics"
@@ -191,4 +192,56 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 	} else {
 		return &pb.PolygonPollutionAnalytics_Response{}, nil
 	}
+}
+
+func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashboard_Request) (*pb.PolygonAnalyticsDashboard_Response, error) {
+	if err := in.Validate(); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	var basicAnalytics *pb.PolygonAnalytics_Response
+	var parkAnalytics *pb.PolygonParkAnalytics_Response
+	var pollutionAnalytics *pb.PolygonPollutionAnalytics_Response
+	var err error
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		basicAnalytics, err = PolygonAnalytics(ctx, &pb.PolygonAnalytics_Request{
+			Polygon: in.Polygon,
+		})
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		parkAnalytics, err = PolygonParkAnalytics(ctx, &pb.PolygonParkAnalytics_Request{
+			Polygon:        in.Polygon,
+			HasSportground: false,
+		})
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		pollutionAnalytics, err = PolygonPollutionAnalytics(ctx, &pb.PolygonPollutionAnalytics_Request{
+			Polygon:      in.Polygon,
+			ReturnPoints: true,
+		})
+	}()
+	wg.Wait()
+
+	if err != nil {
+		return nil, err
+	}
+	return &pb.PolygonAnalyticsDashboard_Response{
+		BasicAnalytics:     basicAnalytics,
+		ParkAnalytics:      parkAnalytics,
+		PollutionAnalytics: pollutionAnalytics,
+	}, nil
 }

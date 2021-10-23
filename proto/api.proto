@@ -204,6 +204,18 @@ service ApiService {
         };
     }
 
+    rpc PolygonAnalyticsDashboard(PolygonAnalyticsDashboard.Request) returns (PolygonAnalyticsDashboard.Response) {
+        option (google.api.http) = {
+            post: "/api/v1/PolygonAnalyticsDashboard";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Returns compiled polygon analytics for the dashboard";
+            summary: "Returns compiled polygon analytics for the dashboard";
+            tags: "Analytics";
+        };
+    }
+
     // Filters
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
         option (google.api.http) = {

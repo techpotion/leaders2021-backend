@@ -56,3 +56,15 @@ message PolygonPollutionAnalytics {
         ListStats listStats = 2;
     }
 }
+
+message PolygonAnalyticsDashboard {
+    message Request {
+        Polygon polygon = 1;
+    }
+
+    message Response {
+        PolygonAnalytics.Response basicAnalytics = 1;
+        PolygonParkAnalytics.Response parkAnalytics = 2;
+        PolygonPollutionAnalytics.Response pollutionAnalytics = 3;
+    }
+}
