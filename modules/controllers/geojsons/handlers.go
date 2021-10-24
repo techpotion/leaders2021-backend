@@ -15,18 +15,22 @@ const (
 	objectsPath        = "static/objects.geojson"
 )
 
+// GetRegions is a geojson with moscow regions handler
 func GetRegions(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return handleGeoJson(regionsPath)
 }
 
+// GetDensityHeatmap is a geojson with moscow population density
 func GetDensityHeatmap(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return handleGeoJson(densityHeatmapPath)
 }
 
+// GetGeoJsonSportsObjects is a geojson with sports objects density
 func GetGeoJsonSportsObjects(ctx context.Context, in *pb.GeoJsons_Request) (*pb.GeoJsons_Response, error) {
 	return handleGeoJson(objectsPath)
 }
 
+// handleGeoJson is a universal geojson proxy method
 func handleGeoJson(path string) (*pb.GeoJsons_Response, error) {
 	jsonBytes, err := ioutil.ReadFile(path)
 	if err != nil {
