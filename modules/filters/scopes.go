@@ -92,7 +92,7 @@ func SportKindsScope(kinds []string, tableName string) func(db *gorm.DB) *gorm.D
 func PolygonScope(polygon *pb.Polygon) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if polygon != nil {
-			polyQuery := analytics.FormPolygonContainsQuery(polygon)
+			polyQuery := analytics.FormPolygonContainsQueryFromDetailed(polygon)
 			return db.Where(polyQuery)
 		}
 		return db

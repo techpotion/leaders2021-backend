@@ -36,6 +36,19 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 	)
 }
 
+// FormPolygonContainsQuery forms SQL Where query and returns
+// whether polygon contains ST_Point provided in position column
+func FormPolygonContainsQueryFromDetailed(polygon *pb.Polygon) string {
+	polygonQuery := FormGeometryPolygon(polygon)
+	return fmt.Sprintf(`
+		ST_Contains(
+			%s,
+			"objects".position
+		)`,
+		polygonQuery,
+	)
+}
+
 // FormGeometryPolygon forms valid PostGIS::geometry polygon value
 func FormGeometryPolygon(polygon *pb.Polygon) string {
 	points := ""
