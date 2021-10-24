@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// ListIntersections is a list intersections endpoint handler that returns geojsons with intersections
 func ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*pb.Intersections_ListResponse, error) {
 	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
@@ -41,6 +42,7 @@ func ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*
 	}, nil
 }
 
+// ListUnions is a list unions endpoint handler that returns geojsons with unions
 func ListUnions(ctx context.Context, in *pb.Unions_ListRequest) (*pb.Unions_ListResponse, error) {
 	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())

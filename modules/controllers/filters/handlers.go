@@ -11,6 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// ListObjectsNames is a ListObjectsNames handler that returns unique object_names for filtering puropses
 func ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb.ObjectsNames_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {
@@ -35,6 +36,7 @@ func ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb
 	}, nil
 }
 
+// ListDepartmentalOrganizationsIds is a ListDepartmentalOrganizationsIds handler that returns unique departmental_organization_ids for filtering puropses
 func ListDepartmentalOrganizationsIds(ctx context.Context, in *pb.DepartmentalOrganizationsIds_ListRequest) (*pb.DepartmentalOrganizationsIds_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {
@@ -59,6 +61,7 @@ func ListDepartmentalOrganizationsIds(ctx context.Context, in *pb.DepartmentalOr
 	}, nil
 }
 
+// ListDepartmentalOrganizationsNames is a list objects names handler that returns unique departmental_organization_names for filtering puropses
 func ListDepartmentalOrganizationsNames(ctx context.Context, in *pb.DepartmentalOrganizationsNames_ListRequest) (*pb.DepartmentalOrganizationsNames_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {
@@ -83,6 +86,7 @@ func ListDepartmentalOrganizationsNames(ctx context.Context, in *pb.Departmental
 	}, nil
 }
 
+// ListSportKinds is a list objects names handler that returns unique sport_kinds for filtering puropses
 func ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.SportKinds_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {
@@ -107,6 +111,7 @@ func ListSportKinds(ctx context.Context, in *pb.SportKinds_ListRequest) (*pb.Spo
 	}, nil
 }
 
+// ListSportsAreaTypes is a list objects names handler that returns unique sports_area_types for filtering puropses
 func ListSportsAreaTypes(ctx context.Context, in *pb.SportsAreaTypes_ListRequest) (*pb.SportsAreaTypes_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {
@@ -131,6 +136,7 @@ func ListSportsAreaTypes(ctx context.Context, in *pb.SportsAreaTypes_ListRequest
 	}, nil
 }
 
+// ListSportsAreaNames is a list objects names handler that returns unique sports_area_names for filtering puropses
 func ListSportsAreaNames(ctx context.Context, in *pb.SportsAreaNames_ListRequest) (*pb.SportsAreaNames_ListResponse, error) {
 	db, err := database.New()
 	if err != nil {

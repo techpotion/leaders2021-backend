@@ -14,6 +14,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// PolygonAnalytics is a polygon analytics endpoint handler
 func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb.PolygonAnalytics_Response, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
@@ -108,6 +109,7 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 	}, nil
 }
 
+// PolygonParkAnalytics is a polygon park analytics endpoint handler
 func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Request) (*pb.PolygonParkAnalytics_Response, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
@@ -149,6 +151,7 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 	}, nil
 }
 
+// PolygonPollutionAnalytics is a polygon pollution analytics endpoint handler
 func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnalytics_Request) (*pb.PolygonPollutionAnalytics_Response, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
@@ -194,6 +197,7 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 	}
 }
 
+// PolygonAnalyticsDashboard is a polygon pollution analytics dashboard endpoint handler that compiles all the other methods
 func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashboard_Request) (*pb.PolygonAnalyticsDashboard_Response, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
