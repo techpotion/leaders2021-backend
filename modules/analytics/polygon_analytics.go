@@ -7,7 +7,7 @@ import (
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 )
 
-// TODO add tests
+// ValidatePolygon validates provided polygon
 func ValidatePolygon(polygon *pb.Polygon) error {
 	polyLen := len(polygon.Points)
 
@@ -23,7 +23,8 @@ func ValidatePolygon(polygon *pb.Polygon) error {
 	return nil
 }
 
-// TODO add tests
+// FormPolygonContainsQuery forms SQL Where query and returns
+// whether polygon contains ST_Point provided in position column
 func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 	polygonQuery := FormGeometryPolygon(polygon)
 	return fmt.Sprintf(`
@@ -35,7 +36,7 @@ func FormPolygonContainsQuery(polygon *pb.Polygon) string {
 	)
 }
 
-// TODO add tests
+// FormGeometryPolygon forms valid PostGIS::geometry polygon value
 func FormGeometryPolygon(polygon *pb.Polygon) string {
 	points := ""
 	for _, point := range polygon.Points {
@@ -45,7 +46,7 @@ func FormGeometryPolygon(polygon *pb.Polygon) string {
 	return fmt.Sprintf("ST_GeomFromText('%s', 4326)", poly)
 }
 
-// TODO add tests
+// CalculateSquare calculates sum square from provided sports objects
 func CalculateSquare(areas []*pb.SportsObjectDetailed) float64 {
 	var sumSquare float64 = 0
 	for _, area := range areas {
@@ -54,7 +55,7 @@ func CalculateSquare(areas []*pb.SportsObjectDetailed) float64 {
 	return sumSquare
 }
 
-// TODO add tests
+// UniqueSportsKinds returns the list of available sports kind for filtering purposes
 func UniqueSportsKinds(areas []*pb.SportsObjectDetailed) []string {
 	keys := make(map[string]bool)
 	list := []string{}
@@ -70,7 +71,7 @@ func UniqueSportsKinds(areas []*pb.SportsObjectDetailed) []string {
 	return list
 }
 
-// TODO add tests
+// UniqueAreaTypes returns the list of available area types for filtering purposes
 func UniqueAreaTypes(areas []*pb.SportsObjectDetailed) []string {
 	keys := make(map[string]bool)
 	list := []string{}
@@ -86,6 +87,8 @@ func UniqueAreaTypes(areas []*pb.SportsObjectDetailed) []string {
 	return list
 }
 
+// FormPolygonContainsQuery forms SQL Where query and returns
+// whether polygon intersects with another polygon from polygon column
 func FormPolygonIntersectsParkQuery(polygon *pb.Polygon) string {
 	polygonQuery := FormGeometryPolygon(polygon)
 	return fmt.Sprintf(`
@@ -97,6 +100,8 @@ func FormPolygonIntersectsParkQuery(polygon *pb.Polygon) string {
 	)
 }
 
+// FormPolygonContainsPointQuery forms SQL Where query and returns
+// whether polygon from polygon column containts provided point
 func FormPolygonContainsPointQuery(point *pb.Point) string {
 	return fmt.Sprintf(`
 		ST_Intersects(
@@ -108,6 +113,8 @@ func FormPolygonContainsPointQuery(point *pb.Point) string {
 	)
 }
 
+// CalculatePolygonCenter calculates polygon center
+// using center of gravity formula
 func CalculatePolygonCenter(poly *pb.Polygon) *pb.Point {
 	pointsLen := len(poly.Points)
 	var lat float32 = 0.
@@ -122,6 +129,8 @@ func CalculatePolygonCenter(poly *pb.Polygon) *pb.Point {
 	}
 }
 
+// CalculatePolygonCenter form SQL query
+// for calculating polygon's square in km^2
 func CalculatePolygonSquareQuery(polygon *pb.Polygon) string {
 	polygonQuery := FormGeometryPolygon(polygon)
 	return fmt.Sprintf(`
