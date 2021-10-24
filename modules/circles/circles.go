@@ -6,6 +6,8 @@ import (
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 )
 
+// FormIntersectionsQuery forms SQL query for getting geojsons of
+// circles intersections - http://postgis.net/workshops/postgis-intro/geometry_returning.html
 func FormIntersectionsQuery(availability uint32, polygon *pb.Polygon) string {
 	polyQuery := FormPolygonContainsQuery(polygon)
 	return fmt.Sprintf(`
@@ -19,6 +21,8 @@ func FormIntersectionsQuery(availability uint32, polygon *pb.Polygon) string {
 	)
 }
 
+// FormIntersectionsQuery forms SQL query for getting geojsons of
+// united circles - http://postgis.net/workshops/postgis-intro/geometry_returning.html
 func FormUnionsQuery(availability uint32, polygon *pb.Polygon) string {
 	polyQuery := FormPolygonContainsQuery(polygon)
 	return fmt.Sprintf(`
