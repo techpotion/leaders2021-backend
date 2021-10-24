@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// ObjectIdsScope is an object_id filter which applies if valid list was provided
 func ObjectIdsScope(ids []uint32, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(ids) > 0 {
@@ -17,6 +18,7 @@ func ObjectIdsScope(ids []uint32, tableName string) func(db *gorm.DB) *gorm.DB {
 	}
 }
 
+// ObjectNamesScope is an object_name filter which applies if valid list was provided
 func ObjectNamesScope(names []string, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(names) > 0 {
@@ -26,6 +28,7 @@ func ObjectNamesScope(names []string, tableName string) func(db *gorm.DB) *gorm.
 	}
 }
 
+// DepartmentalOrganizationIdsScope is a departmental_organization_id filter which applies if valid list was provided
 func DepartmentalOrganizationIdsScope(ids []uint32, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(ids) > 0 {
@@ -35,6 +38,7 @@ func DepartmentalOrganizationIdsScope(ids []uint32, tableName string) func(db *g
 	}
 }
 
+// SportsAreaNamesScope is a sports_area_name filter which applies if valid list was provided
 func SportsAreaNamesScope(names []string, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(names) > 0 {
@@ -44,6 +48,7 @@ func SportsAreaNamesScope(names []string, tableName string) func(db *gorm.DB) *g
 	}
 }
 
+// SportsAreaTypeScope is a sports_area_type filter which applies if valid list was provided
 func SportsAreaTypeScope(types []string, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(types) > 0 {
@@ -53,6 +58,7 @@ func SportsAreaTypeScope(types []string, tableName string) func(db *gorm.DB) *go
 	}
 }
 
+// DepartmentalOrganizationNamesScope is a departmental_organization_name filter which applies if valid list was provided
 func DepartmentalOrganizationNamesScope(names []string, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(names) > 0 {
@@ -62,6 +68,7 @@ func DepartmentalOrganizationNamesScope(names []string, tableName string) func(d
 	}
 }
 
+// AvailabilitiesScope is an availability filter which applies if valid list was provided
 func AvailabilitiesScope(availabilities []pb.Availability, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(availabilities) > 0 {
@@ -71,6 +78,7 @@ func AvailabilitiesScope(availabilities []pb.Availability, tableName string) fun
 	}
 }
 
+// SportKindsScope is a sport_kind filter which applies if valid list was provided
 func SportKindsScope(kinds []string, tableName string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(kinds) > 0 {
@@ -80,6 +88,7 @@ func SportKindsScope(kinds []string, tableName string) func(db *gorm.DB) *gorm.D
 	}
 }
 
+// PolygonScope is a sport_kind filter which applies if valid polygon was provided
 func PolygonScope(polygon *pb.Polygon) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if polygon != nil {

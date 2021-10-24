@@ -15,6 +15,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// List is a ListSportsObjects handler that returns the list of sports objects by required filters
 func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObjects_ListResponse, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
@@ -64,6 +65,7 @@ func List(ctx context.Context, in *pb.SportsObjects_ListRequest) (*pb.SportsObje
 	}, nil
 }
 
+// Get is a GetSportsObjects handler that returns the SportsObject by provided object_id
 func Get(ctx context.Context, in *pb.SportsObjects_GetRequest) (*pb.SportsObjects_GetResponse, error) {
 	filter := &pb.SportsObjectORM{
 		ObjectId: in.ObjectId,
@@ -93,6 +95,7 @@ func Get(ctx context.Context, in *pb.SportsObjects_GetRequest) (*pb.SportsObject
 	}, nil
 }
 
+// ListFromDetailed is a ListSportsObjectsFromDetailed handler that returns the list of sports objects by sports areas filters
 func ListFromDetailed(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequest) (*pb.SportsObjects_ListResponse, error) {
 	if err := in.Validate(); err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())

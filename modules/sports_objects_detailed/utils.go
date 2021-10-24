@@ -4,6 +4,7 @@ import (
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 )
 
+// ObjectDetailedToObject is a dummy converter from SportsObjectDetailed structure to SportsObject
 func ObjectDetailedToObject(in *pb.SportsObjectDetailed) *pb.SportsObject {
 	return &pb.SportsObject{
 		ObjectId:                     in.ObjectId,
@@ -15,6 +16,7 @@ func ObjectDetailedToObject(in *pb.SportsObjectDetailed) *pb.SportsObject {
 	}
 }
 
+// UniqueObjectsFromDetailed returnes unique SportsObject from SportsObjectDetailed list
 func UniqueObjectsFromDetailed(objects []*pb.SportsObjectDetailed) []*pb.SportsObject {
 	var result []*pb.SportsObject
 	idsHashMap := make(map[uint32]bool)

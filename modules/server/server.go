@@ -28,7 +28,7 @@ func Run() {
 		}).Fatalln("failed to listen")
 	}
 	grpcServer := grpc.NewServer()
-	pb.RegisterApiServiceServer(grpcServer, &ApiServiceServer{})
+	pb.RegisterApiServiceServer(grpcServer, &ApiServiceServer{}) // registring new grpc server
 
 	// starting new grpc server in a goroutine
 	go func() {
@@ -59,7 +59,7 @@ func Run() {
 	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
 		EmitDefaults: true,
 	}))
-	err = pb.RegisterApiServiceHandler(context.Background(), gwMux, conn)
+	err = pb.RegisterApiServiceHandler(context.Background(), gwMux, conn) // setting grpc http gateway
 	if err != nil {
 		logrus.WithFields(logrus.Fields{
 			"error": err.Error(),
@@ -69,7 +69,7 @@ func Run() {
 	mux := http.NewServeMux()
 	mux.Handle("/", gwMux)
 
-	mux.HandleFunc("/swagger.json", serveSwagger)
+	mux.HandleFunc("/swagger.json", serveSwagger) // handling swagger.json file for swagger-ui
 
 	logrus.Infoln("serving HTTP gRPC-Gateway on " + httpConnectionString)
 	if err := http.ListenAndServe(httpConnectionString, allowCORS(mux)); err != nil {
@@ -79,11 +79,13 @@ func Run() {
 	}
 }
 
+// preflightHandler sets CORS headers for the response
 func preflightHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
 }
 
+// allowCORS configres CORS
 func allowCORS(h http.Handler) http.Handler {
 	h = handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),

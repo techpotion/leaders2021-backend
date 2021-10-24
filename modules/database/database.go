@@ -11,10 +11,13 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-var connectionString string
-var db *gorm.DB
+var connectionString string // connection string
+var db *gorm.DB             // database singleton instance
 
 // Init initializes connection string as a global module variable
+// We use Init instead of self executed init as we need
+// some other stuff (viper) to be configured
+// before  database.init executiong
 func Init() {
 	connectionString = makeConnectionString()
 	var dbErr error
