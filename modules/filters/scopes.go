@@ -92,6 +92,17 @@ func SportKindsScope(kinds []string, tableName string) func(db *gorm.DB) *gorm.D
 func PolygonScope(polygon *pb.Polygon) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if polygon != nil {
+			polyQuery := analytics.FormPolygonContainsQuery(polygon)
+			return db.Where(polyQuery)
+		}
+		return db
+	}
+}
+
+// PolygonScope is a sport_kind filter which applies if valid polygon was provided
+func PolygonFromDetailedScope(polygon *pb.Polygon) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if polygon != nil {
 			polyQuery := analytics.FormPolygonContainsQueryFromDetailed(polygon)
 			return db.Where(polyQuery)
 		}

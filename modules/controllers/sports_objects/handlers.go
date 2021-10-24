@@ -119,7 +119,7 @@ func ListFromDetailed(ctx context.Context, in *pb.SportsObjectsDetailed_ListRequ
 		filters.SportsAreaTypeScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
 		filters.AvailabilitiesScope(in.Availabilities, sportsobjectsdetailed.TableName),
 		filters.SportKindsScope(in.SportKinds, sportsobjectsdetailed.TableName),
-		filters.PolygonScope(in.Polygon),
+		filters.PolygonFromDetailedScope(in.Polygon),
 	).Joins("INNER JOIN objects ON objects.object_id = objects_detailed.object_id").Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
