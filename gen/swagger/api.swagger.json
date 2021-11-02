@@ -1612,6 +1612,10 @@
             "$ref": "#/definitions/apiPollution"
           }
         },
+        "pollutionPercentage": {
+          "type": "number",
+          "format": "float"
+        },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
         }

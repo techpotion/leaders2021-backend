@@ -749,6 +749,8 @@ func (m *PolygonPollutionAnalytics_Response) Validate() error {
 
 	}
 
+	// no validation rules for PollutionPercentage
+
 	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PolygonPollutionAnalytics_ResponseValidationError{
