@@ -47,6 +47,9 @@ service ApiService {
     rpc PolygonPollutionAnalytics(PolygonPollutionAnalytics.Request) returns (PolygonPollutionAnalytics.Response) {
     }
 
+    rpc PolygonSubwayAnalytics(PolygonSubwayAnalytics.Request) returns (PolygonSubwayAnalytics.Response) {
+    }
+
     rpc PolygonAnalyticsDashboard(PolygonAnalyticsDashboard.Request) returns (PolygonAnalyticsDashboard.Response) {
     }
 

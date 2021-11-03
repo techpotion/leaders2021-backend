@@ -97,3 +97,10 @@ message Region {
     double density = 3;
     double population = 4;
 }
+
+message Subway {
+    string name = 1;
+    string lineColor = 2;
+    Point point = 3;
+    double distanceFromPolygon = 4; // optional
+}

@@ -22,6 +22,8 @@ generate:
 
 	go run scripts/generate_clean_protos/main.go
 
+	gofmt -s -w gen/pb/
+
 	make lint --ignore-errors > /dev/null 2>&1
 
 lint:

@@ -58,6 +58,17 @@ message PolygonPollutionAnalytics {
     }
 }
 
+message PolygonSubwayAnalytics {
+    message Request {
+        Polygon polygon = 1;
+    }
+
+    message Response {
+        repeated Subway points = 1;
+        ListStats listStats = 2;
+    }
+}
+
 message PolygonAnalyticsDashboard {
     message Request {
         Polygon polygon = 1;
