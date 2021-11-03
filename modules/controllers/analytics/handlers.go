@@ -148,7 +148,7 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 
 	return &pb.PolygonParkAnalytics_Response{
 		Parks:     convertedList,
-		ListStats: &pb.ListStats{Count: uint32(result.RowsAffected)},
+		ListStats: &pb.ListStats{Count: uint32(len(convertedList))},
 	}, nil
 }
 
@@ -196,12 +196,12 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 		}
 		convertedList = append(convertedList, &converted)
 	}
-
+	fmt.Println(convertedList)
 	if in.ReturnPoints {
 		return &pb.PolygonPollutionAnalytics_Response{
 			Points:              convertedList,
 			PollutionPercentage: float32(len(convertedList)) / float32(totalPoints),
-			ListStats:           &pb.ListStats{Count: uint32(result.RowsAffected)},
+			ListStats:           &pb.ListStats{Count: uint32(len(convertedList))},
 		}, nil
 	} else {
 		return &pb.PolygonPollutionAnalytics_Response{}, nil
