@@ -178,6 +178,15 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 		return nil, status.Error(codes.Internal, result.Error.Error())
 	}
 
+	var totalPoints int64
+	result = db.Model(&pb.PollutionORM{}).Where(pb.ParkORM{HasSportground: false}).Where(polygonQuery).Count(&totalPoints)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
 	var convertedList []*pb.Pollution
 	for _, objectORM := range parksList {
 		converted, err := objectORM.ToPB(ctx)
@@ -189,8 +198,9 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 
 	if in.ReturnPoints {
 		return &pb.PolygonPollutionAnalytics_Response{
-			Points:    convertedList,
-			ListStats: &pb.ListStats{Count: uint32(result.RowsAffected)},
+			Points:              convertedList,
+			PollutionPercentage: float32(len(convertedList)) / float32(totalPoints),
+			ListStats:           &pb.ListStats{Count: uint32(result.RowsAffected)},
 		}, nil
 	} else {
 		return &pb.PolygonPollutionAnalytics_Response{}, nil
@@ -235,6 +245,7 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 		defer wg.Done()
 		pollutionAnalytics, err = PolygonPollutionAnalytics(ctx, &pb.PolygonPollutionAnalytics_Request{
 			Polygon:      in.Polygon,
+			IsPolluted:   true,
 			ReturnPoints: true,
 		})
 	}()

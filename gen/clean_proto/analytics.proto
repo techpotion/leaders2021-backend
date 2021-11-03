@@ -53,7 +53,8 @@ message PolygonPollutionAnalytics {
 
     message Response {
         repeated Pollution points = 1;
-        ListStats listStats = 2;
+        float pollutionPercentage = 2;
+        ListStats listStats = 3;
     }
 }
 

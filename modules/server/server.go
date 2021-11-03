@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/handlers"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"github.com/techpotion/leaders2021-backend/gen/pb"
@@ -56,9 +56,7 @@ func Run() {
 	httpPort := viper.GetInt("server.http.port")
 	httpConnectionString := fmt.Sprintf("%s:%d", httpInterface, httpPort)
 
-	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
-		EmitDefaults: true,
-	}))
+	gwMux := runtime.NewServeMux()
 	err = pb.RegisterApiServiceHandler(context.Background(), gwMux, conn) // setting grpc http gateway
 	if err != nil {
 		logrus.WithFields(logrus.Fields{
