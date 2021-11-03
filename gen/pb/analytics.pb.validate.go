@@ -232,6 +232,73 @@ var _ interface {
 	ErrorName() string
 } = PolygonPollutionAnalyticsValidationError{}
 
+// Validate checks the field values on PolygonSubwayAnalytics with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *PolygonSubwayAnalytics) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// PolygonSubwayAnalyticsValidationError is the validation error returned by
+// PolygonSubwayAnalytics.Validate if the designated constraints aren't met.
+type PolygonSubwayAnalyticsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PolygonSubwayAnalyticsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PolygonSubwayAnalyticsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PolygonSubwayAnalyticsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PolygonSubwayAnalyticsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PolygonSubwayAnalyticsValidationError) ErrorName() string {
+	return "PolygonSubwayAnalyticsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PolygonSubwayAnalyticsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPolygonSubwayAnalytics.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PolygonSubwayAnalyticsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PolygonSubwayAnalyticsValidationError{}
+
 // Validate checks the field values on PolygonAnalyticsDashboard with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
@@ -821,6 +888,177 @@ var _ interface {
 	ErrorName() string
 } = PolygonPollutionAnalytics_ResponseValidationError{}
 
+// Validate checks the field values on PolygonSubwayAnalytics_Request with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *PolygonSubwayAnalytics_Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PolygonSubwayAnalytics_RequestValidationError{
+				field:  "Polygon",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// PolygonSubwayAnalytics_RequestValidationError is the validation error
+// returned by PolygonSubwayAnalytics_Request.Validate if the designated
+// constraints aren't met.
+type PolygonSubwayAnalytics_RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PolygonSubwayAnalytics_RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PolygonSubwayAnalytics_RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PolygonSubwayAnalytics_RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PolygonSubwayAnalytics_RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PolygonSubwayAnalytics_RequestValidationError) ErrorName() string {
+	return "PolygonSubwayAnalytics_RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PolygonSubwayAnalytics_RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPolygonSubwayAnalytics_Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PolygonSubwayAnalytics_RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PolygonSubwayAnalytics_RequestValidationError{}
+
+// Validate checks the field values on PolygonSubwayAnalytics_Response with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *PolygonSubwayAnalytics_Response) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetPoints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PolygonSubwayAnalytics_ResponseValidationError{
+					field:  fmt.Sprintf("Points[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PolygonSubwayAnalytics_ResponseValidationError{
+				field:  "ListStats",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// PolygonSubwayAnalytics_ResponseValidationError is the validation error
+// returned by PolygonSubwayAnalytics_Response.Validate if the designated
+// constraints aren't met.
+type PolygonSubwayAnalytics_ResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PolygonSubwayAnalytics_ResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PolygonSubwayAnalytics_ResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PolygonSubwayAnalytics_ResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PolygonSubwayAnalytics_ResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PolygonSubwayAnalytics_ResponseValidationError) ErrorName() string {
+	return "PolygonSubwayAnalytics_ResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PolygonSubwayAnalytics_ResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPolygonSubwayAnalytics_Response.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PolygonSubwayAnalytics_ResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PolygonSubwayAnalytics_ResponseValidationError{}
+
 // Validate checks the field values on PolygonAnalyticsDashboard_Request with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, an error is returned.
@@ -931,6 +1169,16 @@ func (m *PolygonAnalyticsDashboard_Response) Validate() error {
 		if err := v.Validate(); err != nil {
 			return PolygonAnalyticsDashboard_ResponseValidationError{
 				field:  "PollutionAnalytics",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubwayAnalytics()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PolygonAnalyticsDashboard_ResponseValidationError{
+				field:  "SubwayAnalytics",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

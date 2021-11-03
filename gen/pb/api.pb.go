@@ -29,7 +29,7 @@ var file_api_proto_rawDesc = []byte{
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0f, 0x61, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0d, 0x63, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x73, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x32, 0x81, 0x25, 0x0a, 0x0a, 0x41, 0x70, 0x69, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x6f, 0x74, 0x6f, 0x32, 0x81, 0x27, 0x0a, 0x0a, 0x41, 0x70, 0x69, 0x53, 0x65, 0x72, 0x76, 0x69,
 	0x63, 0x65, 0x12, 0xb9, 0x01, 0x0a, 0x11, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x70, 0x6f, 0x72, 0x74,
 	0x73, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x12, 0x1e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x53,
 	0x70, 0x6f, 0x72, 0x74, 0x73, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x2e, 0x4c, 0x69, 0x73,
@@ -179,6 +179,22 @@ var file_api_proto_rawDesc = []byte{
 	0x79, 0x67, 0x6f, 0x6e, 0x1a, 0x38, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x73, 0x20, 0x61, 0x69,
 	0x72, 0x20, 0x70, 0x6f, 0x6c, 0x6c, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x73, 0x69, 0x74, 0x75,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x77, 0x69, 0x74, 0x68, 0x69, 0x6e, 0x20, 0x72, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x20, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x12, 0xfd,
+	0x01, 0x0a, 0x16, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x53, 0x75, 0x62, 0x77, 0x61, 0x79,
+	0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x12, 0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x53, 0x75, 0x62, 0x77, 0x61, 0x79, 0x41, 0x6e, 0x61,
+	0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x53, 0x75, 0x62, 0x77,
+	0x61, 0x79, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x2e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x97, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x23, 0x22, 0x1e, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x53, 0x75,
+	0x62, 0x77, 0x61, 0x79, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x3a, 0x01, 0x2a,
+	0x92, 0x41, 0x6b, 0x0a, 0x09, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x12, 0x32,
+	0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x73, 0x20, 0x73, 0x75, 0x62, 0x77, 0x61, 0x79, 0x20, 0x61,
+	0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x20, 0x77, 0x69, 0x74, 0x68, 0x69, 0x6e, 0x67,
+	0x20, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x20, 0x70, 0x6f, 0x6c, 0x79, 0x67,
+	0x6f, 0x6e, 0x1a, 0x2a, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x73, 0x20, 0x73, 0x75, 0x62, 0x77,
+	0x61, 0x79, 0x20, 0x61, 0x6e, 0x61, 0x6c, 0x79, 0x74, 0x69, 0x63, 0x73, 0x20, 0x72, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x20, 0x70, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x12, 0x95,
 	0x02, 0x0a, 0x19, 0x50, 0x6f, 0x6c, 0x79, 0x67, 0x6f, 0x6e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x74,
 	0x69, 0x63, 0x73, 0x44, 0x61, 0x73, 0x68, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x12, 0x26, 0x2e, 0x61,
@@ -376,31 +392,33 @@ var file_api_proto_goTypes = []interface{}{
 	(*PolygonAnalytics_Request)(nil),                    // 4: api.PolygonAnalytics.Request
 	(*PolygonParkAnalytics_Request)(nil),                // 5: api.PolygonParkAnalytics.Request
 	(*PolygonPollutionAnalytics_Request)(nil),           // 6: api.PolygonPollutionAnalytics.Request
-	(*PolygonAnalyticsDashboard_Request)(nil),           // 7: api.PolygonAnalyticsDashboard.Request
-	(*ObjectsNames_ListRequest)(nil),                    // 8: api.ObjectsNames.ListRequest
-	(*DepartmentalOrganizationsIds_ListRequest)(nil),    // 9: api.DepartmentalOrganizationsIds.ListRequest
-	(*DepartmentalOrganizationsNames_ListRequest)(nil),  // 10: api.DepartmentalOrganizationsNames.ListRequest
-	(*SportsAreaNames_ListRequest)(nil),                 // 11: api.SportsAreaNames.ListRequest
-	(*SportsAreaTypes_ListRequest)(nil),                 // 12: api.SportsAreaTypes.ListRequest
-	(*SportKinds_ListRequest)(nil),                      // 13: api.SportKinds.ListRequest
-	(*Intersections_ListRequest)(nil),                   // 14: api.Intersections.ListRequest
-	(*Unions_ListRequest)(nil),                          // 15: api.Unions.ListRequest
-	(*SportsObjects_ListResponse)(nil),                  // 16: api.SportsObjects.ListResponse
-	(*SportsObjects_GetResponse)(nil),                   // 17: api.SportsObjects.GetResponse
-	(*SportsObjectsDetailed_ListResponse)(nil),          // 18: api.SportsObjectsDetailed.ListResponse
-	(*GeoJsons_Response)(nil),                           // 19: api.GeoJsons.Response
-	(*PolygonAnalytics_Response)(nil),                   // 20: api.PolygonAnalytics.Response
-	(*PolygonParkAnalytics_Response)(nil),               // 21: api.PolygonParkAnalytics.Response
-	(*PolygonPollutionAnalytics_Response)(nil),          // 22: api.PolygonPollutionAnalytics.Response
-	(*PolygonAnalyticsDashboard_Response)(nil),          // 23: api.PolygonAnalyticsDashboard.Response
-	(*ObjectsNames_ListResponse)(nil),                   // 24: api.ObjectsNames.ListResponse
-	(*DepartmentalOrganizationsIds_ListResponse)(nil),   // 25: api.DepartmentalOrganizationsIds.ListResponse
-	(*DepartmentalOrganizationsNames_ListResponse)(nil), // 26: api.DepartmentalOrganizationsNames.ListResponse
-	(*SportsAreaNames_ListResponse)(nil),                // 27: api.SportsAreaNames.ListResponse
-	(*SportsAreaTypes_ListResponse)(nil),                // 28: api.SportsAreaTypes.ListResponse
-	(*SportKinds_ListResponse)(nil),                     // 29: api.SportKinds.ListResponse
-	(*Intersections_ListResponse)(nil),                  // 30: api.Intersections.ListResponse
-	(*Unions_ListResponse)(nil),                         // 31: api.Unions.ListResponse
+	(*PolygonSubwayAnalytics_Request)(nil),              // 7: api.PolygonSubwayAnalytics.Request
+	(*PolygonAnalyticsDashboard_Request)(nil),           // 8: api.PolygonAnalyticsDashboard.Request
+	(*ObjectsNames_ListRequest)(nil),                    // 9: api.ObjectsNames.ListRequest
+	(*DepartmentalOrganizationsIds_ListRequest)(nil),    // 10: api.DepartmentalOrganizationsIds.ListRequest
+	(*DepartmentalOrganizationsNames_ListRequest)(nil),  // 11: api.DepartmentalOrganizationsNames.ListRequest
+	(*SportsAreaNames_ListRequest)(nil),                 // 12: api.SportsAreaNames.ListRequest
+	(*SportsAreaTypes_ListRequest)(nil),                 // 13: api.SportsAreaTypes.ListRequest
+	(*SportKinds_ListRequest)(nil),                      // 14: api.SportKinds.ListRequest
+	(*Intersections_ListRequest)(nil),                   // 15: api.Intersections.ListRequest
+	(*Unions_ListRequest)(nil),                          // 16: api.Unions.ListRequest
+	(*SportsObjects_ListResponse)(nil),                  // 17: api.SportsObjects.ListResponse
+	(*SportsObjects_GetResponse)(nil),                   // 18: api.SportsObjects.GetResponse
+	(*SportsObjectsDetailed_ListResponse)(nil),          // 19: api.SportsObjectsDetailed.ListResponse
+	(*GeoJsons_Response)(nil),                           // 20: api.GeoJsons.Response
+	(*PolygonAnalytics_Response)(nil),                   // 21: api.PolygonAnalytics.Response
+	(*PolygonParkAnalytics_Response)(nil),               // 22: api.PolygonParkAnalytics.Response
+	(*PolygonPollutionAnalytics_Response)(nil),          // 23: api.PolygonPollutionAnalytics.Response
+	(*PolygonSubwayAnalytics_Response)(nil),             // 24: api.PolygonSubwayAnalytics.Response
+	(*PolygonAnalyticsDashboard_Response)(nil),          // 25: api.PolygonAnalyticsDashboard.Response
+	(*ObjectsNames_ListResponse)(nil),                   // 26: api.ObjectsNames.ListResponse
+	(*DepartmentalOrganizationsIds_ListResponse)(nil),   // 27: api.DepartmentalOrganizationsIds.ListResponse
+	(*DepartmentalOrganizationsNames_ListResponse)(nil), // 28: api.DepartmentalOrganizationsNames.ListResponse
+	(*SportsAreaNames_ListResponse)(nil),                // 29: api.SportsAreaNames.ListResponse
+	(*SportsAreaTypes_ListResponse)(nil),                // 30: api.SportsAreaTypes.ListResponse
+	(*SportKinds_ListResponse)(nil),                     // 31: api.SportKinds.ListResponse
+	(*Intersections_ListResponse)(nil),                  // 32: api.Intersections.ListResponse
+	(*Unions_ListResponse)(nil),                         // 33: api.Unions.ListResponse
 }
 var file_api_proto_depIdxs = []int32{
 	0,  // 0: api.ApiService.ListSportsObjects:input_type -> api.SportsObjects.ListRequest
@@ -413,36 +431,38 @@ var file_api_proto_depIdxs = []int32{
 	4,  // 7: api.ApiService.PolygonAnalytics:input_type -> api.PolygonAnalytics.Request
 	5,  // 8: api.ApiService.PolygonParkAnalytics:input_type -> api.PolygonParkAnalytics.Request
 	6,  // 9: api.ApiService.PolygonPollutionAnalytics:input_type -> api.PolygonPollutionAnalytics.Request
-	7,  // 10: api.ApiService.PolygonAnalyticsDashboard:input_type -> api.PolygonAnalyticsDashboard.Request
-	8,  // 11: api.ApiService.ListObjectsNames:input_type -> api.ObjectsNames.ListRequest
-	9,  // 12: api.ApiService.ListDepartmentalOrganizationsIds:input_type -> api.DepartmentalOrganizationsIds.ListRequest
-	10, // 13: api.ApiService.ListDepartmentalOrganizationsNames:input_type -> api.DepartmentalOrganizationsNames.ListRequest
-	11, // 14: api.ApiService.ListSportsAreaNames:input_type -> api.SportsAreaNames.ListRequest
-	12, // 15: api.ApiService.ListSportsAreaTypes:input_type -> api.SportsAreaTypes.ListRequest
-	13, // 16: api.ApiService.ListSportKinds:input_type -> api.SportKinds.ListRequest
-	14, // 17: api.ApiService.ListIntersections:input_type -> api.Intersections.ListRequest
-	15, // 18: api.ApiService.ListUnions:input_type -> api.Unions.ListRequest
-	16, // 19: api.ApiService.ListSportsObjects:output_type -> api.SportsObjects.ListResponse
-	16, // 20: api.ApiService.ListSportsObjectsFromDetailed:output_type -> api.SportsObjects.ListResponse
-	17, // 21: api.ApiService.GetSportsObject:output_type -> api.SportsObjects.GetResponse
-	18, // 22: api.ApiService.ListSportsObjectsDetailed:output_type -> api.SportsObjectsDetailed.ListResponse
-	19, // 23: api.ApiService.GetGeoJsonRegions:output_type -> api.GeoJsons.Response
-	19, // 24: api.ApiService.GetGeoJsonDensityHeatmap:output_type -> api.GeoJsons.Response
-	19, // 25: api.ApiService.GetGeoJsonSportsObjects:output_type -> api.GeoJsons.Response
-	20, // 26: api.ApiService.PolygonAnalytics:output_type -> api.PolygonAnalytics.Response
-	21, // 27: api.ApiService.PolygonParkAnalytics:output_type -> api.PolygonParkAnalytics.Response
-	22, // 28: api.ApiService.PolygonPollutionAnalytics:output_type -> api.PolygonPollutionAnalytics.Response
-	23, // 29: api.ApiService.PolygonAnalyticsDashboard:output_type -> api.PolygonAnalyticsDashboard.Response
-	24, // 30: api.ApiService.ListObjectsNames:output_type -> api.ObjectsNames.ListResponse
-	25, // 31: api.ApiService.ListDepartmentalOrganizationsIds:output_type -> api.DepartmentalOrganizationsIds.ListResponse
-	26, // 32: api.ApiService.ListDepartmentalOrganizationsNames:output_type -> api.DepartmentalOrganizationsNames.ListResponse
-	27, // 33: api.ApiService.ListSportsAreaNames:output_type -> api.SportsAreaNames.ListResponse
-	28, // 34: api.ApiService.ListSportsAreaTypes:output_type -> api.SportsAreaTypes.ListResponse
-	29, // 35: api.ApiService.ListSportKinds:output_type -> api.SportKinds.ListResponse
-	30, // 36: api.ApiService.ListIntersections:output_type -> api.Intersections.ListResponse
-	31, // 37: api.ApiService.ListUnions:output_type -> api.Unions.ListResponse
-	19, // [19:38] is the sub-list for method output_type
-	0,  // [0:19] is the sub-list for method input_type
+	7,  // 10: api.ApiService.PolygonSubwayAnalytics:input_type -> api.PolygonSubwayAnalytics.Request
+	8,  // 11: api.ApiService.PolygonAnalyticsDashboard:input_type -> api.PolygonAnalyticsDashboard.Request
+	9,  // 12: api.ApiService.ListObjectsNames:input_type -> api.ObjectsNames.ListRequest
+	10, // 13: api.ApiService.ListDepartmentalOrganizationsIds:input_type -> api.DepartmentalOrganizationsIds.ListRequest
+	11, // 14: api.ApiService.ListDepartmentalOrganizationsNames:input_type -> api.DepartmentalOrganizationsNames.ListRequest
+	12, // 15: api.ApiService.ListSportsAreaNames:input_type -> api.SportsAreaNames.ListRequest
+	13, // 16: api.ApiService.ListSportsAreaTypes:input_type -> api.SportsAreaTypes.ListRequest
+	14, // 17: api.ApiService.ListSportKinds:input_type -> api.SportKinds.ListRequest
+	15, // 18: api.ApiService.ListIntersections:input_type -> api.Intersections.ListRequest
+	16, // 19: api.ApiService.ListUnions:input_type -> api.Unions.ListRequest
+	17, // 20: api.ApiService.ListSportsObjects:output_type -> api.SportsObjects.ListResponse
+	17, // 21: api.ApiService.ListSportsObjectsFromDetailed:output_type -> api.SportsObjects.ListResponse
+	18, // 22: api.ApiService.GetSportsObject:output_type -> api.SportsObjects.GetResponse
+	19, // 23: api.ApiService.ListSportsObjectsDetailed:output_type -> api.SportsObjectsDetailed.ListResponse
+	20, // 24: api.ApiService.GetGeoJsonRegions:output_type -> api.GeoJsons.Response
+	20, // 25: api.ApiService.GetGeoJsonDensityHeatmap:output_type -> api.GeoJsons.Response
+	20, // 26: api.ApiService.GetGeoJsonSportsObjects:output_type -> api.GeoJsons.Response
+	21, // 27: api.ApiService.PolygonAnalytics:output_type -> api.PolygonAnalytics.Response
+	22, // 28: api.ApiService.PolygonParkAnalytics:output_type -> api.PolygonParkAnalytics.Response
+	23, // 29: api.ApiService.PolygonPollutionAnalytics:output_type -> api.PolygonPollutionAnalytics.Response
+	24, // 30: api.ApiService.PolygonSubwayAnalytics:output_type -> api.PolygonSubwayAnalytics.Response
+	25, // 31: api.ApiService.PolygonAnalyticsDashboard:output_type -> api.PolygonAnalyticsDashboard.Response
+	26, // 32: api.ApiService.ListObjectsNames:output_type -> api.ObjectsNames.ListResponse
+	27, // 33: api.ApiService.ListDepartmentalOrganizationsIds:output_type -> api.DepartmentalOrganizationsIds.ListResponse
+	28, // 34: api.ApiService.ListDepartmentalOrganizationsNames:output_type -> api.DepartmentalOrganizationsNames.ListResponse
+	29, // 35: api.ApiService.ListSportsAreaNames:output_type -> api.SportsAreaNames.ListResponse
+	30, // 36: api.ApiService.ListSportsAreaTypes:output_type -> api.SportsAreaTypes.ListResponse
+	31, // 37: api.ApiService.ListSportKinds:output_type -> api.SportKinds.ListResponse
+	32, // 38: api.ApiService.ListIntersections:output_type -> api.Intersections.ListResponse
+	33, // 39: api.ApiService.ListUnions:output_type -> api.Unions.ListResponse
+	20, // [20:40] is the sub-list for method output_type
+	0,  // [0:20] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

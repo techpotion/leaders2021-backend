@@ -110,3 +110,12 @@ message Region {
     double density = 3;
     double population = 4;
 }
+
+message Subway {
+    option (gorm.opts).ormable = true;
+    option (gorm.opts).table = "subway_stations";
+    string name = 1;
+    string lineColor = 2;
+    Point point = 3 [(gorm.field).tag = {embedded: true, embedded_prefix: "point_", not_null: true}];
+    double distanceFromPolygon = 4; // optional
+}

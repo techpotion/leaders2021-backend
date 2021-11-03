@@ -204,6 +204,18 @@ service ApiService {
         };
     }
 
+    rpc PolygonSubwayAnalytics(PolygonSubwayAnalytics.Request) returns (PolygonSubwayAnalytics.Response) {
+        option (google.api.http) = {
+            post: "/api/v1/PolygonSubwayAnalytics";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Returns subway analytics requested polygon";
+            summary: "Returns subway analytics withing requested polygon";
+            tags: "Analytics";
+        };
+    }
+
     rpc PolygonAnalyticsDashboard(PolygonAnalyticsDashboard.Request) returns (PolygonAnalyticsDashboard.Response) {
         option (google.api.http) = {
             post: "/api/v1/PolygonAnalyticsDashboard";

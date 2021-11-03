@@ -3,6 +3,7 @@ package analytics
 import (
 	"context"
 	"errors"
+	"fmt"
 	"sync"
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
@@ -147,7 +148,7 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 
 	return &pb.PolygonParkAnalytics_Response{
 		Parks:     convertedList,
-		ListStats: &pb.ListStats{Count: uint32(result.RowsAffected)},
+		ListStats: &pb.ListStats{Count: uint32(len(convertedList))},
 	}, nil
 }
 
@@ -195,16 +196,62 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 		}
 		convertedList = append(convertedList, &converted)
 	}
-
+	fmt.Println(convertedList)
 	if in.ReturnPoints {
 		return &pb.PolygonPollutionAnalytics_Response{
 			Points:              convertedList,
 			PollutionPercentage: float32(len(convertedList)) / float32(totalPoints),
-			ListStats:           &pb.ListStats{Count: uint32(result.RowsAffected)},
+			ListStats:           &pb.ListStats{Count: uint32(len(convertedList))},
 		}, nil
 	} else {
 		return &pb.PolygonPollutionAnalytics_Response{}, nil
 	}
+}
+
+// PolygonPollutionAnalytics is a polygon pollution analytics endpoint handler
+func PolygonSubwayAnalytics(ctx context.Context, in *pb.PolygonSubwayAnalytics_Request) (*pb.PolygonSubwayAnalytics_Response, error) {
+	if err := in.Validate(); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	if err := analytics.ValidatePolygon(in.Polygon); err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	db, err := database.New()
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	var subwaysList []*pb.SubwayORM
+
+	polygonQuery := analytics.FormGeometryPolygon(in.Polygon)
+
+	result := db.
+		Select(fmt.Sprintf("*, ST_Distance(%s::geography, position::geography) as distance_from_polygon", polygonQuery)).
+		Order(fmt.Sprintf("position <-> %s", polygonQuery)).
+		Limit(5).
+		Find(&subwaysList)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, status.Error(codes.NotFound, result.Error.Error())
+		}
+		return nil, status.Error(codes.Internal, result.Error.Error())
+	}
+
+	var convertedList []*pb.Subway
+	for _, subwayORM := range subwaysList {
+		converted, err := subwayORM.ToPB(ctx)
+		if err != nil {
+			return nil, status.Error(codes.Internal, err.Error())
+		}
+		convertedList = append(convertedList, &converted)
+	}
+
+	return &pb.PolygonSubwayAnalytics_Response{
+		Points:    convertedList,
+		ListStats: &pb.ListStats{Count: uint32(len(convertedList))},
+	}, nil
 }
 
 // PolygonAnalyticsDashboard is a polygon pollution analytics dashboard endpoint handler that compiles all the other methods
@@ -220,6 +267,7 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 	var basicAnalytics *pb.PolygonAnalytics_Response
 	var parkAnalytics *pb.PolygonParkAnalytics_Response
 	var pollutionAnalytics *pb.PolygonPollutionAnalytics_Response
+	var subwayAnalytics *pb.PolygonSubwayAnalytics_Response
 	var err error
 	var wg sync.WaitGroup
 
@@ -249,6 +297,15 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 			ReturnPoints: true,
 		})
 	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		subwayAnalytics, err = PolygonSubwayAnalytics(ctx, &pb.PolygonSubwayAnalytics_Request{
+			Polygon: in.Polygon,
+		})
+	}()
+
 	wg.Wait()
 
 	if err != nil {
@@ -258,5 +315,6 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 		BasicAnalytics:     basicAnalytics,
 		ParkAnalytics:      parkAnalytics,
 		PollutionAnalytics: pollutionAnalytics,
+		SubwayAnalytics:    subwayAnalytics,
 	}, nil
 }

@@ -1241,6 +1241,70 @@
           "Analytics"
         ]
       }
+    },
+    "/api/v1/PolygonSubwayAnalytics": {
+      "post": {
+        "summary": "Returns subway analytics withing requested polygon",
+        "description": "Returns subway analytics requested polygon",
+        "operationId": "ApiService_PolygonSubwayAnalytics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPolygonSubwayAnalyticsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonSubwayAnalyticsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1488,6 +1552,9 @@
         },
         "pollutionAnalytics": {
           "$ref": "#/definitions/apiPolygonPollutionAnalyticsResponse"
+        },
+        "subwayAnalytics": {
+          "$ref": "#/definitions/apiPolygonSubwayAnalyticsResponse"
         }
       }
     },
@@ -1615,6 +1682,28 @@
         "pollutionPercentage": {
           "type": "number",
           "format": "float"
+        },
+        "listStats": {
+          "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiPolygonSubwayAnalyticsRequest": {
+      "type": "object",
+      "properties": {
+        "polygon": {
+          "$ref": "#/definitions/apiPolygon"
+        }
+      }
+    },
+    "apiPolygonSubwayAnalyticsResponse": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiSubway"
+          }
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
@@ -1866,6 +1955,24 @@
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiSubway": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lineColor": {
+          "type": "string"
+        },
+        "point": {
+          "$ref": "#/definitions/apiPoint"
+        },
+        "distanceFromPolygon": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
