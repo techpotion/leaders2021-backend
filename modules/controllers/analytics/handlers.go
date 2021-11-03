@@ -107,6 +107,7 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 		AreasAmountPer100K:         areaTypesAmountPerPerson * 100000,
 		SportsObjectsAmount:        uint32(sportsObjectsAmount),
 		SportsObjectsAmountPer100K: sportsObjectsAmountPer100k * 100000,
+		Density:                    region.Density,
 	}, nil
 }
 
