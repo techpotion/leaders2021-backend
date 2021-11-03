@@ -78,5 +78,6 @@ message PolygonAnalyticsDashboard {
         PolygonAnalytics.Response basicAnalytics = 1;
         PolygonParkAnalytics.Response parkAnalytics = 2;
         PolygonPollutionAnalytics.Response pollutionAnalytics = 3;
+        PolygonSubwayAnalytics.Response subwayAnalytics = 4;
     }
 }

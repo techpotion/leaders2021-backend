@@ -1552,6 +1552,9 @@
         },
         "pollutionAnalytics": {
           "$ref": "#/definitions/apiPolygonPollutionAnalyticsResponse"
+        },
+        "subwayAnalytics": {
+          "$ref": "#/definitions/apiPolygonSubwayAnalyticsResponse"
         }
       }
     },

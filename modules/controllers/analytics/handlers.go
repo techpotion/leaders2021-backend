@@ -267,6 +267,7 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 	var basicAnalytics *pb.PolygonAnalytics_Response
 	var parkAnalytics *pb.PolygonParkAnalytics_Response
 	var pollutionAnalytics *pb.PolygonPollutionAnalytics_Response
+	var subwayAnalytics *pb.PolygonSubwayAnalytics_Response
 	var err error
 	var wg sync.WaitGroup
 
@@ -296,6 +297,15 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 			ReturnPoints: true,
 		})
 	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		subwayAnalytics, err = PolygonSubwayAnalytics(ctx, &pb.PolygonSubwayAnalytics_Request{
+			Polygon: in.Polygon,
+		})
+	}()
+
 	wg.Wait()
 
 	if err != nil {
@@ -305,5 +315,6 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 		BasicAnalytics:     basicAnalytics,
 		ParkAnalytics:      parkAnalytics,
 		PollutionAnalytics: pollutionAnalytics,
+		SubwayAnalytics:    subwayAnalytics,
 	}, nil
 }

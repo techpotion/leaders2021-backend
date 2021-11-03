@@ -1175,6 +1175,16 @@ func (m *PolygonAnalyticsDashboard_Response) Validate() error {
 		}
 	}
 
+	if v, ok := interface{}(m.GetSubwayAnalytics()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PolygonAnalyticsDashboard_ResponseValidationError{
+				field:  "SubwayAnalytics",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 

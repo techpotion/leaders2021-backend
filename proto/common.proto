@@ -117,5 +117,5 @@ message Subway {
     string name = 1;
     string lineColor = 2;
     Point point = 3 [(gorm.field).tag = {embedded: true, embedded_prefix: "point_", not_null: true}];
-    double distanceFromPolygon = 4 // optional
+    double distanceFromPolygon = 4; // optional
 }
