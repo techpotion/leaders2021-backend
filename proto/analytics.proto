@@ -27,6 +27,7 @@ message PolygonAnalytics {
         uint32 areaTypesAmount = 9;
         uint32 sportsObjectsAmount = 10;
         double sportsObjectsAmountPer100k = 11;
+        double density = 12;
     }
 }
 
