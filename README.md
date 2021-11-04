@@ -13,19 +13,24 @@ $ cd leaders2021-backend
 2. Fill the config.yaml, according to config.example.yaml example
 ```yaml
 server:
- grpc:
-   interface: 0.0.0.0
-   port: 3200
- http:
-   interface: 0.0.0.0
-   port: 3201
+  grpc:
+    interface: 0.0.0.0
+    port: 3200
+  http:
+    interface: 0.0.0.0
+    port: 3201
+
+microservices:
+  marks:
+    host: 192.168.1.58
+    port: 3300
 
 database:
- host: localhost
- port: 5432
- username: postgis
- password: postgis
- db: postgis
+  host: 192.168.1.58
+  port: 5432
+  username: postgres
+  password: postgres
+  db: postgres
 ```
 
 Alternatively, you may set database connection data using environment variables
@@ -35,6 +40,8 @@ $ export DB_HOST=localhost
 $ export DB_PORT=5432
 $ export DB_USERNAME=postgis
 $ export DB_PASSWORD=postgis
+$ export MARKS_HOST=localhost
+$ export MARKS_PORT=3300
 ```
 \* Environment variables take precedence over data in config.yaml file
 

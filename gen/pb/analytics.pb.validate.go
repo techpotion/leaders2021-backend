@@ -366,6 +366,70 @@ var _ interface {
 	ErrorName() string
 } = PolygonAnalyticsDashboardValidationError{}
 
+// Validate checks the field values on Marks with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Marks) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// MarksValidationError is the validation error returned by Marks.Validate if
+// the designated constraints aren't met.
+type MarksValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MarksValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MarksValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MarksValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MarksValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MarksValidationError) ErrorName() string { return "MarksValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MarksValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMarks.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MarksValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MarksValidationError{}
+
 // Validate checks the field values on PolygonAnalytics_Request with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
@@ -1187,6 +1251,8 @@ func (m *PolygonAnalyticsDashboard_Response) Validate() error {
 		}
 	}
 
+	// no validation rules for Mark
+
 	return nil
 }
 
@@ -1246,3 +1312,147 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PolygonAnalyticsDashboard_ResponseValidationError{}
+
+// Validate checks the field values on Marks_GetRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *Marks_GetRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for AreasAmountPer100K
+
+	// no validation rules for SportsAmountPer100K
+
+	// no validation rules for AreasSquarePer100K
+
+	// no validation rules for SubwayDistance
+
+	// no validation rules for PollutionPercentage
+
+	return nil
+}
+
+// Marks_GetRequestValidationError is the validation error returned by
+// Marks_GetRequest.Validate if the designated constraints aren't met.
+type Marks_GetRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Marks_GetRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Marks_GetRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Marks_GetRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Marks_GetRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Marks_GetRequestValidationError) ErrorName() string { return "Marks_GetRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e Marks_GetRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMarks_GetRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Marks_GetRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Marks_GetRequestValidationError{}
+
+// Validate checks the field values on Marks_GetResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *Marks_GetResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Mark
+
+	return nil
+}
+
+// Marks_GetResponseValidationError is the validation error returned by
+// Marks_GetResponse.Validate if the designated constraints aren't met.
+type Marks_GetResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Marks_GetResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Marks_GetResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Marks_GetResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Marks_GetResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Marks_GetResponseValidationError) ErrorName() string {
+	return "Marks_GetResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Marks_GetResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMarks_GetResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Marks_GetResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Marks_GetResponseValidationError{}

@@ -228,6 +228,18 @@ service ApiService {
         };
     }
 
+    // Marks
+    rpc GetMark(Marks.GetRequest) returns (Marks.GetResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/GetMark";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Returns area's mark from trained model";
+            summary: "Returns area's mark from trained model";
+            tags: "Marks";
+        };
+    }
+
     // Filters
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
         option (google.api.http) = {

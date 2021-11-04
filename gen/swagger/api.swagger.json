@@ -183,6 +183,97 @@
         ]
       }
     },
+    "/api/v1/GetMark": {
+      "get": {
+        "summary": "Returns area's mark from trained model",
+        "description": "Returns area's mark from trained model",
+        "operationId": "ApiService_GetMark",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiMarksGetResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "areasAmountPer100k",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "sportsAmountPer100k",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "areasSquarePer100k",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "subwayDistance",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "pollutionPercentage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          }
+        ],
+        "tags": [
+          "Marks"
+        ]
+      }
+    },
     "/api/v1/GetSportsObject": {
       "get": {
         "summary": "Returns Sports Object info by its ID",
@@ -192,7 +283,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/SportsObjectsGetResponse"
+              "$ref": "#/definitions/apiSportsObjectsGetResponse"
             }
           },
           "400": {
@@ -1308,14 +1399,6 @@
     }
   },
   "definitions": {
-    "SportsObjectsGetResponse": {
-      "type": "object",
-      "properties": {
-        "sportsObject": {
-          "$ref": "#/definitions/apiSportsObject"
-        }
-      }
-    },
     "apiAvailability": {
       "type": "string",
       "enum": [
@@ -1433,6 +1516,15 @@
         "count": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "apiMarksGetResponse": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
@@ -1555,6 +1647,10 @@
         },
         "subwayAnalytics": {
           "$ref": "#/definitions/apiPolygonSubwayAnalyticsResponse"
+        },
+        "mark": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
@@ -1908,6 +2004,14 @@
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "apiSportsObjectsGetResponse": {
+      "type": "object",
+      "properties": {
+        "sportsObject": {
+          "$ref": "#/definitions/apiSportsObject"
         }
       }
     },

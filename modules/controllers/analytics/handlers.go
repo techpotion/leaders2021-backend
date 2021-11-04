@@ -8,6 +8,7 @@ import (
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/analytics"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/marks"
 	"github.com/techpotion/leaders2021-backend/modules/database"
 	sportsobjectsdetailed "github.com/techpotion/leaders2021-backend/modules/sports_objects_detailed"
 	"google.golang.org/grpc/codes"
@@ -306,8 +307,15 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 			Polygon: in.Polygon,
 		})
 	}()
-
 	wg.Wait()
+
+	mark, err := marks.GetMark(ctx, &pb.Marks_GetRequest{
+		AreasAmountPer100K:  float32(basicAnalytics.AreasAmount),
+		SportsAmountPer100K: float32(basicAnalytics.SportsAmountPer100K),
+		AreasSquarePer100K:  float32(basicAnalytics.AreasAmountPer100K),
+		SubwayDistance:      float32(subwayAnalytics.Points[0].DistanceFromPolygon),
+		PollutionPercentage: pollutionAnalytics.PollutionPercentage,
+	})
 
 	if err != nil {
 		return nil, err
@@ -317,5 +325,6 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 		ParkAnalytics:      parkAnalytics,
 		PollutionAnalytics: pollutionAnalytics,
 		SubwayAnalytics:    subwayAnalytics,
+		Mark:               mark.Mark,
 	}, nil
 }

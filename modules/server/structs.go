@@ -8,6 +8,7 @@ import (
 	"github.com/techpotion/leaders2021-backend/modules/controllers/circles"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/filters"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/geojsons"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/marks"
 	sportsobjects "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects"
 	sportsobjectsdetailed "github.com/techpotion/leaders2021-backend/modules/controllers/sports_objects_detailed"
 )
@@ -63,6 +64,10 @@ func (s *ApiServiceServer) PolygonSubwayAnalytics(ctx context.Context, in *pb.Po
 
 func (s *ApiServiceServer) PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashboard_Request) (*pb.PolygonAnalyticsDashboard_Response, error) {
 	return analytics.PolygonAnalyticsDashboard(ctx, in)
+}
+
+func (s *ApiServiceServer) GetMark(ctx context.Context, in *pb.Marks_GetRequest) (*pb.Marks_GetResponse, error) {
+	return marks.GetMark(ctx, in)
 }
 
 func (s *ApiServiceServer) ListObjectsNames(ctx context.Context, in *pb.ObjectsNames_ListRequest) (*pb.ObjectsNames_ListResponse, error) {
