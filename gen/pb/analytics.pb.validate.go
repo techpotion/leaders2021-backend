@@ -1251,6 +1251,8 @@ func (m *PolygonAnalyticsDashboard_Response) Validate() error {
 		}
 	}
 
+	// no validation rules for Mark
+
 	return nil
 }
 

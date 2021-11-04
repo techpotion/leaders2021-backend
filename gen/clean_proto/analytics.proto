@@ -80,6 +80,7 @@ message PolygonAnalyticsDashboard {
         PolygonParkAnalytics.Response parkAnalytics = 2;
         PolygonPollutionAnalytics.Response pollutionAnalytics = 3;
         PolygonSubwayAnalytics.Response subwayAnalytics = 4;
+        float mark = 5;
     }
 }
 
