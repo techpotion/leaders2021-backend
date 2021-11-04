@@ -10,6 +10,7 @@ import (
 	"github.com/techpotion/leaders2021-backend/modules/analytics"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/marks"
 	"github.com/techpotion/leaders2021-backend/modules/database"
+	"github.com/techpotion/leaders2021-backend/modules/filters"
 	sportsobjectsdetailed "github.com/techpotion/leaders2021-backend/modules/sports_objects_detailed"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -26,12 +27,6 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	filter := &pb.SportsObjectDetailedORM{
-		SportsAreaType: in.SportsAreaType,
-		Availability:   uint32(in.Availability),
-		SportKind:      in.SportKind,
-	}
-
 	db, err := database.New()
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
@@ -41,7 +36,11 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 
 	polygonQuery := analytics.FormPolygonContainsQuery(in.Polygon)
 
-	result := db.Select("\"object_id\", \"sport_kind\", \"sports_area_type\", \"sports_area_square\"").Where(filter).Where(polygonQuery).Find(&objectsList)
+	result := db.Select("\"object_id\", \"sport_kind\", \"sports_area_type\", \"sports_area_square\"").Scopes(
+		filters.SportsAreaTypeScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
+		filters.AvailabilitiesScope(in.Availabilities, sportsobjectsdetailed.TableName),
+		filters.SportKindsScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
+	).Where(polygonQuery).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())
@@ -278,7 +277,10 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 	go func() {
 		defer wg.Done()
 		basicAnalytics, err = PolygonAnalytics(ctx, &pb.PolygonAnalytics_Request{
-			Polygon: in.Polygon,
+			Polygon:         in.Polygon,
+			SportsAreaTypes: in.SportsAreaTypes,
+			Availabilities:  in.Availabilities,
+			SportKinds:      in.SportKinds,
 		})
 	}()
 

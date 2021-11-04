@@ -46,7 +46,7 @@ type ApiServiceClient interface {
 	// Circles
 	ListIntersections(ctx context.Context, in *Intersections_ListRequest, opts ...grpc.CallOption) (*Intersections_ListResponse, error)
 	ListUnions(ctx context.Context, in *Unions_ListRequest, opts ...grpc.CallOption) (*Unions_ListResponse, error)
-	// Density
+	// Densities
 	GetDensity(ctx context.Context, in *Densities_GetRequest, opts ...grpc.CallOption) (*Densities_GetResponse, error)
 }
 
@@ -288,7 +288,7 @@ type ApiServiceServer interface {
 	// Circles
 	ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error)
 	ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error)
-	// Density
+	// Densities
 	GetDensity(context.Context, *Densities_GetRequest) (*Densities_GetResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }

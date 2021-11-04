@@ -84,7 +84,7 @@ service ApiService {
     rpc ListUnions(Unions.ListRequest) returns (Unions.ListResponse) {
     }
 
-    // Density
+    // Densities
     rpc GetDensity(Densities.GetRequest) returns (Densities.GetResponse) {
     }
 }

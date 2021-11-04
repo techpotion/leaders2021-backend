@@ -10,9 +10,9 @@ message PolygonAnalytics {
     message Request {
         Polygon polygon = 1;
         // filters
-        string sportsAreaType = 2 [(validate.rules).string = {ignore_empty: true}]; // optional
-        Availability availability = 3; // optional
-        string sportKind = 4 [(validate.rules).string = {ignore_empty: true}]; // optional
+        repeated string sportsAreaTypes = 7 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated Availability availabilities = 8; // optional
+        repeated string sportKinds = 9 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
     }
 
     message Response {
@@ -73,6 +73,10 @@ message PolygonSubwayAnalytics {
 message PolygonAnalyticsDashboard {
     message Request {
         Polygon polygon = 1;
+        // filters
+        repeated string sportsAreaTypes = 7 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated Availability availabilities = 8; // optional
+        repeated string sportKinds = 9 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
     }
 
     message Response {
