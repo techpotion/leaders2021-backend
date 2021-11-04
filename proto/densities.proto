@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gen/pb";
+
+import "common.proto";
+
+message Densities {
+    message GetRequest {
+        Point point = 1;
+    }
+
+    message GetResponse {
+        double density = 2;
+    }
+}

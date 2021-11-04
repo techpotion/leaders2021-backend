@@ -46,6 +46,8 @@ type ApiServiceClient interface {
 	// Circles
 	ListIntersections(ctx context.Context, in *Intersections_ListRequest, opts ...grpc.CallOption) (*Intersections_ListResponse, error)
 	ListUnions(ctx context.Context, in *Unions_ListRequest, opts ...grpc.CallOption) (*Unions_ListResponse, error)
+	// Density
+	GetDensity(ctx context.Context, in *Densities_GetRequest, opts ...grpc.CallOption) (*Densities_GetResponse, error)
 }
 
 type apiServiceClient struct {
@@ -245,6 +247,15 @@ func (c *apiServiceClient) ListUnions(ctx context.Context, in *Unions_ListReques
 	return out, nil
 }
 
+func (c *apiServiceClient) GetDensity(ctx context.Context, in *Densities_GetRequest, opts ...grpc.CallOption) (*Densities_GetResponse, error) {
+	out := new(Densities_GetResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetDensity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServiceServer is the server API for ApiService service.
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
@@ -277,6 +288,8 @@ type ApiServiceServer interface {
 	// Circles
 	ListIntersections(context.Context, *Intersections_ListRequest) (*Intersections_ListResponse, error)
 	ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error)
+	// Density
+	GetDensity(context.Context, *Densities_GetRequest) (*Densities_GetResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -346,6 +359,9 @@ func (UnimplementedApiServiceServer) ListIntersections(context.Context, *Interse
 }
 func (UnimplementedApiServiceServer) ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUnions not implemented")
+}
+func (UnimplementedApiServiceServer) GetDensity(context.Context, *Densities_GetRequest) (*Densities_GetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDensity not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -738,6 +754,24 @@ func _ApiService_ListUnions_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_GetDensity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Densities_GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).GetDensity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/GetDensity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).GetDensity(ctx, req.(*Densities_GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiService_ServiceDesc is the grpc.ServiceDesc for ApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -828,6 +862,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUnions",
 			Handler:    _ApiService_ListUnions_Handler,
+		},
+		{
+			MethodName: "GetDensity",
+			Handler:    _ApiService_GetDensity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

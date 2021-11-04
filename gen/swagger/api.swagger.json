@@ -21,6 +21,70 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/GetDensity": {
+      "post": {
+        "summary": "Returns density in a point",
+        "description": "Returns density in a point",
+        "operationId": "ApiService_GetDensity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDensitiesGetResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiDensitiesGetRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Densities"
+        ]
+      }
+    },
     "/api/v1/GetGeoJsonDensityHeatmap": {
       "get": {
         "summary": "Returns Moscow population density heatmap based on 2020 elections",
@@ -1417,6 +1481,23 @@
           "type": "string"
         },
         "square": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiDensitiesGetRequest": {
+      "type": "object",
+      "properties": {
+        "point": {
+          "$ref": "#/definitions/apiPoint"
+        }
+      }
+    },
+    "apiDensitiesGetResponse": {
+      "type": "object",
+      "properties": {
+        "density": {
           "type": "number",
           "format": "double"
         }
