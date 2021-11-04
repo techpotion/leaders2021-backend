@@ -857,6 +857,8 @@ func (m *Park) Validate() error {
 		}
 	}
 
+	// no validation rules for Square
+
 	return nil
 }
 

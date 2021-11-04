@@ -151,3 +151,7 @@ func CalculatePolygonSquareQuery(polygon *pb.Polygon) string {
 		polygonQuery,
 	)
 }
+
+func FormPolygonSquareQuery() string {
+	return "ST_Area(polygon::geography)"
+}
