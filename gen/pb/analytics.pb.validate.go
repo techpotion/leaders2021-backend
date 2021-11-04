@@ -448,6 +448,15 @@ func (m *PolygonAnalytics_Request) Validate() error {
 		}
 	}
 
+	for idx, item := range m.GetSportsAreaNames() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
+
 	for idx, item := range m.GetSportsAreaTypes() {
 		_, _ = idx, item
 
@@ -1149,6 +1158,15 @@ func (m *PolygonAnalyticsDashboard_Request) Validate() error {
 				cause:  err,
 			}
 		}
+	}
+
+	for idx, item := range m.GetSportsAreaNames() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
 	}
 
 	for idx, item := range m.GetSportsAreaTypes() {

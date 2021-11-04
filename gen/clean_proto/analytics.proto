@@ -10,9 +10,11 @@ message PolygonAnalytics {
     message Request {
         Polygon polygon = 1;
         // filters
-        repeated string sportsAreaTypes = 7; // optional
-        repeated Availability availabilities = 8; // optional
-        repeated string sportKinds = 9; // optional
+        repeated string departmentalOrganizationNames = 2; // optional
+        repeated string sportsAreaNames = 3; // optional
+        repeated string sportsAreaTypes = 4; // optional
+        repeated Availability availabilities = 5; // optional
+        repeated string sportKinds = 6; // optional
     }
 
     message Response {
@@ -74,9 +76,11 @@ message PolygonAnalyticsDashboard {
     message Request {
         Polygon polygon = 1;
         // filters
-        repeated string sportsAreaTypes = 7; // optional
-        repeated Availability availabilities = 8; // optional
-        repeated string sportKinds = 9; // optional
+        repeated string departmentalOrganizationNames = 2; // optional
+        repeated string sportsAreaNames = 3; // optional
+        repeated string sportsAreaTypes = 4; // optional
+        repeated Availability availabilities = 5; // optional
+        repeated string sportKinds = 6; // optional
     }
 
     message Response {
