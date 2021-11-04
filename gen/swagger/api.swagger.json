@@ -1716,12 +1716,24 @@
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
         },
-        "sportsAreaTypes": {
+        "departmentalOrganizationNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "title": "filters"
+        },
+        "sportsAreaNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "availabilities": {
           "type": "array",
@@ -1764,12 +1776,24 @@
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
         },
-        "sportsAreaTypes": {
+        "departmentalOrganizationNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "title": "filters"
+        },
+        "sportsAreaNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "availabilities": {
           "type": "array",

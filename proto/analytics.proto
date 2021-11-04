@@ -10,9 +10,11 @@ message PolygonAnalytics {
     message Request {
         Polygon polygon = 1;
         // filters
-        repeated string sportsAreaTypes = 7 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
-        repeated Availability availabilities = 8; // optional
-        repeated string sportKinds = 9 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated string departmentalOrganizationNames = 2; // optional
+        repeated string sportsAreaNames = 3 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated string sportsAreaTypes = 4 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated Availability availabilities = 5; // optional
+        repeated string sportKinds = 6 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
     }
 
     message Response {
@@ -74,9 +76,11 @@ message PolygonAnalyticsDashboard {
     message Request {
         Polygon polygon = 1;
         // filters
-        repeated string sportsAreaTypes = 7 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
-        repeated Availability availabilities = 8; // optional
-        repeated string sportKinds = 9 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated string departmentalOrganizationNames = 2; // optional
+        repeated string sportsAreaNames = 3 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated string sportsAreaTypes = 4 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+        repeated Availability availabilities = 5; // optional
+        repeated string sportKinds = 6 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
     }
 
     message Response {

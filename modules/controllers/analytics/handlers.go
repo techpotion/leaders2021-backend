@@ -37,6 +37,8 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 	polygonQuery := analytics.FormPolygonContainsQuery(in.Polygon)
 
 	result := db.Select("\"object_id\", \"sport_kind\", \"sports_area_type\", \"sports_area_square\"").Scopes(
+		filters.DepartmentalOrganizationNamesScope(in.DepartmentalOrganizationNames, sportsobjectsdetailed.TableName),
+		filters.SportsAreaNamesScope(in.SportsAreaNames, sportsobjectsdetailed.TableName),
 		filters.SportsAreaTypeScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
 		filters.AvailabilitiesScope(in.Availabilities, sportsobjectsdetailed.TableName),
 		filters.SportKindsScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
@@ -277,10 +279,12 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 	go func() {
 		defer wg.Done()
 		basicAnalytics, err = PolygonAnalytics(ctx, &pb.PolygonAnalytics_Request{
-			Polygon:         in.Polygon,
-			SportsAreaTypes: in.SportsAreaTypes,
-			Availabilities:  in.Availabilities,
-			SportKinds:      in.SportKinds,
+			Polygon:                       in.Polygon,
+			DepartmentalOrganizationNames: in.DepartmentalOrganizationNames,
+			SportsAreaNames:               in.SportsAreaNames,
+			SportsAreaTypes:               in.SportsAreaTypes,
+			Availabilities:                in.Availabilities,
+			SportKinds:                    in.SportKinds,
 		})
 	}()
 
