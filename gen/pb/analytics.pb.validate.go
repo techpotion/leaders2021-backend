@@ -448,13 +448,21 @@ func (m *PolygonAnalytics_Request) Validate() error {
 		}
 	}
 
-	if m.GetSportsAreaType() != "" {
+	for idx, item := range m.GetSportsAreaTypes() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
 
 	}
 
-	// no validation rules for Availability
+	for idx, item := range m.GetSportKinds() {
+		_, _ = idx, item
 
-	if m.GetSportKind() != "" {
+		if item != "" {
+
+		}
 
 	}
 
@@ -1141,6 +1149,24 @@ func (m *PolygonAnalyticsDashboard_Request) Validate() error {
 				cause:  err,
 			}
 		}
+	}
+
+	for idx, item := range m.GetSportsAreaTypes() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
+
+	for idx, item := range m.GetSportKinds() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
 	}
 
 	return nil

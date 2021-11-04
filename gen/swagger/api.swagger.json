@@ -1715,6 +1715,25 @@
       "properties": {
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
+        },
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "filters"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAvailability"
+          }
+        },
+        "sportKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1745,15 +1764,24 @@
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
         },
-        "sportsAreaType": {
-          "type": "string",
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "title": "filters"
         },
-        "availability": {
-          "$ref": "#/definitions/apiAvailability"
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAvailability"
+          }
         },
-        "sportKind": {
-          "type": "string"
+        "sportKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
