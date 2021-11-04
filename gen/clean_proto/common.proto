@@ -75,6 +75,7 @@ message Park {
     string location = 4;
     bool hasSportground = 5;
     Point objectPoint = 6;
+    double square = 7;
 }
 
 message Pollution {

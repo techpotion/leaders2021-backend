@@ -289,6 +289,7 @@ type ParkORM struct {
 	District       string
 	Location       string
 	HasSportground bool
+	Square         float64
 	ObjectPoint    *PointORM `gorm:"not null;embedded;embeddedPrefix:center_point_"`
 }
 
@@ -319,6 +320,7 @@ func (m *Park) ToORM(ctx context.Context) (ParkORM, error) {
 		}
 		to.ObjectPoint = &tempObjectPoint
 	}
+	to.Square = m.Square
 	if posthook, ok := interface{}(m).(ParkWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -347,6 +349,7 @@ func (m *ParkORM) ToPB(ctx context.Context) (Park, error) {
 		}
 		to.ObjectPoint = &tempObjectPoint
 	}
+	to.Square = m.Square
 	if posthook, ok := interface{}(m).(ParkWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}

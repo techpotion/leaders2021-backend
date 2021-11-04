@@ -1575,6 +1575,10 @@
         },
         "objectPoint": {
           "$ref": "#/definitions/apiPoint"
+        },
+        "square": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

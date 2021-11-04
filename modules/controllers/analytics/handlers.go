@@ -131,7 +131,8 @@ func PolygonParkAnalytics(ctx context.Context, in *pb.PolygonParkAnalytics_Reque
 
 	polygonQuery := analytics.FormPolygonIntersectsParkQuery(in.Polygon)
 
-	result := db.Where(pb.ParkORM{HasSportground: false}).Where("has_sportground = ?", in.HasSportground).Where(polygonQuery).Find(&parksList)
+	parkSquareQuery := fmt.Sprintf("*, %s as square", analytics.FormPolygonSquareQuery())
+	result := db.Select(parkSquareQuery).Where(pb.ParkORM{HasSportground: false}).Where("has_sportground = ?", in.HasSportground).Where(polygonQuery).Find(&parksList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, status.Error(codes.NotFound, result.Error.Error())

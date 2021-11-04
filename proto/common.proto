@@ -85,6 +85,7 @@ message Park {
     string location = 4;
     bool hasSportground = 5;
     Point objectPoint = 6 [(gorm.field).tag = {embedded: true, embedded_prefix: "center_point_", not_null: true}];
+    double square = 7;
 }
 
 message Pollution {
