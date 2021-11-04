@@ -34,6 +34,8 @@ type ApiServiceClient interface {
 	PolygonPollutionAnalytics(ctx context.Context, in *PolygonPollutionAnalytics_Request, opts ...grpc.CallOption) (*PolygonPollutionAnalytics_Response, error)
 	PolygonSubwayAnalytics(ctx context.Context, in *PolygonSubwayAnalytics_Request, opts ...grpc.CallOption) (*PolygonSubwayAnalytics_Response, error)
 	PolygonAnalyticsDashboard(ctx context.Context, in *PolygonAnalyticsDashboard_Request, opts ...grpc.CallOption) (*PolygonAnalyticsDashboard_Response, error)
+	// Marks
+	GetMark(ctx context.Context, in *Marks_GetRequest, opts ...grpc.CallOption) (*Marks_GetResponse, error)
 	// Filters
 	ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error)
 	ListDepartmentalOrganizationsIds(ctx context.Context, in *DepartmentalOrganizationsIds_ListRequest, opts ...grpc.CallOption) (*DepartmentalOrganizationsIds_ListResponse, error)
@@ -162,6 +164,15 @@ func (c *apiServiceClient) PolygonAnalyticsDashboard(ctx context.Context, in *Po
 	return out, nil
 }
 
+func (c *apiServiceClient) GetMark(ctx context.Context, in *Marks_GetRequest, opts ...grpc.CallOption) (*Marks_GetResponse, error) {
+	out := new(Marks_GetResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetMark", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiServiceClient) ListObjectsNames(ctx context.Context, in *ObjectsNames_ListRequest, opts ...grpc.CallOption) (*ObjectsNames_ListResponse, error) {
 	out := new(ObjectsNames_ListResponse)
 	err := c.cc.Invoke(ctx, "/api.ApiService/ListObjectsNames", in, out, opts...)
@@ -254,6 +265,8 @@ type ApiServiceServer interface {
 	PolygonPollutionAnalytics(context.Context, *PolygonPollutionAnalytics_Request) (*PolygonPollutionAnalytics_Response, error)
 	PolygonSubwayAnalytics(context.Context, *PolygonSubwayAnalytics_Request) (*PolygonSubwayAnalytics_Response, error)
 	PolygonAnalyticsDashboard(context.Context, *PolygonAnalyticsDashboard_Request) (*PolygonAnalyticsDashboard_Response, error)
+	// Marks
+	GetMark(context.Context, *Marks_GetRequest) (*Marks_GetResponse, error)
 	// Filters
 	ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error)
 	ListDepartmentalOrganizationsIds(context.Context, *DepartmentalOrganizationsIds_ListRequest) (*DepartmentalOrganizationsIds_ListResponse, error)
@@ -306,6 +319,9 @@ func (UnimplementedApiServiceServer) PolygonSubwayAnalytics(context.Context, *Po
 }
 func (UnimplementedApiServiceServer) PolygonAnalyticsDashboard(context.Context, *PolygonAnalyticsDashboard_Request) (*PolygonAnalyticsDashboard_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PolygonAnalyticsDashboard not implemented")
+}
+func (UnimplementedApiServiceServer) GetMark(context.Context, *Marks_GetRequest) (*Marks_GetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMark not implemented")
 }
 func (UnimplementedApiServiceServer) ListObjectsNames(context.Context, *ObjectsNames_ListRequest) (*ObjectsNames_ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsNames not implemented")
@@ -560,6 +576,24 @@ func _ApiService_PolygonAnalyticsDashboard_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_GetMark_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Marks_GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).GetMark(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/GetMark",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).GetMark(ctx, req.(*Marks_GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiService_ListObjectsNames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ObjectsNames_ListRequest)
 	if err := dec(in); err != nil {
@@ -758,6 +792,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PolygonAnalyticsDashboard",
 			Handler:    _ApiService_PolygonAnalyticsDashboard_Handler,
+		},
+		{
+			MethodName: "GetMark",
+			Handler:    _ApiService_GetMark_Handler,
 		},
 		{
 			MethodName: "ListObjectsNames",

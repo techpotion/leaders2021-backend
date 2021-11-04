@@ -82,3 +82,17 @@ message PolygonAnalyticsDashboard {
         PolygonSubwayAnalytics.Response subwayAnalytics = 4;
     }
 }
+
+message Marks {
+    message GetRequest {
+        float areasAmountPer100k = 1;
+        float sportsAmountPer100k = 2;
+        float areasSquarePer100k = 3;
+        float subwayDistance = 4;
+        float pollutionPercentage = 5;
+    }
+
+    message GetResponse {
+        float mark = 1;
+    }
+}

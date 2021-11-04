@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "gen/pb";
+
+import "analytics.proto";
+import "common.proto";
+
+service Microservice {
+    rpc GetMark(api.Marks.GetRequest) returns (api.Marks.GetResponse) {}
+}

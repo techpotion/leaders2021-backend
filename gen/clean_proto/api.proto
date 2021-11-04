@@ -53,6 +53,10 @@ service ApiService {
     rpc PolygonAnalyticsDashboard(PolygonAnalyticsDashboard.Request) returns (PolygonAnalyticsDashboard.Response) {
     }
 
+    // Marks
+    rpc GetMark(Marks.GetRequest) returns (Marks.GetResponse) {
+    }
+
     // Filters
     rpc ListObjectsNames(ObjectsNames.ListRequest) returns (ObjectsNames.ListResponse) {
     }

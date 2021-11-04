@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/marks"
 	"github.com/techpotion/leaders2021-backend/modules/database"
 	"github.com/techpotion/leaders2021-backend/modules/server"
 )
@@ -23,6 +24,7 @@ func init() {
 	// main.init is being called after the
 	// database.init function
 	database.Init()
+	marks.Init()
 }
 
 func main() {
