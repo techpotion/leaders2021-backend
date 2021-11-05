@@ -10,6 +10,7 @@ import "sports_objects.proto";
 import "geojsons.proto";
 import "analytics.proto";
 import "circles.proto";
+import "exports.proto";
 
 import "common.proto";
 
@@ -343,6 +344,19 @@ service ApiService {
             description: "Returns density in a point";
             summary: "Returns density in a point";
             tags: "Densities";
+        };
+    }
+
+    // Exports
+    rpc GetExport(PolygonAnalyticsDashboard.Response) returns (pb.Exports.GetResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/GetExport";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Returns generated xlsx table as byte array";
+            summary: "Returns generated xlsx table as byte array";
+            tags: "Exports";
         };
     }
 }
