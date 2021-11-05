@@ -200,11 +200,15 @@ func PolygonPollutionAnalytics(ctx context.Context, in *pb.PolygonPollutionAnaly
 		}
 		convertedList = append(convertedList, &converted)
 	}
-	fmt.Println(convertedList)
+
+	var perc float32 = 0.
+	if totalPoints != 0 {
+		perc = float32(len(convertedList)) / float32(totalPoints)
+	}
 	if in.ReturnPoints {
 		return &pb.PolygonPollutionAnalytics_Response{
 			Points:              convertedList,
-			PollutionPercentage: float32(len(convertedList)) / float32(totalPoints),
+			PollutionPercentage: perc,
 			ListStats:           &pb.ListStats{Count: uint32(len(convertedList))},
 		}, nil
 	} else {
@@ -316,6 +320,10 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 	}()
 	wg.Wait()
 
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
 	mark, err := marks.GetMark(ctx, &pb.Marks_GetRequest{
 		AreasAmountPer100K:  float32(basicAnalytics.AreasAmount),
 		SportsAmountPer100K: float32(basicAnalytics.SportsAmountPer100K),
@@ -323,10 +331,10 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 		SubwayDistance:      float32(subwayAnalytics.Points[0].DistanceFromPolygon),
 		PollutionPercentage: pollutionAnalytics.PollutionPercentage,
 	})
-
 	if err != nil {
-		return nil, err
+		return nil, status.Error(codes.Internal, err.Error())
 	}
+
 	return &pb.PolygonAnalyticsDashboard_Response{
 		BasicAnalytics:     basicAnalytics,
 		ParkAnalytics:      parkAnalytics,
