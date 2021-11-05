@@ -237,7 +237,7 @@ func PolygonSubwayAnalytics(ctx context.Context, in *pb.PolygonSubwayAnalytics_R
 
 	result := db.
 		Select(fmt.Sprintf("*, ST_Distance(%s::geography, position::geography) as distance_from_polygon", polygonQuery)).
-		Where(fmt.Sprintf("ST_Distance(%s::geography, position::geography) < 1500", polygonQuery)).
+		Where(fmt.Sprintf("ST_Distance(%s::geography, position::geography) < 500", polygonQuery)).
 		Order(fmt.Sprintf("position <-> %s", polygonQuery)).
 		Find(&subwaysList)
 	if result.Error != nil {
