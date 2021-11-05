@@ -42,6 +42,8 @@ $ export DB_USERNAME=postgis
 $ export DB_PASSWORD=postgis
 $ export MARKS_HOST=localhost
 $ export MARKS_PORT=3300
+$ export EXPORTS_HOST=localhost
+$ export EXPORTS_PORT=3400
 ```
 \* Environment variables take precedence over data in config.yaml file
 

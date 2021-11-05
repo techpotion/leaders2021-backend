@@ -18,7 +18,7 @@ generate:
 		-I=${GOPATH}/src/ \
 		-I=${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/ \
 		-I=${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-		--go-grpc_out=./ proto/api.proto proto/marks.proto
+		--go-grpc_out=./ proto/api.proto proto/marks.proto proto/exports.proto
 
 	go run scripts/generate_clean_protos/main.go
 

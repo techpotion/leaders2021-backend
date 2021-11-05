@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "gen/pb";
+
+import "analytics.proto";
+import "common.proto";
+
+service AnalyticsExportService {
+    rpc GetExport(api.PolygonAnalyticsDashboard.Response) returns (Exports.GetResponse) {}
+}
+
+message Exports {
+    message GetResponse {
+        bytes data = 1;
+    }
+}

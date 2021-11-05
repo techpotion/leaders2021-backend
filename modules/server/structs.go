@@ -7,6 +7,7 @@ import (
 	"github.com/techpotion/leaders2021-backend/modules/controllers/analytics"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/circles"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/densities"
+	"github.com/techpotion/leaders2021-backend/modules/controllers/exports"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/filters"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/geojsons"
 	"github.com/techpotion/leaders2021-backend/modules/controllers/marks"
@@ -105,4 +106,8 @@ func (s *ApiServiceServer) ListUnions(ctx context.Context, in *pb.Unions_ListReq
 
 func (s *ApiServiceServer) GetDensity(ctx context.Context, in *pb.Densities_GetRequest) (*pb.Densities_GetResponse, error) {
 	return densities.GetDensity(ctx, in)
+}
+
+func (s *ApiServiceServer) GetExport(ctx context.Context, in *pb.PolygonAnalyticsDashboard_Response) (*pb.Exports_GetResponse, error) {
+	return exports.Get(ctx, in)
 }

@@ -85,6 +85,70 @@
         ]
       }
     },
+    "/api/v1/GetExport": {
+      "post": {
+        "summary": "Returns generated xlsx table as byte array",
+        "description": "Returns generated xlsx table as byte array",
+        "operationId": "ApiService_GetExport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbExportsGetResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request body does not match the API's specifications",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user tries to login to a resource with an incorrect login info",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/apiErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolygonAnalyticsDashboardResponse"
+            }
+          }
+        ],
+        "tags": [
+          "Exports"
+        ]
+      }
+    },
     "/api/v1/GetGeoJsonDensityHeatmap": {
       "get": {
         "summary": "Returns Moscow population density heatmap based on 2020 elections",
@@ -2244,6 +2308,15 @@
         },
         "listStats": {
           "$ref": "#/definitions/apiListStats"
+        }
+      }
+    },
+    "pbExportsGetResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },

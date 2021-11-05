@@ -48,6 +48,8 @@ type ApiServiceClient interface {
 	ListUnions(ctx context.Context, in *Unions_ListRequest, opts ...grpc.CallOption) (*Unions_ListResponse, error)
 	// Densities
 	GetDensity(ctx context.Context, in *Densities_GetRequest, opts ...grpc.CallOption) (*Densities_GetResponse, error)
+	// Exports
+	GetExport(ctx context.Context, in *PolygonAnalyticsDashboard_Response, opts ...grpc.CallOption) (*Exports_GetResponse, error)
 }
 
 type apiServiceClient struct {
@@ -256,6 +258,15 @@ func (c *apiServiceClient) GetDensity(ctx context.Context, in *Densities_GetRequ
 	return out, nil
 }
 
+func (c *apiServiceClient) GetExport(ctx context.Context, in *PolygonAnalyticsDashboard_Response, opts ...grpc.CallOption) (*Exports_GetResponse, error) {
+	out := new(Exports_GetResponse)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetExport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServiceServer is the server API for ApiService service.
 // All implementations must embed UnimplementedApiServiceServer
 // for forward compatibility
@@ -290,6 +301,8 @@ type ApiServiceServer interface {
 	ListUnions(context.Context, *Unions_ListRequest) (*Unions_ListResponse, error)
 	// Densities
 	GetDensity(context.Context, *Densities_GetRequest) (*Densities_GetResponse, error)
+	// Exports
+	GetExport(context.Context, *PolygonAnalyticsDashboard_Response) (*Exports_GetResponse, error)
 	mustEmbedUnimplementedApiServiceServer()
 }
 
@@ -362,6 +375,9 @@ func (UnimplementedApiServiceServer) ListUnions(context.Context, *Unions_ListReq
 }
 func (UnimplementedApiServiceServer) GetDensity(context.Context, *Densities_GetRequest) (*Densities_GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDensity not implemented")
+}
+func (UnimplementedApiServiceServer) GetExport(context.Context, *PolygonAnalyticsDashboard_Response) (*Exports_GetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExport not implemented")
 }
 func (UnimplementedApiServiceServer) mustEmbedUnimplementedApiServiceServer() {}
 
@@ -772,6 +788,24 @@ func _ApiService_GetDensity_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiService_GetExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolygonAnalyticsDashboard_Response)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServiceServer).GetExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.ApiService/GetExport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServiceServer).GetExport(ctx, req.(*PolygonAnalyticsDashboard_Response))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiService_ServiceDesc is the grpc.ServiceDesc for ApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -866,6 +900,10 @@ var ApiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDensity",
 			Handler:    _ApiService_GetDensity_Handler,
+		},
+		{
+			MethodName: "GetExport",
+			Handler:    _ApiService_GetExport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
