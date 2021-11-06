@@ -15,11 +15,15 @@ message Intersections {
         repeated string sportsAreaTypes = 4 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
         Availability availability = 5; // optional
         repeated string sportKinds = 6 [(validate.rules).repeated.items.string = {ignore_empty: true}]; // optional
+
+        bool withUnion = 7; // optional; default: false
     }
 
     message ListResponse {
         repeated CirclesCluster intersections = 1;
         ListStats listStats = 2;
+        repeated CirclesCluster unions = 3; // optional
+        ListStats unionsListStats = 4;  // optional
     }
 }
 

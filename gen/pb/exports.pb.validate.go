@@ -11,6 +11,7 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -31,17 +32,51 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
+	_ = sort.Sort
 )
 
 // Validate checks the field values on Exports with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *Exports) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Exports with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in ExportsMultiError, or nil if none found.
+func (m *Exports) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Exports) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
+	if len(errors) > 0 {
+		return ExportsMultiError(errors)
+	}
 	return nil
 }
+
+// ExportsMultiError is an error wrapping multiple validation errors returned
+// by Exports.ValidateAll() if the designated constraints aren't met.
+type ExportsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportsMultiError) AllErrors() []error { return m }
 
 // ExportsValidationError is the validation error returned by Exports.Validate
 // if the designated constraints aren't met.
@@ -99,16 +134,50 @@ var _ interface {
 
 // Validate checks the field values on Exports_GetResponse with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Exports_GetResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Exports_GetResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Exports_GetResponseMultiError, or nil if none found.
+func (m *Exports_GetResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Exports_GetResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
 	// no validation rules for Data
 
+	if len(errors) > 0 {
+		return Exports_GetResponseMultiError(errors)
+	}
 	return nil
 }
+
+// Exports_GetResponseMultiError is an error wrapping multiple validation
+// errors returned by Exports_GetResponse.ValidateAll() if the designated
+// constraints aren't met.
+type Exports_GetResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Exports_GetResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Exports_GetResponseMultiError) AllErrors() []error { return m }
 
 // Exports_GetResponseValidationError is the validation error returned by
 // Exports_GetResponse.Validate if the designated constraints aren't met.
