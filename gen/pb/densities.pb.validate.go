@@ -11,6 +11,7 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -31,17 +32,52 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
+	_ = sort.Sort
 )
 
 // Validate checks the field values on Densities with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *Densities) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Densities with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in DensitiesMultiError, or nil
+// if none found.
+func (m *Densities) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Densities) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
+	if len(errors) > 0 {
+		return DensitiesMultiError(errors)
+	}
 	return nil
 }
+
+// DensitiesMultiError is an error wrapping multiple validation errors returned
+// by Densities.ValidateAll() if the designated constraints aren't met.
+type DensitiesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DensitiesMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DensitiesMultiError) AllErrors() []error { return m }
 
 // DensitiesValidationError is the validation error returned by
 // Densities.Validate if the designated constraints aren't met.
@@ -99,13 +135,46 @@ var _ interface {
 
 // Validate checks the field values on Densities_GetRequest with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Densities_GetRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Densities_GetRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Densities_GetRequestMultiError, or nil if none found.
+func (m *Densities_GetRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Densities_GetRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetPoint()).(interface{ Validate() error }); ok {
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetPoint()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Densities_GetRequestValidationError{
+					field:  "Point",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Densities_GetRequestValidationError{
+					field:  "Point",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPoint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return Densities_GetRequestValidationError{
 				field:  "Point",
@@ -115,8 +184,28 @@ func (m *Densities_GetRequest) Validate() error {
 		}
 	}
 
+	if len(errors) > 0 {
+		return Densities_GetRequestMultiError(errors)
+	}
 	return nil
 }
+
+// Densities_GetRequestMultiError is an error wrapping multiple validation
+// errors returned by Densities_GetRequest.ValidateAll() if the designated
+// constraints aren't met.
+type Densities_GetRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Densities_GetRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Densities_GetRequestMultiError) AllErrors() []error { return m }
 
 // Densities_GetRequestValidationError is the validation error returned by
 // Densities_GetRequest.Validate if the designated constraints aren't met.
@@ -176,16 +265,50 @@ var _ interface {
 
 // Validate checks the field values on Densities_GetResponse with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Densities_GetResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Densities_GetResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Densities_GetResponseMultiError, or nil if none found.
+func (m *Densities_GetResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Densities_GetResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
 	// no validation rules for Density
 
+	if len(errors) > 0 {
+		return Densities_GetResponseMultiError(errors)
+	}
 	return nil
 }
+
+// Densities_GetResponseMultiError is an error wrapping multiple validation
+// errors returned by Densities_GetResponse.ValidateAll() if the designated
+// constraints aren't met.
+type Densities_GetResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Densities_GetResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Densities_GetResponseMultiError) AllErrors() []error { return m }
 
 // Densities_GetResponseValidationError is the validation error returned by
 // Densities_GetResponse.Validate if the designated constraints aren't met.

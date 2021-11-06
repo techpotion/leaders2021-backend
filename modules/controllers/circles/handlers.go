@@ -2,6 +2,7 @@ package circles
 
 import (
 	"context"
+	"sync"
 
 	"github.com/techpotion/leaders2021-backend/gen/pb"
 	"github.com/techpotion/leaders2021-backend/modules/analytics"
@@ -22,6 +23,27 @@ func ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
+	var unions *pb.Unions_ListResponse
+	var unionError error
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	if in.WithUnion {
+		go func() {
+			defer wg.Done()
+			unions, unionError = ListUnions(ctx, &pb.Unions_ListRequest{
+				Polygon:                       in.Polygon,
+				DepartmentalOrganizationNames: in.DepartmentalOrganizationNames,
+				SportsAreaNames:               in.SportsAreaNames,
+				SportsAreaTypes:               in.SportsAreaTypes,
+				Availability:                  in.Availability,
+				SportKinds:                    in.SportKinds,
+			})
+		}()
+	} else {
+		wg.Done()
+	}
+
 	query := circles.FormIntersectionsQuery(in.Polygon, uint32(in.Availability), in.SportKinds, in.DepartmentalOrganizationNames, in.SportsAreaNames, in.SportsAreaTypes)
 
 	var intersections []*pb.CirclesClusterORM
@@ -36,9 +58,24 @@ func ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*
 		}
 		convertedList = append(convertedList, &converted)
 	}
+
+	wg.Wait()
+	if unionError != nil {
+		return nil, status.Error(codes.Internal, unionError.Error())
+	}
+
+	var unionsResp []*pb.CirclesCluster
+	var unionsListStats *pb.ListStats = &pb.ListStats{Count: 0}
+	if unions != nil {
+		unionsResp = unions.Unions
+		unionsListStats = unions.ListStats
+	}
+
 	return &pb.Intersections_ListResponse{
-		Intersections: convertedList,
-		ListStats:     &pb.ListStats{Count: uint32(len(convertedList))},
+		Intersections:   convertedList,
+		ListStats:       &pb.ListStats{Count: uint32(len(convertedList))},
+		Unions:          unionsResp,
+		UnionsListStats: unionsListStats,
 	}, nil
 }
 

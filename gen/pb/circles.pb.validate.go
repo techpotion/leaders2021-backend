@@ -11,6 +11,7 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -31,18 +32,53 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
+	_ = sort.Sort
 )
 
 // Validate checks the field values on Intersections with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *Intersections) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Intersections with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in IntersectionsMultiError, or
+// nil if none found.
+func (m *Intersections) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Intersections) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
+	if len(errors) > 0 {
+		return IntersectionsMultiError(errors)
+	}
 	return nil
 }
+
+// IntersectionsMultiError is an error wrapping multiple validation errors
+// returned by Intersections.ValidateAll() if the designated constraints
+// aren't met.
+type IntersectionsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IntersectionsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IntersectionsMultiError) AllErrors() []error { return m }
 
 // IntersectionsValidationError is the validation error returned by
 // Intersections.Validate if the designated constraints aren't met.
@@ -99,14 +135,47 @@ var _ interface {
 } = IntersectionsValidationError{}
 
 // Validate checks the field values on Unions with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
 func (m *Unions) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Unions with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in UnionsMultiError, or nil if none found.
+func (m *Unions) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Unions) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
+	if len(errors) > 0 {
+		return UnionsMultiError(errors)
+	}
 	return nil
 }
+
+// UnionsMultiError is an error wrapping multiple validation errors returned by
+// Unions.ValidateAll() if the designated constraints aren't met.
+type UnionsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnionsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnionsMultiError) AllErrors() []error { return m }
 
 // UnionsValidationError is the validation error returned by Unions.Validate if
 // the designated constraints aren't met.
@@ -164,13 +233,46 @@ var _ interface {
 
 // Validate checks the field values on Intersections_ListRequest with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Intersections_ListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Intersections_ListRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Intersections_ListRequestMultiError, or nil if none found.
+func (m *Intersections_ListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Intersections_ListRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetPolygon()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Intersections_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Intersections_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return Intersections_ListRequestValidationError{
 				field:  "Polygon",
@@ -209,8 +311,30 @@ func (m *Intersections_ListRequest) Validate() error {
 
 	}
 
+	// no validation rules for WithUnion
+
+	if len(errors) > 0 {
+		return Intersections_ListRequestMultiError(errors)
+	}
 	return nil
 }
+
+// Intersections_ListRequestMultiError is an error wrapping multiple validation
+// errors returned by Intersections_ListRequest.ValidateAll() if the
+// designated constraints aren't met.
+type Intersections_ListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Intersections_ListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Intersections_ListRequestMultiError) AllErrors() []error { return m }
 
 // Intersections_ListRequestValidationError is the validation error returned by
 // Intersections_ListRequest.Validate if the designated constraints aren't met.
@@ -270,16 +394,49 @@ var _ interface {
 
 // Validate checks the field values on Intersections_ListResponse with the
 // rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Intersections_ListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Intersections_ListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Intersections_ListResponseMultiError, or nil if none found.
+func (m *Intersections_ListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Intersections_ListResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
 	for idx, item := range m.GetIntersections() {
 		_, _ = idx, item
 
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, Intersections_ListResponseValidationError{
+						field:  fmt.Sprintf("Intersections[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, Intersections_ListResponseValidationError{
+						field:  fmt.Sprintf("Intersections[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return Intersections_ListResponseValidationError{
 					field:  fmt.Sprintf("Intersections[%v]", idx),
@@ -291,7 +448,26 @@ func (m *Intersections_ListResponse) Validate() error {
 
 	}
 
-	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+	if all {
+		switch v := interface{}(m.GetListStats()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Intersections_ListResponseValidationError{
+					field:  "ListStats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Intersections_ListResponseValidationError{
+					field:  "ListStats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return Intersections_ListResponseValidationError{
 				field:  "ListStats",
@@ -301,8 +477,91 @@ func (m *Intersections_ListResponse) Validate() error {
 		}
 	}
 
+	for idx, item := range m.GetUnions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, Intersections_ListResponseValidationError{
+						field:  fmt.Sprintf("Unions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, Intersections_ListResponseValidationError{
+						field:  fmt.Sprintf("Unions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return Intersections_ListResponseValidationError{
+					field:  fmt.Sprintf("Unions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetUnionsListStats()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Intersections_ListResponseValidationError{
+					field:  "UnionsListStats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Intersections_ListResponseValidationError{
+					field:  "UnionsListStats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUnionsListStats()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return Intersections_ListResponseValidationError{
+				field:  "UnionsListStats",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return Intersections_ListResponseMultiError(errors)
+	}
 	return nil
 }
+
+// Intersections_ListResponseMultiError is an error wrapping multiple
+// validation errors returned by Intersections_ListResponse.ValidateAll() if
+// the designated constraints aren't met.
+type Intersections_ListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Intersections_ListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Intersections_ListResponseMultiError) AllErrors() []error { return m }
 
 // Intersections_ListResponseValidationError is the validation error returned
 // by Intersections_ListResponse.Validate if the designated constraints aren't met.
@@ -362,13 +621,46 @@ var _ interface {
 
 // Validate checks the field values on Unions_ListRequest with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Unions_ListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Unions_ListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Unions_ListRequestMultiError, or nil if none found.
+func (m *Unions_ListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Unions_ListRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetPolygon()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Unions_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Unions_ListRequestValidationError{
+					field:  "Polygon",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPolygon()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return Unions_ListRequestValidationError{
 				field:  "Polygon",
@@ -407,8 +699,28 @@ func (m *Unions_ListRequest) Validate() error {
 
 	}
 
+	if len(errors) > 0 {
+		return Unions_ListRequestMultiError(errors)
+	}
 	return nil
 }
+
+// Unions_ListRequestMultiError is an error wrapping multiple validation errors
+// returned by Unions_ListRequest.ValidateAll() if the designated constraints
+// aren't met.
+type Unions_ListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Unions_ListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Unions_ListRequestMultiError) AllErrors() []error { return m }
 
 // Unions_ListRequestValidationError is the validation error returned by
 // Unions_ListRequest.Validate if the designated constraints aren't met.
@@ -468,16 +780,49 @@ var _ interface {
 
 // Validate checks the field values on Unions_ListResponse with the rules
 // defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
+// violated, the first error encountered is returned, or nil if there are no violations.
 func (m *Unions_ListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Unions_ListResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Unions_ListResponseMultiError, or nil if none found.
+func (m *Unions_ListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Unions_ListResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
+	var errors []error
+
 	for idx, item := range m.GetUnions() {
 		_, _ = idx, item
 
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, Unions_ListResponseValidationError{
+						field:  fmt.Sprintf("Unions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, Unions_ListResponseValidationError{
+						field:  fmt.Sprintf("Unions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return Unions_ListResponseValidationError{
 					field:  fmt.Sprintf("Unions[%v]", idx),
@@ -489,7 +834,26 @@ func (m *Unions_ListResponse) Validate() error {
 
 	}
 
-	if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
+	if all {
+		switch v := interface{}(m.GetListStats()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, Unions_ListResponseValidationError{
+					field:  "ListStats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, Unions_ListResponseValidationError{
+					field:  "ListStats",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetListStats()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return Unions_ListResponseValidationError{
 				field:  "ListStats",
@@ -499,8 +863,28 @@ func (m *Unions_ListResponse) Validate() error {
 		}
 	}
 
+	if len(errors) > 0 {
+		return Unions_ListResponseMultiError(errors)
+	}
 	return nil
 }
+
+// Unions_ListResponseMultiError is an error wrapping multiple validation
+// errors returned by Unions_ListResponse.ValidateAll() if the designated
+// constraints aren't met.
+type Unions_ListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Unions_ListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Unions_ListResponseMultiError) AllErrors() []error { return m }
 
 // Unions_ListResponseValidationError is the validation error returned by
 // Unions_ListResponse.Validate if the designated constraints aren't met.
