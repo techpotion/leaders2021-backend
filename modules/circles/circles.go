@@ -29,11 +29,14 @@ func FormIntersectionsQuery(availability uint32, polygon *pb.Polygon) string {
 func FormUnionsQuery(availability uint32, polygon *pb.Polygon) string {
 	polyQuery := FormPolygonContainsQuery(polygon)
 	return fmt.Sprintf(`
-		SELECT ST_AsGeoJSON(ST_Union(circle)) AS geojson, SUM(object_sum_square) as square FROM (
+		WITH t1 AS (SELECT object_id, circle, SUM(object_sum_square) AS square FROM (
 			SELECT *, ST_ClusterDBSCAN(circle, 0, 1) OVER() AS clst FROM objects
 			WHERE availability = %d AND %s
 		) q
-		GROUP BY clst`,
+		GROUP BY clst, circle, object_id)
+
+		SELECT ST_AsGeoJSON(ST_Union(ST_intersection(a.circle, b.circle))) as geojson, SUM(a.square + b.square) as square FROM t1 a, t1 b
+		WHERE ST_Intersects (a.circle,b.circle) AND a.object_id < b.object_id`,
 		availability,
 		polyQuery,
 	)
