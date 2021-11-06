@@ -325,7 +325,7 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 	}
 
 	mark, err := marks.GetMark(ctx, &pb.Marks_GetRequest{
-		AreasAmountPer100K:  float32(basicAnalytics.AreasAmount),
+		AreasAmountPer100K:  float32(basicAnalytics.AreasAmountPer100K),
 		SportsAmountPer100K: float32(basicAnalytics.SportsAmountPer100K),
 		AreasSquarePer100K:  float32(basicAnalytics.AreasAmountPer100K),
 		SubwayDistance:      float32(subwayAnalytics.Points[0].DistanceFromPolygon),
