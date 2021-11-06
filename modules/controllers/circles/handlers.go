@@ -22,7 +22,7 @@ func ListIntersections(ctx context.Context, in *pb.Intersections_ListRequest) (*
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	query := circles.FormIntersectionsQuery(uint32(in.Availability), in.Polygon)
+	query := circles.FormIntersectionsQuery(in.Polygon, uint32(in.Availability), in.SportKinds, in.DepartmentalOrganizationNames, in.SportsAreaNames, in.SportsAreaTypes)
 
 	var intersections []*pb.CirclesClusterORM
 
@@ -53,7 +53,7 @@ func ListUnions(ctx context.Context, in *pb.Unions_ListRequest) (*pb.Unions_List
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	query := circles.FormUnionsQuery(uint32(in.Availability), in.Polygon)
+	query := circles.FormUnionsQuery(in.Polygon, uint32(in.Availability), in.SportKinds, in.DepartmentalOrganizationNames, in.SportsAreaNames, in.SportsAreaTypes)
 
 	var intersections []*pb.CirclesClusterORM
 

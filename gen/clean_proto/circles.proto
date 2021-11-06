@@ -10,7 +10,11 @@ message Intersections {
     message ListRequest {
         Polygon polygon = 1;
         // filters
-        Availability availability = 2;
+        repeated string departmentalOrganizationNames = 2; // optional
+        repeated string sportsAreaNames = 3; // optional
+        repeated string sportsAreaTypes = 4; // optional
+        Availability availability = 5; // optional
+        repeated string sportKinds = 6; // optional
     }
 
     message ListResponse {
@@ -23,7 +27,11 @@ message Unions {
     message ListRequest {
         Polygon polygon = 1;
         // filters
-        Availability availability = 2;
+        repeated string departmentalOrganizationNames = 2; // optional
+        repeated string sportsAreaNames = 3; // optional
+        repeated string sportsAreaTypes = 4; // optional
+        Availability availability = 5; // optional
+        repeated string sportKinds = 6; // optional
     }
 
     message ListResponse {

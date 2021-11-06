@@ -1635,9 +1635,33 @@
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
         },
-        "availability": {
-          "$ref": "#/definitions/apiAvailability",
+        "departmentalOrganizationNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "title": "filters"
+        },
+        "sportsAreaNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability"
+        },
+        "sportKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2291,9 +2315,33 @@
         "polygon": {
           "$ref": "#/definitions/apiPolygon"
         },
-        "availability": {
-          "$ref": "#/definitions/apiAvailability",
+        "departmentalOrganizationNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "title": "filters"
+        },
+        "sportsAreaNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sportsAreaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "$ref": "#/definitions/apiAvailability"
+        },
+        "sportKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

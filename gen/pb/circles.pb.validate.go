@@ -180,7 +180,34 @@ func (m *Intersections_ListRequest) Validate() error {
 		}
 	}
 
+	for idx, item := range m.GetSportsAreaNames() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
+
+	for idx, item := range m.GetSportsAreaTypes() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
+
 	// no validation rules for Availability
+
+	for idx, item := range m.GetSportKinds() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
 
 	return nil
 }
@@ -351,7 +378,34 @@ func (m *Unions_ListRequest) Validate() error {
 		}
 	}
 
+	for idx, item := range m.GetSportsAreaNames() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
+
+	for idx, item := range m.GetSportsAreaTypes() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
+
 	// no validation rules for Availability
+
+	for idx, item := range m.GetSportKinds() {
+		_, _ = idx, item
+
+		if item != "" {
+
+		}
+
+	}
 
 	return nil
 }
