@@ -41,7 +41,7 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 		filters.SportsAreaNamesScope(in.SportsAreaNames, sportsobjectsdetailed.TableName),
 		filters.SportsAreaTypeScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
 		filters.AvailabilitiesScope(in.Availabilities, sportsobjectsdetailed.TableName),
-		filters.SportKindsScope(in.SportsAreaTypes, sportsobjectsdetailed.TableName),
+		filters.SportKindsScope(in.SportKinds, sportsobjectsdetailed.TableName),
 	).Where(polygonQuery).Find(&objectsList)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
