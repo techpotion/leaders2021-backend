@@ -80,6 +80,9 @@ func PolygonAnalytics(ctx context.Context, in *pb.PolygonAnalytics_Request) (*pb
 		return nil, status.Error(codes.Internal, result.Error.Error())
 	}
 
+	if region.Density == 0 {
+		region.Density = 5500
+	}
 	personsOnSquare := polygonSquare * region.Density
 
 	areasSquare := analytics.CalculateSquare(convertedList)
@@ -319,7 +322,9 @@ func PolygonAnalyticsDashboard(ctx context.Context, in *pb.PolygonAnalyticsDashb
 		})
 	}()
 	wg.Wait()
-
+	fmt.Printf("%+v", basicAnalytics)
+	fmt.Printf("%+v", subwayAnalytics)
+	fmt.Printf("%+v", pollutionAnalytics)
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
